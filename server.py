@@ -38,6 +38,8 @@ def scan_media(root_dir):
         return files
     for dirpath, _, filenames in os.walk(root_dir):
         for name in filenames:
+            if name.startswith("."):
+                continue
             full = os.path.join(dirpath, name)
             mtype = get_media_type(full)
             if mtype == "other":

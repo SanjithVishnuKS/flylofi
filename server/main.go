@@ -57,7 +57,7 @@ func scanMedia(root string) ([]mediaFile, error) {
 		if err != nil {
 			return err
 		}
-		if info.IsDir() {
+		if info.IsDir() || strings.HasPrefix(info.Name(), ".") {
 			return nil
 		}
 		typeName := mediaType(path)
