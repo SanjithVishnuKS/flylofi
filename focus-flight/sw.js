@@ -1,5 +1,5 @@
 // Flylofi Service Worker for offline PWA support
-const CACHE_NAME = 'flylofi-v1';
+const CACHE_NAME = 'flylofi-v2';
 const CORE_ASSETS = [
   './',
   'app.html',

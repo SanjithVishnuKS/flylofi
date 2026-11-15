@@ -89,23 +89,49 @@ h1{font-size:clamp(26px,4.2vw,58px);line-height:.99;letter-spacing:-.055em;font-
    <span>to</span><input id="toInput" value="Tokyo" maxlength="20" aria-label="Destination city">
    <button id="apply">Update</button>
   </div>
-  <div class="cruise-tools" aria-label="Audio and Video controls">
-    <div class="audio-track-group" id="audioTrackList">
-      <button class="sound-btn media-toggle" data-lofi-src="../media/flight/audio/bedtime-lofi.webm">Bedtime</button>
-      <button class="sound-btn media-toggle" data-lofi-src="../media/flight/audio/best-of-lofi.webm">Best lofi</button>
-      <button class="sound-btn media-toggle" data-lofi-src="../media/flight/audio/lofi-work-space.webm">Workspace</button>
-      <button class="sound-btn media-toggle" data-lofi-src="../media/flight/audio/afternoon-jazz.webm">Jazz</button>
+  <div class="cruise-media-deck" id="cruiseMediaDeck" aria-label="Flight Cabin Entertainment & Ambience Controls">
+    <!-- Row 1: Lofi Music Deck -->
+    <div class="deck-row">
+      <button class="deck-btn play-btn" id="lofiPlayToggle" title="Play / Pause Lofi Music">
+        <span class="btn-icon" id="playIcon">▶</span>
+        <span class="btn-label" id="playLabel">Play Lofi</span>
+      </button>
+      <div class="deck-select-wrap">
+        <select class="deck-select" id="lofiTrackSelect" aria-label="Choose Lofi Music Track">
+          <option value="../media/flight/audio/bedtime-lofi.webm">🌙 Bedtime Lofi</option>
+          <option value="../media/flight/audio/best-of-lofi.webm">🎧 Best of Lofi</option>
+          <option value="../media/flight/audio/lofi-work-space.webm">💻 Lofi Workspace</option>
+          <option value="../media/flight/audio/afternoon-jazz.webm">☕ Afternoon Jazz</option>
+          <option value="__custom_audio__">➕ Upload Audio File...</option>
+        </select>
+      </div>
+      <input type="file" id="customAudioFile" accept="audio/*,.mp3,.wav,.ogg,.m4a,.webm,.flac" style="display:none" aria-label="Insert custom audio file">
     </div>
-    <button class="sound-btn insert-btn" id="addAudioBtn" title="Insert local audio file (+ MP3, WAV, WebM, M4A)">+ Audio</button>
-    <input type="file" id="customAudioFile" accept="audio/*,.mp3,.wav,.ogg,.m4a,.webm,.flac" style="display:none" aria-label="Insert custom audio file">
-    <button class="sound-btn" id="cabinBtn">〰 Cabin off</button>
-    <button class="sound-btn" id="videoBtn">▣ Video: Night</button>
-    <button class="sound-btn insert-btn" id="addVideoBtn" title="Insert local video file (+ MP4, WebM)">+ Video</button>
-    <input type="file" id="customVideoFile" accept="video/*,.mp4,.webm,.mov" style="display:none" aria-label="Insert custom video file">
-    <button class="sound-btn synth-btn" id="lofiBtn" title="Procedural synth music">♫ Synth off</button>
-    <label class="sound-btn volume-wrap" style="display:flex;align-items:center;gap:6px">VOL <input class="volume" id="volume" type="range" min="0" max="100" value="35" aria-label="Audio volume"></label>
+
+    <!-- Row 2: Cabin Ambience & Backdrop Scene & Volume -->
+    <div class="deck-row">
+      <button class="deck-btn cabin-btn" id="cabinBtn" title="Toggle Aircraft Cabin White Noise">
+        <span class="btn-icon">〰</span>
+        <span class="btn-label" id="cabinLabel">Cabin: Off</span>
+      </button>
+      <div class="deck-select-wrap">
+        <select class="deck-select" id="videoSceneSelect" aria-label="Choose Flight Window Scene">
+          <option value="../media/flight/clips/night-flight-lofi.mp4">✈️ Night Flight Cabin</option>
+          <option value="../media/flight/videos/first-class-cabin.mp4">🛋️ First Class Suite</option>
+          <option value="../media/flight/clips/gemini_generated_video_09c1b3d1.mp4">☁️ Wing Above Clouds</option>
+          <option value="__canvas__">🎨 Illustrated Canvas</option>
+          <option value="__custom_video__">➕ Upload Video File...</option>
+        </select>
+      </div>
+      <input type="file" id="customVideoFile" accept="video/*,.mp4,.webm,.mov" style="display:none" aria-label="Insert custom video file">
+      <label class="deck-volume-wrap" title="Master Volume">
+        <span class="vol-icon" id="volIcon">🔊</span>
+        <input class="volume-slider" id="volume" type="range" min="0" max="100" value="45" aria-label="Master volume">
+      </label>
+    </div>
   </div>
-  <audio id="mediaLofi" preload="metadata" loop></audio><audio id="mediaCabin" preload="metadata" loop></audio>
+  <audio id="mediaLofi" preload="metadata" loop></audio>
+  <audio id="mediaCabin" preload="metadata" loop></audio>
   <aside class="study-card" aria-label="Focus study timer">
    <div class="study-head"><span>Focus session</span><span id="studyState">Ready</span></div>
    <div class="study-time" id="studyTime">25:00</div>
@@ -300,76 +326,24 @@ $('apply').onclick=()=>{from=$('fromInput').value.trim()||'Origin';to=$('toInput
 ['fromInput','toInput'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')$('apply').click()}));
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&focusRunning)stopFocus()});
 
-// Original, locally synthesized lofi-like instrumental and cabin ambience.
-// No audio files, external requests, copyrighted tracks or autoplay.
-let audioCtx=null,master=null,lofiBus=null,cabinBus=null,lofiOn=false,cabinOn=false;
-let musicNodes=[],cabinNodes=[],musicTimer=null,musicStep=0;
-const melody=[0,3,7,10,7,3,5,10,0,3,7,12,10,7,3,5];
-const chordRoots=[0,5,3,7];
-function getAudio(){
- if(audioCtx)return;
- const AC=window.AudioContext||window.webkitAudioContext;
- if(!AC){$('lofiBtn').textContent='Audio unsupported';$('cabinBtn').textContent='Audio unsupported';return}
- audioCtx=new AC();master=audioCtx.createGain();master.gain.value=Number($('volume').value)/100*.42;master.connect(audioCtx.destination);
- lofiBus=audioCtx.createGain();lofiBus.gain.value=0;lofiBus.connect(master);
- cabinBus=audioCtx.createGain();cabinBus.gain.value=0;cabinBus.connect(master);
-}
-function tone(freq,when,duration,gain,bus,wave='sine',detune=0){
- const o=audioCtx.createOscillator(),g=audioCtx.createGain(),f=audioCtx.createBiquadFilter();
- o.type=wave;o.frequency.setValueAtTime(freq,when);o.detune.value=detune;
- f.type='lowpass';f.frequency.value=wave==='triangle'?1500:950;
- g.gain.setValueAtTime(.0001,when);g.gain.exponentialRampToValueAtTime(gain,when+.025);g.gain.exponentialRampToValueAtTime(.0001,when+duration);
- o.connect(f);f.connect(g);g.connect(bus);o.start(when);o.stop(when+duration+.04);
- musicNodes.push(o);
-}
-function noiseBurst(when,duration,level,filterFreq,bus){
- const n=Math.floor(audioCtx.sampleRate*duration),buffer=audioCtx.createBuffer(1,n,audioCtx.sampleRate),d=buffer.getChannelData(0);
- for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);
- const src=audioCtx.createBufferSource(),f=audioCtx.createBiquadFilter(),g=audioCtx.createGain();
- src.buffer=buffer;f.type='lowpass';f.frequency.value=filterFreq;g.gain.setValueAtTime(level,when);g.gain.exponentialRampToValueAtTime(.0001,when+duration);
- src.connect(f);f.connect(g);g.connect(bus);src.start(when);src.stop(when+duration+.02);musicNodes.push(src);
-}
-function scheduleMusic(){
- if(!lofiOn||!audioCtx)return;
- const now=audioCtx.currentTime+.04,stepDur=.34,step=musicStep%16,bar=Math.floor(musicStep/16)%4,root=chordRoots[bar]*1;
- const base=130.81*Math.pow(2,root/12);
- if(step%4===0){tone(base,now,1.15,.055,lofiBus,'triangle');tone(base*1.498,now,1.05,.022,lofiBus,'sine',-3);tone(base*1.782,now,1.0,.018,lofiBus,'sine',3)}
- const note=melody[step],freq=261.63*Math.pow(2,note/12);
- if(step%2===0)tone(freq,now,.42,.023,lofiBus,'triangle',step%3===0?-4:3);
- if(step%4===2)tone(freq*.5,now,.28,.018,lofiBus,'sine');
- if(step%4===0)noiseBurst(now,.09,.012,4200,lofiBus);
- if(step%4===2)noiseBurst(now,.055,.006,2500,lofiBus);
- musicStep++;musicTimer=setTimeout(scheduleMusic,stepDur*1000);
-}
+// High-fidelity media playback connecting installed webm/mp4 audio and videos.
+// Procedural oscillator synth is deactivated to prevent sound overlapping.
 function startLofi(){
- getAudio();if(!audioCtx)return;audioCtx.resume();lofiOn=true;
- lofiBus.gain.cancelScheduledValues(audioCtx.currentTime);lofiBus.gain.setTargetAtTime(.72,audioCtx.currentTime,.8);
- $('lofiBtn').textContent='♫ Lofi on';$('lofiBtn').classList.add('active');
- if(!musicTimer)scheduleMusic();
+ const audio = $('mediaLofi');
+ if (audio && audio.paused) audio.play().catch(()=>{});
 }
 function stopLofi(){
- lofiOn=false;if(musicTimer){clearTimeout(musicTimer);musicTimer=null}
- if(audioCtx&&lofiBus)lofiBus.gain.setTargetAtTime(0,audioCtx.currentTime,.35);
- $('lofiBtn').textContent='♫ Lofi off';$('lofiBtn').classList.remove('active');
+ const audio = $('mediaLofi');
+ if (audio && !audio.paused) audio.pause();
 }
 function startCabin(){
- getAudio();if(!audioCtx)return;audioCtx.resume();cabinOn=true;
- // Soft low-frequency engine-like drone with a quiet filtered air texture.
- const o1=audioCtx.createOscillator(),o2=audioCtx.createOscillator(),g=audioCtx.createGain(),f=audioCtx.createBiquadFilter();
- o1.type='sine';o1.frequency.value=62;o2.type='sine';o2.frequency.value=63.7;
- f.type='lowpass';f.frequency.value=180;g.gain.value=.0001;o1.connect(f);o2.connect(f);f.connect(g);g.connect(cabinBus);
- o1.start();o2.start();cabinNodes=[o1,o2,g];
- cabinBus.gain.setTargetAtTime(.3,audioCtx.currentTime,1.2);
- $('cabinBtn').textContent='〰 Cabin on';$('cabinBtn').classList.add('active');
+ const cabin = $('mediaCabin');
+ if (cabin && cabin.paused) cabin.play().catch(()=>{});
 }
 function stopCabin(){
- cabinOn=false;if(audioCtx&&cabinBus)cabinBus.gain.setTargetAtTime(0,audioCtx.currentTime,.5);
- cabinNodes.slice(0,2).forEach(n=>{try{n.stop(audioCtx.currentTime+2)}catch(e){}});
- cabinNodes=[];$('cabinBtn').textContent='〰 Cabin off';$('cabinBtn').classList.remove('active');
+ const cabin = $('mediaCabin');
+ if (cabin && !cabin.paused) cabin.pause();
 }
-$('lofiBtn').onclick=()=>lofiOn?stopLofi():startLofi();
-$('cabinBtn').onclick=()=>cabinOn?stopCabin():startCabin();
-$('volume').oninput=()=>{if(master)master.gain.setTargetAtTime(Number($('volume').value)/100*.42,audioCtx.currentTime,.08)};
 
 // A lightweight local focus timer prototype. It is independent of the flight preview
 // and will later be connected to the real Focus Flight session state.
@@ -394,7 +368,7 @@ $('studyToggle').onclick=()=>{if(focusRunning)stopFocus();else startFocus()};
 $('studyReset').onclick=()=>{stopFocus();focusRemaining=Number($('studyLength').value)*60;focusDurationSeconds=focusRemaining;elapsed=0;paintFocus()};
 $('studyLength').onchange=()=>{stopFocus();focusRemaining=Number($('studyLength').value)*60;focusDurationSeconds=focusRemaining;elapsed=0;paintFocus()};
 paintFocus();if(savedFlight)startFocus();
-window.addEventListener('pagehide',()=>{if(musicTimer)clearTimeout(musicTimer);if(audioCtx)audioCtx.close()});
+window.addEventListener('pagehide',()=>{try{$('mediaLofi')?.pause();$('mediaCabin')?.pause()}catch(e){}});
 draw();raf=requestAnimationFrame(tick);
 })();
 </script>
