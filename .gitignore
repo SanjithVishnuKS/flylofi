@@ -24,7 +24,11 @@ media/flight/audio/*.webm
 # Keep directory structure
 !media/**/.gitkeep
 
-# Build caches & scratch
+# Keystore & Certificates
+*.pem
+*.p12
+*.keystore
+*.jks
 .idea/
 .vscode/
 *.log
