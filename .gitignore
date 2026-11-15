@@ -1,0 +1,31 @@
+# System & OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.venv/
+env/
+venv/
+
+# Large Media Binaries (>100MB limit for GitHub)
+media/*.mp4
+media/*.webm
+media/*.mkv
+media/*.avi
+media/*.mov
+media/flight/clips/*.mp4
+media/flight/videos/*.mp4
+media/flight/audio/*.webm
+
+# Keep directory structure
+!media/**/.gitkeep
+
+# Build caches & scratch
+.idea/
+.vscode/
+*.log
+*.tmp

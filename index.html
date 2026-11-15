@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101513">
+  <title>Sentinel | Server Control Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-lockup">
+        <div class="brand-mark"><span></span><span></span><span></span></div>
+        <div>
+          <div class="brand-name">SENTINEL</div>
+          <div class="brand-caption">SERVER CONTROL</div>
+        </div>
+      </div>
+
+      <div class="server-picker">
+        <div class="server-dot"></div>
+        <div class="server-picker-copy">
+          <span>Active node</span>
+          <strong>prod-eu-west-01</strong>
+        </div>
+        <span class="chevron">⌄</span>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <div class="nav-label">Workspace</div>
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">◈</span>Overview</button>
+        <button class="nav-item" data-view="services"><span class="nav-icon">≋</span>Services <span class="nav-count">12</span></button>
+        <button class="nav-item" data-view="activity"><span class="nav-icon">◷</span>Activity <span class="nav-count alert-count">3</span></button>
+        <button class="nav-item" data-view="storage"><span class="nav-icon">▣</span>Media library <span class="nav-count">48</span></button>
+        <a class="nav-item" href="/focus-flight/app.html" target="_blank" style="text-decoration:none;display:flex;align-items:center"><span class="nav-icon">✈</span>Focus Flight <span class="nav-count" style="background:rgba(131,224,181,.18);color:#83e0b5">App</span></a>
+        <button class="nav-item" data-view="network"><span class="nav-icon">⌁</span>Network</button>
+        <div class="nav-label second-label">Manage</div>
+        <button class="nav-item" data-view="users"><span class="nav-icon">◉</span>Team access</button>
+        <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span>Settings</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="connection-card">
+          <div class="connection-header"><span class="pulse"></span> Secure tunnel</div>
+          <div class="connection-detail">Last sync <strong id="lastSync">just now</strong></div>
+          <div class="connection-bar"><span></span></div>
+        </div>
+        <div class="profile-row">
+          <div class="avatar">AR</div>
+          <div class="profile-copy"><strong>Alex Rivera</strong><span>Owner</span></div>
+          <span class="profile-menu">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Infrastructure</span><b>/</b><strong>Overview</strong></div>
+        <div class="top-actions">
+          <div class="status-pill"><span class="status-dot"></span>All systems operational</div>
+          <button class="icon-button" title="Notifications" aria-label="Notifications"><span class="notification-dot"></span>♢</button>
+          <button class="icon-button" title="Help" aria-label="Help">?</button>
+          <button class="refresh-button" id="refreshButton"><span class="refresh-icon">↻</span>Refresh</button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="page-heading">
+          <div>
+            <div class="eyebrow">SATURDAY, NOVEMBER 15, 2026 <span class="eyebrow-line"></span> 09:42 UTC</div>
+            <h1>Good morning, Alex.</h1>
+            <p>Here’s the pulse of your production environment.</p>
+          </div>
+          <div class="heading-actions">
+            <button class="button secondary-button" id="terminalButton"><span>⌘</span> Open terminal</button>
+            <button class="button primary-button" id="deployButton"><span>+</span> Deploy service</button>
+          </div>
+        </section>
+
+        <section class="media-workspace" id="mediaWorkspace" hidden>
+          <div class="media-hero">
+            <div>
+              <div class="eyebrow">SERVER FILE ACCESS <span class="eyebrow-line"></span> READ / STREAM</div>
+              <h1>Media library</h1>
+              <p>Browse, preview and stream files stored on prod-eu-west-01.</p>
+            </div>
+            <div class="media-hero-actions"><button class="button secondary-button" id="uploadButton"><span>↑</span> Upload media</button><button class="button primary-button" id="newFolderButton"><span>+</span> New folder</button></div>
+          </div>
+          <div class="media-toolbar"><div class="media-breadcrumb"><span class="crumb-home">⌂</span><span>/</span><strong>srv</strong><span>/</span><strong>media</strong><span>/</span><span>all files</span></div><div class="media-toolbar-actions"><div class="search-box"><span>⌕</span><input id="mediaSearch" type="search" placeholder="Search media" aria-label="Search media"></div><button class="media-view active" title="List view">☷</button><button class="media-view" title="Grid view">▦</button></div></div>
+          <div class="media-layout">
+            <aside class="media-sidebar"><div class="media-sidebar-title">Library</div><button class="media-filter active" data-media-filter="all"><span>◫</span>All files <b>48</b></button><button class="media-filter" data-media-filter="video"><span>▶</span>Video <b>12</b></button><button class="media-filter" data-media-filter="audio"><span>◖</span>Audio <b>18</b></button><button class="media-filter" data-media-filter="image"><span>▧</span>Images <b>18</b></button><div class="storage-meter"><div><span>Storage used</span><strong>246 GB <small>/ 1 TB</small></strong></div><div class="storage-meter-track"><i></i></div><p>24% used · healthy</p></div></aside>
+            <div class="media-files"><div class="media-summary"><span id="mediaSummary">48 files</span><span>Sorted by <strong>recently modified</strong>⌄</span></div><div class="media-file-list" id="mediaFileList"><div class="media-file-row" data-media-type="video"><div class="file-thumb video-thumb"><span>▶</span><small>MP4</small></div><div class="file-info"><strong>focus-flight-cabin.mp4</strong><span>/srv/media/flight/ambient <b>·</b> 1.8 GB</span></div><span class="file-modified">Today, 09:14</span><span class="file-access">Stream ready</span><button class="file-action" data-action="Preview focus-flight-cabin.mp4">Preview</button></div><div class="media-file-row" data-media-type="audio"><div class="file-thumb audio-thumb"><span>◖</span><small>MP3</small></div><div class="file-info"><strong>engine-cabin-loop.mp3</strong><span>/srv/media/flight/audio <b>·</b> 84 MB</span></div><span class="file-modified">Today, 08:42</span><span class="file-access">Stream ready</span><button class="file-action" data-action="Play engine-cabin-loop.mp3">Play</button></div><div class="media-file-row" data-media-type="image"><div class="file-thumb image-thumb"><span>▧</span><small>JPG</small></div><div class="file-info"><strong>clouds-over-singapore.jpg</strong><span>/srv/media/flight/images <b>·</b> 12 MB</span></div><span class="file-modified">Yesterday, 21:06</span><span class="file-access">Public preview</span><button class="file-action" data-action="Preview clouds-over-singapore.jpg">Preview</button></div><div class="media-file-row" data-media-type="audio"><div class="file-thumb audio-thumb"><span>◖</span><small>WAV</small></div><div class="file-info"><strong>rain-on-window.wav</strong><span>/srv/media/flight/audio <b>·</b> 236 MB</span></div><span class="file-modified">Nov 14, 18:20</span><span class="file-access">Stream ready</span><button class="file-action" data-action="Play rain-on-window.wav">Play</button></div></div></div>
+          </div>
+        </section>
+
+        <div id="overviewContent">
+        <section class="metric-grid" aria-label="Server metrics">
+          <article class="metric-card accent-green">
+            <div class="metric-top"><span class="metric-label">System health</span><span class="metric-icon">✦</span></div>
+            <div class="metric-value">98.7<span class="metric-unit">%</span></div>
+            <div class="metric-foot"><span class="trend positive">↗ 2.4%</span><span>vs. last 24h</span></div>
+            <div class="sparkline green-spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+          <article class="metric-card accent-orange">
+            <div class="metric-top"><span class="metric-label">CPU utilization</span><span class="metric-icon">◒</span></div>
+            <div class="metric-value">42<span class="metric-unit">%</span></div>
+            <div class="metric-foot"><span class="trend neutral">→ 0.8%</span><span>vs. last 24h</span></div>
+            <div class="sparkline orange-spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+          <article class="metric-card accent-teal">
+            <div class="metric-top"><span class="metric-label">Memory usage</span><span class="metric-icon">▥</span></div>
+            <div class="metric-value">11.4<span class="metric-unit"> / 32 GB</span></div>
+            <div class="metric-foot"><span class="trend positive">↘ 4.1%</span><span>vs. last 24h</span></div>
+            <div class="progress-track"><span style="width: 36%"></span></div>
+          </article>
+          <article class="metric-card accent-blue">
+            <div class="metric-top"><span class="metric-label">Network throughput</span><span class="metric-icon">⌁</span></div>
+            <div class="metric-value">1.8<span class="metric-unit"> Gbps</span></div>
+            <div class="metric-foot"><span class="trend positive">↗ 12.6%</span><span>vs. last 24h</span></div>
+            <div class="network-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="panel resource-panel">
+            <div class="panel-heading"><div><h2>Resource overview</h2><p>Live performance across your node</p></div><div class="segmented-control"><button class="segment active">24h</button><button class="segment">7d</button><button class="segment">30d</button></div></div>
+            <div class="chart-wrap">
+              <div class="y-axis"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
+              <div class="chart-area">
+                <div class="grid-lines"><i></i><i></i><i></i><i></i><i></i></div>
+                <svg class="chart-svg" viewBox="0 0 760 220" preserveAspectRatio="none" aria-label="Resource usage chart" role="img"><defs><linearGradient id="fillGreen" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#78d3a5" stop-opacity=".24"/><stop offset="1" stop-color="#78d3a5" stop-opacity="0"/></linearGradient><linearGradient id="fillOrange" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#e69a63" stop-opacity=".17"/><stop offset="1" stop-color="#e69a63" stop-opacity="0"/></linearGradient></defs><path class="area-green" d="M0 166 C36 158 54 142 84 150 S135 166 160 128 S204 103 230 130 S272 145 300 112 S340 118 370 95 S421 114 450 90 S489 82 518 111 S556 115 584 80 S630 50 655 74 S708 45 760 60 L760 220 L0 220Z"/><path class="area-orange" d="M0 188 C38 185 50 179 84 176 S131 161 164 170 S207 183 238 145 S273 156 304 147 S346 158 377 129 S424 139 450 118 S487 133 520 126 S554 137 585 105 S624 124 655 108 S713 95 760 102 L760 220 L0 220Z"/><path class="line-green" d="M0 166 C36 158 54 142 84 150 S135 166 160 128 S204 103 230 130 S272 145 300 112 S340 118 370 95 S421 114 450 90 S489 82 518 111 S556 115 584 80 S630 50 655 74 S708 45 760 60"/><path class="line-orange" d="M0 188 C38 185 50 179 84 176 S131 161 164 170 S207 183 238 145 S273 156 304 147 S346 158 377 129 S424 139 450 118 S487 133 520 126 S554 137 585 105 S624 124 655 108 S713 95 760 102"/></svg>
+                <div class="x-axis"><span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span><span>Now</span></div>
+              </div>
+            </div>
+            <div class="chart-legend"><span><i class="legend-dot green"></i>CPU</span><span><i class="legend-dot orange"></i>Memory</span><span class="chart-updated">Updated 12 sec ago</span></div>
+          </article>
+
+          <article class="panel events-panel">
+            <div class="panel-heading"><div><h2>Recent activity</h2><p>Latest events in your environment</p></div><button class="text-button" data-view="activity">View all <span>→</span></button></div>
+            <div class="activity-list">
+              <div class="activity-item"><div class="activity-icon success">✓</div><div class="activity-copy"><strong>Deployment completed</strong><span>api-gateway <b>·</b> v2.14.0</span></div><time>8 min</time></div>
+              <div class="activity-item"><div class="activity-icon warning">!</div><div class="activity-copy"><strong>High memory alert resolved</strong><span>worker-queue <b>·</b> auto-scaled</span></div><time>42 min</time></div>
+              <div class="activity-item"><div class="activity-icon neutral">↻</div><div class="activity-copy"><strong>Configuration updated</strong><span>nginx <b>·</b> by Alex Rivera</span></div><time>1 hr</time></div>
+              <div class="activity-item"><div class="activity-icon success">✓</div><div class="activity-copy"><strong>Backup snapshot created</strong><span>database <b>·</b> 248 GB</span></div><time>3 hr</time></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel services-panel">
+          <div class="panel-heading service-heading"><div><h2>Service health</h2><p>12 services monitored on prod-eu-west-01</p></div><div class="service-actions"><div class="search-box"><span>⌕</span><input id="serviceSearch" type="search" placeholder="Filter services" aria-label="Filter services"></div><button class="icon-button table-button" title="More service actions">•••</button></div></div>
+          <div class="table-scroll"><table><thead><tr><th>Service</th><th>Status</th><th>Uptime</th><th>CPU</th><th>Memory</th><th>Last deploy</th><th></th></tr></thead><tbody id="serviceTable"><tr><td><div class="service-name"><span class="service-symbol">▦</span><span><strong>api-gateway</strong><small>Docker container</small></span></div></td><td><span class="table-status healthy"><i></i>Healthy</span></td><td>99.99%</td><td>18%</td><td>412 MB</td><td>8 min ago</td><td><button class="row-menu" aria-label="api-gateway actions">•••</button></td></tr><tr><td><div class="service-name"><span class="service-symbol">▤</span><span><strong>web-frontend</strong><small>Docker container</small></span></div></td><td><span class="table-status healthy"><i></i>Healthy</span></td><td>99.98%</td><td>24%</td><td>684 MB</td><td>2 hr ago</td><td><button class="row-menu" aria-label="web-frontend actions">•••</button></td></tr><tr><td><div class="service-name"><span class="service-symbol">◫</span><span><strong>worker-queue</strong><small>Systemd service</small></span></div></td><td><span class="table-status warning"><i></i>Degraded</span></td><td>98.42%</td><td>67%</td><td>1.2 GB</td><td>Yesterday</td><td><button class="row-menu" aria-label="worker-queue actions">•••</button></td></tr><tr><td><div class="service-name"><span class="service-symbol">◌</span><span><strong>postgres-primary</strong><small>Managed database</small></span></div></td><td><span class="table-status healthy"><i></i>Healthy</span></td><td>100%</td><td>31%</td><td>5.8 GB</td><td>4 days ago</td><td><button class="row-menu" aria-label="postgres-primary actions">•••</button></td></tr></tbody></table></div>
+          <div class="table-footer"><span>Showing <strong>4</strong> of 12 services</span><button class="text-button" data-view="services">Manage services <span>→</span></button></div>
+        </section>
+        <footer class="page-footer"><span><i class="footer-dot"></i> Monitoring is active</span><span>Sentinel v1.8.2 <b>·</b> Region eu-west-1</span></footer>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-icon">✓</span><span id="toastText">Action completed</span></div>
+  <script src="app.js"></script>
+</body>
+</html>

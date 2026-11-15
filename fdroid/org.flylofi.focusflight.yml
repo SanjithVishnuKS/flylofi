@@ -1,0 +1,37 @@
+Categories:
+  - Multimedia
+  - Wellness
+License: MIT
+WebSite: https://focus-flight.always04king.workers.dev
+SourceCode: https://github.com/SanjithVishnuKS/flylofi-focus-flight
+IssueTracker: https://github.com/SanjithVishnuKS/flylofi-focus-flight/issues
+Changelog: https://github.com/SanjithVishnuKS/flylofi-focus-flight/releases
+
+AutoName: FlyLofi Focus Flight
+Summary: Ambient lofi study & deep relaxation flight deck
+Description: |-
+  FlyLofi Focus Flight transforms your device into an immersive ambient flight cabin
+  engineered for deep focus, studying, flow-state productivity, and tranquil relaxation.
+
+  Key features:
+  * Cruise mode with atmospheric cabin and cockpit visuals
+  * Ambient airplane cabin white noise
+  * Curated lofi audio tracks with offline playback
+  * Completely offline, no tracking, no ads, zero telemetry
+  * Battery-efficient native rendering
+
+RepoType: git
+Repo: https://github.com/SanjithVishnuKS/flylofi-focus-flight.git
+
+Builds:
+  - versionName: '1.0.0'
+    versionCode: 1
+    commit: v1.0.0
+    subdir: focus-flight
+    gradle:
+      - yes
+
+AutoUpdateMode: Version v%v
+UpdateCheckMode: Tags
+CurrentVersion: '1.0.0'
+CurrentVersionCode: 1
