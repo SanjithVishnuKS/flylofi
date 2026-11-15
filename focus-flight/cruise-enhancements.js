@@ -49,12 +49,16 @@
     const host = window.location.hostname || 'localhost';
     const candidates = [
       '../' + clean,
+      '/assets/web/' + clean,
+      'assets/web/' + clean,
       '/' + clean,
       './' + clean,
       clean,
       `http://${host}:8080/${clean}`,
+      `http://192.168.0.28:8080/${clean}`,
       `http://localhost:8080/${clean}`,
-      `http://127.0.0.1:8080/${clean}`
+      `http://127.0.0.1:8080/${clean}`,
+      `http://10.0.2.2:8080/${clean}`
     ];
     return [...new Set(candidates)];
   }
@@ -190,10 +194,14 @@
   // 6. Cabin Ambience (airplane-cabin-white.webm)
   const cabinCandidates = [
     '../media/flight/audio/airplane-cabin-white.webm',
+    '/assets/web/media/flight/audio/airplane-cabin-white.webm',
+    'assets/web/media/flight/audio/airplane-cabin-white.webm',
     '/media/flight/audio/airplane-cabin-white.webm',
     './media/flight/audio/airplane-cabin-white.webm',
     'media/flight/audio/airplane-cabin-white.webm',
-    `http://${window.location.hostname || 'localhost'}:8080/media/flight/audio/airplane-cabin-white.webm`
+    'http://192.168.0.28:8080/media/flight/audio/airplane-cabin-white.webm',
+    'http://localhost:8080/media/flight/audio/airplane-cabin-white.webm',
+    'http://10.0.2.2:8080/media/flight/audio/airplane-cabin-white.webm'
   ];
 
   let isCabinActive = false;

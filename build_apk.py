@@ -16,6 +16,7 @@ output_apk = r'd:\SERVER APP\focus-flight.apk'
 web_apk = r'd:\SERVER APP\focus-flight\focus-flight.apk'
 focus_dir = r'd:\SERVER APP\focus-flight'
 master_clip = r'd:\SERVER APP\media\flight\clips\gemini_generated_video_09c1b3d1.mp4'
+afternoon_jazz = r'd:\SERVER APP\media\flight\audio\afternoon-jazz.webm'
 key_path = r'd:\SERVER APP\flylofi-release-key.pem'
 cert_path = r'd:\SERVER APP\flylofi-release-cert.pem'
 
@@ -69,6 +70,8 @@ files_to_inject = {
 }
 if os.path.exists(master_clip):
     files_to_inject['assets/web/media/flight/clips/gemini_generated_video_09c1b3d1.mp4'] = master_clip
+if os.path.exists(afternoon_jazz):
+    files_to_inject['assets/web/media/flight/audio/afternoon-jazz.webm'] = afternoon_jazz
 
 for zpath, fpath in files_to_inject.items():
     if os.path.exists(fpath):
@@ -77,15 +80,15 @@ for zpath, fpath in files_to_inject.items():
     else:
         print(f"   WARNING: file missing: {fpath}")
 
-# Direct redirect entry for local/index.html
+# Direct redirect entry for local/index.html and demo/index.html
 local_index_html = b"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=/assets/web/app.html">
+  <meta http-equiv="refresh" content="0; url=/assets/web/index.html">
   <title>Flylofi</title>
   <script>
-    window.location.replace('/assets/web/app.html');
+    window.location.replace('/assets/web/index.html');
   </script>
 </head>
 <body style="background:#071117;color:#83e0b5;display:grid;place-items:center;height:100vh;margin:0;font-family:sans-serif">
@@ -99,29 +102,30 @@ import json
 settings_json = {
     "sites": [
         {
-            "url": "https://appassets.androidplatform.net/assets/web/app.html",
+            "url": "https://appassets.androidplatform.net/assets/web/index.html",
             "title": "Flylofi Focus Flight"
         }
     ],
-    "other": "https://appassets.androidplatform.net/assets/web/app.html",
+    "other": "https://appassets.androidplatform.net/assets/web/index.html",
     "match": [
         ["host", "equals", "appassets.androidplatform.net"],
-        ["scheme", "equals", "https"],
-        ["scheme", "equals", "http"],
-        ["scheme", "equals", "file"]
+        ["host", "contains", "localhost"],
+        ["host", "contains", "127.0.0.1"],
+        ["host", "contains", "192.168."]
+    ],
+    "skip": [
+        ["path", "endsWith", ".epub"],
+        ["query", "contains", "type=epub"]
     ],
     "remote_debug": True,
     "console_log": False,
     "js_interface": False,
     "context_menu": False,
     "not_matching": False,
-    "local_sites": False,
+    "local_sites": True,
+    "update_zip": "",
     "web_settings": {
-        "JavaScriptEnabled": True,
-        "DomStorageEnabled": True,
-        "AllowFileAccess": True,
-        "AllowContentAccess": True,
-        "MediaPlaybackRequiresUserGesture": False
+        "JavaScriptEnabled": True
     },
     "source": "assets",
     "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()

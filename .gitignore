@@ -33,3 +33,4 @@ media/flight/audio/*.webm
 .vscode/
 *.log
 *.tmp
+clean-base.apk
