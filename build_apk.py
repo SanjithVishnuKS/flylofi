@@ -48,11 +48,26 @@ assert pos != -1, "Could not find app_name slot in resources.arsc"
 arsc[pos:pos+len(old_slot)] = new_slot
 entries['resources.arsc'] = bytes(arsc)
 
-print("4. Patching AndroidManifest.xml (minSdkVersion -> 24)...")
+print("4. Patching AndroidManifest.xml (minSdkVersion -> 24, versionCode -> 30)...")
 manifest = bytearray(entries['AndroidManifest.xml'])
 assert manifest[5296] == 31, f"Expected 31 at offset 5296, got {manifest[5296]}"
 manifest[5296] = 24
+assert manifest[5120] == 29, f"Expected 29 at offset 5120, got {manifest[5120]}"
+manifest[5120] = 30
 entries['AndroidManifest.xml'] = bytes(manifest)
+
+print("4b. Patching classes.dex (immunize null intent action in MainActivity)...")
+import hashlib, zlib
+dex = bytearray(entries['classes.dex'])
+dex_pos = dex.find(b'\x1a\x03\xb9\x63\x6e\x20\x21\x6e\x32\x00')
+if dex_pos != -1:
+    dex[dex_pos + 8] = 0x23
+    sha1 = hashlib.sha1(dex[32:]).digest()
+    dex[12:32] = sha1
+    adler = zlib.adler32(dex[12:]) & 0xffffffff
+    dex[8:12] = struct.pack('<I', adler)
+    print("    classes.dex patched and rehashed successfully.")
+entries['classes.dex'] = bytes(dex)
 
 print("5. Injecting web assets and media...")
 files_to_inject = {

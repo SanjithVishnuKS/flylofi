@@ -48,12 +48,12 @@
     const clean = src.replace(/^(\.\.\/|\.\/|\/)/, '');
     const host = window.location.hostname || 'localhost';
     const candidates = [
-      '../' + clean,
+      clean,
+      './' + clean,
       '/assets/web/' + clean,
       'assets/web/' + clean,
+      '../' + clean,
       '/' + clean,
-      './' + clean,
-      clean,
       `http://${host}:8080/${clean}`,
       `http://192.168.0.28:8080/${clean}`,
       `http://localhost:8080/${clean}`,
@@ -193,12 +193,12 @@
 
   // 6. Cabin Ambience (airplane-cabin-white.webm)
   const cabinCandidates = [
-    '../media/flight/audio/airplane-cabin-white.webm',
+    'media/flight/audio/airplane-cabin-white.webm',
+    './media/flight/audio/airplane-cabin-white.webm',
     '/assets/web/media/flight/audio/airplane-cabin-white.webm',
     'assets/web/media/flight/audio/airplane-cabin-white.webm',
+    '../media/flight/audio/airplane-cabin-white.webm',
     '/media/flight/audio/airplane-cabin-white.webm',
-    './media/flight/audio/airplane-cabin-white.webm',
-    'media/flight/audio/airplane-cabin-white.webm',
     'http://192.168.0.28:8080/media/flight/audio/airplane-cabin-white.webm',
     'http://localhost:8080/media/flight/audio/airplane-cabin-white.webm',
     'http://10.0.2.2:8080/media/flight/audio/airplane-cabin-white.webm'
@@ -307,7 +307,7 @@
   }
 
   // Initial video attempt with user gesture listener fallback
-  loadVideoScene(videoSceneSelect?.value || '../media/flight/clips/night-flight-lofi.mp4');
+  loadVideoScene(videoSceneSelect?.value || 'media/flight/clips/gemini_generated_video_09c1b3d1.mp4');
 
   // If browser blocked initial video autoplay, unlock on first user click anywhere in the window
   const unlockAutoplay = () => {
