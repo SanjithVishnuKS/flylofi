@@ -158,8 +158,9 @@
   border-radius: 4px;
 }
 
-/* 2. Flight Timer Bar */
+/* 2. Flight Timer Bar (hidden to unblock lofi deck and scenery) */
 .flight-timer-bar {
+  display: none !important;
   position: absolute;
   z-index: 4;
   top: 16px;

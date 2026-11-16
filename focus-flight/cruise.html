@@ -82,7 +82,6 @@ h1{font-size:clamp(26px,4.2vw,58px);line-height:.99;letter-spacing:-.055em;font-
  <main class="stage" id="stage">
   <div class="cabin-layer" aria-hidden="true"><div class="overhead-light"></div><div class="seat-shell"></div><div class="window-glow"></div><div class="reflection reflection-one"></div><div class="reflection reflection-two"></div><i class="cabin-particle particle-one"></i><i class="cabin-particle particle-two"></i><i class="cabin-particle particle-three"></i><span class="cabin-caption">14A WINDOW SEAT · QUIET CABIN</span></div>
   <video class="flight-video" id="flightVideo" muted loop playsinline preload="metadata"><source src="media/flight/clips/gemini_generated_video_09c1b3d1.mp4" type="video/mp4"></video>
-  <div class="flight-timer-bar" aria-live="polite"><span class="timer-kicker">FLIGHT IN PROGRESS</span><strong id="flightTopTimer">25:00</strong><span class="timer-phase" id="flightTopPhase">BOARDING</span></div>
   <canvas id="scene" aria-label="Cinematic illustrated flight journey"></canvas>
   <div class="settings">
    <span>Route</span><input id="fromInput" value="Chennai" maxlength="20" aria-label="Origin city">
@@ -190,7 +189,18 @@ flightVideo.addEventListener('loadeddata',()=>{stage.classList.add('video-live')
 flightVideo.addEventListener('error',()=>stage.classList.remove('video-live'));
 flightVideo.load();
 let elapsed=0,last=0,W=1280,H=720,D=1,from='Chennai',to='Tokyo',raf=0;
-if(savedFlight){from=`${savedFlight.departure} · ${cityNames[savedFlight.departure]||savedFlight.departure}`;to=`${savedFlight.destination} · ${cityNames[savedFlight.destination]||savedFlight.destination}`;stage.classList.add('booked-session')}
+if(savedFlight){
+  from=`${savedFlight.departure} · ${cityNames[savedFlight.departure]||savedFlight.departure}`;
+  to=`${savedFlight.destination} · ${cityNames[savedFlight.destination]||savedFlight.destination}`;
+  stage.classList.add('booked-session');
+  if(savedFlight.seat){
+    const captionEl = document.querySelector('.cabin-caption');
+    if(captionEl){
+      const seatTitle = savedFlight.seatType ? `${savedFlight.seat} · ${savedFlight.seatType.toUpperCase()}` : `${savedFlight.seat} WINDOW SEAT · QUIET CABIN`;
+      captionEl.textContent = seatTitle;
+    }
+  }
+}
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mix=(a,b,t)=>a+(b-a)*t;
 const ease=t=>t*t*(3-2*t),smooth=(a,b,x)=>{let t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)};
 function resize(){let r=canvas.getBoundingClientRect();W=Math.max(1,r.width);H=Math.max(1,r.height);D=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(W*D);canvas.height=Math.round(H*D);c.setTransform(D,0,0,D,0,0)}
@@ -352,8 +362,8 @@ if(savedFlight){$('studyLength').innerHTML=`<option value="${savedFlight.duratio
 function paintFocus(){
  const mm=Math.floor(focusRemaining/60),ss=focusRemaining%60;
  $('studyTime').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
- $('flightTopTimer').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
- $('flightTopPhase').textContent=focusRunning?'IN FOCUS':'BOARDING';
+ if($('flightTopTimer')) $('flightTopTimer').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
+ if($('flightTopPhase')) $('flightTopPhase').textContent=focusRunning?'IN FOCUS':'BOARDING';
  $('studyState').textContent=focusRemaining===0?'Complete':focusRunning?'Focusing':'Ready';
  $('studyToggle').textContent=focusRunning?'Pause':focusRemaining===0?'Again':'Start';
  $('studyNote').textContent=focusRemaining===0?'Focus block complete. Take a short break before the next one.':focusRunning?'One task. One window. Stay with it.':'Settle in. Start your focus timer when you are ready.';

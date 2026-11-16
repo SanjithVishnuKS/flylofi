@@ -50,6 +50,19 @@ legend{margin-bottom:10px;font-weight:600}
 .options label{position:relative;display:grid;place-items:center;padding:12px 6px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(89,223,160,.2);transition:all .15s}
 .options label.active,.options label:has(input:checked){border-color:var(--accent)!important;background:rgba(89,223,160,.16)!important;color:var(--accent)!important;box-shadow:0 0 14px rgba(89,223,160,.2)}
 .options input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;z-index:2}
+
+/* Seat Selection Grid */
+.seat-picker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.seat-pill{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 6px;border:1px solid var(--line);border-radius:10px;background:rgba(9,24,32,.75);color:var(--muted);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(89,223,160,.2);transition:all .15s}
+.seat-pill.active,.seat-pill:has(input:checked){border-color:var(--accent)!important;background:rgba(89,223,160,.16)!important;color:var(--text)!important;box-shadow:0 0 16px rgba(89,223,160,.22)}
+.seat-pill input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;z-index:2}
+.seat-icon{font-size:16px;margin-bottom:2px}
+.seat-code{font:700 13px "Space Grotesk",sans-serif;color:var(--text);letter-spacing:.05em}
+.seat-pill.active .seat-code,.seat-pill:has(input:checked) .seat-code{color:var(--accent)}
+.seat-label{font-size:10px;color:var(--muted);margin-top:2px}
+.seat-tag{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-top:3px;font-weight:700}
+.seat-pill.active .seat-tag,.seat-pill:has(input:checked) .seat-tag{color:var(--accent)}
+
 .board{width:100%;margin-top:12px;padding:15px 18px;border:none;border-radius:10px;background:var(--accent);color:#08241a;font:800 14px "Space Grotesk",sans-serif;letter-spacing:.04em;cursor:pointer;box-shadow:0 8px 24px rgba(89,223,160,.28);transition:transform .15s}
 .board:active{transform:scale(.98)}
 .ticket-card{padding:0;overflow:hidden}
@@ -90,6 +103,7 @@ legend{margin-bottom:10px;font-weight:600}
   .ticket-footer .ticket-actions{width:100%}
   .ticket-footer .ticket-actions button{flex:1}
   .cruise-view{inset:58px 0 0}
+  .seat-picker-grid{grid-template-columns:repeat(2,1fr)}
 }
 .top-actions{display:flex;align-items:center;gap:12px}
 .top-actions button{padding:7px 13px;font-size:11px;font-weight:600;color:var(--muted);background:rgba(12,29,37,.7)}
@@ -114,7 +128,7 @@ legend{margin-bottom:10px;font-weight:600}
       <div class="hero">
         <div class="eyebrow">THE FOCUS ROUTE · SESSION 001</div>
         <h1>Make focus<br><em>a destination.</em></h1>
-        <p>Choose your route, receive your boarding pass, and settle into a rich cruise-study experience.</p>
+        <p>Choose your route, select your preferred seat, and settle into a rich cruise-study experience.</p>
         <div class="hero-actions">
           <button class="quick-board-btn" id="heroQuickBoard" type="button">✈ QUICK START FLIGHT →</button>
         </div>
@@ -162,6 +176,40 @@ legend{margin-bottom:10px;font-weight:600}
           </div>
         </fieldset>
 
+        <fieldset>
+          <legend>Select aircraft seat</legend>
+          <div class="seat-picker-grid" id="seatOptions">
+            <label class="seat-pill active">
+              <input type="radio" name="seat" value="14A" data-type="Window Seat · Quiet Cabin" checked>
+              <span class="seat-icon">🪟</span>
+              <span class="seat-code">14A</span>
+              <span class="seat-label">Window</span>
+              <span class="seat-tag">Quiet</span>
+            </label>
+            <label class="seat-pill">
+              <input type="radio" name="seat" value="14C" data-type="Aisle Seat · Extra Legroom">
+              <span class="seat-icon">🚶</span>
+              <span class="seat-code">14C</span>
+              <span class="seat-label">Aisle</span>
+              <span class="seat-tag">Space</span>
+            </label>
+            <label class="seat-pill">
+              <input type="radio" name="seat" value="01A" data-type="First Class Suite · Horizon View">
+              <span class="seat-icon">👑</span>
+              <span class="seat-code">01A</span>
+              <span class="seat-label">Suite</span>
+              <span class="seat-tag">First</span>
+            </label>
+            <label class="seat-pill">
+              <input type="radio" name="seat" value="02F" data-type="Wing Window · Engine Glow">
+              <span class="seat-icon">✈️</span>
+              <span class="seat-code">02F</span>
+              <span class="seat-label">Wing</span>
+              <span class="seat-tag">Scenic</span>
+            </label>
+          </div>
+        </fieldset>
+
         <button class="board" id="submitBookFlight" type="submit">✈ Book Flight & Board Aircraft →</button>
       </form>
     </div>
@@ -186,7 +234,7 @@ legend{margin-bottom:10px;font-weight:600}
           <div class="ticket-destination"><small>TO</small><strong id="ticketToCode">SIN</strong><span id="ticketToName">Singapore</span></div>
         </div>
         <div class="ticket-meta">
-          <div><small>SEAT</small><strong>14A</strong></div>
+          <div><small>SEAT</small><strong id="ticketSeat">14A</strong></div>
           <div><small>GATE</small><strong>F04</strong></div>
           <div><small>GROUP</small><strong>FOCUS 1</strong></div>
           <div><small>CLASS</small><strong id="ticketCategory">PROGRAMMING</strong></div>
@@ -234,6 +282,8 @@ let activeFlight = {
   destination: 'SIN',
   duration: 45,
   category: 'Programming',
+  seat: '14A',
+  seatType: 'Window Seat · Quiet Cabin',
   number: '042'
 };
 
@@ -264,12 +314,13 @@ function showTicket(data){
   $('ticketToName').textContent=airports[data.destination]||data.destination;
   $('ticketCategory').textContent=data.category.toUpperCase();
   $('ticketDuration').textContent=`${data.duration} minutes · Full credit on landing`;
+  if($('ticketSeat')) $('ticketSeat').textContent=data.seat || '14A';
   selectView('ticketView');
 }
 
-// Option button selection handling (supports 100% of Android WebView versions without relying on CSS :has)
+// Option and seat button selection handling
 function updateOptionVisuals() {
-  document.querySelectorAll('.options').forEach((container) => {
+  document.querySelectorAll('.options, .seat-picker-grid').forEach((container) => {
     container.querySelectorAll('label').forEach((label) => {
       const radio = label.querySelector('input[type="radio"]');
       if (radio) {
@@ -279,7 +330,7 @@ function updateOptionVisuals() {
   });
 }
 
-document.querySelectorAll('.options label').forEach((label) => {
+document.querySelectorAll('.options label, .seat-picker-grid label').forEach((label) => {
   label.addEventListener('click', () => {
     const radio = label.querySelector('input[type="radio"]');
     if (radio) {
@@ -290,16 +341,19 @@ document.querySelectorAll('.options label').forEach((label) => {
 });
 updateOptionVisuals();
 
-// Form submit -> directly launch flight
+// Form submit -> directly launch flight with selected seat
 $('bookingForm').addEventListener('submit', (event) => {
   event.preventDefault();
   const durInput = document.querySelector('input[name="duration"]:checked');
   const catInput = document.querySelector('input[name="category"]:checked');
+  const seatInput = document.querySelector('input[name="seat"]:checked');
   const data = {
     departure: departure.value || 'MAA',
     destination: destination.value || 'SIN',
     duration: durInput ? Number(durInput.value) : 45,
     category: catInput ? catInput.value : 'Programming',
+    seat: seatInput ? seatInput.value : '14A',
+    seatType: seatInput ? (seatInput.getAttribute('data-type') || 'Window Seat · Quiet Cabin') : 'Window Seat · Quiet Cabin',
     number: '042'
   };
   launchFlight(data);
@@ -311,11 +365,14 @@ if (heroBtn) {
   heroBtn.addEventListener('click', () => {
     const durInput = document.querySelector('input[name="duration"]:checked');
     const catInput = document.querySelector('input[name="category"]:checked');
+    const seatInput = document.querySelector('input[name="seat"]:checked');
     launchFlight({
       departure: departure.value || 'MAA',
       destination: destination.value || 'SIN',
       duration: durInput ? Number(durInput.value) : 45,
       category: catInput ? catInput.value : 'Programming',
+      seat: seatInput ? seatInput.value : '14A',
+      seatType: seatInput ? (seatInput.getAttribute('data-type') || 'Window Seat · Quiet Cabin') : 'Window Seat · Quiet Cabin',
       number: '042'
     });
   });
