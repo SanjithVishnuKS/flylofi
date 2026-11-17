@@ -1512,6 +1512,95 @@ legend{margin-bottom:10px;font-weight:600}
 </section>
 </div>
 
+<!-- DOWNLOAD HUB MODAL (Windows, Linux, Android, PWA) -->
+<div class="download-modal-backdrop" id="downloadModal" aria-hidden="true">
+  <div class="download-modal-card" role="dialog" aria-labelledby="modalTitle">
+    <div class="download-modal-header">
+      <div class="download-modal-title" id="modalTitle">
+        <span>📥</span> Download Flylofi
+      </div>
+      <button class="download-modal-close" id="downloadModalClose" type="button" aria-label="Close dialog">×</button>
+    </div>
+
+    <div class="platform-grid">
+      <!-- Windows -->
+      <div class="platform-row">
+        <div class="platform-row-info">
+          <span class="platform-row-icon">🪟</span>
+          <div class="platform-row-text">
+            <strong>Windows Desktop</strong>
+            <small>Windows 10 / 11 · Standalone .EXE &amp; Portable ZIP</small>
+          </div>
+        </div>
+        <div class="platform-row-actions">
+          <a href="Flylofi.exe" class="dl-btn" download title="Download Standalone Flylofi.exe (91 KB)">
+            <span>⬇</span> .EXE (91 KB)
+          </a>
+          <a href="Flylofi-Windows.zip" class="dl-btn secondary" download title="Download Portable ZIP package">
+            <span>📦</span> .ZIP
+          </a>
+        </div>
+      </div>
+
+      <!-- Linux -->
+      <div class="platform-row" style="flex-direction:column;align-items:stretch">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="platform-row-info">
+            <span class="platform-row-icon">🐧</span>
+            <div class="platform-row-text">
+              <strong>Linux Desktop</strong>
+              <small>Ubuntu, Debian, Fedora, Arch · .tar.gz bundle + 1-click install</small>
+            </div>
+          </div>
+          <div class="platform-row-actions">
+            <a href="flylofi-linux.tar.gz" class="dl-btn" download title="Download Linux .tar.gz package">
+              <span>⬇</span> .tar.gz (214 KB)
+            </a>
+            <a href="flylofi-linux.zip" class="dl-btn secondary" download title="Download Linux .zip package">
+              <span>📦</span> .zip
+            </a>
+          </div>
+        </div>
+        <div class="linux-code-box" title="Click to copy Linux installation command">
+          tar -xzf flylofi-linux.tar.gz &amp;&amp; cd flylofi-linux &amp;&amp; ./install.sh
+        </div>
+      </div>
+
+      <!-- Android -->
+      <div class="platform-row">
+        <div class="platform-row-info">
+          <span class="platform-row-icon">🤖</span>
+          <div class="platform-row-text">
+            <strong>Android Mobile</strong>
+            <small>Android 7.0+ · Signed Release APK (v2 + v3 Merkle Tree)</small>
+          </div>
+        </div>
+        <div class="platform-row-actions">
+          <a href="focus-flight.apk" class="dl-btn" download title="Download Signed Android APK">
+            <span>⬇</span> .APK (94 MB)
+          </a>
+        </div>
+      </div>
+
+      <!-- Browser / PWA -->
+      <div class="platform-row">
+        <div class="platform-row-info">
+          <span class="platform-row-icon">💻</span>
+          <div class="platform-row-text">
+            <strong>Desktop PWA (Windows &amp; Linux)</strong>
+            <small>Install directly into Start Menu, Taskbar or Dock via Chrome / Edge / Brave</small>
+          </div>
+        </div>
+        <div class="platform-row-actions">
+          <button type="button" class="dl-btn" id="modalInstallPwaBtn">
+            <span>⚡</span> Install App
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 const airports = {
   MAA: 'Chennai', BOM: 'Mumbai', DEL: 'New Delhi', BLR: 'Bengaluru',
@@ -2455,7 +2544,7 @@ function closeDownloadModal() {
 }
 
 // Deep hash navigation support (e.g. #ticket, #booking, #car, #bus, #download)
-window.addEventListener('load', () => {
+function checkHash() {
   resetTearState();
   if (window.location.hash.includes('car')) {
     switchTransitMode('car');
@@ -2470,7 +2559,11 @@ window.addEventListener('load', () => {
   } else if (window.location.hash === '#download') {
     openDownloadModal();
   }
-});
+}
+window.addEventListener('load', checkHash);
+window.addEventListener('hashchange', checkHash);
+window.addEventListener('DOMContentLoaded', checkHash);
+checkHash();
 
 if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
   window.addEventListener('load', () => {
@@ -2498,96 +2591,6 @@ async function triggerPwaInstall() {
 
 if (installPwaChip) installPwaChip.onclick = triggerPwaInstall;
 if (modalInstallPwaBtn) modalInstallPwaBtn.onclick = triggerPwaInstall;
-</script>
-
-<!-- DOWNLOAD HUB MODAL (Windows, Linux, Android, PWA) -->
-<div class="download-modal-backdrop" id="downloadModal" aria-hidden="true">
-  <div class="download-modal-card" role="dialog" aria-labelledby="modalTitle">
-    <div class="download-modal-header">
-      <div class="download-modal-title" id="modalTitle">
-        <span>📥</span> Download Flylofi
-      </div>
-      <button class="download-modal-close" id="downloadModalClose" type="button" aria-label="Close dialog">×</button>
-    </div>
-
-    <div class="platform-grid">
-      <!-- Windows -->
-      <div class="platform-row">
-        <div class="platform-row-info">
-          <span class="platform-row-icon">🪟</span>
-          <div class="platform-row-text">
-            <strong>Windows Desktop</strong>
-            <small>Windows 10 / 11 · Standalone .EXE &amp; Portable ZIP</small>
-          </div>
-        </div>
-        <div class="platform-row-actions">
-          <a href="Flylofi.exe" class="dl-btn" download title="Download Standalone Flylofi.exe (91 KB)">
-            <span>⬇</span> .EXE (91 KB)
-          </a>
-          <a href="Flylofi-Windows.zip" class="dl-btn secondary" download title="Download Portable ZIP package">
-            <span>📦</span> .ZIP
-          </a>
-        </div>
-      </div>
-
-      <!-- Linux -->
-      <div class="platform-row" style="flex-direction:column;align-items:stretch">
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <div class="platform-row-info">
-            <span class="platform-row-icon">🐧</span>
-            <div class="platform-row-text">
-              <strong>Linux Desktop</strong>
-              <small>Ubuntu, Debian, Fedora, Arch · .tar.gz bundle + 1-click install</small>
-            </div>
-          </div>
-          <div class="platform-row-actions">
-            <a href="flylofi-linux.tar.gz" class="dl-btn" download title="Download Linux .tar.gz package">
-              <span>⬇</span> .tar.gz (214 KB)
-            </a>
-            <a href="flylofi-linux.zip" class="dl-btn secondary" download title="Download Linux .zip package">
-              <span>📦</span> .zip
-            </a>
-          </div>
-        </div>
-        <div class="linux-code-box" title="Click to copy Linux installation command">
-          tar -xzf flylofi-linux.tar.gz &amp;&amp; cd flylofi-linux &amp;&amp; ./install.sh
-        </div>
-      </div>
-
-      <!-- Android -->
-      <div class="platform-row">
-        <div class="platform-row-info">
-          <span class="platform-row-icon">🤖</span>
-          <div class="platform-row-text">
-            <strong>Android Mobile</strong>
-            <small>Android 7.0+ · Signed Release APK (v2 + v3 Merkle Tree)</small>
-          </div>
-        </div>
-        <div class="platform-row-actions">
-          <a href="focus-flight.apk" class="dl-btn" download title="Download Signed Android APK">
-            <span>⬇</span> .APK (94 MB)
-          </a>
-        </div>
-      </div>
-
-      <!-- Browser / PWA -->
-      <div class="platform-row">
-        <div class="platform-row-info">
-          <span class="platform-row-icon">💻</span>
-          <div class="platform-row-text">
-            <strong>Desktop PWA (Windows &amp; Linux)</strong>
-            <small>Install directly into Start Menu, Taskbar or Dock via Chrome / Edge / Brave</small>
-          </div>
-        </div>
-        <div class="platform-row-actions">
-          <button type="button" class="dl-btn" id="modalInstallPwaBtn">
-            <span>⚡</span> Install App
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 </script>
 <script src="app-controls.js"></script>
 </body>
