@@ -331,7 +331,7 @@ legend{margin-bottom:10px;font-weight:600}
         <h1>Make focus<br><em>a destination.</em></h1>
         <p>Choose your route, select your preferred seat perspective, and tear your boarding pass to settle into a rich focus journey.</p>
         <div class="hero-actions">
-          <button class="quick-board-btn" id="heroQuickBoard" type="button">✈ QUICK START FLIGHT →</button>
+          <button class="quick-board-btn" id="heroQuickBoard" type="button">✈ CHOOSE SEAT &amp; BOARD →</button>
         </div>
         <div class="stats">
           <div><strong>24</strong><small>Destinations</small></div>
@@ -377,41 +377,41 @@ legend{margin-bottom:10px;font-weight:600}
           </div>
         </fieldset>
 
-        <fieldset>
-          <legend>Select aircraft seat perspective</legend>
+        <fieldset style="border:1px solid rgba(89,223,160,.25);border-radius:12px;padding:12px 14px;background:rgba(89,223,160,.04);margin-bottom:18px">
+          <legend style="padding:0 6px;color:var(--accent);font-weight:700">Where would you like to sit? (Choose Perspective)</legend>
           <div class="seat-picker-grid" id="seatOptions">
             <label class="seat-pill active">
-              <input type="radio" name="seat" value="14A" data-type="Window Seat · Quiet Cabin" checked>
+              <input type="radio" name="seat" value="14A" data-type="Aerial Earth Vista" data-img="media/flight/scenes/seat_14a_aerial_earth.jpg" checked>
               <span class="seat-icon">🪟</span>
               <span class="seat-code">14A</span>
               <span class="seat-label">Window</span>
-              <span class="seat-tag">Quiet</span>
+              <span class="seat-tag">Aerial Earth</span>
             </label>
             <label class="seat-pill">
-              <input type="radio" name="seat" value="14C" data-type="Aisle Seat · Extra Legroom">
-              <span class="seat-icon">🚶</span>
-              <span class="seat-code">14C</span>
-              <span class="seat-label">Aisle</span>
-              <span class="seat-tag">Space</span>
-            </label>
-            <label class="seat-pill">
-              <input type="radio" name="seat" value="01A" data-type="First Class Suite · Horizon View">
-              <span class="seat-icon">👑</span>
-              <span class="seat-code">01A</span>
-              <span class="seat-label">Suite</span>
-              <span class="seat-tag">First</span>
-            </label>
-            <label class="seat-pill">
-              <input type="radio" name="seat" value="02F" data-type="Wing Window · Engine Glow">
+              <input type="radio" name="seat" value="02F" data-type="Wing &amp; Jet Engine" data-img="media/flight/scenes/seat_02f_wing.jpg">
               <span class="seat-icon">✈️</span>
               <span class="seat-code">02F</span>
               <span class="seat-label">Wing</span>
-              <span class="seat-tag">Scenic</span>
+              <span class="seat-tag">Turbine View</span>
+            </label>
+            <label class="seat-pill">
+              <input type="radio" name="seat" value="01A" data-type="Horizon Sunset Suite" data-img="media/flight/scenes/seat_01a_horizon.jpg">
+              <span class="seat-icon">👑</span>
+              <span class="seat-code">01A</span>
+              <span class="seat-label">Suite</span>
+              <span class="seat-tag">Sunset Horizon</span>
+            </label>
+            <label class="seat-pill">
+              <input type="radio" name="seat" value="18A" data-type="Night City Lights" data-img="media/flight/scenes/seat_18a_night.jpg">
+              <span class="seat-icon">🌃</span>
+              <span class="seat-code">18A</span>
+              <span class="seat-label">Night</span>
+              <span class="seat-tag">City Lights</span>
             </label>
           </div>
         </fieldset>
 
-        <button class="board" id="submitBookFlight" type="submit">✈ Review Boarding Pass &amp; Board →</button>
+        <button class="board" id="submitBookFlight" type="submit">✈ Select Seat &amp; Issue Boarding Pass →</button>
       </form>
     </div>
   </section>
@@ -607,7 +607,12 @@ function showTicket(data){
   $('stubTo').textContent = data.destination;
   $('stubTime').textContent = `${data.duration}M`;
 
-  const descMap = { '14A': 'WINDOW', '14C': 'AISLE', '01A': 'SUITE', '02F': 'WING' };
+  const descMap = {
+    '14A': 'WINDOW · AERIAL EARTH',
+    '02F': 'WING · JET TURBINE',
+    '01A': 'SUITE · SUNSET HORIZON',
+    '18A': 'NIGHT · CITY LIGHTS'
+  };
   if ($('stubSeatDesc')) $('stubSeatDesc').textContent = descMap[data.seat] || 'CABIN';
 
   resetTearState();
@@ -647,7 +652,7 @@ function collectFormData() {
     duration: durInput ? Number(durInput.value) : 45,
     category: catInput ? catInput.value : 'Programming',
     seat: seatInput ? seatInput.value : '14A',
-    seatType: seatInput ? (seatInput.getAttribute('data-type') || 'Window Seat · Quiet Cabin') : 'Window Seat · Quiet Cabin',
+    seatType: seatInput ? (seatInput.getAttribute('data-type') || 'Aerial Earth Vista') : 'Aerial Earth Vista',
     number: '042'
   };
 }
@@ -660,21 +665,33 @@ $('bookingForm').addEventListener('submit', (event) => {
 const heroBtn = $('heroQuickBoard');
 if (heroBtn) {
   heroBtn.addEventListener('click', () => {
-    showTicket(collectFormData());
+    const seatGrid = $('seatOptions');
+    seatGrid?.scrollIntoView({behavior: 'smooth', block: 'center'});
+    if (seatGrid) {
+      seatGrid.style.transition = 'box-shadow 0.35s ease';
+      seatGrid.style.boxShadow = '0 0 28px rgba(89,223,160,0.5)';
+      setTimeout(() => { seatGrid.style.boxShadow = ''; }, 1400);
+    }
   });
 }
 
 const navBoard = $('quickLaunchNav');
 if (navBoard) {
   navBoard.addEventListener('click', () => {
-    showTicket(activeFlight);
+    const seatGrid = $('seatOptions');
+    seatGrid?.scrollIntoView({behavior: 'smooth', block: 'center'});
+    if (seatGrid) {
+      seatGrid.style.transition = 'box-shadow 0.35s ease';
+      seatGrid.style.boxShadow = '0 0 28px rgba(89,223,160,0.5)';
+      setTimeout(() => { seatGrid.style.boxShadow = ''; }, 1400);
+    }
   });
 }
 
 const cardHead = $('cardHeadClickable');
 if (cardHead) {
   cardHead.addEventListener('click', () => {
-    $('submitBookFlight')?.scrollIntoView({behavior: 'smooth', block: 'center'});
+    $('seatOptions')?.scrollIntoView({behavior: 'smooth', block: 'center'});
   });
 }
 
@@ -691,7 +708,7 @@ window.addEventListener('message', (event) => {
     if ($('passportCity')) $('passportCity').textContent = destName.toUpperCase();
     if ($('passportDate')) $('passportDate').textContent = `${activeFlight.duration} MIN COMPLETED`;
   }
-  if (event.data?.type === 'flylofi-exit') {
+  if (event.data?.type === 'flylofi-exit' || event.data?.type === 'flylofi-exit-cruise') {
     selectView('ticketView');
   }
 });
@@ -846,6 +863,17 @@ if (quickRip) {
     triggerCompleteTear();
   });
 }
+
+// Deep hash navigation support (e.g. #ticket or #booking)
+window.addEventListener('load', () => {
+  if (window.location.hash === '#ticket') {
+    const saved = JSON.parse(localStorage.getItem('focusFlightActive') || 'null');
+    if (saved) showTicket(saved);
+    else showTicket(collectFormData());
+  } else if (window.location.hash === '#booking') {
+    selectView('homeView');
+  }
+});
 
 if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
   window.addEventListener('load', () => {

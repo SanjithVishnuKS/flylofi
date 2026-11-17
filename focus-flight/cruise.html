@@ -122,8 +122,15 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
           <source src="media/flight/clips/gemini_generated_video_09c1b3d1.mp4" type="video/mp4">
         </video>
 
-        <!-- Outside Illustrated Canvas Scenery -->
-        <canvas id="scene" aria-label="Outside flight scenery"></canvas>
+        <!-- Photorealistic Scenic Layer for Selected Seat Perspective -->
+        <div class="photorealistic-window-scene" id="photoScene">
+          <img id="photoSceneImg" class="photo-scene-img" src="media/flight/scenes/seat_14a_aerial_earth.jpg" alt="Airplane window realistic scenery">
+          <div class="cloud-drift-layer" id="cloudDrift"></div>
+          <div class="atmospheric-haze-layer"></div>
+        </div>
+
+        <!-- Outside Illustrated Canvas Scenery (fallback) -->
+        <canvas id="scene" aria-label="Outside flight scenery" style="display:none"></canvas>
 
         <!-- Dynamic Seat-Specific Perspective Layer -->
         <div class="seat-view-overlay" id="seatViewOverlay">
@@ -217,10 +224,12 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
         </button>
         <div class="deck-select-wrap">
           <select class="deck-select" id="videoSceneSelect" aria-label="Choose Flight Window Scene">
-            <option value="../media/flight/clips/gemini_generated_video_09c1b3d1.mp4">☁️ Wing Above Clouds (Built-in)</option>
-            <option value="../media/flight/clips/night-flight-lofi.mp4">✈️ Night Flight Cabin</option>
-            <option value="../media/flight/videos/first-class-cabin.mp4">🛋️ First Class Suite</option>
-            <option value="__canvas__">🎨 Illustrated Canvas</option>
+            <option value="media/flight/scenes/seat_14a_aerial_earth.jpg">🪟 14A · Aerial Earth &amp; Farmland</option>
+            <option value="media/flight/scenes/seat_02f_wing.jpg">✈️ 02F · Wing &amp; Jet Engine</option>
+            <option value="media/flight/scenes/seat_01a_horizon.jpg">👑 01A · First Class Sunset Horizon</option>
+            <option value="media/flight/scenes/seat_18a_night.jpg">🌃 18A · Night Flight &amp; City Lights</option>
+            <option value="media/flight/clips/gemini_generated_video_09c1b3d1.mp4">☁️ Wing Above Clouds (Video Loop)</option>
+            <option value="__canvas__">🎨 Illustrated Canvas (Legacy)</option>
             <option value="__custom_video__">➕ Upload Video File...</option>
           </select>
         </div>
@@ -263,7 +272,30 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
           <div class="route-data">
             <div><div class="datum-label">Departure</div><div class="datum-value" id="fromDatum">MAA · Chennai</div></div>
             <div><div class="datum-label">Destination</div><div class="datum-value" id="toDatum">SIN · Singapore</div></div>
-            <div><div class="datum-label">Seat View</div><div class="datum-value" id="seatDatum">14A · Window</div></div>
+            <div style="position:relative">
+              <div class="datum-label">Seat View</div>
+              <div class="datum-value seat-picker-trigger" id="seatDatum" title="Click to switch seat perspective">14A · Window</div>
+              <!-- In-Flight Seat Perspective Switcher Popover -->
+              <div class="seat-switch-popover" id="seatSwitchPopover" hidden>
+                <div class="seat-popover-title">SELECT SEAT PERSPECTIVE</div>
+                <button type="button" class="seat-switch-btn active" data-seat="14A" data-type="Aerial Earth Vista" data-img="media/flight/scenes/seat_14a_aerial_earth.jpg">
+                  <span class="seat-pop-icon">🪟</span>
+                  <div><strong>14A · Window</strong><small>Aerial Earth &amp; Farmland</small></div>
+                </button>
+                <button type="button" class="seat-switch-btn" data-seat="02F" data-type="Wing &amp; Jet Engine" data-img="media/flight/scenes/seat_02f_wing.jpg">
+                  <span class="seat-pop-icon">✈️</span>
+                  <div><strong>02F · Wing View</strong><small>Jet Turbine &amp; Clouds</small></div>
+                </button>
+                <button type="button" class="seat-switch-btn" data-seat="01A" data-type="Horizon Sunset Suite" data-img="media/flight/scenes/seat_01a_horizon.jpg">
+                  <span class="seat-pop-icon">👑</span>
+                  <div><strong>01A · First Class</strong><small>Panoramic Sunset Horizon</small></div>
+                </button>
+                <button type="button" class="seat-switch-btn" data-seat="18A" data-type="Night Flight View" data-img="media/flight/scenes/seat_18a_night.jpg">
+                  <span class="seat-pop-icon">🌃</span>
+                  <div><strong>18A · Night Flight</strong><small>City Lights &amp; Stars</small></div>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 

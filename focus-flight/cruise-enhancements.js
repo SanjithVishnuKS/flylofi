@@ -250,10 +250,27 @@
   cabinAudio.addEventListener('play', () => updateCabinUI(true));
   cabinAudio.addEventListener('pause', () => updateCabinUI(false));
 
-  // 6. Scenic Video Backdrop
+  // 6. Scenic Video & Photorealistic Backdrop
   async function loadVideoScene(sceneSrc) {
-    if (!sceneSrc || sceneSrc === '__canvas__') {
+    const photoScene = document.getElementById('photoScene');
+    const photoSceneImg = document.getElementById('photoSceneImg');
+    const sceneCanvas = document.getElementById('scene');
+
+    if (!sceneSrc) return;
+
+    if (sceneSrc.endsWith('.jpg') || sceneSrc.endsWith('.jpeg') || sceneSrc.endsWith('.png')) {
+      if (photoSceneImg) photoSceneImg.src = sceneSrc;
+      if (photoScene) photoScene.style.display = 'block';
+      if (sceneCanvas) sceneCanvas.style.display = 'none';
       flightVideo.pause();
+      if (stage) stage.classList.remove('video-live');
+      return;
+    }
+
+    if (sceneSrc === '__canvas__') {
+      flightVideo.pause();
+      if (photoScene) photoScene.style.display = 'none';
+      if (sceneCanvas) sceneCanvas.style.display = 'block';
       if (stage) stage.classList.remove('video-live');
       return;
     }
@@ -262,6 +279,9 @@
       if (customVideoFile) customVideoFile.click();
       return;
     }
+
+    if (photoScene) photoScene.style.display = 'block';
+    if (sceneCanvas) sceneCanvas.style.display = 'none';
 
     flightVideo.muted = true;
     flightVideo.defaultMuted = true;
@@ -581,14 +601,100 @@
 
   discoverServerMedia().catch(() => {});
 
-  // Flight Navigation Return Button
+  // ==========================================================================
+  // 11. PHOTOREALISTIC SEAT PERSPECTIVE ENGINE & IN-FLIGHT SWITCHER
+  // ==========================================================================
+  const SCENE_MAP = {
+    '14A': {
+      img: 'media/flight/scenes/seat_14a_aerial_earth.jpg',
+      type: 'Aerial Earth Vista',
+      desc: 'Lush green farmland, patchwork fields & winding rivers'
+    },
+    '02F': {
+      img: 'media/flight/scenes/seat_02f_wing.jpg',
+      type: 'Wing & Jet Engine',
+      desc: 'Swept aircraft wing and turbine over vast cloud deck'
+    },
+    '01A': {
+      img: 'media/flight/scenes/seat_01a_horizon.jpg',
+      type: 'Horizon Sunset Suite',
+      desc: '38,000 ft panoramic sunset horizon with golden glow'
+    },
+    '18A': {
+      img: 'media/flight/scenes/seat_18a_night.jpg',
+      type: 'Night Flight View',
+      desc: 'Metropolitan golden city grids & starlight below'
+    }
+  };
+
+  const photoSceneImg = document.getElementById('photoSceneImg');
+  const seatDatum = document.getElementById('seatDatum');
+  const seatSwitchPopover = document.getElementById('seatSwitchPopover');
+  const traySeatLabel = document.getElementById('traySeatLabel');
+
+  function applySeatPerspective(seatCode) {
+    const info = SCENE_MAP[seatCode] || SCENE_MAP['14A'];
+    if (photoSceneImg) photoSceneImg.src = info.img;
+    if (seatDatum) seatDatum.textContent = `${seatCode} · ${info.type}`;
+    if (traySeatLabel) traySeatLabel.textContent = `${seatCode} · ${info.type}`.toUpperCase();
+
+    // Update active class on popover buttons
+    document.querySelectorAll('.seat-switch-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.seat === seatCode);
+    });
+
+    // Update videoSceneSelect if present
+    if (videoSceneSelect) {
+      const matchOpt = [...videoSceneSelect.options].find((opt) => opt.value === info.img);
+      if (matchOpt) videoSceneSelect.value = info.img;
+    }
+
+    // Save to active session
+    try {
+      const d = JSON.parse(localStorage.getItem('focusFlightActive') || '{}');
+      d.seat = seatCode;
+      d.seatType = info.type;
+      localStorage.setItem('focusFlightActive', JSON.stringify(d));
+    } catch(e) {}
+  }
+
+  // Initialize seat from storage or default to 14A
+  const initialSeat = (savedFlightData?.seat || '14A').toUpperCase();
+  applySeatPerspective(initialSeat);
+
+  // In-Flight Seat Picker Popover Toggle
+  if (seatDatum && seatSwitchPopover) {
+    seatDatum.addEventListener('click', (e) => {
+      e.stopPropagation();
+      seatSwitchPopover.hidden = !seatSwitchPopover.hidden;
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!seatSwitchPopover.contains(e.target) && e.target !== seatDatum) {
+        seatSwitchPopover.hidden = true;
+      }
+    });
+
+    document.querySelectorAll('.seat-switch-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const seat = btn.dataset.seat;
+        applySeatPerspective(seat);
+        seatSwitchPopover.hidden = true;
+        playCabinTwoToneChime();
+      });
+    });
+  }
+
+  // Flight Navigation Return Button (Reliable Dual Message & Hash Navigation)
   const returnBtn = document.getElementById('cruiseReturnBtn');
   if (returnBtn) {
     returnBtn.addEventListener('click', () => {
       if (window.self !== window.top) {
         window.parent.postMessage({ type: 'flylofi-exit-cruise' }, '*');
+        window.parent.postMessage({ type: 'flylofi-exit' }, '*');
       } else {
-        window.location.href = 'app.html';
+        window.location.href = 'index.html#ticket';
       }
     });
   }

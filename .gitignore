@@ -12,14 +12,20 @@ env/
 venv/
 
 # Large Media Binaries (>100MB limit for GitHub)
-media/*.mp4
-media/*.webm
 media/*.mkv
 media/*.avi
 media/*.mov
-media/flight/clips/*.mp4
-media/flight/videos/*.mp4
-media/flight/audio/*.webm
+media/flight/clips/night-flight-lofi.mp4
+media/flight/videos/first-class-cabin.mp4
+media/flight/audio/airplane-cabin-white.webm
+media/flight/audio/bedtime-lofi.webm
+media/flight/audio/best-of-lofi.webm
+media/flight/audio/lofi-work-space.webm
+
+# Allow lightweight media (<50MB) for production builds
+!media/flight/clips/gemini_generated_video_09c1b3d1.mp4
+!media/flight/audio/afternoon-jazz.webm
+!focus-flight/media/**
 
 # Keep directory structure
 !media/**/.gitkeep
