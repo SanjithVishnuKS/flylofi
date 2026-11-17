@@ -762,3 +762,67 @@
     font-size: 8px;
   }
 }
+
+
+/* ==========================================================================
+   7. ZERO-OVERLAP GUARANTEES (Timer, Bottom Route Data, and Navigation)
+   ========================================================================== */
+.flight-timer-bar, .timer-kicker, .timer-phase, #flightTopTimer, .stage .rail .flight-timer-bar {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.cruise-close {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html.embedded-view .top {
+  display: none !important;
+}
+
+html.embedded-view .shell {
+  grid-template-rows: minmax(0, 1fr) auto !important;
+  padding: clamp(6px, 1.2vw, 14px) !important;
+}
+
+.hud-bottom {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding-bottom: 2px !important;
+}
+
+.route-data {
+  display: flex !important;
+  gap: clamp(10px, 1.8vw, 24px) !important;
+  flex-wrap: nowrap !important;
+  min-width: 0 !important;
+}
+
+.hud-status-group {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  gap: 5px !important;
+  flex-shrink: 0 !important;
+  text-align: right !important;
+}
+
+.hint {
+  position: static !important;
+  transform: none !important;
+  left: auto !important;
+  bottom: auto !important;
+  font-size: 8px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: rgba(235, 245, 239, 0.7) !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
