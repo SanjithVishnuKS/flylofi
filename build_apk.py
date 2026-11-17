@@ -85,8 +85,13 @@ files_to_inject = {
 }
 if os.path.exists(master_clip):
     files_to_inject['assets/web/media/flight/clips/gemini_generated_video_09c1b3d1.mp4'] = master_clip
-if os.path.exists(afternoon_jazz):
-    files_to_inject['assets/web/media/flight/audio/afternoon-jazz.webm'] = afternoon_jazz
+audio_dir = os.path.join(focus_dir, 'media', 'flight', 'audio')
+if os.path.exists(audio_dir):
+    for audio_file in os.listdir(audio_dir):
+        if audio_file.endswith('.webm') and not audio_file.endswith('.orig.webm'):
+            ap = os.path.join(audio_dir, audio_file)
+            files_to_inject[f'assets/web/media/flight/audio/{audio_file}'] = ap
+            print(f"   Queued audio track: {audio_file} ({os.path.getsize(ap)} bytes)")
 
 scenes_dir = os.path.join(focus_dir, 'media', 'flight', 'scenes')
 if os.path.exists(scenes_dir):

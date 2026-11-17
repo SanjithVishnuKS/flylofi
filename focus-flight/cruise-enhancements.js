@@ -77,6 +77,137 @@
     return [...new Set(candidates)];
   }
 
+  // Web Audio Fallback Synthesizer Engine (Zero-Bandwidth Infinite Cabin & Lofi Ambient)
+  let synthAudioCtx = null;
+  let cabinSynthGain = null;
+  let cabinNoiseSource = null;
+  let isProceduralCabinActive = false;
+  let lofiSynthGain = null;
+  let lofiSynthTimer = null;
+  let isProceduralLofiActive = false;
+
+  function getSynthContext() {
+    if (!synthAudioCtx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) synthAudioCtx = new AudioCtx();
+    }
+    if (synthAudioCtx && synthAudioCtx.state === 'suspended') {
+      synthAudioCtx.resume();
+    }
+    return synthAudioCtx;
+  }
+
+  function startProceduralCabinSynth() {
+    const ctx = getSynthContext();
+    if (!ctx) return;
+    stopProceduralCabinSynth();
+
+    const bufferSize = ctx.sampleRate * 2;
+    const noiseBuffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
+    for (let ch = 0; ch < 2; ch++) {
+      const out = noiseBuffer.getChannelData(ch);
+      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.99886 * b0 + white * 0.0555179;
+        b1 = 0.99332 * b1 + white * 0.0750759;
+        b2 = 0.96900 * b2 + white * 0.1538520;
+        b3 = 0.86650 * b3 + white * 0.3104856;
+        b4 = 0.55000 * b4 + white * 0.5329522;
+        b5 = -0.7616 * b5 - white * 0.0168980;
+        out[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.06;
+        b6 = white * 0.115926;
+      }
+    }
+
+    cabinNoiseSource = ctx.createBufferSource();
+    cabinNoiseSource.buffer = noiseBuffer;
+    cabinNoiseSource.loop = true;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(380, ctx.currentTime);
+    filter.Q.setValueAtTime(1.1, ctx.currentTime);
+
+    cabinSynthGain = ctx.createGain();
+    const vol = getVolumeLevel() * 0.28;
+    cabinSynthGain.gain.setValueAtTime(vol, ctx.currentTime);
+
+    cabinNoiseSource.connect(filter);
+    filter.connect(cabinSynthGain);
+    cabinSynthGain.connect(ctx.destination);
+    cabinNoiseSource.start(0);
+    isProceduralCabinActive = true;
+  }
+
+  function stopProceduralCabinSynth() {
+    if (cabinNoiseSource) {
+      try { cabinNoiseSource.stop(0); } catch(e) {}
+      try { cabinNoiseSource.disconnect(); } catch(e) {}
+      cabinNoiseSource = null;
+    }
+    isProceduralCabinActive = false;
+  }
+
+  function startProceduralLofiSynth() {
+    const ctx = getSynthContext();
+    if (!ctx) return;
+    stopProceduralLofiSynth();
+
+    lofiSynthGain = ctx.createGain();
+    const vol = getVolumeLevel() * 0.22;
+    lofiSynthGain.gain.setValueAtTime(vol, ctx.currentTime);
+
+    const lofiFilter = ctx.createBiquadFilter();
+    lofiFilter.type = 'lowpass';
+    lofiFilter.frequency.setValueAtTime(1100, ctx.currentTime);
+    lofiSynthGain.connect(lofiFilter);
+    lofiFilter.connect(ctx.destination);
+
+    // Warm relaxing 7th chords: Dm7, G7, Cmaj7, Am7
+    const chords = [
+      [146.83, 220.00, 261.63, 329.63],
+      [196.00, 246.94, 293.66, 349.23],
+      [130.81, 196.00, 246.94, 329.63],
+      [110.00, 164.81, 220.00, 261.63]
+    ];
+
+    let chordIdx = 0;
+    const playNextChord = () => {
+      if (!isProceduralLofiActive) return;
+      const curNotes = chords[chordIdx % chords.length];
+      chordIdx++;
+      const now = ctx.currentTime;
+      curNotes.forEach((freq) => {
+        const osc = ctx.createOscillator();
+        const noteGain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+        
+        noteGain.gain.setValueAtTime(0.0001, now);
+        noteGain.gain.linearRampToValueAtTime(0.08, now + 0.15);
+        noteGain.gain.exponentialRampToValueAtTime(0.0001, now + 3.8);
+
+        osc.connect(noteGain);
+        noteGain.connect(lofiSynthGain);
+        osc.start(now);
+        osc.stop(now + 4.0);
+      });
+      lofiSynthTimer = setTimeout(playNextChord, 3800);
+    };
+
+    isProceduralLofiActive = true;
+    playNextChord();
+  }
+
+  function stopProceduralLofiSynth() {
+    isProceduralLofiActive = false;
+    if (lofiSynthTimer) {
+      clearTimeout(lofiSynthTimer);
+      lofiSynthTimer = null;
+    }
+  }
+
   // Master Volume
   const getVolumeLevel = () => {
     return volumeSlider ? Number(volumeSlider.value) / 100 : 0.45;
@@ -86,6 +217,8 @@
     const vol = getVolumeLevel();
     lofiAudio.volume = vol;
     cabinAudio.volume = vol * 0.65;
+    if (lofiSynthGain && synthAudioCtx) lofiSynthGain.gain.setValueAtTime(vol * 0.22, synthAudioCtx.currentTime);
+    if (cabinSynthGain && synthAudioCtx) cabinSynthGain.gain.setValueAtTime(vol * 0.28, synthAudioCtx.currentTime);
   }
   updateAudioVolumes();
 
@@ -139,6 +272,7 @@
     if (!lofiAudio.paused) {
       lofiAudio.pause();
     }
+    stopProceduralLofiSynth();
 
     const candidates = getCandidatePaths(src);
     try {
@@ -149,16 +283,30 @@
       } catch (e) {}
     } catch (err) {
       console.warn('Lofi track playback failed for:', src, err);
-      updatePlayButtonUI(false);
+      // Fallback 1: Try built-in afternoon jazz
+      if (!src.includes('afternoon-jazz')) {
+        try {
+          const fallbackCandidates = getCandidatePaths('media/flight/audio/afternoon-jazz.webm');
+          await playSourceWithFallback(lofiAudio, fallbackCandidates);
+          updatePlayButtonUI(true);
+          return;
+        } catch (e2) {
+          console.warn('Afternoon jazz fallback failed:', e2);
+        }
+      }
+      // Fallback 2: Procedural synthesizer fallback
+      startProceduralLofiSynth();
+      updatePlayButtonUI(true);
     }
   }
 
   function togglePlayPause() {
-    if (isMusicPlaying && !lofiAudio.paused) {
+    if (isMusicPlaying && (!lofiAudio.paused || isProceduralLofiActive)) {
       lofiAudio.pause();
+      stopProceduralLofiSynth();
       updatePlayButtonUI(false);
     } else {
-      const selectedSrc = lofiTrackSelect ? lofiTrackSelect.value : '../media/flight/audio/afternoon-jazz.webm';
+      const selectedSrc = lofiTrackSelect ? lofiTrackSelect.value : 'media/flight/audio/afternoon-jazz.webm';
       startTrackPlayback(selectedSrc);
     }
   }
@@ -178,9 +326,19 @@
     });
   }
 
-  lofiAudio.addEventListener('play', () => updatePlayButtonUI(true));
-  lofiAudio.addEventListener('pause', () => updatePlayButtonUI(false));
-  lofiAudio.addEventListener('ended', () => updatePlayButtonUI(false));
+  lofiAudio.addEventListener('play', () => {
+    stopProceduralLofiSynth();
+    updatePlayButtonUI(true);
+  });
+  lofiAudio.addEventListener('pause', () => {
+    if (!isProceduralLofiActive) updatePlayButtonUI(false);
+  });
+  lofiAudio.addEventListener('ended', () => {
+    if (isMusicPlaying) {
+      lofiAudio.currentTime = 0;
+      lofiAudio.play().catch(() => {});
+    }
+  });
 
   if (customAudioFile && lofiTrackSelect) {
     customAudioFile.addEventListener('change', (e) => {
@@ -229,16 +387,18 @@
   }
 
   async function toggleCabin() {
-    if (isCabinActive && !cabinAudio.paused) {
+    if (isCabinActive && (!cabinAudio.paused || isProceduralCabinActive)) {
       cabinAudio.pause();
+      stopProceduralCabinSynth();
       updateCabinUI(false);
     } else {
       try {
         await playSourceWithFallback(cabinAudio, cabinCandidates);
         updateCabinUI(true);
       } catch (err) {
-        console.warn('Cabin white noise playback failed:', err);
-        updateCabinUI(false);
+        console.warn('Cabin white noise audio file failed, using Web Audio pink noise generator:', err);
+        startProceduralCabinSynth();
+        updateCabinUI(true);
       }
     }
   }
@@ -247,8 +407,19 @@
     cabinBtn.addEventListener('click', toggleCabin);
   }
 
-  cabinAudio.addEventListener('play', () => updateCabinUI(true));
-  cabinAudio.addEventListener('pause', () => updateCabinUI(false));
+  cabinAudio.addEventListener('play', () => {
+    stopProceduralCabinSynth();
+    updateCabinUI(true);
+  });
+  cabinAudio.addEventListener('pause', () => {
+    if (!isProceduralCabinActive) updateCabinUI(false);
+  });
+  cabinAudio.addEventListener('ended', () => {
+    if (isCabinActive) {
+      cabinAudio.currentTime = 0;
+      cabinAudio.play().catch(() => {});
+    }
+  });
 
   // 6. Scenic Video & Photorealistic Backdrop Engine (Matching User Aerial Photo)
   function loadVideoScene(sceneSrc) {
@@ -334,7 +505,26 @@
 
   if (videoSceneSelect) {
     videoSceneSelect.addEventListener('change', () => {
-      loadVideoScene(videoSceneSelect.value);
+      const val = videoSceneSelect.value;
+      if (val.includes('seat_firstclass_suite')) {
+        applySeatPerspective('01A');
+      } else if (val.includes('seat_middle_cabin')) {
+        applySeatPerspective('14B');
+      } else if (val.includes('seat_aisle_cabin')) {
+        applySeatPerspective('14C');
+      } else if (val.includes('seat_02f_wing')) {
+        applySeatPerspective('02F');
+      } else if (val.includes('seat_18a_night')) {
+        applySeatPerspective('18A');
+      } else if (val.includes('seat_14a_aerial')) {
+        applySeatPerspective('14A');
+      } else {
+        if (stage) {
+          stage.classList.remove('pov-cabin-interior', 'pov-middle', 'pov-aisle', 'pov-firstclass');
+          stage.classList.add('pov-window');
+        }
+        loadVideoScene(val);
+      }
     });
   }
 
