@@ -114,6 +114,17 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
   </header>
 
   <main class="stage" id="stage">
+    <!-- Photorealistic Cabin Interior Seat POV Layer (For Middle, Aisle, & First Class Suites) -->
+    <div class="cabin-interior-backdrop" id="cabinInteriorBackdrop">
+      <img id="cabinPovImg" class="cabin-pov-img" src="" alt="Aircraft Cabin Seat Perspective">
+      <div class="reading-spotlight-layer" id="readingSpotlightLayer"></div>
+    </div>
+
+    <!-- Interactive Overhead Spotlight Toggle (For Aisle Seats) -->
+    <button class="spotlight-toggle-btn" id="spotlightToggleBtn" type="button">💡 Reading Spotlight: ON</button>
+
+    <!-- Interactive Smart Tint Toggle (For First Class Suites) -->
+    <button class="smart-tint-btn" id="smartTintBtn" type="button">🪟 Smart Tint: 50%</button>
     <!-- Cabin Interior Atmosphere (Night Dimmed Ambient) -->
     <div class="cabin-atmosphere" aria-hidden="true"></div>
 
@@ -224,14 +235,15 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
         </button>
         <div class="deck-select-wrap">
           <select class="deck-select" id="videoSceneSelect" aria-label="Choose Flight Window Scene">
-            <option value="media/flight/scenes/seat_14a_aerial_earth.jpg">🪟 14A · Aerial Earth &amp; Farmland</option>
-            <option value="media/flight/scenes/seat_02f_wing.jpg">✈️ 02F · Wing &amp; Jet Engine</option>
-            <option value="media/flight/scenes/seat_01a_horizon.jpg">👑 01A · First Class Sunset Horizon</option>
-            <option value="media/flight/scenes/seat_18a_night.jpg">🌃 18A · Night Flight &amp; City Lights</option>
+            <option value="media/flight/scenes/seat_14a_aerial_earth.jpg">🪟 14A · Aerial Earth Vista (Window)</option>
+            <option value="media/flight/scenes/seat_02f_wing.jpg">✈️ 02F · Wing &amp; Jet Turbine (Window)</option>
+            <option value="media/flight/scenes/seat_middle_cabin.jpg">👥 14B · Middle Seat Cabin POV (Tray &amp; IFE)</option>
+            <option value="media/flight/scenes/seat_aisle_cabin.jpg">🚶 14C · Aisle Seat Extra Legroom (Spotlight)</option>
+            <option value="media/flight/scenes/seat_firstclass_suite.jpg">👑 01A · First Class Private Suite (Smart Tint)</option>
+            <option value="media/flight/scenes/seat_18a_night.jpg">🌃 18A · Night Flight &amp; City Lights (Window)</option>
             <option value="media/flight/clips/gemini_generated_video_09c1b3d1.mp4">☁️ Wing Above Clouds (Video Loop)</option>
             <option value="__canvas__">🎨 Illustrated Canvas (Legacy)</option>
-            <option value="__custom_video__">➕ Upload Video File...</option>
-          </select>
+            <option value="__custom_video__">➕ Upload Video File...</option></select>
         </div>
         <input type="file" id="customVideoFile" accept="video/*,.mp4,.webm,.mov" style="display:none" aria-label="Insert custom video file">
         <label class="deck-volume-wrap" title="Master Volume">
@@ -278,21 +290,29 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
               <!-- In-Flight Seat Perspective Switcher Popover -->
               <div class="seat-switch-popover" id="seatSwitchPopover" hidden>
                 <div class="seat-popover-title">SELECT SEAT PERSPECTIVE</div>
-                <button type="button" class="seat-switch-btn active" data-seat="14A" data-type="Aerial Earth Vista" data-img="media/flight/scenes/seat_14a_aerial_earth.jpg">
+                <button type="button" class="seat-switch-btn" data-seat="14A" data-type="Aerial Earth Vista" data-img="media/flight/scenes/seat_14a_aerial_earth.jpg">
                   <span class="seat-pop-icon">🪟</span>
-                  <div><strong>14A · Window</strong><small>Aerial Earth &amp; Farmland</small></div>
+                  <div><strong>14A · Window Seat</strong><small>35,000 ft Aerial Earth &amp; Farmland</small></div>
+                </button>
+                <button type="button" class="seat-switch-btn" data-seat="14B" data-type="Middle Seat Cabin POV" data-img="media/flight/scenes/seat_middle_cabin.jpg">
+                  <span class="seat-pop-icon">👥</span>
+                  <div><strong>14B · Middle Seat</strong><small>Tray Table, Journal &amp; Forward IFE</small></div>
+                </button>
+                <button type="button" class="seat-switch-btn" data-seat="14C" data-type="Aisle Seat Cabin POV" data-img="media/flight/scenes/seat_aisle_cabin.jpg">
+                  <span class="seat-pop-icon">🚶</span>
+                  <div><strong>14C · Aisle Seat</strong><small>Extra Legroom &amp; Reading Spotlight</small></div>
                 </button>
                 <button type="button" class="seat-switch-btn" data-seat="02F" data-type="Wing &amp; Jet Engine" data-img="media/flight/scenes/seat_02f_wing.jpg">
                   <span class="seat-pop-icon">✈️</span>
-                  <div><strong>02F · Wing View</strong><small>Jet Turbine &amp; Clouds</small></div>
+                  <div><strong>02F · Overwing Window</strong><small>Jet Turbine &amp; Swept Wing</small></div>
                 </button>
-                <button type="button" class="seat-switch-btn" data-seat="01A" data-type="Horizon Sunset Suite" data-img="media/flight/scenes/seat_01a_horizon.jpg">
+                <button type="button" class="seat-switch-btn" data-seat="01A" data-type="First Class Suite" data-img="media/flight/scenes/seat_firstclass_suite.jpg">
                   <span class="seat-pop-icon">👑</span>
-                  <div><strong>01A · First Class</strong><small>Panoramic Sunset Horizon</small></div>
+                  <div><strong>01A · Private Suite</strong><small>Walnut Pod &amp; Smart Tint Window</small></div>
                 </button>
                 <button type="button" class="seat-switch-btn" data-seat="18A" data-type="Night Flight View" data-img="media/flight/scenes/seat_18a_night.jpg">
                   <span class="seat-pop-icon">🌃</span>
-                  <div><strong>18A · Night Flight</strong><small>City Lights &amp; Stars</small></div>
+                  <div><strong>18A · Night Flight</strong><small>Metropolitan City Lights &amp; Stars</small></div>
                 </button>
               </div>
             </div>

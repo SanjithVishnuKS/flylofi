@@ -89,10 +89,11 @@ if os.path.exists(afternoon_jazz):
     files_to_inject['assets/web/media/flight/audio/afternoon-jazz.webm'] = afternoon_jazz
 
 scenes_dir = os.path.join(focus_dir, 'media', 'flight', 'scenes')
-for scene_file in ['seat_14a_aerial_earth.jpg', 'seat_02f_wing.jpg', 'seat_01a_horizon.jpg', 'seat_18a_night.jpg']:
-    sp = os.path.join(scenes_dir, scene_file)
-    if os.path.exists(sp):
-        files_to_inject[f'assets/web/media/flight/scenes/{scene_file}'] = sp
+if os.path.exists(scenes_dir):
+    for scene_file in os.listdir(scenes_dir):
+        if scene_file.endswith(('.jpg', '.png', '.jpeg')):
+            sp = os.path.join(scenes_dir, scene_file)
+            files_to_inject[f'assets/web/media/flight/scenes/{scene_file}'] = sp
 
 for zpath, fpath in files_to_inject.items():
     if os.path.exists(fpath):

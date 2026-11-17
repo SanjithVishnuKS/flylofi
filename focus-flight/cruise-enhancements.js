@@ -631,30 +631,59 @@
     const code = (seatCode || '14A').toUpperCase();
     const rowMatch = code.match(/^(\d+)/);
     const row = rowMatch ? parseInt(rowMatch[1], 10) : 14;
+    const col = code.slice(-1);
+    const isWindow = col === 'A' || col === 'F';
+    const isAisle = col === 'C' || col === 'D';
+    const isMiddle = col === 'B' || col === 'E';
 
     if (row <= 2) {
       return {
-        img: 'media/flight/scenes/seat_01a_horizon.jpg',
-        type: 'First Class Horizon',
-        desc: '38,000 ft golden sunset horizon suite'
+        img: 'media/flight/scenes/seat_firstclass_suite.jpg',
+        type: 'First Class Suite',
+        desc: 'Walnut suite pod with smart tint window & golden horizon',
+        pov: 'firstclass'
       };
-    } else if (row <= 6) {
+    }
+
+    if (isMiddle) {
+      return {
+        img: 'media/flight/scenes/seat_middle_cabin.jpg',
+        type: 'Middle Seat Cabin POV',
+        desc: 'Forward IFE monitor, fold-down tray table with journal & side window',
+        pov: 'middle'
+      };
+    }
+
+    if (isAisle) {
+      return {
+        img: 'media/flight/scenes/seat_aisle_cabin.jpg',
+        type: 'Aisle Seat Cabin POV',
+        desc: 'Extra legroom, overhead reading spotlight beam & row window view',
+        pov: 'aisle'
+      };
+    }
+
+    // Window Seats (A, F)
+    if (row <= 6) {
       return {
         img: 'media/flight/scenes/seat_02f_wing.jpg',
         type: 'Wing & Jet Engine',
-        desc: 'Swept aircraft wing and turbine over vast cloud deck'
+        desc: 'Swept aircraft wing and turbine over vast cloud deck',
+        pov: 'window'
       };
     } else if (row <= 15) {
       return {
         img: 'media/flight/scenes/seat_14a_aerial_earth.jpg',
         type: 'Aerial Earth Vista',
-        desc: 'Lush green agricultural farmland & rivers (Matching User Photo)'
+        desc: 'Lush green agricultural farmland & rivers (Matching Photo)',
+        pov: 'window'
       };
     } else {
       return {
         img: 'media/flight/scenes/seat_18a_night.jpg',
         type: 'Night Flight Vista',
-        desc: 'Metropolitan golden illuminated city light grids & starlight'
+        desc: 'Metropolitan golden illuminated city light grids & starlight',
+        pov: 'window'
       };
     }
   }
@@ -662,10 +691,53 @@
   const seatDatum = document.getElementById('seatDatum');
   const seatSwitchPopover = document.getElementById('seatSwitchPopover');
   const traySeatLabel = document.getElementById('traySeatLabel');
+  const cabinPovImg = document.getElementById('cabinPovImg');
+  const readingSpotlightLayer = document.getElementById('readingSpotlightLayer');
+  const spotlightToggleBtn = document.getElementById('spotlightToggleBtn');
+  const smartTintBtn = document.getElementById('smartTintBtn');
 
   function applySeatPerspective(seatCode) {
     const info = getSeatInfo(seatCode);
-    loadVideoScene(info.img);
+
+    if (info.pov === 'middle' || info.pov === 'aisle' || info.pov === 'firstclass') {
+      if (stage) {
+        stage.classList.add('pov-cabin-interior', `pov-${info.pov}`);
+        stage.classList.remove('pov-window', 'video-live');
+        if (info.pov !== 'middle') stage.classList.remove('pov-middle');
+        if (info.pov !== 'aisle') stage.classList.remove('pov-aisle');
+        if (info.pov !== 'firstclass') stage.classList.remove('pov-firstclass');
+      }
+
+      if (cabinPovImg) {
+        const clean = info.img.replace(/^(\.\.\/|\.\/|\/)/, '');
+        const candidates = [
+          info.img,
+          './' + clean,
+          '../' + clean,
+          'focus-flight/' + clean,
+          '/focus-flight/' + clean,
+          '/assets/web/' + clean,
+          'assets/web/' + clean
+        ];
+        let cIdx = 0;
+        cabinPovImg.onerror = () => {
+          cIdx++;
+          if (cIdx < candidates.length) {
+            cabinPovImg.src = candidates[cIdx];
+          }
+        };
+        cabinPovImg.src = candidates[0];
+      }
+
+      if (flightVideo) flightVideo.pause();
+    } else {
+      // Direct Window Portal (POV Window)
+      if (stage) {
+        stage.classList.remove('pov-cabin-interior', 'pov-middle', 'pov-aisle', 'pov-firstclass');
+        stage.classList.add('pov-window');
+      }
+      loadVideoScene(info.img);
+    }
 
     if (seatDatum) seatDatum.textContent = `${seatCode} · ${info.type}`;
     if (traySeatLabel) traySeatLabel.textContent = `${seatCode} · ${info.type}`.toUpperCase();
@@ -687,8 +759,36 @@
       const d = JSON.parse(localStorage.getItem('focusFlightActive') || '{}');
       d.seat = seatCode;
       d.seatType = info.type;
+      d.sceneImg = info.img;
       localStorage.setItem('focusFlightActive', JSON.stringify(d));
     } catch(e) {}
+  }
+
+  // Reading Spotlight Toggle (Aisle Seat)
+  let isSpotlightOn = true;
+  if (spotlightToggleBtn && readingSpotlightLayer) {
+    spotlightToggleBtn.addEventListener('click', () => {
+      isSpotlightOn = !isSpotlightOn;
+      readingSpotlightLayer.classList.toggle('off', !isSpotlightOn);
+      spotlightToggleBtn.classList.toggle('off', !isSpotlightOn);
+      spotlightToggleBtn.textContent = isSpotlightOn ? '💡 Reading Spotlight: ON' : '💡 Reading Spotlight: OFF';
+      playCabinTwoToneChime();
+    });
+  }
+
+  // Smart Tint Toggle (First Class Suite)
+  const tintLabels = ['🪟 Smart Tint: Clear', '🪟 Smart Tint: 25%', '🪟 Smart Tint: 50%', '🪟 Smart Tint: 75%', '🪟 Smart Tint: Cobalt'];
+  let tintIdx = 2;
+  if (smartTintBtn) {
+    smartTintBtn.addEventListener('click', () => {
+      tintIdx = (tintIdx + 1) % tintLabels.length;
+      smartTintBtn.textContent = tintLabels[tintIdx];
+      const smartTintGlass = document.getElementById('smartTintGlass');
+      if (smartTintGlass) {
+        smartTintGlass.style.opacity = String(tintIdx * 0.22);
+      }
+      playCabinTwoToneChime();
+    });
   }
 
   // Initialize seat from storage or default to 14A (Aerial Earth Vista)

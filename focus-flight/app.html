@@ -1213,38 +1213,67 @@ function getSeatInfo(seatCode) {
   const col = seatCode.slice(-1).toUpperCase();
   const isWindow = col === 'A' || col === 'F';
   const isAisle = col === 'C' || col === 'D';
-  const seatClass = isWindow ? 'WINDOW' : (isAisle ? 'AISLE' : 'MIDDLE');
+  const isMiddle = col === 'B' || col === 'E';
 
   if (row <= 2) {
     return {
-      type: 'Horizon Sunset Suite',
-      desc: isWindow ? '38,000 ft golden-hour stratospheric sunset horizon' : 'First Class suite with golden sunset horizon ambiance',
-      img: 'media/flight/scenes/seat_01a_horizon.jpg',
+      type: 'First Class Private Suite',
+      desc: 'Private executive pod, walnut woodgrain console, smart tint window & golden horizon',
+      img: 'media/flight/scenes/seat_firstclass_suite.jpg',
+      pov: 'firstclass',
       class: isWindow ? 'WINDOW SUITE' : 'CENTER SUITE',
       icon: '👑'
     };
-  } else if (row <= 6) {
+  }
+
+  if (isMiddle) {
     return {
-      type: 'Wing & Jet Engine',
-      desc: isWindow ? 'Swept aircraft wing and turbine over vast cloud deck' : `Forward cabin ${seatClass.toLowerCase()} seat · Overwing turbine vista`,
+      type: 'Middle Seat Cabin POV',
+      desc: 'Center seat perspective: lowered tray table with journal, forward IFE screen & side window',
+      img: 'media/flight/scenes/seat_middle_cabin.jpg',
+      pov: 'middle',
+      class: 'MIDDLE SEAT',
+      icon: '👥'
+    };
+  }
+
+  if (isAisle) {
+    return {
+      type: 'Aisle Seat Cabin POV',
+      desc: 'Aisle seat perspective: extra legroom, overhead reading spotlight beam & row window view',
+      img: 'media/flight/scenes/seat_aisle_cabin.jpg',
+      pov: 'aisle',
+      class: 'AISLE SEAT',
+      icon: '🚶'
+    };
+  }
+
+  // Window Seats (A, F)
+  if (row <= 6) {
+    return {
+      type: 'Wing & Jet Turbine Window',
+      desc: 'Swept aircraft wing and massive turbofan engine over vast cloud deck',
       img: 'media/flight/scenes/seat_02f_wing.jpg',
-      class: seatClass,
+      pov: 'window',
+      class: 'WINDOW SEAT',
       icon: '✈'
     };
   } else if (row <= 15) {
     return {
-      type: 'Aerial Earth Vista',
-      desc: isWindow ? 'Lush green agricultural farmland, patchwork fields & rivers' : `Main cabin ${seatClass.toLowerCase()} seat · 35,000 ft earth vista view`,
+      type: 'Aerial Earth Vista Window',
+      desc: '35,000 ft direct window perspective over lush green farmland and rivers',
       img: 'media/flight/scenes/seat_14a_aerial_earth.jpg',
-      class: seatClass,
+      pov: 'window',
+      class: 'WINDOW SEAT',
       icon: '🪟'
     };
   } else {
     return {
-      type: 'Night Flight View',
-      desc: isWindow ? 'Metropolitan golden illuminated city light grids & starlight' : `Aft cabin ${seatClass.toLowerCase()} seat · Night flight & city lights vista`,
+      type: 'Night Flight City Lights Window',
+      desc: 'Aft cabin window perspective over metropolitan illuminated city grids and stars',
       img: 'media/flight/scenes/seat_18a_night.jpg',
-      class: seatClass,
+      pov: 'window',
+      class: 'WINDOW SEAT',
       icon: '🌃'
     };
   }

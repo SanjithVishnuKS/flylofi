@@ -1155,3 +1155,138 @@ h1#title {
   font-size: 9px !important;
   color: #9ab4b4 !important;
 }
+
+/* ==========================================================================
+   AUTHENTIC CABIN INTERIOR PERSPECTIVE ENGINE (Middle, Aisle, First Class POVs)
+   ========================================================================== */
+.cabin-interior-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  overflow: hidden;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.stage.pov-cabin-interior .cabin-interior-backdrop {
+  display: block;
+  opacity: 1;
+}
+
+.stage.pov-cabin-interior .airplane-window-portal {
+  display: none !important;
+}
+
+.cabin-pov-img {
+  position: absolute;
+  inset: -2%;
+  width: 104%;
+  height: 104%;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.05) brightness(1.02);
+  animation: cabinGentleFloat 45s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes cabinGentleFloat {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.02) translate(-0.3%, -0.2%); }
+  100% { transform: scale(1.01) translate(0.3%, 0.2%); }
+}
+
+/* Overhead Reading Spotlight Layer (For Aisle Seats) */
+.reading-spotlight-layer {
+  position: absolute;
+  top: -20px;
+  left: 15%;
+  width: 70%;
+  height: 95%;
+  background: radial-gradient(ellipse at 50% 5%, rgba(255, 240, 200, 0.45) 0%, rgba(255, 225, 160, 0.22) 28%, transparent 68%);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: screen;
+}
+
+.reading-spotlight-layer.off {
+  opacity: 0;
+}
+
+/* Interactive Spotlight Button for Aisle Seat */
+.spotlight-toggle-btn {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 208, 112, 0.45);
+  background: rgba(14, 25, 32, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--gold, #f5d070);
+  font: 700 10px "Space Grotesk", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+}
+
+.stage.pov-aisle .spotlight-toggle-btn {
+  display: inline-flex !important;
+}
+
+.spotlight-toggle-btn:hover {
+  background: rgba(245, 208, 112, 0.2);
+  border-color: var(--gold);
+}
+
+.spotlight-toggle-btn.off {
+  color: var(--muted);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(10, 18, 24, 0.85);
+}
+
+/* Interactive Smart Tint Button for First Class Suite */
+.smart-tint-btn {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(131, 224, 181, 0.45);
+  background: rgba(14, 25, 32, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--mint, #83e0b5);
+  font: 700 10px "Space Grotesk", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+}
+
+.stage.pov-firstclass .smart-tint-btn {
+  display: inline-flex !important;
+}
+
+.smart-tint-btn:hover {
+  background: rgba(131, 224, 181, 0.2);
+  border-color: var(--mint);
+}
