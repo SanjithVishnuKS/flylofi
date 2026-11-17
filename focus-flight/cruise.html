@@ -105,7 +105,7 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
 <body>
 <div class="shell">
   <header class="top">
-    <div class="brand"><div class="brand-icon">✈</div><span>Flylofi</span></div>
+    <div class="brand"><div class="brand-icon" id="brandIcon">✈</div><span id="brandTitle">Flylofi</span></div>
     <div class="route-top" id="routeTop">Chennai · MAA&nbsp;&nbsp; — &nbsp;&nbsp;Singapore · SIN</div>
     <div class="top-right">
       <i class="live-dot"></i><span id="status">In focus</span>
@@ -241,6 +241,10 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
             <option value="media/flight/scenes/seat_aisle_cabin.jpg">🚶 14C · Aisle Seat Extra Legroom (Spotlight)</option>
             <option value="media/flight/scenes/seat_firstclass_suite.jpg">👑 01A · First Class Private Suite (Smart Tint)</option>
             <option value="media/flight/scenes/seat_18a_night.jpg">🌃 18A · Night Flight &amp; City Lights (Window)</option>
+            <option value="media/flight/scenes/car_front_passenger.jpg">🚗 FP · Car Front Passenger Shotgun (Rain &amp; Highway)</option>
+            <option value="media/flight/scenes/car_rear_passenger.jpg">🛋️ RL · Car Rear Passenger Window (Raindrops &amp; Armrest)</option>
+            <option value="media/flight/scenes/bus_observation_deck.jpg">🌄 01A · Bus Observation Panorama (Misty Pines Road)</option>
+            <option value="media/flight/scenes/bus_window_berth.jpg">🌲 02A · Bus Sleeper Berth (Spotlight &amp; Wood Bunk)</option>
             <option value="media/flight/clips/gemini_generated_video_09c1b3d1.mp4">☁️ Wing Above Clouds (Video Loop)</option>
             <option value="__canvas__">🎨 Illustrated Canvas (Legacy)</option>
             <option value="__custom_video__">➕ Upload Video File...</option></select>
@@ -276,10 +280,10 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
         <div class="hud-left-column">
           <!-- Live In-Flight Cockpit Telemetry HUD Strip (Positioned above Route Data) -->
           <div class="flight-telemetry-hud" id="flightTelemetryHud">
-            <div class="telemetry-item"><span class="telem-label">ALT</span><strong class="telem-val">36,000 FT</strong></div>
-            <div class="telemetry-item"><span class="telem-label">GS</span><strong class="telem-val">518 KTS</strong></div>
-            <div class="telemetry-item"><span class="telem-label">OAT</span><strong class="telem-val">-54°C</strong></div>
-            <div class="telemetry-item"><span class="telem-label">CABIN</span><strong class="telem-val">NORM</strong></div>
+            <div class="telemetry-item"><span class="telem-label" id="telemLabel1">ALT</span><strong class="telem-val" id="telemVal1">36,000 FT</strong></div>
+            <div class="telemetry-item"><span class="telem-label" id="telemLabel2">GS</span><strong class="telem-val" id="telemVal2">518 KTS</strong></div>
+            <div class="telemetry-item"><span class="telem-label" id="telemLabel3">OAT</span><strong class="telem-val" id="telemVal3">-54°C</strong></div>
+            <div class="telemetry-item"><span class="telem-label" id="telemLabel4">CABIN</span><strong class="telem-val" id="telemVal4">NORM</strong></div>
           </div>
           <div class="route-data">
             <div><div class="datum-label">Departure</div><div class="datum-value" id="fromDatum">MAA · Chennai</div></div>
@@ -289,31 +293,152 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
               <div class="datum-value seat-picker-trigger" id="seatDatum" title="Click to switch seat perspective">14A · Window</div>
               <!-- In-Flight Seat Perspective Switcher Popover -->
               <div class="seat-switch-popover" id="seatSwitchPopover" hidden>
-                <div class="seat-popover-title">SELECT SEAT PERSPECTIVE</div>
-                <button type="button" class="seat-switch-btn" data-seat="14A" data-type="Aerial Earth Vista" data-img="media/flight/scenes/seat_14a_aerial_earth.jpg">
-                  <span class="seat-pop-icon">🪟</span>
-                  <div><strong>14A · Window Seat</strong><small>35,000 ft Aerial Earth &amp; Farmland</small></div>
-                </button>
-                <button type="button" class="seat-switch-btn" data-seat="14B" data-type="Middle Seat Cabin POV" data-img="media/flight/scenes/seat_middle_cabin.jpg">
-                  <span class="seat-pop-icon">👥</span>
-                  <div><strong>14B · Middle Seat</strong><small>Tray Table, Journal &amp; Forward IFE</small></div>
-                </button>
-                <button type="button" class="seat-switch-btn" data-seat="14C" data-type="Aisle Seat Cabin POV" data-img="media/flight/scenes/seat_aisle_cabin.jpg">
-                  <span class="seat-pop-icon">🚶</span>
-                  <div><strong>14C · Aisle Seat</strong><small>Extra Legroom &amp; Reading Spotlight</small></div>
-                </button>
-                <button type="button" class="seat-switch-btn" data-seat="02F" data-type="Wing &amp; Jet Engine" data-img="media/flight/scenes/seat_02f_wing.jpg">
-                  <span class="seat-pop-icon">✈️</span>
-                  <div><strong>02F · Overwing Window</strong><small>Jet Turbine &amp; Swept Wing</small></div>
-                </button>
-                <button type="button" class="seat-switch-btn" data-seat="01A" data-type="First Class Suite" data-img="media/flight/scenes/seat_firstclass_suite.jpg">
-                  <span class="seat-pop-icon">👑</span>
-                  <div><strong>01A · Private Suite</strong><small>Walnut Pod &amp; Smart Tint Window</small></div>
-                </button>
-                <button type="button" class="seat-switch-btn" data-seat="18A" data-type="Night Flight View" data-img="media/flight/scenes/seat_18a_night.jpg">
-                  <span class="seat-pop-icon">🌃</span>
-                  <div><strong>18A · Night Flight</strong><small>Metropolitan City Lights &amp; Stars</small></div>
-                </button>
+                <div class="seat-popover-header">
+                  <div class="seat-popover-title-row">
+                    <span class="seat-popover-title">SELECT SEAT PERSPECTIVE</span>
+                    <span class="popover-mode-badge" id="popoverModeBadge">✈️ FLIGHT</span>
+                  </div>
+                  <div class="seat-popover-tabs" id="seatPopoverTabs">
+                    <button type="button" class="seat-pop-tab active" data-tab="curated" id="tabCurated">Curated POVs</button>
+                    <button type="button" class="seat-pop-tab" data-tab="allSeats" id="tabAllSeats">All Seats Grid</button>
+                  </div>
+                </div>
+
+                <!-- Tab 1: Curated Distinct POVs -->
+                <div class="seat-popover-scroll-body" id="popoverCuratedView">
+                  <!-- Flight POVs -->
+                  <div class="popover-section" id="popoverFlightSections">
+                    <div class="seat-category-subhead">👑 First Class Suites</div>
+                    <button type="button" class="seat-switch-btn" data-seat="01A" data-type="First Class Suite" data-img="media/flight/scenes/seat_firstclass_suite.jpg">
+                      <span class="seat-pop-icon">👑</span>
+                      <div><strong>01A · Private Suite Pod</strong><small>Walnut Pod, Smart Tint &amp; Sunset Horizon</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="01F" data-type="First Class Suite" data-img="media/flight/scenes/seat_01a_horizon.jpg">
+                      <span class="seat-pop-icon">👑</span>
+                      <div><strong>01F · Starboard Horizon Suite</strong><small>Golden Stratospheric Sunset Horizon</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="02A" data-type="First Class Suite" data-img="media/flight/scenes/seat_firstclass_suite.jpg">
+                      <span class="seat-pop-icon">👑</span>
+                      <div><strong>02A · Executive Suite Lounger</strong><small>Forward Quiet Suite &amp; Mood Lighting</small></div>
+                    </button>
+
+                    <div class="seat-category-subhead">✈️ Overwing &amp; Jet Turbine Windows</div>
+                    <button type="button" class="seat-switch-btn" data-seat="02F" data-type="Wing &amp; Jet Engine" data-img="media/flight/scenes/seat_02f_wing.jpg">
+                      <span class="seat-pop-icon">✈️</span>
+                      <div><strong>02F · Overwing Jet Turbine</strong><small>Swept Wing, Engine Cowl &amp; Strobe Light</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="03A" data-type="Forward Wing Window" data-img="media/flight/scenes/seat_02f_wing.jpg">
+                      <span class="seat-pop-icon">✈️</span>
+                      <div><strong>03A · Forward Wing Portal</strong><small>Leading Edge Wing View Over Clouds</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="04F" data-type="Mid-Wing Turbine" data-img="media/flight/scenes/seat_02f_wing.jpg">
+                      <span class="seat-pop-icon">✈️</span>
+                      <div><strong>04F · Mid-Wing Engine View</strong><small>Turbine Exhaust &amp; Wingtip Flow</small></div>
+                    </button>
+
+                    <div class="seat-category-subhead">🪟 Scenic Aerial Earth Windows</div>
+                    <button type="button" class="seat-switch-btn" data-seat="14A" data-type="Aerial Earth Vista" data-img="media/flight/scenes/seat_14a_aerial_earth.jpg">
+                      <span class="seat-pop-icon">🪟</span>
+                      <div><strong>14A · Aerial Earth Vista</strong><small>35,000 ft Farmlands, Rivers &amp; Coastline</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="12A" data-type="Cloud Deck Window" data-img="media/flight/scenes/seat_14a_aerial_earth.jpg">
+                      <span class="seat-pop-icon">🪟</span>
+                      <div><strong>12A · Cloud Sea Deck</strong><small>Endless Cumulus Fields &amp; Horizon</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="15F" data-type="Stratosphere Window" data-img="media/flight/scenes/seat_14a_aerial_earth.jpg">
+                      <span class="seat-pop-icon">🪟</span>
+                      <div><strong>15F · Stratosphere Azure</strong><small>High Altitude Deep Blue Atmospheric Rim</small></div>
+                    </button>
+
+                    <div class="seat-category-subhead">👥 Middle Seat Workspaces (Tray Table &amp; IFE)</div>
+                    <button type="button" class="seat-switch-btn" data-seat="14B" data-type="Middle Seat Cabin POV" data-img="media/flight/scenes/seat_middle_cabin.jpg">
+                      <span class="seat-pop-icon">👥</span>
+                      <div><strong>14B · Mid Cabin Middle Seat</strong><small>Fold-Down Tray, Journal, Coffee &amp; IFE</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="07B" data-type="Forward Middle Seat" data-img="media/flight/scenes/seat_middle_cabin.jpg">
+                      <span class="seat-pop-icon">👥</span>
+                      <div><strong>07B · Quiet Focus Middle Desk</strong><small>Lowered Table, Notebook &amp; Side Window Glow</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="15E" data-type="Aft Middle Seat" data-img="media/flight/scenes/seat_middle_cabin.jpg">
+                      <span class="seat-pop-icon">👥</span>
+                      <div><strong>15E · Aft Cabin Middle Table</strong><small>Private Workstation &amp; Soft Ambient Cabin</small></div>
+                    </button>
+
+                    <div class="seat-category-subhead">🚶 Aisle Seats (Extra Legroom &amp; Spotlight)</div>
+                    <button type="button" class="seat-switch-btn" data-seat="14C" data-type="Aisle Seat Cabin POV" data-img="media/flight/scenes/seat_aisle_cabin.jpg">
+                      <span class="seat-pop-icon">🚶</span>
+                      <div><strong>14C · Main Aisle Seat</strong><small>Extra Legroom &amp; Overhead Reading Spotlight</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="06C" data-type="Forward Aisle Seat" data-img="media/flight/scenes/seat_aisle_cabin.jpg">
+                      <span class="seat-pop-icon">🚶</span>
+                      <div><strong>06C · Forward Aisle Walkway</strong><small>Clear Walkway &amp; Spotlight Reading Beam</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="14D" data-type="Starboard Aisle Seat" data-img="media/flight/scenes/seat_aisle_cabin.jpg">
+                      <span class="seat-pop-icon">🚶</span>
+                      <div><strong>14D · Starboard Aisle Seat</strong><small>Spacious Clearance &amp; Reading Beam</small></div>
+                    </button>
+
+                    <div class="seat-category-subhead">🌃 Night Flight &amp; City Lights Windows</div>
+                    <button type="button" class="seat-switch-btn" data-seat="18A" data-type="Night Flight View" data-img="media/flight/scenes/seat_18a_night.jpg">
+                      <span class="seat-pop-icon">🌃</span>
+                      <div><strong>18A · Night Flight &amp; City Lights</strong><small>Metropolitan Grid &amp; Sparkling Night Lights</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="16A" data-type="Twilight Horizon View" data-img="media/flight/scenes/seat_18a_night.jpg">
+                      <span class="seat-pop-icon">🌃</span>
+                      <div><strong>16A · Twilight Skyline Window</strong><small>City Skyline &amp; Starry Night Sky</small></div>
+                    </button>
+                  </div>
+
+                  <!-- Car POVs -->
+                  <div class="popover-section" id="popoverCarSection" hidden>
+                    <div class="seat-category-subhead">🚗 Night Highway Car (All 3 Passengers Open)</div>
+                    <button type="button" class="seat-switch-btn" data-seat="FP" data-type="Front Passenger (Shotgun)" data-img="media/flight/scenes/car_front_passenger.jpg">
+                      <span class="seat-pop-icon">💺</span>
+                      <div><strong>FP · Front Passenger (Shotgun)</strong><small>Wide Windshield, Glowing Radio &amp; Rainy Highway</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="RL" data-type="Rear Left Passenger Window" data-img="media/flight/scenes/car_rear_passenger.jpg">
+                      <span class="seat-pop-icon">🛋️</span>
+                      <div><strong>RL · Rear Left Window</strong><small>Raindrops on Glass, Armrest &amp; Streetlights</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="RR" data-type="Rear Right Passenger Window" data-img="media/flight/scenes/car_rear_passenger.jpg">
+                      <span class="seat-pop-icon">🛋️</span>
+                      <div><strong>RR · Rear Right Window</strong><small>Highway Neon Bokeh &amp; Cozy Corner</small></div>
+                    </button>
+                    <div class="locked-driver-notice">
+                      <span>🚫 Driver Seat: Locked (Chauffeur / Auto-Pilot Active)</span>
+                    </div>
+                  </div>
+
+                  <!-- Bus POVs -->
+                  <div class="popover-section" id="popoverBusSection" hidden>
+                    <div class="seat-category-subhead">🚌 Sleeper Bus (All Passenger Berths Open)</div>
+                    <button type="button" class="seat-switch-btn" data-seat="01A" data-type="Upper-Deck Observation Panorama" data-img="media/flight/scenes/bus_observation_deck.jpg">
+                      <span class="seat-pop-icon">🌄</span>
+                      <div><strong>01A · Observation Deck Front</strong><small>Curved Panoramic Windscreen Over Misty Pines</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="02A" data-type="Upper Sleeper Berth (Window)" data-img="media/flight/scenes/bus_window_berth.jpg">
+                      <span class="seat-pop-icon">🌲</span>
+                      <div><strong>02A · Upper Window Berth</strong><small>Misty Forest Pines &amp; Reading Spotlight</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="03A" data-type="Lower Sleeper Berth (Window)" data-img="media/flight/scenes/bus_window_berth.jpg">
+                      <span class="seat-pop-icon">🌲</span>
+                      <div><strong>03A · Lower Window Berth</strong><small>Roadside Pine Fog &amp; Cozy Wood Ledge</small></div>
+                    </button>
+                    <button type="button" class="seat-switch-btn" data-seat="02B" data-type="Aisle Sleeper Berth" data-img="media/flight/scenes/bus_window_berth.jpg">
+                      <span class="seat-pop-icon">💡</span>
+                      <div><strong>02B · Aisle Sleeper Berth</strong><small>Quiet Focus Bunk with Personal Reading Lamp</small></div>
+                    </button>
+                    <div class="locked-driver-notice">
+                      <span>🚫 Driver Cabin: Locked (Bus Captain Only)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tab 2: All 90 Commercial Flight Seats Grid -->
+                <div class="seat-popover-grid-container" id="popoverAllSeatsView" hidden>
+                  <div class="popover-grid-info">Tap any seat to switch perspective immediately:</div>
+                  <div class="popover-aircraft-grid" id="popoverAircraftGrid"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -382,8 +507,27 @@ const chapters=[
  {id:'land',name:'Arrival',eyebrow:'08 / 08 · Journey complete',title:'You made<br>it.',sub:'Welcome to your destination. Your focus journey is complete.',phase:'Arrived',hint:'Welcome · Flight completed',d:8}
 ];
 const total=chapters.reduce((a,b)=>a+b.d,0);
-const savedFlight=JSON.parse(localStorage.getItem('focusFlightActive')||'null');
-const cityNames={MAA:'Chennai',BOM:'Mumbai',DEL:'New Delhi',BLR:'Bengaluru',HYD:'Hyderabad',SIN:'Singapore',BKK:'Bangkok',HKG:'Hong Kong',ICN:'Seoul',NRT:'Tokyo',SYD:'Sydney',MEL:'Melbourne',DXB:'Dubai',DOH:'Doha',LHR:'London',AMS:'Amsterdam',CDG:'Paris',FRA:'Frankfurt',IST:'Istanbul',JFK:'New York',SFO:'San Francisco',LAX:'Los Angeles',ORD:'Chicago',YYZ:'Toronto'};
+const urlParams = new URLSearchParams(window.location.search);
+let savedFlight = JSON.parse(localStorage.getItem('focusFlightActive') || 'null');
+if (urlParams.get('mode')) {
+  const m = urlParams.get('mode');
+  const dSeat = m === 'car' ? 'FP' : m === 'bus' ? '01A' : '14A';
+  savedFlight = {
+    transitMode: m,
+    departure: urlParams.get('from') || (m === 'car' ? 'PCH' : m === 'bus' ? 'TYO' : 'MAA'),
+    destination: urlParams.get('to') || (m === 'car' ? 'SUR' : m === 'bus' ? 'KYO' : 'SIN'),
+    duration: parseInt(urlParams.get('duration') || '45', 10),
+    seat: urlParams.get('seat') || dSeat,
+    ...(savedFlight || {})
+  };
+  if (urlParams.get('seat')) savedFlight.seat = urlParams.get('seat');
+  if (urlParams.get('mode')) savedFlight.transitMode = urlParams.get('mode');
+}
+const cityNames={
+  MAA:'Chennai',BOM:'Mumbai',DEL:'New Delhi',BLR:'Bengaluru',HYD:'Hyderabad',SIN:'Singapore',BKK:'Bangkok',HKG:'Hong Kong',ICN:'Seoul',NRT:'Tokyo',SYD:'Sydney',MEL:'Melbourne',DXB:'Dubai',DOH:'Doha',LHR:'London',AMS:'Amsterdam',CDG:'Paris',FRA:'Frankfurt',IST:'Istanbul',JFK:'New York',SFO:'San Francisco',LAX:'Los Angeles',ORD:'Chicago',YYZ:'Toronto',
+  PCH:'Pacific Coast Highway',SUR:'Big Sur Bixby',C1:'Tokyo Shuto C1',ODA:'Odaiba Rainbow Bridge',R66:'Route 66',SED:'Sedona Red Rock',A8:'German Autobahn',SAL:'Salzburg Pass',AC:'Amalfi Coast',RAV:'Ravello Ocean',
+  TYO:'Tokyo Station',KYO:'Kyoto Heritage',LON:'London Victoria',EDI:'Edinburgh Express',NYC:'New York Central',MTL:'Montreal Coach',MUM:'Mumbai Dadar',GOA:'Goa Coastal',ZUR:'Zurich Alpine',MIL:'Milan Lampugnano'
+};
 const flightVideo=$('flightVideo'),stage=$('stage');
 
 // Photorealistic scene is active by default; video plays on explicit user selection

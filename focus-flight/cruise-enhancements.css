@@ -1089,15 +1089,16 @@ h1#title {
   z-index: 50 !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 6px !important;
-  width: 270px !important;
-  padding: 10px !important;
-  border-radius: 12px !important;
-  background: rgba(6, 18, 25, 0.96) !important;
+  gap: 8px !important;
+  width: min(94vw, 360px) !important;
+  max-height: min(78vh, 520px) !important;
+  padding: 12px !important;
+  border-radius: 14px !important;
+  background: rgba(6, 18, 25, 0.97) !important;
   border: 1px solid rgba(131, 224, 181, 0.35) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
   pointer-events: auto !important;
 }
 
@@ -1105,12 +1106,173 @@ h1#title {
   display: none !important;
 }
 
+.seat-popover-header {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding-bottom: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.seat-popover-title-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+}
+
 .seat-popover-title {
   font: 700 9px "Space Grotesk", sans-serif !important;
   letter-spacing: 0.16em !important;
   color: var(--mint, #83e0b5) !important;
-  margin-bottom: 2px !important;
   text-transform: uppercase !important;
+}
+
+.popover-mode-badge {
+  font: 800 8px "Space Grotesk", sans-serif !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  background: rgba(131, 224, 181, 0.15) !important;
+  color: var(--mint, #83e0b5) !important;
+  border: 1px solid rgba(131, 224, 181, 0.3) !important;
+  letter-spacing: 0.08em !important;
+}
+
+.seat-popover-tabs {
+  display: flex !important;
+  gap: 6px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  padding: 3px !important;
+  border-radius: 8px !important;
+}
+
+.seat-pop-tab {
+  flex: 1 !important;
+  padding: 6px 8px !important;
+  border-radius: 6px !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  color: #9ab4b4 !important;
+  font: 700 10px "Space Grotesk", sans-serif !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  text-align: center !important;
+}
+
+.seat-pop-tab.active {
+  background: rgba(131, 224, 181, 0.18) !important;
+  border-color: rgba(131, 224, 181, 0.4) !important;
+  color: #fff !important;
+}
+
+.seat-popover-scroll-body {
+  overflow-y: auto !important;
+  max-height: 380px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  padding-right: 4px !important;
+}
+
+.seat-category-subhead {
+  font: 800 8px "Space Grotesk", sans-serif !important;
+  letter-spacing: 0.14em !important;
+  color: #799a98 !important;
+  text-transform: uppercase !important;
+  margin: 6px 0 2px 2px !important;
+}
+
+.locked-driver-notice {
+  padding: 6px 10px !important;
+  border-radius: 6px !important;
+  background: rgba(239, 154, 114, 0.1) !important;
+  border: 1px dashed rgba(239, 154, 114, 0.3) !important;
+  color: var(--coral, #ef9a72) !important;
+  font: 700 9px "Space Grotesk", sans-serif !important;
+  text-align: center !important;
+  margin-top: 4px !important;
+}
+
+/* Tab 2: Mini Aircraft Grid */
+.seat-popover-grid-container {
+  overflow-y: auto !important;
+  max-height: 380px !important;
+  padding: 4px !important;
+}
+
+.popover-grid-info {
+  font-size: 9px !important;
+  color: #9ab4b4 !important;
+  margin-bottom: 8px !important;
+  line-height: 1.4 !important;
+}
+
+.popover-aircraft-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  padding: 8px 4px !important;
+  background: rgba(0, 0, 0, 0.25) !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.popover-grid-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+}
+
+.popover-grid-row-num {
+  font: 700 8px monospace !important;
+  color: #6c8886 !important;
+  width: 14px !important;
+  text-align: center !important;
+}
+
+.popover-grid-aisle {
+  width: 10px !important;
+}
+
+.popover-seat-grid-btn {
+  width: 27px !important;
+  height: 25px !important;
+  padding: 0 !important;
+  border-radius: 5px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(16, 36, 44, 0.7) !important;
+  color: #bed7d5 !important;
+  font: 700 8px "Space Grotesk", sans-serif !important;
+  cursor: pointer !important;
+  transition: all 0.12s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.popover-seat-grid-btn:hover {
+  border-color: var(--mint) !important;
+  background: rgba(131, 224, 181, 0.2) !important;
+  color: #fff !important;
+  transform: scale(1.08) !important;
+}
+
+.popover-seat-grid-btn.active {
+  border-color: var(--mint) !important;
+  background: var(--mint) !important;
+  color: #06171f !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 10px rgba(131, 224, 181, 0.4) !important;
+}
+
+.popover-seat-grid-btn.window-seat {
+  border-color: rgba(131, 224, 181, 0.3) !important;
+}
+
+.popover-seat-grid-btn.first-class {
+  border-color: rgba(255, 215, 0, 0.35) !important;
 }
 
 .seat-switch-btn {

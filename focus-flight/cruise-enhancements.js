@@ -506,7 +506,15 @@
   if (videoSceneSelect) {
     videoSceneSelect.addEventListener('change', () => {
       const val = videoSceneSelect.value;
-      if (val.includes('seat_firstclass_suite')) {
+      if (val.includes('car_front_passenger')) {
+        applySeatPerspective('FP');
+      } else if (val.includes('car_rear_passenger')) {
+        applySeatPerspective('RL');
+      } else if (val.includes('bus_observation_deck')) {
+        applySeatPerspective('01A');
+      } else if (val.includes('bus_window_berth')) {
+        applySeatPerspective('02A');
+      } else if (val.includes('seat_firstclass_suite')) {
         applySeatPerspective('01A');
       } else if (val.includes('seat_middle_cabin')) {
         applySeatPerspective('14B');
@@ -520,7 +528,7 @@
         applySeatPerspective('14A');
       } else {
         if (stage) {
-          stage.classList.remove('pov-cabin-interior', 'pov-middle', 'pov-aisle', 'pov-firstclass');
+          stage.classList.remove('pov-cabin-interior', 'pov-middle', 'pov-aisle', 'pov-firstclass', 'pov-car-front', 'pov-car-rear', 'pov-bus-front', 'pov-bus-berth');
           stage.classList.add('pov-window');
         }
         loadVideoScene(val);
@@ -818,20 +826,84 @@
   // ==========================================================================
   // 11. PHOTOREALISTIC SEAT PERSPECTIVE ENGINE & IN-FLIGHT SWITCHER
   function getSeatInfo(seatCode) {
-    const code = (seatCode || '14A').toUpperCase();
-    const rowMatch = code.match(/^(\d+)/);
-    const row = rowMatch ? parseInt(rowMatch[1], 10) : 14;
-    const col = code.slice(-1);
-    const isWindow = col === 'A' || col === 'F';
-    const isAisle = col === 'C' || col === 'D';
-    const isMiddle = col === 'B' || col === 'E';
+    const s = String(seatCode || '14A').toUpperCase().trim();
+    const mode = new URLSearchParams(window.location.search).get('mode') || savedFlightData?.transitMode || 'flight';
 
-    if (row <= 2) {
+    // Car Mode Seats
+    if (mode === 'car' || s === 'FP' || s === 'RL' || s === 'RR' || s.startsWith('CAR-')) {
+      if (s === 'RL' || s.includes('RL')) {
+        return {
+          img: 'media/flight/scenes/car_rear_passenger.jpg',
+          type: 'Rear Left Passenger Window',
+          desc: 'Raindrops tracing glass, side streetlights & executive armrest',
+          pov: 'car-rear',
+          class: 'EXECUTIVE REAR'
+        };
+      }
+      if (s === 'RR' || s.includes('RR')) {
+        return {
+          img: 'media/flight/scenes/car_rear_passenger.jpg',
+          type: 'Rear Right Passenger Window',
+          desc: 'Highway neon bokeh & cozy corner window view',
+          pov: 'car-rear',
+          class: 'EXECUTIVE REAR'
+        };
+      }
+      return {
+        img: 'media/flight/scenes/car_front_passenger.jpg',
+        type: 'Front Passenger (Shotgun)',
+        desc: 'Wide windshield, glowing dashboard radio & rainy highway view',
+        pov: 'car-front',
+        class: 'PASSENGER SHOTGUN'
+      };
+    }
+
+    // Bus Mode Seats
+    if (mode === 'bus' || s.startsWith('BUS-')) {
+      if (s === '01A' || s === '01B' || s.includes('OBS')) {
+        return {
+          img: 'media/flight/scenes/bus_observation_deck.jpg',
+          type: 'Upper-Deck Observation Panorama',
+          desc: 'Curved panoramic windscreen over winding misty pines',
+          pov: 'bus-front',
+          class: 'OBSERVATION PANORAMA'
+        };
+      }
+      const isWindow = s.endsWith('A') || s.endsWith('D');
+      return {
+        img: 'media/flight/scenes/bus_window_berth.jpg',
+        type: isWindow ? 'Upper Sleeper Berth (Window)' : 'Aisle Sleeper Berth',
+        desc: isWindow ? 'Misty forest pines, mountain fog & wooden ledge' : 'Quiet focus bunk with personal reading spotlight',
+        pov: 'bus-berth',
+        class: isWindow ? 'WINDOW BERTH' : 'AISLE BERTH'
+      };
+    }
+
+    // Flight Mode Seats (Rows 01 to 15, Seats A to F)
+    const match = s.match(/(\d+)([A-F])/);
+    const row = match ? parseInt(match[1], 10) : 14;
+    const col = match ? match[2] : 'A';
+
+    const isFirstClass = row <= 2;
+    const isMiddle = col === 'B' || col === 'E';
+    const isAisle = col === 'C' || col === 'D';
+
+    if (isFirstClass) {
+      if (col === 'F') {
+        return {
+          img: 'media/flight/scenes/seat_01a_horizon.jpg',
+          type: 'First Class Suite (Horizon)',
+          desc: 'Golden stratospheric sunset horizon suite',
+          pov: 'firstclass',
+          class: 'FIRST SUITE'
+        };
+      }
       return {
         img: 'media/flight/scenes/seat_firstclass_suite.jpg',
         type: 'First Class Suite',
-        desc: 'Walnut suite pod with smart tint window & golden horizon',
-        pov: 'firstclass'
+        desc: 'Walnut suite pod with smart tint window & executive console',
+        pov: 'firstclass',
+        class: 'FIRST SUITE'
       };
     }
 
@@ -840,7 +912,8 @@
         img: 'media/flight/scenes/seat_middle_cabin.jpg',
         type: 'Middle Seat Cabin POV',
         desc: 'Forward IFE monitor, fold-down tray table with journal & side window',
-        pov: 'middle'
+        pov: 'middle',
+        class: 'CABIN MIDDLE'
       };
     }
 
@@ -849,7 +922,8 @@
         img: 'media/flight/scenes/seat_aisle_cabin.jpg',
         type: 'Aisle Seat Cabin POV',
         desc: 'Extra legroom, overhead reading spotlight beam & row window view',
-        pov: 'aisle'
+        pov: 'aisle',
+        class: 'EXTRA LEGROOM'
       };
     }
 
@@ -859,21 +933,24 @@
         img: 'media/flight/scenes/seat_02f_wing.jpg',
         type: 'Wing & Jet Engine',
         desc: 'Swept aircraft wing and turbine over vast cloud deck',
-        pov: 'window'
+        pov: 'window',
+        class: 'OVERWING'
       };
     } else if (row <= 15) {
       return {
         img: 'media/flight/scenes/seat_14a_aerial_earth.jpg',
         type: 'Aerial Earth Vista',
-        desc: 'Lush green agricultural farmland & rivers (Matching Photo)',
-        pov: 'window'
+        desc: 'Lush green agricultural farmland & rivers',
+        pov: 'window',
+        class: 'SCENIC WINDOW'
       };
     } else {
       return {
         img: 'media/flight/scenes/seat_18a_night.jpg',
         type: 'Night Flight Vista',
         desc: 'Metropolitan golden illuminated city light grids & starlight',
-        pov: 'window'
+        pov: 'window',
+        class: 'NIGHT WINDOW'
       };
     }
   }
@@ -889,13 +966,13 @@
   function applySeatPerspective(seatCode) {
     const info = getSeatInfo(seatCode);
 
-    if (info.pov === 'middle' || info.pov === 'aisle' || info.pov === 'firstclass') {
+    if (info.pov === 'middle' || info.pov === 'aisle' || info.pov === 'firstclass' || info.pov.startsWith('car-') || info.pov.startsWith('bus-')) {
       if (stage) {
         stage.classList.add('pov-cabin-interior', `pov-${info.pov}`);
         stage.classList.remove('pov-window', 'video-live');
-        if (info.pov !== 'middle') stage.classList.remove('pov-middle');
-        if (info.pov !== 'aisle') stage.classList.remove('pov-aisle');
-        if (info.pov !== 'firstclass') stage.classList.remove('pov-firstclass');
+        ['pov-middle', 'pov-aisle', 'pov-firstclass', 'pov-car-front', 'pov-car-rear', 'pov-bus-front', 'pov-bus-berth'].forEach((c) => {
+          if (c !== `pov-${info.pov}`) stage.classList.remove(c);
+        });
       }
 
       if (cabinPovImg) {
@@ -923,7 +1000,7 @@
     } else {
       // Direct Window Portal (POV Window)
       if (stage) {
-        stage.classList.remove('pov-cabin-interior', 'pov-middle', 'pov-aisle', 'pov-firstclass');
+        stage.classList.remove('pov-cabin-interior', 'pov-middle', 'pov-aisle', 'pov-firstclass', 'pov-car-front', 'pov-car-rear', 'pov-bus-front', 'pov-bus-berth');
         stage.classList.add('pov-window');
       }
       loadVideoScene(info.img);
@@ -932,8 +1009,11 @@
     if (seatDatum) seatDatum.textContent = `${seatCode} · ${info.type}`;
     if (traySeatLabel) traySeatLabel.textContent = `${seatCode} · ${info.type}`.toUpperCase();
 
-    // Update active class on popover buttons
+    // Update active class on popover buttons & mini-grid buttons
     document.querySelectorAll('.seat-switch-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.seat === seatCode);
+    });
+    document.querySelectorAll('.popover-seat-grid-btn').forEach((btn) => {
       btn.classList.toggle('active', btn.dataset.seat === seatCode);
     });
 
@@ -981,8 +1061,160 @@
     });
   }
 
-  // Initialize seat from storage or default to 14A (Aerial Earth Vista)
-  const initialSeat = (savedFlightData?.seat || '14A').toUpperCase();
+  // Populate Mini Aircraft Seat Grid (Rows 01 to 15, Seats A-F)
+  const gridContainer = document.getElementById('popoverAircraftGrid');
+  if (gridContainer && gridContainer.children.length === 0) {
+    for (let r = 1; r <= 15; r++) {
+      const rowNum = String(r).padStart(2, '0');
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'popover-grid-row';
+
+      const numSpan = document.createElement('span');
+      numSpan.className = 'popover-grid-row-num';
+      numSpan.textContent = rowNum;
+      rowDiv.appendChild(numSpan);
+
+      const isFirst = r <= 2;
+      const cols = isFirst ? ['A', 'B', 'aisle', 'E', 'F'] : ['A', 'B', 'C', 'aisle', 'D', 'E', 'F'];
+
+      cols.forEach((col) => {
+        if (col === 'aisle') {
+          const aisleDiv = document.createElement('div');
+          aisleDiv.className = 'popover-grid-aisle';
+          rowDiv.appendChild(aisleDiv);
+          return;
+        }
+        const seatCode = `${rowNum}${col}`;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'popover-seat-grid-btn';
+        if (col === 'A' || col === 'F') btn.classList.add('window-seat');
+        if (isFirst) btn.classList.add('first-class');
+        btn.dataset.seat = seatCode;
+        btn.textContent = col;
+        btn.title = `Seat ${seatCode} (${col === 'A' || col === 'F' ? 'Window' : col === 'B' || col === 'E' ? 'Middle Desk' : 'Aisle'})`;
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          applySeatPerspective(seatCode);
+          if (seatSwitchPopover) seatSwitchPopover.hidden = true;
+          playCabinTwoToneChime();
+        });
+        rowDiv.appendChild(btn);
+      });
+      gridContainer.appendChild(rowDiv);
+    }
+  }
+
+  // Popover Tab Switching (Curated POVs vs All Seats Grid)
+  const tabCurated = document.getElementById('tabCurated');
+  const tabAllSeats = document.getElementById('tabAllSeats');
+  const popoverCuratedView = document.getElementById('popoverCuratedView');
+  const popoverAllSeatsView = document.getElementById('popoverAllSeatsView');
+
+  if (tabCurated && tabAllSeats && popoverCuratedView && popoverAllSeatsView) {
+    tabCurated.addEventListener('click', (e) => {
+      e.stopPropagation();
+      tabCurated.classList.add('active');
+      tabAllSeats.classList.remove('active');
+      popoverCuratedView.hidden = false;
+      popoverAllSeatsView.hidden = true;
+    });
+
+    tabAllSeats.addEventListener('click', (e) => {
+      e.stopPropagation();
+      tabAllSeats.classList.add('active');
+      tabCurated.classList.remove('active');
+      popoverCuratedView.hidden = true;
+      popoverAllSeatsView.hidden = false;
+    });
+  }
+
+  // Detect Active Transit Mode & Seat
+  const urlParamMode = new URLSearchParams(window.location.search).get('mode');
+  const urlParamSeat = new URLSearchParams(window.location.search).get('seat');
+  const currentTransitMode = urlParamMode || savedFlightData?.transitMode || 'flight';
+  const popoverModeBadge = document.getElementById('popoverModeBadge');
+  const popoverFlightSections = document.getElementById('popoverFlightSections');
+  const popoverCarSection = document.getElementById('popoverCarSection');
+  const popoverBusSection = document.getElementById('popoverBusSection');
+
+  if (popoverModeBadge) {
+    if (currentTransitMode === 'car') {
+      popoverModeBadge.textContent = '🚗 CAR';
+      if (popoverCarSection) popoverCarSection.hidden = false;
+      if (popoverFlightSections) popoverFlightSections.hidden = true;
+      if (popoverBusSection) popoverBusSection.hidden = true;
+      if (tabAllSeats) tabAllSeats.style.display = 'none';
+    } else if (currentTransitMode === 'bus') {
+      popoverModeBadge.textContent = '🚌 BUS';
+      if (popoverBusSection) popoverBusSection.hidden = false;
+      if (popoverFlightSections) popoverFlightSections.hidden = true;
+      if (popoverCarSection) popoverCarSection.hidden = true;
+      if (tabAllSeats) tabAllSeats.style.display = 'none';
+    } else {
+      popoverModeBadge.textContent = '✈️ FLIGHT';
+      if (popoverFlightSections) popoverFlightSections.hidden = false;
+      if (popoverCarSection) popoverCarSection.hidden = true;
+      if (popoverBusSection) popoverBusSection.hidden = true;
+    }
+  }
+
+  // Update Cockpit / Vehicle Telemetry HUD
+  const tLabel1 = document.getElementById('telemLabel1');
+  const tVal1 = document.getElementById('telemVal1');
+  const tLabel2 = document.getElementById('telemLabel2');
+  const tVal2 = document.getElementById('telemVal2');
+  const tLabel3 = document.getElementById('telemLabel3');
+  const tVal3 = document.getElementById('telemVal3');
+  const tLabel4 = document.getElementById('telemLabel4');
+  const tVal4 = document.getElementById('telemVal4');
+
+  if (currentTransitMode === 'car') {
+    if (tLabel1) tLabel1.textContent = 'SPD';
+    if (tVal1) tVal1.textContent = '68 MPH';
+    if (tLabel2) tLabel2.textContent = 'GEAR';
+    if (tVal2) tVal2.textContent = 'D7';
+    if (tLabel3) tLabel3.textContent = 'ROAD';
+    if (tVal3) tVal3.textContent = 'WET HWY';
+    if (tLabel4) tLabel4.textContent = 'CABIN';
+    if (tVal4) tVal4.textContent = 'WARM';
+  } else if (currentTransitMode === 'bus') {
+    if (tLabel1) tLabel1.textContent = 'SPD';
+    if (tVal1) tVal1.textContent = '55 MPH';
+    if (tLabel2) tLabel2.textContent = 'ROUTE';
+    if (tVal2) tVal2.textContent = 'COACH';
+    if (tLabel3) tLabel3.textContent = 'BERTH';
+    if (tVal3) tVal3.textContent = 'PRIV';
+    if (tLabel4) tLabel4.textContent = 'CABIN';
+    if (tVal4) tVal4.textContent = 'SLEEP';
+  } else {
+    if (tLabel1) tLabel1.textContent = 'ALT';
+    if (tVal1) tVal1.textContent = '36,000 FT';
+    if (tLabel2) tLabel2.textContent = 'GS';
+    if (tVal2) tVal2.textContent = '518 KTS';
+    if (tLabel3) tLabel3.textContent = 'OAT';
+    if (tVal3) tVal3.textContent = '-54°C';
+    if (tLabel4) tLabel4.textContent = 'CABIN';
+    if (tVal4) tVal4.textContent = 'NORM';
+  }
+
+  // Update Brand Icon & Title based on Mode
+  const brandIcon = document.getElementById('brandIcon');
+  const brandTitle = document.getElementById('brandTitle');
+  if (currentTransitMode === 'car') {
+    if (brandIcon) brandIcon.textContent = '🚗';
+    if (brandTitle) brandTitle.textContent = 'Flylofi Drive';
+  } else if (currentTransitMode === 'bus') {
+    if (brandIcon) brandIcon.textContent = '🚌';
+    if (brandTitle) brandTitle.textContent = 'Flylofi Bus';
+  } else {
+    if (brandIcon) brandIcon.textContent = '✈';
+    if (brandTitle) brandTitle.textContent = 'Flylofi';
+  }
+
+  // Initialize seat from storage or default
+  const defaultSeat = currentTransitMode === 'car' ? 'FP' : currentTransitMode === 'bus' ? '01A' : '14A';
+  const initialSeat = (urlParamSeat || savedFlightData?.seat || defaultSeat).toUpperCase();
   applySeatPerspective(initialSeat);
 
   // In-Flight Seat Picker Popover Toggle
