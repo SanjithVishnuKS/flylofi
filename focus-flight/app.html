@@ -2427,30 +2427,6 @@ if (quickRip) {
   });
 }
 
-// Deep hash navigation support (e.g. #ticket, #booking, #car, #bus)
-window.addEventListener('load', () => {
-  resetTearState();
-  if (window.location.hash.includes('car')) {
-    switchTransitMode('car');
-  } else if (window.location.hash.includes('bus')) {
-    switchTransitMode('bus');
-  } else {
-    updateLiveBoardingPass();
-  }
-  if (window.location.hash === '#booking' || window.location.hash === '#ticket') {
-    selectView('homeView');
-    $('boardingPass')?.scrollIntoView({behavior: 'smooth', block: 'center'});
-  } else if (window.location.hash === '#download') {
-    openDownloadModal();
-  }
-});
-
-if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
-  });
-}
-
 // Download Hub Modal Logic & Desktop PWA Installation
 const downloadModal = $('downloadModal');
 const downloadModalTrigger = $('downloadModalTrigger');
@@ -2476,6 +2452,30 @@ function closeDownloadModal() {
     downloadModal.classList.remove('open');
     downloadModal.setAttribute('aria-hidden', 'true');
   }
+}
+
+// Deep hash navigation support (e.g. #ticket, #booking, #car, #bus, #download)
+window.addEventListener('load', () => {
+  resetTearState();
+  if (window.location.hash.includes('car')) {
+    switchTransitMode('car');
+  } else if (window.location.hash.includes('bus')) {
+    switchTransitMode('bus');
+  } else {
+    updateLiveBoardingPass();
+  }
+  if (window.location.hash === '#booking' || window.location.hash === '#ticket') {
+    selectView('homeView');
+    $('boardingPass')?.scrollIntoView({behavior: 'smooth', block: 'center'});
+  } else if (window.location.hash === '#download') {
+    openDownloadModal();
+  }
+});
+
+if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
 }
 
 if (downloadModalTrigger) downloadModalTrigger.onclick = openDownloadModal;
