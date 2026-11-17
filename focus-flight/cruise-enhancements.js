@@ -581,6 +581,18 @@
 
   discoverServerMedia().catch(() => {});
 
+  // Flight Navigation Return Button
+  const returnBtn = document.getElementById('cruiseReturnBtn');
+  if (returnBtn) {
+    returnBtn.addEventListener('click', () => {
+      if (window.self !== window.top) {
+        window.parent.postMessage({ type: 'flylofi-exit-cruise' }, '*');
+      } else {
+        window.location.href = 'app.html';
+      }
+    });
+  }
+
   // Legacy Global API Aliases
   window.FlyLofiAudio = {
     play: startTrackPlayback,

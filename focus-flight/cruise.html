@@ -186,51 +186,10 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
       </div>
     </div>
 
-    <!-- Overhead Fasten Seatbelt Sign & Two-Tone Chime -->
-    <div class="seatbelt-sign-hud" id="seatbeltSignHud" title="Toggle Fasten Seatbelt Sign & Cabin Chime">
-      <span class="seatbelt-glyph">💺</span>
-      <span class="seatbelt-text">FASTEN SEAT BELT</span>
-      <span class="chime-dot" id="chimeDot"></span>
-    </div>
+    <!-- Flight Navigation Return Button (Top-Right) -->
+    <button class="cruise-close" id="cruiseReturnBtn" type="button" title="Return to Boarding Pass Ticket">← Back to Ticket</button>
 
-    <!-- Live In-Flight Cockpit Telemetry HUD Strip -->
-    <div class="flight-telemetry-hud" id="flightTelemetryHud">
-      <div class="telemetry-item"><span class="telem-label">ALT</span><strong class="telem-val">36,000 FT</strong></div>
-      <div class="telemetry-item"><span class="telem-label">GS</span><strong class="telem-val">518 KTS</strong></div>
-      <div class="telemetry-item"><span class="telem-label">OAT</span><strong class="telem-val">-54°C</strong></div>
-      <div class="telemetry-item"><span class="telem-label">CABIN</span><strong class="telem-val">NORM</strong></div>
-    </div>
-
-    <!-- In-Flight Fold-Out Tray Table / Focus Notepad (Matching User Photo!) -->
-    <aside class="tray-table-drawer" id="trayTableDrawer">
-      <button class="tray-table-toggle" id="trayTableToggle" type="button">
-        <span class="tray-icon">📋</span>
-        <span class="tray-btn-text">Tray Table &amp; Focus Task</span>
-      </button>
-      <div class="tray-table-content" id="trayTableContent">
-        <div class="tray-header">
-          <div class="tray-brand"><span>✈</span> FLIGHT FOCUS MISSION</div>
-          <button class="tray-close-btn" id="trayCloseBtn" type="button">×</button>
-        </div>
-        <div class="tray-task-box">
-          <label for="trayTaskInput">CRUISE OBJECTIVE:</label>
-          <div class="tray-input-row">
-            <input type="checkbox" id="trayTaskDone" class="tray-checkbox">
-            <input type="text" id="trayTaskInput" placeholder="Enter focus goal for this flight..." maxlength="60">
-          </div>
-        </div>
-        <div class="tray-notes-box">
-          <label for="trayNotesInput">IN-FLIGHT NOTES:</label>
-          <textarea id="trayNotesInput" rows="3" placeholder="Scratch notes, formulas, or key thoughts..."></textarea>
-        </div>
-        <div class="tray-status-row">
-          <span id="traySeatLabel">14A WINDOW SEAT</span>
-          <span class="tray-autosave">✓ Auto-saved</span>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Cockpit Media Deck: Cleanly Positioned (Zero Overlap with Timer) -->
+    <!-- Cockpit Media Deck: Positioned with clearance below Back to Ticket -->
     <div class="cruise-media-deck" id="cruiseMediaDeck" aria-label="Flight Cabin Entertainment & Ambience Controls">
       <!-- Row 1: Lofi Music Deck -->
       <div class="deck-row">
@@ -277,24 +236,70 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
     <audio id="mediaLofi" preload="metadata" loop src="media/flight/audio/afternoon-jazz.webm"></audio>
     <audio id="mediaCabin" preload="metadata" loop></audio>
 
-    <!-- Flight Stage HUD: Clean Top & Clean Bottom -->
+    <!-- Flight Stage HUD: Clean Top & Clean Bottom (Structured Flex Containers, ZERO Overlap) -->
     <section class="hud">
+      <!-- Top-Left Group: Seatbelt Sign, Eyebrow, Title, Subtitle in strict vertical flow -->
       <div class="hud-top">
+        <div class="seatbelt-sign-hud" id="seatbeltSignHud" title="Toggle Fasten Seatbelt Sign & Cabin Chime">
+          <span class="seatbelt-glyph">💺</span>
+          <span class="seatbelt-text">FASTEN SEAT BELT</span>
+          <span class="chime-dot" id="chimeDot"></span>
+        </div>
         <div class="eyebrow" id="eyebrow">01 / 08 · Airport departure</div>
         <h1 id="title">A new journey<br>starts here.</h1>
         <div class="subtitle" id="subtitle">Take a breath, settle in, and leave the noise of the day behind.</div>
       </div>
       
-      <!-- Bottom HUD: Departure on left, Phase on right. ZERO OVERLAP. -->
+      <!-- Bottom HUD: Symmetrical split — Left: Telemetry above Route; Right: Phase above Tray Table -->
       <div class="hud-bottom">
-        <div class="route-data">
-          <div><div class="datum-label">Departure</div><div class="datum-value" id="fromDatum">MAA · Chennai</div></div>
-          <div><div class="datum-label">Destination</div><div class="datum-value" id="toDatum">SIN · Singapore</div></div>
-          <div><div class="datum-label">Seat View</div><div class="datum-value" id="seatDatum">14A · Window</div></div>
+        <div class="hud-left-column">
+          <!-- Live In-Flight Cockpit Telemetry HUD Strip (Positioned above Route Data) -->
+          <div class="flight-telemetry-hud" id="flightTelemetryHud">
+            <div class="telemetry-item"><span class="telem-label">ALT</span><strong class="telem-val">36,000 FT</strong></div>
+            <div class="telemetry-item"><span class="telem-label">GS</span><strong class="telem-val">518 KTS</strong></div>
+            <div class="telemetry-item"><span class="telem-label">OAT</span><strong class="telem-val">-54°C</strong></div>
+            <div class="telemetry-item"><span class="telem-label">CABIN</span><strong class="telem-val">NORM</strong></div>
+          </div>
+          <div class="route-data">
+            <div><div class="datum-label">Departure</div><div class="datum-value" id="fromDatum">MAA · Chennai</div></div>
+            <div><div class="datum-label">Destination</div><div class="datum-value" id="toDatum">SIN · Singapore</div></div>
+            <div><div class="datum-label">Seat View</div><div class="datum-value" id="seatDatum">14A · Window</div></div>
+          </div>
         </div>
-        <div class="hud-status-group">
-          <div class="phase-chip" id="phase">At the terminal</div>
-          <div class="hint" id="hint">Boarding completed</div>
+
+        <div class="hud-right-column">
+          <div class="hud-status-group">
+            <div class="phase-chip" id="phase">At the terminal</div>
+            <div class="hint" id="hint">Boarding completed</div>
+          </div>
+          <!-- In-Flight Fold-Out Tray Table / Focus Notepad -->
+          <aside class="tray-table-drawer" id="trayTableDrawer">
+            <button class="tray-table-toggle" id="trayTableToggle" type="button">
+              <span class="tray-icon">📋</span>
+              <span class="tray-btn-text">Tray Table &amp; Focus Task</span>
+            </button>
+            <div class="tray-table-content" id="trayTableContent">
+              <div class="tray-header">
+                <div class="tray-brand"><span>✈</span> FLIGHT FOCUS MISSION</div>
+                <button class="tray-close-btn" id="trayCloseBtn" type="button">×</button>
+              </div>
+              <div class="tray-task-box">
+                <label for="trayTaskInput">CRUISE OBJECTIVE:</label>
+                <div class="tray-input-row">
+                  <input type="checkbox" id="trayTaskDone" class="tray-checkbox">
+                  <input type="text" id="trayTaskInput" placeholder="Enter focus goal for this flight..." maxlength="60">
+                </div>
+              </div>
+              <div class="tray-notes-box">
+                <label for="trayNotesInput">IN-FLIGHT NOTES:</label>
+                <textarea id="trayNotesInput" rows="3" placeholder="Scratch notes, formulas, or key thoughts..."></textarea>
+              </div>
+              <div class="tray-status-row">
+                <span id="traySeatLabel">14A WINDOW SEAT</span>
+                <span class="tray-autosave">✓ Auto-saved</span>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>

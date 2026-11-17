@@ -788,30 +788,172 @@ html.embedded-view .shell {
   padding: clamp(6px, 1.2vw, 14px) !important;
 }
 
+/* ==========================================================================
+   PERFECT ZERO-OVERLAP CORNER ARRANGEMENTS
+   ========================================================================== */
+
+/* 1. TOP-LEFT: Seatbelt sign neatly above Eyebrow & Title */
+.hud-top {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 5px !important;
+  max-width: min(440px, 46%) !important;
+  pointer-events: none !important;
+}
+
+.seatbelt-sign-hud {
+  position: static !important;
+  transform: none !important;
+  margin: 0 0 4px 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 5px 12px !important;
+  border: 1px solid rgba(131, 224, 181, 0.35) !important;
+  border-radius: 999px !important;
+  background: rgba(7, 22, 30, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: var(--mint) !important;
+  font: 700 9px "Space Grotesk", sans-serif !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 12px rgba(131, 224, 181, 0.15) !important;
+}
+
+.eyebrow {
+  margin: 0 !important;
+  font-size: 9px !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: #d1e1df !important;
+}
+
+h1#title {
+  margin: 2px 0 4px 0 !important;
+  line-height: 1.05 !important;
+}
+
+.subtitle {
+  margin: 0 !important;
+  font-size: 11px !important;
+  color: #e0eae6 !important;
+}
+
+/* 2. TOP-RIGHT: Return button at top, Media Deck strictly below it */
+.cruise-close {
+  position: absolute !important;
+  z-index: 35 !important;
+  top: 14px !important;
+  right: 18px !important;
+  height: 30px !important;
+  padding: 0 13px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  border-radius: 8px !important;
+  background: rgba(6, 20, 28, 0.95) !important;
+  border: 1px solid rgba(131, 224, 181, 0.4) !important;
+  color: var(--mint, #83e0b5) !important;
+  font: 700 11px "Space Grotesk", sans-serif !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+  transition: all 0.2s ease !important;
+}
+
+.cruise-close:hover {
+  background: rgba(131, 224, 181, 0.2) !important;
+  border-color: var(--mint) !important;
+}
+
+.cruise-media-deck {
+  position: absolute !important;
+  z-index: 25 !important;
+  top: 54px !important; /* Guaranteed vertical gap below Back to Ticket button */
+  right: 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+  padding: 8px 10px !important;
+  border: 1px solid var(--deck-border) !important;
+  border-radius: 14px !important;
+  background: var(--deck-bg) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45) !important;
+  width: clamp(285px, 31vw, 400px) !important;
+  box-sizing: border-box !important;
+}
+
+/* 3. BOTTOM-LEFT: Telemetry strip cleanly above Departure/Destination/Seat */
 .hud-bottom {
   display: flex !important;
   align-items: flex-end !important;
   justify-content: space-between !important;
-  gap: 16px !important;
+  gap: 20px !important;
   width: 100% !important;
   box-sizing: border-box !important;
   padding-bottom: 2px !important;
 }
 
+.hud-left-column {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+  pointer-events: none !important;
+}
+
+.flight-telemetry-hud {
+  position: static !important;
+  transform: none !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 5px 12px !important;
+  border-radius: 8px !important;
+  background: rgba(5, 17, 24, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(220, 239, 237, 0.15) !important;
+  pointer-events: auto !important;
+}
+
 .route-data {
+  position: static !important;
+  transform: none !important;
+  margin: 0 !important;
   display: flex !important;
   gap: clamp(10px, 1.8vw, 24px) !important;
   flex-wrap: nowrap !important;
-  min-width: 0 !important;
+  pointer-events: auto !important;
 }
 
-.hud-status-group {
+/* 4. BOTTOM-RIGHT: Status chip on top, Tray Table button below */
+.hud-right-column {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-end !important;
-  gap: 5px !important;
+  gap: 8px !important;
   flex-shrink: 0 !important;
+  pointer-events: none !important;
+}
+
+.hud-status-group {
+  position: static !important;
+  transform: none !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  gap: 4px !important;
   text-align: right !important;
+  pointer-events: auto !important;
 }
 
 .hint {
@@ -825,4 +967,33 @@ html.embedded-view .shell {
   color: rgba(235, 245, 239, 0.7) !important;
   white-space: nowrap !important;
   pointer-events: none !important;
+}
+
+.tray-table-drawer {
+  position: static !important;
+  transform: none !important;
+  margin: 0 !important;
+  pointer-events: auto !important;
+}
+
+@media (max-width: 768px) {
+  .cruise-media-deck {
+    top: 50px !important;
+    right: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+  .hud-top {
+    max-width: 92% !important;
+  }
+  .hud-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .hud-right-column {
+    align-items: flex-start !important;
+    width: 100% !important;
+  }
 }
