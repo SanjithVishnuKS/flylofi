@@ -2440,6 +2440,8 @@ window.addEventListener('load', () => {
   if (window.location.hash === '#booking' || window.location.hash === '#ticket') {
     selectView('homeView');
     $('boardingPass')?.scrollIntoView({behavior: 'smooth', block: 'center'});
+  } else if (window.location.hash === '#download') {
+    openDownloadModal();
   }
 });
 
