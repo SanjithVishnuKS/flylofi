@@ -7,7 +7,7 @@
 <title>Flylofi — Cruise &amp; Study Mode</title>
 <script>
 try {
-  if (window.self !== window.top) {
+  if (window.self !== window.top || window.location.search.includes('embedded=1') || window.location.hash.includes('embedded')) {
     document.documentElement.classList.add('embedded-view');
   }
 } catch (e) {
@@ -107,7 +107,10 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
   <header class="top">
     <div class="brand"><div class="brand-icon">✈</div><span>Flylofi</span></div>
     <div class="route-top" id="routeTop">Chennai · MAA&nbsp;&nbsp; — &nbsp;&nbsp;Singapore · SIN</div>
-    <div class="top-right"><i class="live-dot"></i><span id="status">In focus</span></div>
+    <div class="top-right">
+      <i class="live-dot"></i><span id="status">In focus</span>
+      <button class="standalone-exit-btn" id="standaloneExitBtn" type="button" title="Return to Boarding Pass Ticket" style="margin-left:8px;padding:4px 10px;border-radius:6px;border:1px solid rgba(131,224,181,.35);background:rgba(131,224,181,.12);color:var(--mint);font-size:10px;font-weight:700;cursor:pointer">← Back to Ticket</button>
+    </div>
   </header>
 
   <main class="stage" id="stage">
@@ -192,9 +195,6 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
         <div class="window-vignette-inner" aria-hidden="true"></div>
       </div>
     </div>
-
-    <!-- Flight Navigation Return Button (Top-Right) -->
-    <button class="cruise-close" id="cruiseReturnBtn" type="button" title="Return to Boarding Pass Ticket">← Back to Ticket</button>
 
     <!-- Cockpit Media Deck: Positioned with clearance below Back to Ticket -->
     <div class="cruise-media-deck" id="cruiseMediaDeck" aria-label="Flight Cabin Entertainment & Ambience Controls">
@@ -366,9 +366,9 @@ const savedFlight=JSON.parse(localStorage.getItem('focusFlightActive')||'null');
 const cityNames={MAA:'Chennai',BOM:'Mumbai',DEL:'New Delhi',BLR:'Bengaluru',HYD:'Hyderabad',SIN:'Singapore',BKK:'Bangkok',HKG:'Hong Kong',ICN:'Seoul',NRT:'Tokyo',SYD:'Sydney',MEL:'Melbourne',DXB:'Dubai',DOH:'Doha',LHR:'London',AMS:'Amsterdam',CDG:'Paris',FRA:'Frankfurt',IST:'Istanbul',JFK:'New York',SFO:'San Francisco',LAX:'Los Angeles',ORD:'Chicago',YYZ:'Toronto'};
 const flightVideo=$('flightVideo'),stage=$('stage');
 
-flightVideo.addEventListener('loadeddata',()=>{stage.classList.add('video-live');flightVideo.play().catch(()=>{})});
+// Photorealistic scene is active by default; video plays on explicit user selection
 flightVideo.addEventListener('error',()=>stage.classList.remove('video-live'));
-flightVideo.load();
+// flightVideo.load();
 
 let elapsed=0,last=0,W=600,H=800,D=1,from='Chennai',to='Singapore',raf=0;
 if(savedFlight){

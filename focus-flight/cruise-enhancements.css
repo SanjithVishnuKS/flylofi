@@ -242,7 +242,7 @@
   height: 100%;
   z-index: 1;
   overflow: hidden;
-  background: #02090e;
+  background: radial-gradient(circle at 50% 40%, #2f6b55 0%, #153c36 40%, #06181b 80%, #02090e 100%);
 }
 
 .photo-scene-img {
@@ -289,8 +289,13 @@
 }
 
 .stage.video-live .photorealistic-window-scene {
-  opacity: 0;
-  transition: opacity 0.6s ease;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #2f6b55 0%, #153c36 40%, #06181b 80%, #02090e 100%);
 }
 
 .stage.video-live .flight-video {
@@ -589,21 +594,20 @@
   50% { opacity: 1; }
 }
 
-/* In-Flight Cockpit Telemetry HUD Strip */
+/* In-Flight Cockpit Telemetry HUD Strip (Strictly Static inside hud-left-column) */
 .flight-telemetry-hud {
-  position: absolute;
-  z-index: 15;
-  bottom: 14px;
-  left: 18px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: rgba(5, 17, 24, 0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(220, 239, 237, 0.1);
-  pointer-events: none;
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 5px 12px !important;
+  border-radius: 8px !important;
+  background: rgba(5, 17, 24, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(220, 239, 237, 0.15) !important;
+  pointer-events: auto !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
 }
 
 .telemetry-item {
@@ -843,8 +847,13 @@
   pointer-events: none !important;
 }
 
-html.embedded-view .top {
+html.embedded-view .top,
+html.embedded-view .cruise-close,
+html.embedded-view #cruiseReturnBtn,
+html.embedded-view #standaloneExitBtn {
   display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 html.embedded-view .shell {
@@ -907,48 +916,29 @@ h1#title {
   color: #e0eae6 !important;
 }
 
-/* 2. TOP-RIGHT: Return button at top, Media Deck strictly below it */
-.cruise-close {
-  position: absolute !important;
-  z-index: 35 !important;
-  top: 14px !important;
-  right: 18px !important;
-  height: 30px !important;
-  padding: 0 13px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  border-radius: 8px !important;
-  background: rgba(6, 20, 28, 0.95) !important;
-  border: 1px solid rgba(131, 224, 181, 0.4) !important;
-  color: var(--mint, #83e0b5) !important;
-  font: 700 11px "Space Grotesk", sans-serif !important;
-  cursor: pointer !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
-  transition: all 0.2s ease !important;
-}
-
-.cruise-close:hover {
-  background: rgba(131, 224, 181, 0.2) !important;
-  border-color: var(--mint) !important;
+/* 2. TOP-RIGHT: Clean Cockpit Media Deck (Standalone return button is in .top-right header) */
+.cruise-close, #cruiseReturnBtn {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 .cruise-media-deck {
   position: absolute !important;
   z-index: 25 !important;
-  top: 54px !important; /* Guaranteed vertical gap below Back to Ticket button */
-  right: 18px !important;
+  top: 14px !important;
+  right: 16px !important;
   display: flex !important;
   flex-direction: column !important;
   gap: 7px !important;
   padding: 8px 10px !important;
-  border: 1px solid var(--deck-border) !important;
+  border: 1px solid var(--deck-border, rgba(131, 224, 181, 0.28)) !important;
   border-radius: 14px !important;
-  background: var(--deck-bg) !important;
+  background: var(--deck-bg, rgba(7, 20, 28, 0.88)) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45) !important;
-  width: clamp(285px, 31vw, 400px) !important;
+  width: clamp(285px, 30vw, 380px) !important;
   box-sizing: border-box !important;
 }
 

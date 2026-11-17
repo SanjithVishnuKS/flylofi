@@ -912,7 +912,7 @@ legend{margin-bottom:10px;font-weight:600}
 
   <!-- FLIGHT CRUISE VIEW: Clean Frame without floating collision button -->
   <section class="cruise-view" id="cruiseView" hidden>
-    <iframe id="cruiseFrame" title="Flylofi cruise study experience" src="cruise.html"></iframe>
+    <iframe id="cruiseFrame" title="Flylofi cruise study experience" src="cruise.html?embedded=1"></iframe>
   </section>
 
   <!-- LANDING / IMMIGRATION PASSPORT STAMP VIEW -->
@@ -1122,7 +1122,7 @@ function launchFlight(data) {
   try {
     $('cruiseFrame').contentWindow.location.reload();
   } catch(e) {
-    $('cruiseFrame').src = 'cruise.html';
+    $('cruiseFrame').src = 'cruise.html?embedded=1';
   }
 }
 
