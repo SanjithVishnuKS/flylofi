@@ -76,26 +76,18 @@ button:hover,button:active{border-color:var(--accent);color:var(--accent)}
 }
 
 .view{flex:1;overflow-y:auto}
-.home-grid,.ticket-grid{
-  max-width:1180px;margin:auto;padding:clamp(24px,4vw,60px) 20px;
-  display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(24px,5vw,80px);align-items:start;
+.home-grid{
+  max-width:1240px;margin:auto;padding:clamp(20px,3.5vw,50px) 16px;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(20px,4vw,50px);align-items:start;
 }
 .eyebrow{font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
 .hero h1,.ticket-copy h1,.landing h1{
-  font:700 clamp(34px,5vw,64px)/1 "Space Grotesk",sans-serif;letter-spacing:-2px;
-  margin:16px 0;color:var(--text);
+  font:700 clamp(30px,4.5vw,56px)/1.08 "Space Grotesk",sans-serif;letter-spacing:-1.5px;
+  margin:14px 0 10px;color:var(--text);
 }
 em{color:var(--coral);font-style:normal}
-.hero p,.ticket-copy p{color:var(--muted);line-height:1.6;max-width:380px;font-size:13px}
-.hero-actions{margin-top:24px;display:flex;flex-direction:column;gap:12px;max-width:340px}
-.quick-board-btn{
-  width:100%;padding:15px 22px;border:none;border-radius:10px;
-  background:var(--accent);color:#071a12;font:800 14px "Space Grotesk",sans-serif;
-  letter-spacing:.05em;cursor:pointer;box-shadow:0 8px 24px rgba(89,223,160,.28);
-  transition:transform .15s,box-shadow .15s;
-}
-.quick-board-btn:active{transform:scale(.98);box-shadow:0 4px 12px rgba(89,223,160,.2)}
-.stats{display:flex;gap:24px;margin-top:32px}
+.hero p,.ticket-copy p{color:var(--muted);line-height:1.6;max-width:440px;font-size:13px}
+.stats{display:flex;gap:24px;margin-top:24px}
 .stats strong{display:block;font:600 18px "Space Grotesk",sans-serif}
 .stats small{color:var(--muted);font-size:9px}
 
@@ -121,6 +113,40 @@ em{color:var(--coral);font-style:normal}
 .rule{height:1px;background:var(--line);margin:18px 0}
 fieldset{border:0;padding:0;margin:0 0 16px}
 legend{margin-bottom:10px;font-weight:600}
+
+/* Duration Presets & Custom Timer */
+.duration-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.dur-btn{
+  padding:10px 4px;border-radius:8px;border:1px solid var(--line);
+  background:rgba(12,29,37,.78);color:var(--muted);font:700 11px "Space Grotesk",sans-serif;
+  cursor:pointer;transition:all .15s ease;text-align:center;
+}
+.dur-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(89,223,160,.1)}
+.dur-btn.active{
+  border-color:var(--accent)!important;background:rgba(89,223,160,.2)!important;
+  color:var(--accent)!important;box-shadow:0 0 14px rgba(89,223,160,.25)!important;
+}
+.custom-timer-box{
+  margin-top:10px;padding:10px 14px;border-radius:8px;
+  background:rgba(16,36,44,.6);border:1px solid var(--line);
+  display:flex;align-items:center;gap:10px;
+}
+.custom-timer-icon{font-size:16px;color:var(--accent)}
+.custom-timer-box label{font-size:10px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+.custom-timer-field{display:flex;align-items:center;gap:6px;margin-left:auto}
+.timer-step-btn{
+  width:28px;height:28px;padding:0;display:grid;place-items:center;
+  border-radius:6px;border:1px solid var(--line);background:rgba(12,29,37,.85);
+  color:var(--text);font:700 14px "Space Grotesk",sans-serif;cursor:pointer;
+}
+.timer-step-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(89,223,160,.15)}
+.custom-timer-field input{
+  width:64px;padding:5px 6px;border-radius:6px;border:1px solid var(--line);
+  background:#091820;color:var(--text);font:700 13px "Space Grotesk",sans-serif;text-align:center;
+}
+.custom-timer-field input:focus{border-color:var(--accent);outline:0;box-shadow:0 0 8px rgba(89,223,160,.3)}
+.custom-timer-field span{font-size:11px;color:var(--muted);font-weight:600}
+
 .options{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .options label{
   position:relative;display:grid;place-items:center;padding:12px 6px;
@@ -134,33 +160,79 @@ legend{margin-bottom:10px;font-weight:600}
 }
 .options input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;z-index:2}
 
-/* Seat Selection Grid */
-.seat-picker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.seat-pill{
-  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:12px 6px;border:1px solid var(--line);border-radius:10px;background:rgba(9,24,32,.75);
-  color:var(--muted);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(89,223,160,.2);
-  transition:all .15s;
+/* ==========================================================================
+   AUTHENTIC AIRLINE CABIN SEAT MAP
+   ========================================================================== */
+.aircraft-fuselage{
+  position:relative;background:linear-gradient(180deg,#0b1e27 0%,#081720 100%);
+  border:2px solid rgba(89,223,160,.25);border-radius:90px 90px 24px 24px;
+  padding:22px 14px 16px;margin-top:10px;
+  box-shadow:0 16px 40px rgba(0,0,0,.5),inset 0 0 30px rgba(0,0,0,.4);
 }
-.seat-pill.active,.seat-pill:has(input:checked){
-  border-color:var(--accent)!important;background:rgba(89,223,160,.16)!important;
-  color:var(--text)!important;box-shadow:0 0 16px rgba(89,223,160,.22);
+.cockpit-nose{
+  text-align:center;font:700 9px "Space Grotesk",sans-serif;letter-spacing:.22em;
+  color:var(--accent);padding-bottom:10px;border-bottom:1px dashed rgba(89,223,160,.2);
+  margin-bottom:14px;text-transform:uppercase;
 }
-.seat-pill input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;z-index:2}
-.seat-icon{font-size:16px;margin-bottom:2px}
-.seat-code{font:700 13px "Space Grotesk",sans-serif;color:var(--text);letter-spacing:.05em}
-.seat-pill.active .seat-code,.seat-pill:has(input:checked) .seat-code{color:var(--accent)}
-.seat-label{font-size:10px;color:var(--muted);margin-top:2px}
-.seat-tag{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-top:3px;font-weight:700}
-.seat-pill.active .seat-tag,.seat-pill:has(input:checked) .seat-tag{color:var(--accent)}
+.wings-indicator{
+  position:absolute;top:48%;left:-20px;right:-20px;display:flex;
+  justify-content:space-between;pointer-events:none;font:700 8px "Space Grotesk",sans-serif;
+  letter-spacing:.14em;color:rgba(239,154,114,.85);text-transform:uppercase;
+}
+.wing-tag{
+  background:rgba(14,34,42,.95);padding:4px 8px;border:1px solid rgba(239,154,114,.35);
+  border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,.5);
+}
+.cabin-section-label{
+  font:700 8px "Space Grotesk",sans-serif;letter-spacing:.16em;color:var(--muted);
+  text-transform:uppercase;margin:10px 0 6px;text-align:center;
+}
+.exit-row-divider{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:4px 14px;margin:8px 0;font:700 8px "Space Grotesk",sans-serif;
+  letter-spacing:.14em;color:var(--coral);background:rgba(239,154,114,.08);
+  border-radius:6px;text-transform:uppercase;
+}
+.seat-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:6px}
+.row-num{font-size:8px;font-family:monospace;color:var(--muted);width:16px;text-align:center}
+.cabin-aisle{width:16px}
+.seat-btn{
+  position:relative;width:34px;height:34px;padding:0;border-radius:7px;
+  border:1px solid rgba(198,220,225,.2);background:rgba(16,36,44,.85);color:#d1e1df;
+  font:700 10px "Space Grotesk",sans-serif;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;cursor:pointer;transition:all .15s ease;user-select:none;
+}
+.seat-btn:hover:not(:disabled){
+  border-color:var(--accent);background:rgba(89,223,160,.18);color:var(--accent);transform:scale(1.06);
+}
+.seat-btn.selected{
+  border-color:var(--accent)!important;background:var(--accent)!important;
+  color:#06171f!important;font-weight:800!important;box-shadow:0 0 16px rgba(89,223,160,.6)!important;
+  transform:scale(1.08);
+}
+.seat-btn:disabled,.seat-btn.occupied{
+  opacity:.28;cursor:not-allowed;background:rgba(10,20,26,.5);border-color:rgba(255,255,255,.05);color:#60757d;
+}
+.seat-btn.window-seat::before{content:'🪟';position:absolute;top:-5px;font-size:7px;opacity:.85}
+.seat-map-legend{
+  display:flex;justify-content:center;align-items:center;gap:14px;
+  margin-top:14px;padding-top:10px;border-top:1px dashed rgba(89,223,160,.2);
+  font-size:9px;color:var(--muted);
+}
+.legend-box{width:10px;height:10px;border-radius:3px;display:inline-block;vertical-align:middle;margin-right:4px}
+.legend-box.selected{background:var(--accent)}
+.legend-box.available{border:1px solid rgba(198,220,225,.3);background:rgba(16,36,44,.85)}
+.legend-box.occupied{background:rgba(10,20,26,.5);opacity:.4}
 
-.board{
-  width:100%;margin-top:14px;padding:15px 18px;border:none;border-radius:10px;
-  background:var(--accent);color:#08241a;font:800 14px "Space Grotesk",sans-serif;
-  letter-spacing:.04em;cursor:pointer;box-shadow:0 8px 24px rgba(89,223,160,.28);
-  transition:transform .15s,box-shadow .15s;
+/* Selected Seat Badge & Live Preview */
+.selected-seat-info-card{
+  margin-top:12px;padding:10px 14px;border-radius:10px;
+  background:rgba(89,223,160,.08);border:1px solid rgba(89,223,160,.25);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
 }
-.board:active{transform:scale(.98)}
+.seat-info-left strong{display:block;font:700 13px "Space Grotesk",sans-serif;color:var(--accent)}
+.seat-info-left small{font-size:9px;color:#bed7d5}
+.seat-preview-thumb{width:54px;height:38px;border-radius:6px;object-fit:cover;border:1px solid rgba(89,223,160,.3)}
 
 /* ==========================================================================
    PHYSICAL MOTION-TEAR BOARDING PASS
@@ -283,13 +355,12 @@ legend{margin-bottom:10px;font-weight:600}
 .passport-stamp-city{font:700 16px "Space Grotesk",sans-serif;letter-spacing:.1em;color:#fff}
 .passport-stamp-date{font-size:8px;letter-spacing:.15em;color:var(--muted);margin-top:4px}
 
-@media(max-width:780px){
+@media(max-width:960px){
   .topbar{height:56px}
-  .home-grid,.ticket-grid{grid-template-columns:1fr;padding:18px 12px;gap:20px}
-  .hero h1,.ticket-copy h1{font-size:36px}
+  .home-grid{grid-template-columns:1fr;padding:18px 12px;gap:24px}
+  .hero h1,.ticket-copy h1{font-size:32px}
   .stats{margin-top:18px}
   .booking{padding:16px}
-  .seat-picker-grid{grid-template-columns:repeat(2,1fr)}
   .boarding-pass-card{grid-template-columns:1fr;overflow:visible}
   .perforation-divider{right:0;left:0;top:auto;bottom:148px;width:100%;height:2px}
   .perf-notch.top{left:-11px;top:-9px}
@@ -323,198 +394,318 @@ legend{margin-bottom:10px;font-weight:600}
     </div>
   </header>
 
-  <!-- HOME / BOOKING VIEW -->
+  <!-- HOME VIEW: ITINERARY BUILDER + ACTUAL AIRLINE CABIN MAP + LIVE PHYSICAL BOARDING PASS IN FRONT -->
   <section class="view" id="homeView">
     <div class="home-grid">
-      <div class="hero">
-        <div class="eyebrow">THE FOCUS ROUTE · FLIGHT CABIN</div>
-        <h1>Make focus<br><em>a destination.</em></h1>
-        <p>Choose your route, select your preferred seat perspective, and tear your boarding pass to settle into a rich focus journey.</p>
-        <div class="hero-actions">
-          <button class="quick-board-btn" id="heroQuickBoard" type="button">✈ CHOOSE SEAT &amp; BOARD →</button>
+      
+      <!-- LEFT COLUMN: ITINERARY & ACTUAL AIRPLANE SEAT MAP -->
+      <div class="booking-col">
+        <form class="booking" id="bookingForm" onsubmit="event.preventDefault();">
+          <div class="card-head clickable" id="cardHeadClickable" title="Tap to configure itinerary">
+            <div>
+              <div class="eyebrow">New Itinerary &amp; Cabin Seat</div>
+              <h2 id="bookFlightTitle">Book Focus Flight ✈</h2>
+            </div>
+            <span class="flight-no">FF-042</span>
+          </div>
+
+          <div class="route-grid">
+            <label>Departure<select id="departure"></select></label>
+            <div class="arrow">→</div>
+            <label>Destination<select id="destination"></select></label>
+          </div>
+
+          <div class="rule"></div>
+
+          <!-- DURATION SELECTION (Presets + Custom Timer) -->
+          <fieldset>
+            <legend>Flight Duration (Select Preset or Custom)</legend>
+            <div class="duration-grid" id="durationGrid">
+              <button type="button" class="dur-btn" data-mins="15">15 min</button>
+              <button type="button" class="dur-btn" data-mins="25">25 min</button>
+              <button type="button" class="dur-btn active" data-mins="45">45 min</button>
+              <button type="button" class="dur-btn" data-mins="60">60 min</button>
+              <button type="button" class="dur-btn" data-mins="90">90 min</button>
+              <button type="button" class="dur-btn" data-mins="120">120 min</button>
+            </div>
+            <div class="custom-timer-box">
+              <span class="custom-timer-icon">⏱</span>
+              <div>
+                <label for="customTimerInput">Custom Timer</label>
+                <div style="font-size:9px;color:var(--muted)">Set any custom duration (1 - 360 min)</div>
+              </div>
+              <div class="custom-timer-field">
+                <button type="button" id="timerMinusBtn" class="timer-step-btn" title="Decrease 5 min">−</button>
+                <input type="number" id="customTimerInput" min="1" max="360" value="45" placeholder="45">
+                <button type="button" id="timerPlusBtn" class="timer-step-btn" title="Increase 5 min">+</button>
+                <span>min</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- FOCUS CATEGORY -->
+          <fieldset>
+            <legend>Focus Category</legend>
+            <div class="options" id="categoryOptions">
+              <label class="active"><input type="radio" name="category" value="Programming" checked>Code</label>
+              <label><input type="radio" name="category" value="Studying">Study</label>
+              <label><input type="radio" name="category" value="Engineering">Build</label>
+              <label><input type="radio" name="category" value="Personal">Read</label>
+            </div>
+          </fieldset>
+
+          <!-- AUTHENTIC COMMERCIAL AIRLINE CABIN SEAT MAP -->
+          <fieldset style="border:1px solid rgba(89,223,160,.25);border-radius:14px;padding:14px;background:rgba(89,223,160,.03);margin-top:16px">
+            <legend style="padding:0 6px;color:var(--accent);font-weight:700">Commercial Aircraft Cabin Map (Tap Seat to Select)</legend>
+            
+            <div class="aircraft-fuselage">
+              <div class="cockpit-nose">▲ BOEING 787 FLIGHT DECK ▲</div>
+              
+              <div class="wings-indicator">
+                <span class="wing-tag">◀ PORT WING &amp; TURBINE</span>
+                <span class="wing-tag">STARBOARD WING &amp; TURBINE ▶</span>
+              </div>
+
+              <!-- Section 1: First Class Suites -->
+              <div class="cabin-section-label">First Class Suite · Sunset Horizon View</div>
+              <div class="seat-row">
+                <span class="row-num">01</span>
+                <button type="button" class="seat-btn window-seat" data-seat="01A" title="Seat 01A - Sunset Horizon Suite Window">01A</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled title="Seat 01B - Occupied">01B</button>
+                <div class="cabin-aisle" style="width:28px"></div>
+                <button type="button" class="seat-btn occupied" disabled title="Seat 01E - Occupied">01E</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn window-seat" data-seat="01F" title="Seat 01F - Sunset Horizon Suite Window">01F</button>
+              </div>
+              <div class="seat-row">
+                <span class="row-num">02</span>
+                <button type="button" class="seat-btn window-seat" data-seat="02A" title="Seat 02A - Sunset Horizon Suite Window">02A</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled title="Seat 02B - Occupied">02B</button>
+                <div class="cabin-aisle" style="width:28px"></div>
+                <button type="button" class="seat-btn occupied" disabled title="Seat 02E - Occupied">02E</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn window-seat" data-seat="02F" title="Seat 02F - Wing &amp; Jet Engine Window">02F</button>
+              </div>
+
+              <!-- Emergency Exit Row -->
+              <div class="exit-row-divider">
+                <span>◀ EMERGENCY EXIT</span>
+                <span>OVERWING SECTION</span>
+                <span>EMERGENCY EXIT ▶</span>
+              </div>
+
+              <!-- Section 2: Overwing & Jet Turbine -->
+              <div class="cabin-section-label">Forward Cabin · Overwing &amp; Jet Turbine View</div>
+              <div class="seat-row">
+                <span class="row-num">03</span>
+                <button type="button" class="seat-btn window-seat" data-seat="03A" title="Seat 03A - Wing &amp; Engine Window">03A</button>
+                <button type="button" class="seat-btn occupied" disabled>03B</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>03C</button>
+                <button type="button" class="seat-btn occupied" disabled>03D</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>03E</button>
+                <button type="button" class="seat-btn window-seat" data-seat="04F" title="Seat 04F - Overwing Turbine">04F</button>
+              </div>
+              <div class="seat-row">
+                <span class="row-num">05</span>
+                <button type="button" class="seat-btn window-seat" data-seat="05A" title="Seat 05A - Wing &amp; Engine Window">05A</button>
+                <button type="button" class="seat-btn occupied" disabled>05B</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>05C</button>
+                <button type="button" class="seat-btn occupied" disabled>05D</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>05E</button>
+                <button type="button" class="seat-btn window-seat" data-seat="06F" title="Seat 06F - Wing View">06F</button>
+              </div>
+
+              <!-- Section 3: Mid Cabin Aerial Vista (User Reference Photo Match) -->
+              <div class="cabin-section-label">Main Cabin · 35,000 ft Aerial Earth Vista</div>
+              <div class="seat-row">
+                <span class="row-num">11</span>
+                <button type="button" class="seat-btn window-seat" data-seat="11A" title="Seat 11A - Aerial Earth Vista Window">11A</button>
+                <button type="button" class="seat-btn occupied" disabled>11B</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>11C</button>
+                <button type="button" class="seat-btn occupied" disabled>11D</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>11E</button>
+                <button type="button" class="seat-btn occupied" disabled>11F</button>
+              </div>
+              <div class="seat-row">
+                <span class="row-num">12</span>
+                <button type="button" class="seat-btn window-seat" data-seat="12A" title="Seat 12A - Aerial Earth Vista Window">12A</button>
+                <button type="button" class="seat-btn occupied" disabled>12B</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>12C</button>
+                <button type="button" class="seat-btn occupied" disabled>12D</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>12E</button>
+                <button type="button" class="seat-btn window-seat" data-seat="14F" title="Seat 14F - Aerial Earth Vista Window">14F</button>
+              </div>
+              <div class="seat-row">
+                <span class="row-num">14</span>
+                <button type="button" class="seat-btn window-seat selected" data-seat="14A" title="Seat 14A - Aerial Earth Vista Window">14A</button>
+                <button type="button" class="seat-btn occupied" disabled>14B</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>14C</button>
+                <button type="button" class="seat-btn occupied" disabled>14D</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>14E</button>
+                <button type="button" class="seat-btn window-seat" data-seat="15F" title="Seat 15F - Aerial Earth Vista Window">15F</button>
+              </div>
+
+              <!-- Section 4: Aft Cabin Night Lights -->
+              <div class="cabin-section-label">Aft Cabin · Night Flight &amp; City Lights View</div>
+              <div class="seat-row">
+                <span class="row-num">16</span>
+                <button type="button" class="seat-btn window-seat" data-seat="16A" title="Seat 16A - Night City Lights Window">16A</button>
+                <button type="button" class="seat-btn occupied" disabled>16B</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>16C</button>
+                <button type="button" class="seat-btn occupied" disabled>16D</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>16E</button>
+                <button type="button" class="seat-btn window-seat" data-seat="17F" title="Seat 17F - Night City Lights Window">17F</button>
+              </div>
+              <div class="seat-row">
+                <span class="row-num">18</span>
+                <button type="button" class="seat-btn window-seat" data-seat="18A" title="Seat 18A - Night City Lights Window">18A</button>
+                <button type="button" class="seat-btn occupied" disabled>18B</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>18C</button>
+                <button type="button" class="seat-btn occupied" disabled>18D</button>
+                <div class="cabin-aisle"></div>
+                <button type="button" class="seat-btn occupied" disabled>18E</button>
+                <button type="button" class="seat-btn window-seat" data-seat="19F" title="Seat 19F - Night City Lights Window">19F</button>
+              </div>
+
+              <div class="seat-map-legend">
+                <div><span class="legend-box selected"></span>Selected</div>
+                <div><span class="legend-box available"></span>Available</div>
+                <div><span class="legend-box occupied"></span>Occupied</div>
+              </div>
+            </div>
+
+            <!-- Selected Seat Details & Live Scenic Preview -->
+            <div class="selected-seat-info-card" id="selectedSeatCard">
+              <div class="seat-info-left">
+                <strong id="selectedSeatCode">Seat 14A • Window View</strong>
+                <small id="selectedSeatDesc">Aerial Earth Vista • 35,000 ft patchwork fields &amp; rivers</small>
+              </div>
+              <img id="selectedSeatThumb" class="seat-preview-thumb" src="media/flight/scenes/seat_14a_aerial_earth.jpg" alt="Selected perspective preview">
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <!-- RIGHT COLUMN: OFFICIAL BOARDING PASS WITH TACTILE MOTION-TEAR STUB RIGHT IN FRONT -->
+      <div class="ticket-col">
+        <div class="ticket-copy" style="margin-bottom:18px">
+          <div class="eyebrow">OFFICIAL BOARDING PASS · PHYSICAL TEAR-STUB</div>
+          <h1>Tear stub to<br><em>take your seat.</em></h1>
+          <p>Your boarding pass is ready in real-time. Drag down the perforated stub or tap <strong>'Rip to Board'</strong> to settle into your aircraft cabin view.</p>
         </div>
-        <div class="stats">
+
+        <div class="ticket-wrapper">
+          <article class="boarding-pass-card" id="boardingPass">
+            <!-- Main Ticket Body -->
+            <div class="pass-main">
+              <div class="pass-header">
+                <div class="pass-brand"><span>✈</span> FLYLOFI AIRWAYS</div>
+                <div class="pass-type-badge">FOCUS CABIN</div>
+                <span class="flight-no">FF-042</span>
+              </div>
+
+              <div class="pass-route">
+                <div class="route-node">
+                  <small>DEPARTURE</small>
+                  <strong id="ticketFromCode">MAA</strong>
+                  <span id="ticketFromName">Chennai</span>
+                </div>
+                <div class="route-mid-plane">
+                  <span class="plane-glyph">✈</span>
+                  <small>NON-STOP FOCUS</small>
+                </div>
+                <div class="route-node dest">
+                  <small>DESTINATION</small>
+                  <strong id="ticketToCode">SIN</strong>
+                  <span id="ticketToName">Singapore</span>
+                </div>
+              </div>
+
+              <div class="pass-meta-grid">
+                <div><small>SEAT</small><strong class="seat-highlight" id="ticketSeat">14A</strong></div>
+                <div><small>GATE</small><strong>F04</strong></div>
+                <div><small>GROUP</small><strong>FOCUS 1</strong></div>
+                <div><small>CLASS</small><strong id="ticketCategory">CODE</strong></div>
+              </div>
+
+              <div class="pass-bottom">
+                <div class="barcode-box">
+                  <div class="barcode-bars"></div>
+                  <span class="barcode-text">FF 092847 042</span>
+                </div>
+                <span class="pass-duration-pill" id="ticketDuration">45 minutes · Deep cruise</span>
+              </div>
+
+              <!-- Inked Boarded Stamp (Revealed upon tearing) -->
+              <div class="boarded-stamp" id="boardedStamp">
+                <span>✓ BOARDED</span>
+                <small>GATE CLOSED · CLEARED FOR FLIGHT</small>
+              </div>
+            </div>
+
+            <!-- Perforation Divider Line -->
+            <div class="perforation-divider" id="perforationDivider">
+              <div class="perf-notch top"></div>
+              <div class="perf-dashed-line"></div>
+              <span class="perf-scissors">✂</span>
+              <div class="perf-notch bottom"></div>
+            </div>
+
+            <!-- Interactive Tearable Stub -->
+            <div class="pass-stub-tearable" id="passStubTearable">
+              <div class="stub-header">
+                <span>PASSENGER STUB</span>
+                <span>FF-042</span>
+              </div>
+
+              <div class="stub-seat-box">
+                <span class="stub-seat-label">ASSIGNED SEAT</span>
+                <span class="stub-seat-num" id="stubSeatVal">14A</span>
+                <span class="stub-seat-desc" id="stubSeatDesc">WINDOW · AERIAL EARTH</span>
+              </div>
+
+              <div class="stub-flight-details">
+                <div><small>FROM</small><strong id="stubFrom">MAA</strong></div>
+                <div><small>TO</small><strong id="stubTo">SIN</strong></div>
+                <div><small>TIME</small><strong id="stubTime">45M</strong></div>
+              </div>
+
+              <!-- Tactile Motion Tear Handle -->
+              <div class="stub-motion-handle" id="stubTearHandle" title="Drag / Swipe Down to Tear Stub">
+                <div class="handle-arrow">▼</div>
+                <div class="handle-text">DRAG DOWN<br>TO TEAR STUB</div>
+                <div class="tear-progress-track">
+                  <div class="tear-progress-fill" id="tearProgressFill"></div>
+                </div>
+              </div>
+
+              <button type="button" class="quick-rip-button" id="quickRipBtn">✂ Rip Stub to Board</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="stats" style="margin-top:28px">
           <div><strong>24</strong><small>Destinations</small></div>
           <div><strong>86%</strong><small>Completion rate</small></div>
           <div><strong>03h 42m</strong><small>Time in the air</small></div>
         </div>
       </div>
 
-      <form class="booking" id="bookingForm">
-        <div class="card-head clickable" id="cardHeadClickable" title="Tap to start booking">
-          <div>
-            <div class="eyebrow">New itinerary</div>
-            <h2 id="bookFlightTitle">Book a flight ✈</h2>
-          </div>
-          <span class="flight-no">FF-042</span>
-        </div>
-
-        <div class="route-grid">
-          <label>Departure<select id="departure"></select></label>
-          <div class="arrow">→</div>
-          <label>Destination<select id="destination"></select></label>
-        </div>
-
-        <div class="rule"></div>
-
-        <fieldset>
-          <legend>Flight duration</legend>
-          <div class="options" id="durationOptions">
-            <label><input type="radio" name="duration" value="25">25 min</label>
-            <label class="active"><input type="radio" name="duration" value="45" checked>45 min</label>
-            <label><input type="radio" name="duration" value="60">60 min</label>
-            <label><input type="radio" name="duration" value="90">90 min</label>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>Focus category</legend>
-          <div class="options" id="categoryOptions">
-            <label class="active"><input type="radio" name="category" value="Programming" checked>Code</label>
-            <label><input type="radio" name="category" value="Studying">Study</label>
-            <label><input type="radio" name="category" value="Engineering">Build</label>
-            <label><input type="radio" name="category" value="Personal">Read</label>
-          </div>
-        </fieldset>
-
-        <fieldset style="border:1px solid rgba(89,223,160,.25);border-radius:12px;padding:12px 14px;background:rgba(89,223,160,.04);margin-bottom:18px">
-          <legend style="padding:0 6px;color:var(--accent);font-weight:700">Where would you like to sit? (Choose Perspective)</legend>
-          <div class="seat-picker-grid" id="seatOptions">
-            <label class="seat-pill active">
-              <input type="radio" name="seat" value="14A" data-type="Aerial Earth Vista" data-img="media/flight/scenes/seat_14a_aerial_earth.jpg" checked>
-              <span class="seat-icon">🪟</span>
-              <span class="seat-code">14A</span>
-              <span class="seat-label">Window</span>
-              <span class="seat-tag">Aerial Earth</span>
-            </label>
-            <label class="seat-pill">
-              <input type="radio" name="seat" value="02F" data-type="Wing &amp; Jet Engine" data-img="media/flight/scenes/seat_02f_wing.jpg">
-              <span class="seat-icon">✈️</span>
-              <span class="seat-code">02F</span>
-              <span class="seat-label">Wing</span>
-              <span class="seat-tag">Turbine View</span>
-            </label>
-            <label class="seat-pill">
-              <input type="radio" name="seat" value="01A" data-type="Horizon Sunset Suite" data-img="media/flight/scenes/seat_01a_horizon.jpg">
-              <span class="seat-icon">👑</span>
-              <span class="seat-code">01A</span>
-              <span class="seat-label">Suite</span>
-              <span class="seat-tag">Sunset Horizon</span>
-            </label>
-            <label class="seat-pill">
-              <input type="radio" name="seat" value="18A" data-type="Night City Lights" data-img="media/flight/scenes/seat_18a_night.jpg">
-              <span class="seat-icon">🌃</span>
-              <span class="seat-code">18A</span>
-              <span class="seat-label">Night</span>
-              <span class="seat-tag">City Lights</span>
-            </label>
-          </div>
-        </fieldset>
-
-        <button class="board" id="submitBookFlight" type="submit">✈ Select Seat &amp; Issue Boarding Pass →</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- TICKET / MOTION-TEAR BOARDING PASS VIEW -->
-  <section class="view" id="ticketView" hidden>
-    <div class="ticket-grid">
-      <div class="ticket-copy">
-        <div class="eyebrow">ITINERARY CONFIRMED · PHYSICAL BOARDING</div>
-        <h1>Tear pass to<br><em>take your seat.</em></h1>
-        <p>Swipe or drag down the boarding stub along the perforated line to physically board your focus aircraft.</p>
-        <button id="editButton" type="button">← Edit itinerary</button>
-      </div>
-
-      <div class="ticket-wrapper">
-        <article class="boarding-pass-card" id="boardingPass">
-          <!-- Main Ticket Body -->
-          <div class="pass-main">
-            <div class="pass-header">
-              <div class="pass-brand"><span>✈</span> FLYLOFI AIRWAYS</div>
-              <div class="pass-type-badge">FOCUS CABIN</div>
-              <span class="flight-no">FF-042</span>
-            </div>
-
-            <div class="pass-route">
-              <div class="route-node">
-                <small>DEPARTURE</small>
-                <strong id="ticketFromCode">MAA</strong>
-                <span id="ticketFromName">Chennai</span>
-              </div>
-              <div class="route-mid-plane">
-                <span class="plane-glyph">✈</span>
-                <small>NON-STOP FOCUS</small>
-              </div>
-              <div class="route-node dest">
-                <small>DESTINATION</small>
-                <strong id="ticketToCode">SIN</strong>
-                <span id="ticketToName">Singapore</span>
-              </div>
-            </div>
-
-            <div class="pass-meta-grid">
-              <div><small>SEAT</small><strong class="seat-highlight" id="ticketSeat">14A</strong></div>
-              <div><small>GATE</small><strong>F04</strong></div>
-              <div><small>GROUP</small><strong>FOCUS 1</strong></div>
-              <div><small>CLASS</small><strong id="ticketCategory">CODE</strong></div>
-            </div>
-
-            <div class="pass-bottom">
-              <div class="barcode-box">
-                <div class="barcode-bars"></div>
-                <span class="barcode-text">FF 092847 042</span>
-              </div>
-              <span class="pass-duration-pill" id="ticketDuration">45 minutes · Deep cruise</span>
-            </div>
-
-            <!-- Inked Boarded Stamp (Revealed upon tearing) -->
-            <div class="boarded-stamp" id="boardedStamp">
-              <span>✓ BOARDED</span>
-              <small>GATE CLOSED · CLEARED FOR FLIGHT</small>
-            </div>
-          </div>
-
-          <!-- Perforation Divider Line -->
-          <div class="perforation-divider" id="perforationDivider">
-            <div class="perf-notch top"></div>
-            <div class="perf-dashed-line"></div>
-            <span class="perf-scissors">✂</span>
-            <div class="perf-notch bottom"></div>
-          </div>
-
-          <!-- Interactive Tearable Stub -->
-          <div class="pass-stub-tearable" id="passStubTearable">
-            <div class="stub-header">
-              <span>PASSENGER STUB</span>
-              <span>FF-042</span>
-            </div>
-
-            <div class="stub-seat-box">
-              <span class="stub-seat-label">ASSIGNED SEAT</span>
-              <span class="stub-seat-num" id="stubSeatVal">14A</span>
-              <span class="stub-seat-desc" id="stubSeatDesc">WINDOW</span>
-            </div>
-
-            <div class="stub-flight-details">
-              <div><small>FROM</small><strong id="stubFrom">MAA</strong></div>
-              <div><small>TO</small><strong id="stubTo">SIN</strong></div>
-              <div><small>TIME</small><strong id="stubTime">45M</strong></div>
-            </div>
-
-            <!-- Tactile Motion Tear Handle -->
-            <div class="stub-motion-handle" id="stubTearHandle" title="Drag / Swipe Down to Tear Stub">
-              <div class="handle-arrow">▼</div>
-              <div class="handle-text">DRAG DOWN<br>TO TEAR STUB</div>
-              <div class="tear-progress-track">
-                <div class="tear-progress-fill" id="tearProgressFill"></div>
-              </div>
-            </div>
-
-            <button type="button" class="quick-rip-button" id="quickRipBtn">✂ Rip to Board</button>
-          </div>
-        </article>
-      </div>
     </div>
   </section>
 
@@ -541,15 +732,52 @@ legend{margin-bottom:10px;font-weight:600}
 </div>
 
 <script>
-const airports={MAA:'Chennai',BOM:'Mumbai',DEL:'New Delhi',BLR:'Bengaluru',HYD:'Hyderabad',SIN:'Singapore',BKK:'Bangkok',HKG:'Hong Kong',ICN:'Seoul',NRT:'Tokyo',SYD:'Sydney',MEL:'Melbourne',DXB:'Dubai',DOH:'Doha',LHR:'London',AMS:'Amsterdam',CDG:'Paris',FRA:'Frankfurt',IST:'Istanbul',JFK:'New York',SFO:'San Francisco',LAX:'Los Angeles',ORD:'Chicago',YYZ:'Toronto'};
-const codes=Object.keys(airports),$=id=>document.getElementById(id);
-const departure=$('departure'),destination=$('destination');
+const airports = {
+  MAA: 'Chennai', BOM: 'Mumbai', DEL: 'New Delhi', BLR: 'Bengaluru',
+  HYD: 'Hyderabad', SIN: 'Singapore', BKK: 'Bangkok', HKG: 'Hong Kong',
+  ICN: 'Seoul', NRT: 'Tokyo', SYD: 'Sydney', MEL: 'Melbourne',
+  DXB: 'Dubai', DOH: 'Doha', LHR: 'London', AMS: 'Amsterdam',
+  CDG: 'Paris', FRA: 'Frankfurt', IST: 'Istanbul', JFK: 'New York',
+  SFO: 'San Francisco', LAX: 'Los Angeles', ORD: 'Chicago', YYZ: 'Toronto'
+};
 
-[departure,destination].forEach((select)=>{
-  select.innerHTML=codes.map(code=>`<option value="${code}">${airports[code]} (${code})</option>`).join('');
+const SEAT_DATABASE = {
+  // First Class Suites (Rows 1-2)
+  '01A': { type: 'Horizon Sunset Suite', desc: '38,000 ft golden-hour stratospheric sunset horizon', img: 'media/flight/scenes/seat_01a_horizon.jpg', class: 'SUITE', icon: '👑' },
+  '01F': { type: 'Horizon Sunset Suite', desc: '38,000 ft golden-hour stratospheric sunset horizon', img: 'media/flight/scenes/seat_01a_horizon.jpg', class: 'SUITE', icon: '👑' },
+  '02A': { type: 'Horizon Sunset Suite', desc: '38,000 ft golden-hour stratospheric sunset horizon', img: 'media/flight/scenes/seat_01a_horizon.jpg', class: 'SUITE', icon: '👑' },
+
+  // Overwing & Jet Turbine (Rows 3-6)
+  '02F': { type: 'Wing & Jet Engine', desc: 'Swept aircraft wing and turbine over vast cloud deck', img: 'media/flight/scenes/seat_02f_wing.jpg', class: 'WING', icon: '✈' },
+  '03A': { type: 'Wing & Jet Engine', desc: 'Swept aircraft wing and turbine over vast cloud deck', img: 'media/flight/scenes/seat_02f_wing.jpg', class: 'WING', icon: '✈' },
+  '04F': { type: 'Wing & Jet Engine', desc: 'Swept aircraft wing and turbine over vast cloud deck', img: 'media/flight/scenes/seat_02f_wing.jpg', class: 'WING', icon: '✈' },
+  '05A': { type: 'Wing & Jet Engine', desc: 'Swept aircraft wing and turbine over vast cloud deck', img: 'media/flight/scenes/seat_02f_wing.jpg', class: 'WING', icon: '✈' },
+  '06F': { type: 'Wing & Jet Engine', desc: 'Swept aircraft wing and turbine over vast cloud deck', img: 'media/flight/scenes/seat_02f_wing.jpg', class: 'WING', icon: '✈' },
+
+  // Main Cabin Aerial Earth Vista (Rows 11-15 - User Reference Photo Match)
+  '11A': { type: 'Aerial Earth Vista', desc: 'Lush green agricultural farmland, patchwork fields & rivers', img: 'media/flight/scenes/seat_14a_aerial_earth.jpg', class: 'WINDOW', icon: '🪟' },
+  '12A': { type: 'Aerial Earth Vista', desc: 'Lush green agricultural farmland, patchwork fields & rivers', img: 'media/flight/scenes/seat_14a_aerial_earth.jpg', class: 'WINDOW', icon: '🪟' },
+  '14A': { type: 'Aerial Earth Vista', desc: 'Lush green agricultural farmland, patchwork fields & rivers', img: 'media/flight/scenes/seat_14a_aerial_earth.jpg', class: 'WINDOW', icon: '🪟' },
+  '14F': { type: 'Aerial Earth Vista', desc: 'Lush green agricultural farmland, patchwork fields & rivers', img: 'media/flight/scenes/seat_14a_aerial_earth.jpg', class: 'WINDOW', icon: '🪟' },
+  '15F': { type: 'Aerial Earth Vista', desc: 'Lush green agricultural farmland, patchwork fields & rivers', img: 'media/flight/scenes/seat_14a_aerial_earth.jpg', class: 'WINDOW', icon: '🪟' },
+
+  // Aft Night Cabin City Lights (Rows 16-19)
+  '16A': { type: 'Night Flight View', desc: 'Metropolitan golden illuminated city light grids & starlight', img: 'media/flight/scenes/seat_18a_night.jpg', class: 'NIGHT', icon: '🌃' },
+  '17F': { type: 'Night Flight View', desc: 'Metropolitan golden illuminated city light grids & starlight', img: 'media/flight/scenes/seat_18a_night.jpg', class: 'NIGHT', icon: '🌃' },
+  '18A': { type: 'Night Flight View', desc: 'Metropolitan golden illuminated city light grids & starlight', img: 'media/flight/scenes/seat_18a_night.jpg', class: 'NIGHT', icon: '🌃' },
+  '19F': { type: 'Night Flight View', desc: 'Metropolitan golden illuminated city light grids & starlight', img: 'media/flight/scenes/seat_18a_night.jpg', class: 'NIGHT', icon: '🌃' }
+};
+
+const codes = Object.keys(airports);
+const $ = id => document.getElementById(id);
+const departure = $('departure');
+const destination = $('destination');
+
+[departure, destination].forEach((select) => {
+  select.innerHTML = codes.map(code => `<option value="${code}">${airports[code]} (${code})</option>`).join('');
 });
-departure.value='MAA';
-destination.value='SIN';
+departure.value = 'MAA';
+destination.value = 'SIN';
 
 let activeFlight = {
   departure: 'MAA',
@@ -557,16 +785,16 @@ let activeFlight = {
   duration: 45,
   category: 'Programming',
   seat: '14A',
-  seatType: 'Window Seat · Quiet Cabin',
+  seatType: 'Aerial Earth Vista',
+  sceneImg: 'media/flight/scenes/seat_14a_aerial_earth.jpg',
   number: '042'
 };
 
-function selectView(id){
-  document.querySelectorAll('.view,.cruise-view').forEach(view=>view.hidden=true);
-  $(id).hidden=false;
+function selectView(id) {
+  document.querySelectorAll('.view,.cruise-view').forEach(view => view.hidden = true);
+  $(id).hidden = false;
   window.scrollTo({top: 0, behavior: 'smooth'});
 
-  // Manage top navigation state
   const isCruise = id === 'cruiseView';
   $('exitCruiseTopBtn').hidden = !isCruise;
   $('quickLaunchNav').hidden = isCruise;
@@ -579,7 +807,7 @@ function selectView(id){
   }
 }
 
-function launchFlight(data){
+function launchFlight(data) {
   activeFlight = data;
   try {
     localStorage.setItem('focusFlightActive', JSON.stringify({...activeFlight, startedAt: Date.now()}));
@@ -592,113 +820,165 @@ function launchFlight(data){
   }
 }
 
-function showTicket(data){
-  activeFlight = data;
-  $('ticketFromCode').textContent = data.departure;
-  $('ticketToCode').textContent = data.destination;
-  $('ticketFromName').textContent = airports[data.departure] || data.departure;
-  $('ticketToName').textContent = airports[data.destination] || data.destination;
-  $('ticketCategory').textContent = data.category.toUpperCase();
-  $('ticketDuration').textContent = `${data.duration} minutes · Deep cruise`;
-  $('ticketSeat').textContent = data.seat || '14A';
+function updateLiveBoardingPass() {
+  const depCode = departure.value || 'MAA';
+  const destCode = destination.value || 'SIN';
+  const depName = airports[depCode] || depCode;
+  const destName = airports[destCode] || destCode;
 
-  $('stubSeatVal').textContent = data.seat || '14A';
-  $('stubFrom').textContent = data.departure;
-  $('stubTo').textContent = data.destination;
-  $('stubTime').textContent = `${data.duration}M`;
+  activeFlight.departure = depCode;
+  activeFlight.destination = destCode;
 
-  const descMap = {
-    '14A': 'WINDOW · AERIAL EARTH',
-    '02F': 'WING · JET TURBINE',
-    '01A': 'SUITE · SUNSET HORIZON',
-    '18A': 'NIGHT · CITY LIGHTS'
-  };
-  if ($('stubSeatDesc')) $('stubSeatDesc').textContent = descMap[data.seat] || 'CABIN';
+  const catRadio = document.querySelector('input[name="category"]:checked');
+  if (catRadio) activeFlight.category = catRadio.value;
 
-  resetTearState();
-  selectView('ticketView');
+  const seatInfo = SEAT_DATABASE[activeFlight.seat] || SEAT_DATABASE['14A'];
+  activeFlight.seatType = seatInfo.type;
+  activeFlight.sceneImg = seatInfo.img;
+
+  // Main Pass
+  if ($('ticketFromCode')) $('ticketFromCode').textContent = depCode;
+  if ($('ticketToCode')) $('ticketToCode').textContent = destCode;
+  if ($('ticketFromName')) $('ticketFromName').textContent = depName;
+  if ($('ticketToName')) $('ticketToName').textContent = destName;
+  if ($('ticketCategory')) $('ticketCategory').textContent = activeFlight.category.toUpperCase();
+  if ($('ticketDuration')) $('ticketDuration').textContent = `${activeFlight.duration} minutes · Deep cruise`;
+  if ($('ticketSeat')) $('ticketSeat').textContent = activeFlight.seat;
+
+  // Stub
+  if ($('stubSeatVal')) $('stubSeatVal').textContent = activeFlight.seat;
+  if ($('stubFrom')) $('stubFrom').textContent = depCode;
+  if ($('stubTo')) $('stubTo').textContent = destCode;
+  if ($('stubTime')) $('stubTime').textContent = `${activeFlight.duration}M`;
+  if ($('stubSeatDesc')) $('stubSeatDesc').textContent = `${seatInfo.class} · ${seatInfo.type}`.toUpperCase();
 }
 
-// Option and seat selection visuals
-function updateOptionVisuals() {
-  document.querySelectorAll('.options, .seat-picker-grid').forEach((container) => {
-    container.querySelectorAll('label').forEach((label) => {
-      const radio = label.querySelector('input[type="radio"]');
-      if (radio) {
-        label.classList.toggle('active', radio.checked);
-      }
-    });
+// ==========================================================================
+// DURATION CONTROLS (Presets + Custom Timer Input)
+// ==========================================================================
+function setDuration(val) {
+  val = Math.max(1, Math.min(360, parseInt(val, 10) || 45));
+  activeFlight.duration = val;
+
+  // Update preset button active states
+  document.querySelectorAll('.dur-btn').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.dataset.mins, 10) === val);
+  });
+
+  // Sync custom input
+  const customInput = $('customTimerInput');
+  if (customInput && parseInt(customInput.value, 10) !== val) {
+    customInput.value = val;
+  }
+
+  updateLiveBoardingPass();
+}
+
+document.querySelectorAll('.dur-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    setDuration(btn.dataset.mins);
+  });
+});
+
+$('customTimerInput')?.addEventListener('input', (e) => {
+  const v = parseInt(e.target.value, 10);
+  if (!isNaN(v) && v > 0) {
+    setDuration(v);
+  }
+});
+
+$('timerMinusBtn')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  setDuration(activeFlight.duration - 5);
+});
+
+$('timerPlusBtn')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  setDuration(activeFlight.duration + 5);
+});
+
+// ==========================================================================
+// ACTUAL AIRLINE CABIN SEAT MAP INTERACTION
+// ==========================================================================
+function selectSeat(seatCode) {
+  const seatInfo = SEAT_DATABASE[seatCode] || SEAT_DATABASE['14A'];
+  activeFlight.seat = seatCode;
+  activeFlight.seatType = seatInfo.type;
+  activeFlight.sceneImg = seatInfo.img;
+
+  document.querySelectorAll('.seat-btn').forEach(btn => {
+    btn.classList.toggle('selected', btn.dataset.seat === seatCode);
+  });
+
+  if ($('selectedSeatCode')) $('selectedSeatCode').textContent = `Seat ${seatCode} • ${seatInfo.class} View`;
+  if ($('selectedSeatDesc')) $('selectedSeatDesc').textContent = `${seatInfo.type} • ${seatInfo.desc}`;
+  if ($('selectedSeatThumb')) $('selectedSeatThumb').src = seatInfo.img;
+
+  updateLiveBoardingPass();
+  playSeatClickTone();
+}
+
+document.querySelectorAll('.seat-btn:not(.occupied)').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const seat = btn.dataset.seat;
+    if (seat) selectSeat(seat);
+  });
+});
+
+function playSeatClickTone() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(540, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.05);
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.05);
+  } catch(e) {}
+}
+
+// Category option visuals
+function updateCategoryVisuals() {
+  document.querySelectorAll('#categoryOptions label').forEach((label) => {
+    const radio = label.querySelector('input[type="radio"]');
+    if (radio) {
+      label.classList.toggle('active', radio.checked);
+    }
   });
 }
 
-document.querySelectorAll('.options label, .seat-picker-grid label').forEach((label) => {
+document.querySelectorAll('#categoryOptions label').forEach((label) => {
   label.addEventListener('click', () => {
     const radio = label.querySelector('input[type="radio"]');
     if (radio) {
       radio.checked = true;
-      updateOptionVisuals();
+      updateCategoryVisuals();
+      updateLiveBoardingPass();
     }
   });
 });
-updateOptionVisuals();
 
-function collectFormData() {
-  const durInput = document.querySelector('input[name="duration"]:checked');
-  const catInput = document.querySelector('input[name="category"]:checked');
-  const seatInput = document.querySelector('input[name="seat"]:checked');
-  return {
-    departure: departure.value || 'MAA',
-    destination: destination.value || 'SIN',
-    duration: durInput ? Number(durInput.value) : 45,
-    category: catInput ? catInput.value : 'Programming',
-    seat: seatInput ? seatInput.value : '14A',
-    seatType: seatInput ? (seatInput.getAttribute('data-type') || 'Aerial Earth Vista') : 'Aerial Earth Vista',
-    number: '042'
-  };
-}
+departure.addEventListener('change', updateLiveBoardingPass);
+destination.addEventListener('change', updateLiveBoardingPass);
+updateCategoryVisuals();
+updateLiveBoardingPass();
 
-$('bookingForm').addEventListener('submit', (event) => {
-  event.preventDefault();
-  showTicket(collectFormData());
-});
-
-const heroBtn = $('heroQuickBoard');
-if (heroBtn) {
-  heroBtn.addEventListener('click', () => {
-    const seatGrid = $('seatOptions');
-    seatGrid?.scrollIntoView({behavior: 'smooth', block: 'center'});
-    if (seatGrid) {
-      seatGrid.style.transition = 'box-shadow 0.35s ease';
-      seatGrid.style.boxShadow = '0 0 28px rgba(89,223,160,0.5)';
-      setTimeout(() => { seatGrid.style.boxShadow = ''; }, 1400);
-    }
-  });
-}
-
-const navBoard = $('quickLaunchNav');
-if (navBoard) {
-  navBoard.addEventListener('click', () => {
-    const seatGrid = $('seatOptions');
-    seatGrid?.scrollIntoView({behavior: 'smooth', block: 'center'});
-    if (seatGrid) {
-      seatGrid.style.transition = 'box-shadow 0.35s ease';
-      seatGrid.style.boxShadow = '0 0 28px rgba(89,223,160,0.5)';
-      setTimeout(() => { seatGrid.style.boxShadow = ''; }, 1400);
-    }
-  });
-}
-
-const cardHead = $('cardHeadClickable');
-if (cardHead) {
-  cardHead.addEventListener('click', () => {
-    $('seatOptions')?.scrollIntoView({behavior: 'smooth', block: 'center'});
-  });
-}
-
-$('editButton').onclick = () => selectView('homeView');
-$('exitCruiseTopBtn').onclick = () => selectView('ticketView');
+// Navigation Actions
+$('exitCruiseTopBtn').onclick = () => selectView('homeView');
 $('homeNavButton').onclick = () => selectView('homeView');
 $('homeButton').onclick = () => selectView('homeView');
+$('quickLaunchNav')?.addEventListener('click', () => {
+  $('boardingPass')?.scrollIntoView({behavior: 'smooth', block: 'center'});
+});
 
 window.addEventListener('message', (event) => {
   if (event.data?.type === 'flylofi-landed') {
@@ -709,7 +989,7 @@ window.addEventListener('message', (event) => {
     if ($('passportDate')) $('passportDate').textContent = `${activeFlight.duration} MIN COMPLETED`;
   }
   if (event.data?.type === 'flylofi-exit' || event.data?.type === 'flylofi-exit-cruise') {
-    selectView('ticketView');
+    selectView('homeView');
   }
 });
 
@@ -866,12 +1146,11 @@ if (quickRip) {
 
 // Deep hash navigation support (e.g. #ticket or #booking)
 window.addEventListener('load', () => {
-  if (window.location.hash === '#ticket') {
-    const saved = JSON.parse(localStorage.getItem('focusFlightActive') || 'null');
-    if (saved) showTicket(saved);
-    else showTicket(collectFormData());
-  } else if (window.location.hash === '#booking') {
+  resetTearState();
+  updateLiveBoardingPass();
+  if (window.location.hash === '#booking' || window.location.hash === '#ticket') {
     selectView('homeView');
+    $('boardingPass')?.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
 });
 

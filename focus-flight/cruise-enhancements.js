@@ -605,26 +605,30 @@
   // 11. PHOTOREALISTIC SEAT PERSPECTIVE ENGINE & IN-FLIGHT SWITCHER
   // ==========================================================================
   const SCENE_MAP = {
-    '14A': {
-      img: 'media/flight/scenes/seat_14a_aerial_earth.jpg',
-      type: 'Aerial Earth Vista',
-      desc: 'Lush green farmland, patchwork fields & winding rivers'
-    },
-    '02F': {
-      img: 'media/flight/scenes/seat_02f_wing.jpg',
-      type: 'Wing & Jet Engine',
-      desc: 'Swept aircraft wing and turbine over vast cloud deck'
-    },
-    '01A': {
-      img: 'media/flight/scenes/seat_01a_horizon.jpg',
-      type: 'Horizon Sunset Suite',
-      desc: '38,000 ft panoramic sunset horizon with golden glow'
-    },
-    '18A': {
-      img: 'media/flight/scenes/seat_18a_night.jpg',
-      type: 'Night Flight View',
-      desc: 'Metropolitan golden city grids & starlight below'
-    }
+    // 35,000 ft Aerial Earth Vista (Matching User Photo)
+    '14A': { img: 'media/flight/scenes/seat_14a_aerial_earth.jpg', type: 'Aerial Earth Vista', desc: 'Lush green agricultural farmland, patchwork fields & rivers' },
+    '11A': { img: 'media/flight/scenes/seat_14a_aerial_earth.jpg', type: 'Aerial Earth Vista', desc: 'Lush green agricultural farmland, patchwork fields & rivers' },
+    '12A': { img: 'media/flight/scenes/seat_14a_aerial_earth.jpg', type: 'Aerial Earth Vista', desc: 'Lush green agricultural farmland, patchwork fields & rivers' },
+    '14F': { img: 'media/flight/scenes/seat_14a_aerial_earth.jpg', type: 'Aerial Earth Vista', desc: 'Lush green agricultural farmland, patchwork fields & rivers' },
+    '15F': { img: 'media/flight/scenes/seat_14a_aerial_earth.jpg', type: 'Aerial Earth Vista', desc: 'Lush green agricultural farmland, patchwork fields & rivers' },
+
+    // Wing & Jet Engine
+    '02F': { img: 'media/flight/scenes/seat_02f_wing.jpg', type: 'Wing & Jet Engine', desc: 'Swept aircraft wing and turbine over vast cloud deck' },
+    '03A': { img: 'media/flight/scenes/seat_02f_wing.jpg', type: 'Wing & Jet Engine', desc: 'Swept aircraft wing and turbine over vast cloud deck' },
+    '04F': { img: 'media/flight/scenes/seat_02f_wing.jpg', type: 'Wing & Jet Engine', desc: 'Swept aircraft wing and turbine over vast cloud deck' },
+    '05A': { img: 'media/flight/scenes/seat_02f_wing.jpg', type: 'Wing & Jet Engine', desc: 'Swept aircraft wing and turbine over vast cloud deck' },
+    '06F': { img: 'media/flight/scenes/seat_02f_wing.jpg', type: 'Wing & Jet Engine', desc: 'Swept aircraft wing and turbine over vast cloud deck' },
+
+    // First Class Sunset Horizon
+    '01A': { img: 'media/flight/scenes/seat_01a_horizon.jpg', type: 'Horizon Sunset Suite', desc: '38,000 ft panoramic sunset horizon with golden glow' },
+    '01F': { img: 'media/flight/scenes/seat_01a_horizon.jpg', type: 'Horizon Sunset Suite', desc: '38,000 ft panoramic sunset horizon with golden glow' },
+    '02A': { img: 'media/flight/scenes/seat_01a_horizon.jpg', type: 'Horizon Sunset Suite', desc: '38,000 ft panoramic sunset horizon with golden glow' },
+
+    // Night Flight City Lights
+    '16A': { img: 'media/flight/scenes/seat_18a_night.jpg', type: 'Night Flight View', desc: 'Metropolitan golden illuminated city light grids & starlight' },
+    '17F': { img: 'media/flight/scenes/seat_18a_night.jpg', type: 'Night Flight View', desc: 'Metropolitan golden illuminated city light grids & starlight' },
+    '18A': { img: 'media/flight/scenes/seat_18a_night.jpg', type: 'Night Flight View', desc: 'Metropolitan golden illuminated city light grids & starlight' },
+    '19F': { img: 'media/flight/scenes/seat_18a_night.jpg', type: 'Night Flight View', desc: 'Metropolitan golden illuminated city light grids & starlight' }
   };
 
   const photoSceneImg = document.getElementById('photoSceneImg');
@@ -633,7 +637,8 @@
   const traySeatLabel = document.getElementById('traySeatLabel');
 
   function applySeatPerspective(seatCode) {
-    const info = SCENE_MAP[seatCode] || SCENE_MAP['14A'];
+    const saved = JSON.parse(localStorage.getItem('focusFlightActive') || '{}');
+    const info = SCENE_MAP[seatCode] || (saved.sceneImg ? { img: saved.sceneImg, type: saved.seatType || 'Scenic Vista', desc: 'Focus Cabin Perspective' } : SCENE_MAP['14A']);
     if (photoSceneImg) photoSceneImg.src = info.img;
     if (seatDatum) seatDatum.textContent = `${seatCode} · ${info.type}`;
     if (traySeatLabel) traySeatLabel.textContent = `${seatCode} · ${info.type}`.toUpperCase();
