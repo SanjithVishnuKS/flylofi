@@ -1031,24 +1031,138 @@ h1#title {
 }
 
 @media (max-width: 768px) {
-  .cruise-media-deck {
-    top: 50px !important;
-    right: 10px !important;
-    left: 10px !important;
-    width: auto !important;
-    max-width: none !important;
+  .top {
+    padding: 4px 8px !important;
+    font-size: 9px !important;
   }
+  .brand {
+    font-size: 9px !important;
+    letter-spacing: 0.12em !important;
+  }
+  .brand-icon {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 12px !important;
+  }
+  .route-top {
+    font-size: 9px !important;
+  }
+  .standalone-exit-btn {
+    font-size: 9px !important;
+    padding: 3px 8px !important;
+  }
+
   .hud-top {
-    max-width: 92% !important;
+    max-width: 54% !important;
+    z-index: 15 !important;
   }
+  .seatbelt-sign-hud {
+    padding: 3px 8px !important;
+    font-size: 8px !important;
+    letter-spacing: 0.1em !important;
+    gap: 5px !important;
+  }
+  .seatbelt-glyph {
+    font-size: 10px !important;
+  }
+  .eyebrow {
+    font-size: 8px !important;
+    display: none !important;
+  }
+  h1#title {
+    font-size: 15px !important;
+    line-height: 1.1 !important;
+    margin: 2px 0 !important;
+  }
+  .subtitle {
+    display: none !important;
+  }
+
+  .cruise-media-deck {
+    top: 8px !important;
+    right: 8px !important;
+    left: auto !important;
+    width: min(220px, 44vw) !important;
+    padding: 4px 6px !important;
+    gap: 4px !important;
+    border-radius: 10px !important;
+    z-index: 25 !important;
+  }
+  .deck-row {
+    gap: 4px !important;
+  }
+  .deck-btn {
+    padding: 3px 6px !important;
+    font-size: 9px !important;
+  }
+  .deck-btn .btn-label {
+    display: none !important;
+  }
+  .deck-btn .btn-icon {
+    font-size: 11px !important;
+  }
+  .deck-select {
+    font-size: 9px !important;
+    padding: 3px 5px !important;
+    max-width: 140px !important;
+  }
+  .deck-volume-wrap {
+    display: none !important;
+  }
+
   .hud-bottom {
     flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 12px !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+    padding-bottom: 2px !important;
   }
-  .hud-right-column {
-    align-items: flex-start !important;
+  .hud-left-column {
+    gap: 4px !important;
     width: 100% !important;
+  }
+  .flight-telemetry-hud {
+    gap: 6px !important;
+    padding: 3px 8px !important;
+    font-size: 8px !important;
+  }
+  .telem-label {
+    font-size: 7px !important;
+  }
+  .telem-val {
+    font-size: 8px !important;
+  }
+  .route-data {
+    gap: 8px !important;
+  }
+  .datum-label {
+    font-size: 7px !important;
+  }
+  .datum-value {
+    font-size: 10px !important;
+  }
+
+  .hud-right-column {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+  .hud-status-group {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+  .phase-chip {
+    padding: 3px 8px !important;
+    font-size: 8px !important;
+  }
+  .hint {
+    display: none !important;
+  }
+  .tray-table-toggle {
+    padding: 4px 10px !important;
+    font-size: 9px !important;
   }
 }
 
