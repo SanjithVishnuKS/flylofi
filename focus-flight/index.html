@@ -161,6 +161,141 @@ legend{margin-bottom:10px;font-weight:600}
 .options input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;z-index:2}
 
 /* ==========================================================================
+   MULTI-TRANSIT EXPANSION (FLIGHT, CAR, BUS ROADMAP - STANDOUT SYSTEM)
+   ========================================================================== */
+.transit-mode-bar{
+  margin-bottom:16px;padding:12px 14px;border-radius:12px;
+  background:rgba(12,29,37,.65);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.transit-mode-label{
+  font:700 10px "Space Grotesk",sans-serif;letter-spacing:.12em;
+  color:var(--muted);text-transform:uppercase;
+}
+.transit-mode-pills{display:flex;align-items:center;gap:8px}
+.mode-pill{
+  display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:8px;
+  border:1px solid var(--line);background:rgba(16,36,44,.75);color:var(--text);
+  font:700 11px "Space Grotesk",sans-serif;cursor:pointer;transition:all .15s ease;
+}
+.mode-pill:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.mode-pill.active{
+  border-color:var(--accent)!important;background:rgba(89,223,160,.16)!important;
+  color:var(--accent)!important;box-shadow:0 0 14px rgba(89,223,160,.25);
+}
+.mode-glyph{font-size:14px}
+.mode-status-tag{
+  font-size:8px;font-weight:800;letter-spacing:.1em;padding:2px 5px;border-radius:4px;text-transform:uppercase;
+}
+.mode-status-tag.live{background:var(--accent);color:#06171f}
+.mode-status-tag.soon{background:rgba(239,154,114,.2);color:var(--coral);border:1px solid rgba(239,154,114,.4)}
+
+/* Multi-Transit Roadmap Universe Card */
+.future-universe-card{
+  margin-top:28px;padding:22px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(255,255,255,.03),transparent 45%),linear-gradient(145deg,#0d1e27,#0a171f 68%,#0b1a22);
+  border:1px solid rgba(89,223,160,.2);box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+.universe-header{margin-bottom:16px}
+.universe-badge{
+  font:800 9px "Space Grotesk",sans-serif;letter-spacing:.2em;
+  color:var(--accent);text-transform:uppercase;margin-bottom:6px;
+}
+.universe-header h3{
+  margin:4px 0 8px;font:700 18px "Space Grotesk",sans-serif;letter-spacing:-.5px;color:var(--text);
+}
+.universe-header p{
+  font-size:11px;line-height:1.6;color:var(--muted);margin:0;max-width:540px;
+}
+.transit-cards-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;
+}
+@media(max-width:700px){
+  .transit-cards-grid{grid-template-columns:1fr;gap:10px}
+}
+.transit-card{
+  padding:14px 12px;border-radius:10px;border:1px solid var(--line);
+  background:rgba(16,36,44,.55);display:flex;flex-direction:column;justify-content:space-between;
+  transition:all .2s ease;
+}
+.transit-card.live-card{border-color:rgba(89,223,160,.35);background:rgba(89,223,160,.05)}
+.transit-card.upcoming-card:hover{border-color:var(--coral);transform:translateY(-2px)}
+.transit-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.transit-card-icon{font-size:20px}
+.transit-card-status{font:800 8px "Space Grotesk",sans-serif;letter-spacing:.12em;padding:2px 6px;border-radius:4px}
+.transit-card-status.active{background:rgba(89,223,160,.2);color:var(--accent);border:1px solid rgba(89,223,160,.4)}
+.transit-card-status.upcoming{background:rgba(239,154,114,.15);color:var(--coral);border:1px solid rgba(239,154,114,.3)}
+.transit-card h4{margin:4px 0 6px;font:700 12px "Space Grotesk",sans-serif;color:var(--text)}
+.transit-card p{font-size:10px;line-height:1.5;color:var(--muted);margin:0 0 10px;flex:1}
+.transit-card-perk{font:700 9px "Space Grotesk",sans-serif;color:var(--accent);margin-top:auto}
+.transit-peek-btn{
+  width:100%;padding:7px 10px;border-radius:6px;border:1px solid rgba(239,154,114,.4);
+  background:rgba(239,154,114,.1);color:var(--coral);font:700 10px "Space Grotesk",sans-serif;
+  cursor:pointer;transition:all .15s ease;margin-top:auto;
+}
+.transit-peek-btn:hover{background:rgba(239,154,114,.25);color:#fff}
+
+/* Interactive Transit Preview Modal */
+.transit-modal-overlay{
+  position:fixed;inset:0;background:rgba(4,10,14,.82);backdrop-filter:blur(14px);
+  z-index:90;display:flex;align-items:center;justify-content:center;padding:16px;
+  animation:fadeIn .2s ease;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.transit-modal{
+  width:100%;max-width:540px;background:#0b1b24;border:1px solid rgba(198,220,225,.25);
+  border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.65);overflow:hidden;
+  animation:scaleUp .25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+@keyframes scaleUp{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+.transit-modal-top{
+  padding:16px 20px 14px;background:rgba(16,36,44,.7);border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.modal-tabs{display:flex;gap:8px}
+.modal-tab-btn{
+  padding:7px 14px;border-radius:8px;border:1px solid var(--line);
+  background:rgba(12,29,37,.6);color:var(--muted);font:700 11px "Space Grotesk",sans-serif;cursor:pointer;
+}
+.modal-tab-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(89,223,160,.12)}
+.modal-close-icon{
+  width:30px;height:30px;border-radius:50%;border:1px solid var(--line);
+  background:transparent;color:var(--muted);font-size:16px;line-height:1;cursor:pointer;
+  display:grid;place-items:center;
+}
+.modal-close-icon:hover{color:#fff;border-color:#fff}
+.transit-modal-body{padding:22px 20px;max-height:75vh;overflow-y:auto}
+.modal-hero-badge{
+  font:800 9px "Space Grotesk",sans-serif;letter-spacing:.18em;
+  color:var(--coral);text-transform:uppercase;margin-bottom:6px;
+}
+.modal-title{font:700 22px "Space Grotesk",sans-serif;color:var(--text);margin:0 0 8px}
+.modal-desc{font-size:12px;line-height:1.6;color:var(--muted);margin-bottom:18px}
+.modal-features-list{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.modal-feat-item{
+  display:flex;gap:12px;padding:12px;border-radius:10px;
+  background:rgba(16,36,44,.5);border:1px solid rgba(198,220,225,.1);
+}
+.modal-feat-icon{font-size:20px;flex-shrink:0}
+.modal-feat-text strong{display:block;font:700 12px "Space Grotesk",sans-serif;color:var(--text)}
+.modal-feat-text p{margin:2px 0 0;font-size:10px;line-height:1.5;color:var(--muted)}
+.modal-actions-box{
+  display:flex;flex-direction:column;gap:10px;padding-top:14px;border-top:1px solid var(--line);
+}
+.modal-sound-btn{
+  width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(89,223,160,.3);
+  background:rgba(89,223,160,.08);color:var(--accent);font:700 12px "Space Grotesk",sans-serif;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.modal-sound-btn.playing{background:var(--accent);color:#06171f}
+.modal-vote-btn{
+  width:100%;padding:12px 14px;border-radius:10px;border:none;
+  background:linear-gradient(135deg,var(--coral),#d87346);color:#fff;font:800 12px "Space Grotesk",sans-serif;
+  letter-spacing:.04em;cursor:pointer;box-shadow:0 6px 20px rgba(239,154,114,.35);
+}
+.modal-vote-btn.voted{background:rgba(89,223,160,.2);color:var(--accent);border:1px solid var(--accent);box-shadow:none}
+
+/* ==========================================================================
    AUTHENTIC AIRLINE CABIN SEAT MAP
    ========================================================================== */
 .aircraft-fuselage{
@@ -400,6 +535,28 @@ legend{margin-bottom:10px;font-weight:600}
       
       <!-- LEFT COLUMN: ITINERARY & ACTUAL AIRPLANE SEAT MAP -->
       <div class="booking-col">
+        <!-- Transit Mode Selector: Flight (Live) vs Car & Bus (Future Multi-Transit Roadmap) -->
+        <div class="transit-mode-bar">
+          <div class="transit-mode-label">Select Transit Mode:</div>
+          <div class="transit-mode-pills">
+            <button type="button" class="mode-pill active" data-mode="flight" title="Commercial Flight (Available Now)">
+              <span class="mode-glyph">✈</span>
+              <span>Flight</span>
+              <span class="mode-status-tag live">LIVE</span>
+            </button>
+            <button type="button" class="mode-pill upcoming" data-mode="car" id="modeCarPill" title="Preview Focus Drive (Night Highway Car)">
+              <span class="mode-glyph">🚗</span>
+              <span>Night Drive</span>
+              <span class="mode-status-tag soon">SOON</span>
+            </button>
+            <button type="button" class="mode-pill upcoming" data-mode="bus" id="modeBusPill" title="Preview Focus Transit (Cross-Country Sleeper Bus)">
+              <span class="mode-glyph">🚌</span>
+              <span>Sleeper Bus</span>
+              <span class="mode-status-tag soon">SOON</span>
+            </button>
+          </div>
+        </div>
+
         <form class="booking" id="bookingForm" onsubmit="event.preventDefault();">
           <div class="card-head clickable" id="cardHeadClickable" title="Tap to configure itinerary">
             <div>
@@ -704,6 +861,50 @@ legend{margin-bottom:10px;font-weight:600}
           <div><strong>86%</strong><small>Completion rate</small></div>
           <div><strong>03h 42m</strong><small>Time in the air</small></div>
         </div>
+
+        <!-- Standout Showcase: Multi-Transit Universe (Flight, Car, Bus) -->
+        <div class="future-universe-card" id="futureUniverseCard">
+          <div class="universe-header">
+            <div class="universe-badge">EXCLUSIVE TO FLYLOFI · MULTI-TRANSIT UNIVERSE</div>
+            <h3>Beyond Airplane Windows.</h3>
+            <p>While Mac's <em>Focus Flight</em> is confined strictly to airplanes, Flylofi is evolving into a full multi-transit study universe:</p>
+          </div>
+
+          <div class="transit-cards-grid">
+            <!-- Mode 1: Flight (Live) -->
+            <div class="transit-card live-card">
+              <div class="transit-card-top">
+                <span class="transit-card-icon">✈️</span>
+                <span class="transit-card-status active">ACTIVE NOW</span>
+              </div>
+              <h4>Commercial Airliner</h4>
+              <p>38,000 ft stratospheric window, 50-seat commercial fuselage map, cabin white noise &amp; physical tearable boarding pass.</p>
+              <div class="transit-card-perk">✓ 50 Selectable Seats · 4 Perspectives</div>
+            </div>
+
+            <!-- Mode 2: Car (Upcoming) -->
+            <div class="transit-card upcoming-card" id="cardCarPreview" title="Click to view Night Highway Car preview">
+              <div class="transit-card-top">
+                <span class="transit-card-icon">🚗</span>
+                <span class="transit-card-status upcoming">COMING NEXT</span>
+              </div>
+              <h4>Midnight Highway Drive</h4>
+              <p>Rainy windshield wipers, glowing amber dashboard gauges, highway rumble &amp; digital toll ticket pass.</p>
+              <button type="button" class="transit-peek-btn" id="openCarModalBtn">Preview Mode 🚗</button>
+            </div>
+
+            <!-- Mode 3: Bus (Upcoming) -->
+            <div class="transit-card upcoming-card" id="cardBusPreview" title="Click to view Sleeper Bus preview">
+              <div class="transit-card-top">
+                <span class="transit-card-icon">🚌</span>
+                <span class="transit-card-status upcoming">IN PIPELINE</span>
+              </div>
+              <h4>Cross-Country Sleeper Bus</h4>
+              <p>Panoramic front-deck windshield over mountain passes, steady diesel purr, reading lamp &amp; punched retro ticket.</p>
+              <button type="button" class="transit-peek-btn" id="openBusModalBtn">Preview Mode 🚌</button>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -728,7 +929,112 @@ legend{margin-bottom:10px;font-weight:600}
       <p id="landingText">Your focus journey is complete.</p>
       <button class="board" id="homeButton" type="button" style="width:auto;display:inline-block;padding:12px 28px;margin-top:20px">Book another flight</button>
     </div>
-  </section>
+  
+<!-- INTERACTIVE SNEAK PEEK MODAL FOR FUTURE MODES (CAR & BUS) -->
+<div class="transit-modal-overlay" id="transitModalOverlay" hidden>
+  <div class="transit-modal">
+    <div class="transit-modal-top">
+      <div class="modal-tabs">
+        <button type="button" class="modal-tab-btn active" id="modalTabCar">🚗 Midnight Drive</button>
+        <button type="button" class="modal-tab-btn" id="modalTabBus">🚌 Sleeper Bus</button>
+      </div>
+      <button type="button" class="modal-close-icon" id="modalCloseBtn" aria-label="Close modal">×</button>
+    </div>
+
+    <!-- CAR CONTENT -->
+    <div class="transit-modal-body" id="modalBodyCar">
+      <div class="modal-hero-badge">PHASE 2 EXPANSION · IN DEVELOPMENT</div>
+      <h3 class="modal-title">Focus Drive: Midnight Highway 🌧️</h3>
+      <p class="modal-desc">Step into the driver's seat for late-night deep work sessions. Designed to provide the hypnotizing calm of cruising along an empty, rainy highway at 2 AM.</p>
+
+      <div class="modal-features-list">
+        <div class="modal-feat-item">
+          <span class="modal-feat-icon">🌧️</span>
+          <div class="modal-feat-text">
+            <strong>Dynamic Rain &amp; Windshield Wipers</strong>
+            <p>Raindrops patter and streak across the windshield glass with rhythmic, toggleable wipers.</p>
+          </div>
+        </div>
+        <div class="modal-feat-item">
+          <span class="modal-feat-icon">📻</span>
+          <div class="modal-feat-text">
+            <strong>Illuminated Dashboard Radio</strong>
+            <p>Glowing analog dials, odometer focus timer, and specialized highway synthwave &amp; night lofi stations.</p>
+          </div>
+        </div>
+        <div class="modal-feat-item">
+          <span class="modal-feat-icon">🛣️</span>
+          <div class="modal-feat-text">
+            <strong>Odometer Distance Countdown</strong>
+            <p>Your session counts down in highway miles remaining to your target focus destination.</p>
+          </div>
+        </div>
+        <div class="modal-feat-item">
+          <span class="modal-feat-icon">🎟️</span>
+          <div class="modal-feat-text">
+            <strong>Express Highway Toll Pass</strong>
+            <p>Tear a physical highway toll booth receipt to initiate your drive.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions-box">
+        <button type="button" class="modal-sound-btn" id="carAudioDemoBtn">
+          <span id="carAudioIcon">🔊</span>
+          <span id="carAudioLabel">Test Rain &amp; Highway Sound Demo</span>
+        </button>
+        <button type="button" class="modal-vote-btn" id="carVoteBtn">⭐ Pre-Register for Focus Drive (Notify on Launch)</button>
+      </div>
+    </div>
+
+    <!-- BUS CONTENT -->
+    <div class="transit-modal-body" id="modalBodyBus" hidden>
+      <div class="modal-hero-badge">PHASE 3 EXPANSION · IN DEVELOPMENT</div>
+      <h3 class="modal-title">Focus Transit: Sleeper Bus 🌲</h3>
+      <p class="modal-desc">The contemplative tranquility of a long-distance cross-country coach journey. Perfect for long reading, studying, and deep contemplation.</p>
+
+      <div class="modal-features-list">
+        <div class="modal-feat-item">
+          <span class="modal-feat-icon">🌄</span>
+          <div class="modal-feat-text">
+            <strong>Panoramic Upper-Deck Road View</strong>
+            <p>High-altitude viewpoint gazing through misty evergreen pine valleys, mountain switchbacks, and rolling fog.</p>
+          </div>
+        </div>
+        <div class="modal-feat-item">
+          <span class="modal-feat-icon">💡</span>
+          <div class="modal-feat-text">
+            <strong>Personal Reading Spotlight</strong>
+            <p>Toggle your overhead warm reading lamp to illuminate your physical workspace or focus notes.</p>
+          </div>
+        </div>
+        <div class="modal-feat-item">
+          <span class="modal-feat-icon">💺</span>
+          <div class="modal-feat-text">
+            <strong>Berth &amp; Cabin Lounges</strong>
+            <p>Choose between panoramic forward observation seats or cozy lower sleeper berths.</p>
+          </div>
+        </div>
+        <div class="modal-feat-item">
+          <span class="modal-feat-icon">🎫</span>
+          <div class="modal-feat-text">
+            <strong>Vintage Conductor Hole Punch</strong>
+            <p>Hear the satisfying mechanical click as your retro sleeper ticket is punched for departure.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions-box">
+        <button type="button" class="modal-sound-btn" id="busAudioDemoBtn">
+          <span id="busAudioIcon">🔊</span>
+          <span id="busAudioLabel">Test Mountain Road &amp; Diesel Purr Demo</span>
+        </button>
+        <button type="button" class="modal-vote-btn" id="busVoteBtn">⭐ Pre-Register for Sleeper Bus (Notify on Launch)</button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 </div>
 
 <script>
@@ -1014,6 +1320,179 @@ departure.addEventListener('change', updateLiveBoardingPass);
 destination.addEventListener('change', updateLiveBoardingPass);
 updateCategoryVisuals();
 updateLiveBoardingPass();
+
+// ==========================================================================
+// MULTI-TRANSIT MODAL & SOUND DEMO (CAR & BUS ROADMAP)
+// ==========================================================================
+const transitModal = $('transitModalOverlay');
+const modalTabCar = $('modalTabCar');
+const modalTabBus = $('modalTabBus');
+const modalBodyCar = $('modalBodyCar');
+const modalBodyBus = $('modalBodyBus');
+const modalCloseBtn = $('modalCloseBtn');
+
+function openTransitModal(mode = 'car') {
+  if (!transitModal) return;
+  transitModal.hidden = false;
+  switchModalTab(mode);
+}
+
+function closeTransitModal() {
+  if (!transitModal) return;
+  transitModal.hidden = true;
+  stopTransitAudioDemo();
+}
+
+function switchModalTab(mode) {
+  const isCar = mode === 'car';
+  modalTabCar.classList.toggle('active', isCar);
+  modalTabBus.classList.toggle('active', !isCar);
+  modalBodyCar.hidden = !isCar;
+  modalBodyBus.hidden = isCar;
+  stopTransitAudioDemo();
+}
+
+modalTabCar?.addEventListener('click', () => switchModalTab('car'));
+modalTabBus?.addEventListener('click', () => switchModalTab('bus'));
+modalCloseBtn?.addEventListener('click', closeTransitModal);
+transitModal?.addEventListener('click', (e) => {
+  if (e.target === transitModal) closeTransitModal();
+});
+
+$('modeCarPill')?.addEventListener('click', () => openTransitModal('car'));
+$('modeBusPill')?.addEventListener('click', () => openTransitModal('bus'));
+$('openCarModalBtn')?.addEventListener('click', () => openTransitModal('car'));
+$('openBusModalBtn')?.addEventListener('click', () => openTransitModal('bus'));
+$('cardCarPreview')?.addEventListener('click', (e) => {
+  if (e.target.tagName !== 'BUTTON') openTransitModal('car');
+});
+$('cardBusPreview')?.addEventListener('click', (e) => {
+  if (e.target.tagName !== 'BUTTON') openTransitModal('bus');
+});
+
+// Interactive Web Audio Synthesis for Car & Bus Preview Demos
+let demoAudioCtx = null;
+let activeDemoSource = null;
+let currentDemoMode = null;
+
+function stopTransitAudioDemo() {
+  if (activeDemoSource) {
+    try { activeDemoSource.stop(); } catch(e) {}
+    activeDemoSource = null;
+  }
+  if (demoAudioCtx) {
+    try { demoAudioCtx.close(); } catch(e) {}
+    demoAudioCtx = null;
+  }
+  currentDemoMode = null;
+  $('carAudioDemoBtn')?.classList.remove('playing');
+  $('busAudioDemoBtn')?.classList.remove('playing');
+  if ($('carAudioLabel')) $('carAudioLabel').textContent = 'Test Rain & Highway Sound Demo';
+  if ($('busAudioLabel')) $('busAudioLabel').textContent = 'Test Mountain Road & Diesel Purr Demo';
+}
+
+function toggleTransitAudioDemo(mode) {
+  if (currentDemoMode === mode) {
+    stopTransitAudioDemo();
+    return;
+  }
+  stopTransitAudioDemo();
+
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    demoAudioCtx = new AudioCtx();
+    currentDemoMode = mode;
+
+    if (mode === 'car') {
+      // Rain on windshield + low highway tire hum
+      const bufferSize = demoAudioCtx.sampleRate * 4;
+      const buffer = demoAudioCtx.createBuffer(1, bufferSize, demoAudioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        // Pink/rain noise
+        data[i] = (Math.random() * 2 - 1) * 0.18;
+      }
+      const noise = demoAudioCtx.createBufferSource();
+      noise.buffer = buffer;
+      noise.loop = true;
+
+      const rainFilter = demoAudioCtx.createBiquadFilter();
+      rainFilter.type = 'lowpass';
+      rainFilter.frequency.value = 1600;
+
+      // Low engine / tire rumble oscillator
+      const osc = demoAudioCtx.createOscillator();
+      osc.type = 'triangle';
+      osc.frequency.value = 68;
+
+      const oscGain = demoAudioCtx.createGain();
+      oscGain.gain.value = 0.08;
+
+      const masterGain = demoAudioCtx.createGain();
+      masterGain.gain.value = 0.25;
+
+      noise.connect(rainFilter);
+      rainFilter.connect(masterGain);
+      osc.connect(oscGain);
+      oscGain.connect(masterGain);
+      masterGain.connect(demoAudioCtx.destination);
+
+      noise.start();
+      osc.start();
+      activeDemoSource = noise;
+
+      $('carAudioDemoBtn')?.classList.add('playing');
+      if ($('carAudioLabel')) $('carAudioLabel').textContent = '■ Stop Rain & Highway Sound';
+    } else if (mode === 'bus') {
+      // Deep diesel engine purr + mountain wind
+      const osc = demoAudioCtx.createOscillator();
+      osc.type = 'sawtooth';
+      osc.frequency.value = 46;
+
+      const filter = demoAudioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 180;
+
+      const masterGain = demoAudioCtx.createGain();
+      masterGain.gain.value = 0.18;
+
+      osc.connect(filter);
+      filter.connect(masterGain);
+      masterGain.connect(demoAudioCtx.destination);
+
+      osc.start();
+      activeDemoSource = osc;
+
+      $('busAudioDemoBtn')?.classList.add('playing');
+      if ($('busAudioLabel')) $('busAudioLabel').textContent = '■ Stop Diesel & Mountain Wind';
+    }
+  } catch(e) {
+    console.warn('Audio demo error:', e);
+  }
+}
+
+$('carAudioDemoBtn')?.addEventListener('click', () => toggleTransitAudioDemo('car'));
+$('busAudioDemoBtn')?.addEventListener('click', () => toggleTransitAudioDemo('bus'));
+
+// Voting / Pre-Registration with Local Storage
+function setupVoteButton(btnId, storageKey, labelSuccess) {
+  const btn = $(btnId);
+  if (!btn) return;
+  if (localStorage.getItem(storageKey) === 'true') {
+    btn.classList.add('voted');
+    btn.textContent = labelSuccess;
+  }
+  btn.addEventListener('click', () => {
+    localStorage.setItem(storageKey, 'true');
+    btn.classList.add('voted');
+    btn.textContent = labelSuccess;
+    playSeatClickTone();
+  });
+}
+
+setupVoteButton('carVoteBtn', 'flylofi_voted_car', '✓ Priority Driver Reserved (Notified at Launch!)');
+setupVoteButton('busVoteBtn', 'flylofi_voted_bus', '✓ Priority Passenger Reserved (Notified at Launch!)');
 
 // Navigation Actions
 $('exitCruiseTopBtn').onclick = () => selectView('homeView');
