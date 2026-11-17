@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07131c">
-<title>Flylofi — Cruise & Study Mode</title>
+<title>Flylofi — Cruise &amp; Study Mode</title>
 <link rel="stylesheet" href="cruise-enhancements.css">
 <style>
 :root{
@@ -16,36 +16,33 @@ html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--text)
 body{overflow:hidden}
 button,input{font:inherit}
 button{color:inherit}
-.shell{height:100%;max-width:1920px;margin:auto;padding:clamp(12px,2vw,26px);display:grid;grid-template-rows:42px minmax(0,1fr) auto;gap:14px}
+.shell{height:100%;max-width:1920px;margin:auto;padding:clamp(10px,2vw,22px);display:grid;grid-template-rows:40px minmax(0,1fr) auto;gap:12px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:center;gap:11px;font-size:11px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}
-.brand-icon{width:34px;height:34px;border:1px solid rgba(131,224,181,.38);border-radius:11px;display:grid;place-items:center;color:var(--mint);background:linear-gradient(145deg,rgba(131,224,181,.13),rgba(131,224,181,.025));font-size:17px}
+.brand{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}
+.brand-icon{width:32px;height:32px;border:1px solid rgba(131,224,181,.38);border-radius:10px;display:grid;place-items:center;color:var(--mint);background:linear-gradient(145deg,rgba(131,224,181,.13),rgba(131,224,181,.025));font-size:16px}
 .route-top{font-size:11px;color:#c3d1d2;letter-spacing:.13em;text-transform:uppercase}
 .top-right{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}
-.stage{position:relative;min-height:0;overflow:hidden;border:1px solid rgba(220,239,237,.13);border-radius:24px;background:#122a38;box-shadow:0 24px 80px rgba(0,0,0,.3)}
-#scene{display:block;width:100%;height:100%}
-.stage:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(4,13,20,.34),transparent 27%,transparent 68%,rgba(4,13,20,.4));box-shadow:inset 0 0 90px rgba(2,10,16,.2)}
-.hud{position:absolute;inset:0;z-index:1;pointer-events:none;padding:clamp(18px,3vw,38px);display:flex;flex-direction:column;justify-content:space-between}
-.hud-top{max-width:min(510px,62%)}
+
+/* Stage Area (Dark Aircraft Cabin Environment) */
+.stage{position:relative;min-height:0;overflow:hidden;border:1px solid rgba(220,239,237,.13);border-radius:22px;background:#061219;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+
+/* HUD Text */
+.hud{position:absolute;inset:0;z-index:10;pointer-events:none;padding:clamp(16px,2.5vw,32px);display:flex;flex-direction:column;justify-content:space-between}
+.hud-top{max-width:min(440px,55%)}
 .eyebrow{font-size:9px;letter-spacing:.23em;text-transform:uppercase;color:#d1e1df;text-shadow:0 2px 15px #08151d}
-h1{font-size:clamp(26px,4.2vw,58px);line-height:.99;letter-spacing:-.055em;font-weight:620;margin:12px 0 10px;text-shadow:0 4px 25px rgba(0,0,0,.24)}
-.subtitle{font-size:clamp(11px,1.2vw,14px);line-height:1.55;color:#e0eae6;max-width:380px;text-shadow:0 2px 14px #08151d}
+h1{font-size:clamp(22px,3.5vw,46px);line-height:1.02;letter-spacing:-.045em;font-weight:620;margin:10px 0 8px;text-shadow:0 4px 25px rgba(0,0,0,.3)}
+.subtitle{font-size:clamp(10px,1.1vw,13px);line-height:1.5;color:#e0eae6;max-width:360px;text-shadow:0 2px 14px #08151d}
 .hud-bottom{display:flex;align-items:end;justify-content:space-between;gap:18px}
-.route-data{display:flex;gap:clamp(16px,3vw,38px);flex-wrap:wrap}
+.route-data{display:flex;gap:clamp(14px,2.5vw,32px);flex-wrap:wrap}
 .datum-label{font-size:8px;letter-spacing:.19em;text-transform:uppercase;color:#bdcece}
-.datum-value{font-size:13px;font-weight:650;margin-top:5px;letter-spacing:.02em;text-shadow:0 2px 12px #08151d}
-.phase-chip{border:1px solid rgba(226,242,235,.25);background:rgba(6,20,28,.42);backdrop-filter:blur(10px);padding:9px 12px;border-radius:999px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#e0ece7}
-.settings{position:absolute;z-index:3;right:18px;top:18px;display:flex;align-items:center;gap:7px;padding:7px 9px;border:1px solid rgba(227,242,239,.2);border-radius:13px;background:rgba(5,17,25,.58);backdrop-filter:blur(14px)}
-.settings span{font-size:9px;color:#a9bdbe;text-transform:uppercase;letter-spacing:.12em}
-.settings input{width:82px;min-width:0;border:0;border-bottom:1px solid rgba(225,239,235,.25);outline:0;background:transparent;color:#f0f6f1;padding:4px 2px;font-size:11px}
-.settings input:focus{border-color:var(--mint)}
-.settings button{border:0;background:rgba(131,224,181,.16);color:var(--mint);padding:6px 9px;border-radius:8px;font-size:10px;cursor:pointer}
-.bottom{display:grid;grid-template-columns:auto minmax(160px,1fr) auto;align-items:center;gap:18px}
+.datum-value{font-size:12px;font-weight:650;margin-top:4px;letter-spacing:.02em;text-shadow:0 2px 12px #08151d}
+.phase-chip{border:1px solid rgba(226,242,235,.25);background:rgba(6,20,28,.55);backdrop-filter:blur(10px);padding:8px 12px;border-radius:999px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#e0ece7}
+
+/* Bottom Timeline */
+.bottom{display:grid;grid-template-columns:auto minmax(160px,1fr) auto;align-items:center;gap:16px}
 .controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.ctrl{border:1px solid var(--line);background:#0b1d28;padding:9px 13px;border-radius:999px;font-size:11px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
-.ctrl:hover{border-color:rgba(131,224,181,.55);background:#102a36;transform:translateY(-1px)}
-.ctrl.primary{background:var(--mint);border-color:var(--mint);color:#09231a;font-weight:750}
+.timeline-label{font-size:9px;letter-spacing:.15em;color:var(--muted);font-weight:700}
 .progress-area{display:flex;align-items:center;gap:12px;min-width:0}
 .track{height:4px;position:relative;flex:1;background:rgba(226,239,235,.14);border-radius:10px;cursor:pointer}
 .track-fill{height:100%;width:0;background:var(--mint);border-radius:10px;position:relative}
@@ -53,126 +50,237 @@ h1{font-size:clamp(26px,4.2vw,58px);line-height:.99;letter-spacing:-.055em;font-
 .time{font-size:10px;color:#a7b9bd;font-variant-numeric:tabular-nums;white-space:nowrap}
 .chapters{display:flex;align-items:center;gap:5px}
 .chapter{width:7px;height:7px;border-radius:50%;border:0;padding:0;background:#40525a;cursor:pointer;transition:.2s}
-.chapter.active{width:19px;border-radius:8px;background:var(--mint)}
+.chapter.active{width:18px;border-radius:8px;background:var(--mint)}
 .chapter:hover{background:#c0e6d5}
-.hint{position:absolute;z-index:2;left:50%;bottom:22px;transform:translateX(-50%);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(235,245,239,.68);pointer-events:none;white-space:nowrap}
+.hint{position:absolute;z-index:9;left:50%;bottom:18px;transform:translateX(-50%);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(235,245,239,.65);pointer-events:none;white-space:nowrap}
+
 @media(max-width:760px){
- .shell{padding:10px;gap:9px;grid-template-rows:36px minmax(0,1fr) auto}
- .route-top{display:none}.top-right{font-size:9px}
- .stage{border-radius:17px}
- .hud{padding:16px}.hud-top{max-width:78%}
- h1{font-size:clamp(25px,7vw,42px);max-width:330px}
- .subtitle{max-width:260px}
- .hud-bottom{align-items:flex-start;flex-direction:column;gap:12px}
- .route-data{gap:15px}.phase-chip{padding:7px 10px}
- .settings{right:10px;top:10px;gap:5px;padding:6px}.settings span{display:none}.settings input{width:63px;font-size:10px}
- .bottom{grid-template-columns:1fr auto;gap:9px}.controls{gap:5px}.ctrl{padding:8px 10px;font-size:10px}
- .progress-area{grid-column:1/-1;grid-row:2}.chapters{display:none}
+  .shell{padding:8px;gap:8px;grid-template-rows:34px minmax(0,1fr) auto}
+  .route-top{display:none}
+  .stage{border-radius:16px}
+  .hud{padding:14px}
+  .hud-top{max-width:85%}
+  h1{font-size:clamp(20px,6vw,34px);max-width:300px}
+  .subtitle{display:none}
+  .hud-bottom{align-items:flex-start;flex-direction:column;gap:10px}
+  .route-data{gap:12px}
+  .bottom{grid-template-columns:1fr;gap:8px}
+  .progress-area{grid-column:1/-1}
+  .chapters{display:none}
 }
-@media(max-width:420px){.ctrl.optional{display:none}.datum-value{font-size:11px}.datum-label{font-size:7px}}
 </style>
 </head>
 <body>
 <div class="shell">
- <header class="top">
-  <div class="brand"><div class="brand-icon">✈</div><span>Flylofi</span></div>
-  <div class="route-top" id="routeTop">Chennai · MAA&nbsp;&nbsp; — &nbsp;&nbsp;Tokyo · NRT</div>
-  <div class="top-right"><i class="live-dot"></i><span id="status">Journey preview</span></div>
- </header>
- <main class="stage" id="stage">
-  <div class="cabin-layer" aria-hidden="true"><div class="overhead-light"></div><div class="seat-shell"></div><div class="window-glow"></div><div class="reflection reflection-one"></div><div class="reflection reflection-two"></div><i class="cabin-particle particle-one"></i><i class="cabin-particle particle-two"></i><i class="cabin-particle particle-three"></i><span class="cabin-caption">14A WINDOW SEAT · QUIET CABIN</span></div>
-  <video class="flight-video" id="flightVideo" muted loop playsinline preload="metadata"><source src="media/flight/clips/gemini_generated_video_09c1b3d1.mp4" type="video/mp4"></video>
-  <canvas id="scene" aria-label="Cinematic illustrated flight journey"></canvas>
-  <div class="settings">
-   <span>Route</span><input id="fromInput" value="Chennai" maxlength="20" aria-label="Origin city">
-   <span>to</span><input id="toInput" value="Tokyo" maxlength="20" aria-label="Destination city">
-   <button id="apply">Update</button>
-  </div>
-  <div class="cruise-media-deck" id="cruiseMediaDeck" aria-label="Flight Cabin Entertainment & Ambience Controls">
-    <!-- Row 1: Lofi Music Deck -->
-    <div class="deck-row">
-      <button class="deck-btn play-btn" id="lofiPlayToggle" title="Play / Pause Lofi Music">
-        <span class="btn-icon" id="playIcon">▶</span>
-        <span class="btn-label" id="playLabel">Play Lofi</span>
-      </button>
-      <div class="deck-select-wrap">
-        <select class="deck-select" id="lofiTrackSelect" aria-label="Choose Lofi Music Track">
-          <option value="../media/flight/audio/afternoon-jazz.webm">☕ Afternoon Jazz (Built-in)</option>
-          <option value="../media/flight/audio/bedtime-lofi.webm">🌙 Bedtime Lofi</option>
-          <option value="../media/flight/audio/best-of-lofi.webm">🎧 Best of Lofi</option>
-          <option value="../media/flight/audio/lofi-work-space.webm">💻 Lofi Workspace</option>
-          <option value="__custom_audio__">➕ Upload Audio File...</option>
-        </select>
+  <header class="top">
+    <div class="brand"><div class="brand-icon">✈</div><span>Flylofi</span></div>
+    <div class="route-top" id="routeTop">Chennai · MAA&nbsp;&nbsp; — &nbsp;&nbsp;Singapore · SIN</div>
+    <div class="top-right"><i class="live-dot"></i><span id="status">In focus</span></div>
+  </header>
+
+  <main class="stage" id="stage">
+    <!-- Cabin Interior Atmosphere (Night Dimmed Ambient) -->
+    <div class="cabin-atmosphere" aria-hidden="true"></div>
+
+    <!-- Authentic Commercial Aircraft Oval Window Portal (Matching User Photo) -->
+    <div class="airplane-window-portal" id="airplaneWindowPortal">
+      <div class="window-aperture" id="windowAperture">
+        <!-- Exterior Video Scenery -->
+        <video class="flight-video" id="flightVideo" muted loop playsinline preload="metadata">
+          <source src="media/flight/clips/gemini_generated_video_09c1b3d1.mp4" type="video/mp4">
+        </video>
+
+        <!-- Outside Illustrated Canvas Scenery -->
+        <canvas id="scene" aria-label="Outside flight scenery"></canvas>
+
+        <!-- Dynamic Seat-Specific Perspective Layer -->
+        <div class="seat-view-overlay" id="seatViewOverlay">
+          <!-- 02F: Over-Wing View with Strobe & Engine Cowl -->
+          <div class="wing-structure" id="seatWingView">
+            <svg class="wing-svg" viewBox="0 0 400 300" preserveAspectRatio="none">
+              <path d="M 120,300 L 400,135 L 400,240 L 220,300 Z" fill="url(#wingGradient)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+              <path d="M 260,205 L 310,225 L 285,245 Z" fill="#8ca0a8"/>
+              <path d="M 330,170 L 375,185 L 355,202 Z" fill="#8ca0a8"/>
+              <path d="M 395,140 Q 412,115 402,70 L 390,75 Q 396,115 385,145 Z" fill="url(#wingletGradient)"/>
+              <circle cx="400" cy="72" r="5" class="strobe-light"/>
+              <ellipse cx="230" cy="275" rx="42" ry="24" transform="rotate(-12 230 275)" fill="url(#engineGradient)"/>
+              <ellipse cx="205" cy="280" rx="14" ry="18" fill="#1b2a30" stroke="#8fa6ae" stroke-width="2"/>
+              <defs>
+                <linearGradient id="wingGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#bcccd1"/>
+                  <stop offset="65%" stop-color="#d6e3e6"/>
+                  <stop offset="100%" stop-color="#a6bac0"/>
+                </linearGradient>
+                <linearGradient id="wingletGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                  <stop offset="0%" stop-color="#b0c2c8"/>
+                  <stop offset="70%" stop-color="#d6e3e6"/>
+                  <stop offset="100%" stop-color="#59dfa0"/>
+                </linearGradient>
+                <linearGradient id="engineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#738992"/>
+                  <stop offset="60%" stop-color="#a2b7bd"/>
+                  <stop offset="100%" stop-color="#495a62"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- 01A: First Class Smart Tint Blue Glass Overlay -->
+          <div class="smart-tint-glass" id="smartTintGlass"></div>
+
+          <!-- 14C: Aisle Seat Foreground Seatback & Spotlight -->
+          <div class="aisle-foreground" id="seatAisleView">
+            <div class="aisle-seatback">
+              <div class="seatback-headrest"></div>
+            </div>
+            <div class="reading-light-beam"></div>
+          </div>
+        </div>
+
+        <!-- Interactive Draggable Window Shade -->
+        <div class="window-shade" id="windowShade">
+          <div class="shade-panel">
+            <div class="shade-grooves"></div>
+          </div>
+          <div class="shade-handle" id="shadeHandle" title="Drag down to pull window shade / study mode">
+            <div class="shade-grip-ridges"></div>
+            <span class="shade-grip-text">PULL SHADE</span>
+          </div>
+        </div>
+
+        <!-- Window Glass Glare & Vignette Inner Ring -->
+        <div class="window-glass-glare" aria-hidden="true"></div>
+        <div class="window-vignette-inner" aria-hidden="true"></div>
       </div>
-      <input type="file" id="customAudioFile" accept="audio/*,.mp3,.wav,.ogg,.m4a,.webm,.flac" style="display:none" aria-label="Insert custom audio file">
     </div>
 
-    <!-- Row 2: Cabin Ambience & Backdrop Scene & Volume -->
-    <div class="deck-row">
-      <button class="deck-btn cabin-btn" id="cabinBtn" title="Toggle Aircraft Cabin White Noise">
-        <span class="btn-icon">〰</span>
-        <span class="btn-label" id="cabinLabel">Cabin: Off</span>
+    <!-- Overhead Fasten Seatbelt Sign & Two-Tone Chime -->
+    <div class="seatbelt-sign-hud" id="seatbeltSignHud" title="Toggle Fasten Seatbelt Sign & Cabin Chime">
+      <span class="seatbelt-glyph">💺</span>
+      <span class="seatbelt-text">FASTEN SEAT BELT</span>
+      <span class="chime-dot" id="chimeDot"></span>
+    </div>
+
+    <!-- Live In-Flight Cockpit Telemetry HUD Strip -->
+    <div class="flight-telemetry-hud" id="flightTelemetryHud">
+      <div class="telemetry-item"><span class="telem-label">ALT</span><strong class="telem-val">36,000 FT</strong></div>
+      <div class="telemetry-item"><span class="telem-label">GS</span><strong class="telem-val">518 KTS</strong></div>
+      <div class="telemetry-item"><span class="telem-label">OAT</span><strong class="telem-val">-54°C</strong></div>
+      <div class="telemetry-item"><span class="telem-label">CABIN</span><strong class="telem-val">NORM</strong></div>
+    </div>
+
+    <!-- In-Flight Fold-Out Tray Table / Focus Notepad (Matching User Photo!) -->
+    <aside class="tray-table-drawer" id="trayTableDrawer">
+      <button class="tray-table-toggle" id="trayTableToggle" type="button">
+        <span class="tray-icon">📋</span>
+        <span class="tray-btn-text">Tray Table &amp; Focus Task</span>
       </button>
-      <div class="deck-select-wrap">
-        <select class="deck-select" id="videoSceneSelect" aria-label="Choose Flight Window Scene">
-          <option value="../media/flight/clips/gemini_generated_video_09c1b3d1.mp4">☁️ Wing Above Clouds (Built-in)</option>
-          <option value="../media/flight/clips/night-flight-lofi.mp4">✈️ Night Flight Cabin</option>
-          <option value="../media/flight/videos/first-class-cabin.mp4">🛋️ First Class Suite</option>
-          <option value="__canvas__">🎨 Illustrated Canvas</option>
-          <option value="__custom_video__">➕ Upload Video File...</option>
-        </select>
+      <div class="tray-table-content" id="trayTableContent">
+        <div class="tray-header">
+          <div class="tray-brand"><span>✈</span> FLIGHT FOCUS MISSION</div>
+          <button class="tray-close-btn" id="trayCloseBtn" type="button">×</button>
+        </div>
+        <div class="tray-task-box">
+          <label for="trayTaskInput">CRUISE OBJECTIVE:</label>
+          <div class="tray-input-row">
+            <input type="checkbox" id="trayTaskDone" class="tray-checkbox">
+            <input type="text" id="trayTaskInput" placeholder="Enter focus goal for this flight..." maxlength="60">
+          </div>
+        </div>
+        <div class="tray-notes-box">
+          <label for="trayNotesInput">IN-FLIGHT NOTES:</label>
+          <textarea id="trayNotesInput" rows="3" placeholder="Scratch notes, formulas, or key thoughts..."></textarea>
+        </div>
+        <div class="tray-status-row">
+          <span id="traySeatLabel">14A WINDOW SEAT</span>
+          <span class="tray-autosave">✓ Auto-saved</span>
+        </div>
       </div>
-      <input type="file" id="customVideoFile" accept="video/*,.mp4,.webm,.mov" style="display:none" aria-label="Insert custom video file">
-      <label class="deck-volume-wrap" title="Master Volume">
-        <span class="vol-icon" id="volIcon">🔊</span>
-        <input class="volume-slider" id="volume" type="range" min="0" max="100" value="45" aria-label="Master volume">
-      </label>
+    </aside>
+
+    <!-- Cockpit Media Deck: Lofi & Cabin Entertainment Controls -->
+    <div class="cruise-media-deck" id="cruiseMediaDeck" aria-label="Flight Cabin Entertainment & Ambience Controls">
+      <!-- Row 1: Lofi Music Deck -->
+      <div class="deck-row">
+        <button class="deck-btn play-btn" id="lofiPlayToggle" title="Play / Pause Lofi Music">
+          <span class="btn-icon" id="playIcon">▶</span>
+          <span class="btn-label" id="playLabel">Play Lofi</span>
+        </button>
+        <div class="deck-select-wrap">
+          <select class="deck-select" id="lofiTrackSelect" aria-label="Choose Lofi Music Track">
+            <option value="../media/flight/audio/afternoon-jazz.webm">☕ Afternoon Jazz (Built-in)</option>
+            <option value="../media/flight/audio/bedtime-lofi.webm">🌙 Bedtime Lofi</option>
+            <option value="../media/flight/audio/best-of-lofi.webm">🎧 Best of Lofi</option>
+            <option value="../media/flight/audio/lofi-work-space.webm">💻 Lofi Workspace</option>
+            <option value="__custom_audio__">➕ Upload Audio File...</option>
+          </select>
+        </div>
+        <input type="file" id="customAudioFile" accept="audio/*,.mp3,.wav,.ogg,.m4a,.webm,.flac" style="display:none" aria-label="Insert custom audio file">
+      </div>
+
+      <!-- Row 2: Cabin Ambience & Backdrop Scene & Volume -->
+      <div class="deck-row">
+        <button class="deck-btn cabin-btn" id="cabinBtn" title="Toggle Aircraft Cabin White Noise">
+          <span class="btn-icon">〰</span>
+          <span class="btn-label" id="cabinLabel">Cabin: Off</span>
+        </button>
+        <div class="deck-select-wrap">
+          <select class="deck-select" id="videoSceneSelect" aria-label="Choose Flight Window Scene">
+            <option value="../media/flight/clips/gemini_generated_video_09c1b3d1.mp4">☁️ Wing Above Clouds (Built-in)</option>
+            <option value="../media/flight/clips/night-flight-lofi.mp4">✈️ Night Flight Cabin</option>
+            <option value="../media/flight/videos/first-class-cabin.mp4">🛋️ First Class Suite</option>
+            <option value="__canvas__">🎨 Illustrated Canvas</option>
+            <option value="__custom_video__">➕ Upload Video File...</option>
+          </select>
+        </div>
+        <input type="file" id="customVideoFile" accept="video/*,.mp4,.webm,.mov" style="display:none" aria-label="Insert custom video file">
+        <label class="deck-volume-wrap" title="Master Volume">
+          <span class="vol-icon" id="volIcon">🔊</span>
+          <input class="volume-slider" id="volume" type="range" min="0" max="100" value="45" aria-label="Master volume">
+        </label>
+      </div>
     </div>
-  </div>
-  <audio id="mediaLofi" preload="metadata" loop src="media/flight/audio/afternoon-jazz.webm"></audio>
-  <audio id="mediaCabin" preload="metadata" loop></audio>
-  <aside class="study-card" aria-label="Focus study timer">
-   <div class="study-head"><span>Focus session</span><span id="studyState">Ready</span></div>
-   <div class="study-time" id="studyTime">25:00</div>
-   <div class="study-actions">
-    <select id="studyLength" aria-label="Focus duration"><option value="25">25 min</option><option value="50">50 min</option><option value="90">90 min</option></select>
-    <button id="studyToggle">Start</button>
-    <button id="studyReset">Reset</button>
-   </div>
-   <div class="study-note" id="studyNote">Settle in. Start your focus timer when you're ready.</div>
-  </aside>
-  <section class="hud">
-   <div class="hud-top">
-    <div class="eyebrow" id="eyebrow">01 / 08 · Airport departure</div>
-    <h1 id="title">A new journey<br>starts here.</h1>
-    <div class="subtitle" id="subtitle">Take a breath, settle in, and leave the noise of the day behind.</div>
-   </div>
-   <div class="hud-bottom">
-    <div class="route-data">
-     <div><div class="datum-label">Departure</div><div class="datum-value" id="fromDatum">MAA · Chennai</div></div>
-     <div><div class="datum-label">Destination</div><div class="datum-value" id="toDatum">NRT · Tokyo</div></div>
-     <div><div class="datum-label">Mode</div><div class="datum-value">Deep focus</div></div>
+
+    <!-- Audio Elements -->
+    <audio id="mediaLofi" preload="metadata" loop src="media/flight/audio/afternoon-jazz.webm"></audio>
+    <audio id="mediaCabin" preload="metadata" loop></audio>
+
+    <!-- Flight Stage HUD -->
+    <section class="hud">
+      <div class="hud-top">
+        <div class="eyebrow" id="eyebrow">01 / 08 · Airport departure</div>
+        <h1 id="title">A new journey<br>starts here.</h1>
+        <div class="subtitle" id="subtitle">Take a breath, settle in, and leave the noise of the day behind.</div>
+      </div>
+      <div class="hud-bottom">
+        <div class="route-data">
+          <div><div class="datum-label">Departure</div><div class="datum-value" id="fromDatum">MAA · Chennai</div></div>
+          <div><div class="datum-label">Destination</div><div class="datum-value" id="toDatum">SIN · Singapore</div></div>
+          <div><div class="datum-label">Seat View</div><div class="datum-value" id="seatDatum">14A · Window</div></div>
+        </div>
+        <div class="phase-chip" id="phase">At the terminal</div>
+      </div>
+    </section>
+
+    <div class="hint" id="hint">A calm journey, one scene at a time</div>
+  </main>
+
+  <footer class="bottom">
+    <div class="controls" aria-label="Flight timeline status"><span class="timeline-label">AUTO FLIGHT TIMELINE</span></div>
+    <div class="progress-area">
+      <div class="track" id="track" aria-label="Flight timeline"><div class="track-fill" id="fill"></div></div>
+      <div class="time" id="time">00:00 / 01:32</div>
     </div>
-    <div class="phase-chip" id="phase">At the terminal</div>
-   </div>
-  </section>
-  <div class="hint" id="hint">A calm journey, one scene at a time</div>
- </main>
- <footer class="bottom">
-  <div class="controls" aria-label="Flight timeline status"><span class="timeline-label">AUTO FLIGHT TIMELINE</span></div>
-  <div class="progress-area">
-  <div class="track" id="track" aria-label="Flight timeline"><div class="track-fill" id="fill"></div></div>
-   <div class="time" id="time">00:00 / 01:32</div>
-  </div>
-  <div class="chapters" id="chapters" aria-label="Flight scenes"></div>
- </footer>
+    <div class="chapters" id="chapters" aria-label="Flight scenes"></div>
+  </footer>
 </div>
+
 <script>
 (()=>{
 'use strict';
 const $=id=>document.getElementById(id),canvas=$('scene'),c=canvas.getContext('2d');
 const chapters=[
- {id:'gate',name:'Boarding',eyebrow:'01 / 08 · Airport departure',title:'A new journey<br>starts here.',sub:'Take a breath, settle in, and leave the noise of the day behind.',phase:'At the terminal',hint:'Boarding is now open',d:10},
+ {id:'gate',name:'Boarding',eyebrow:'01 / 08 · Airport departure',title:'A new journey<br>starts here.',sub:'Take a breath, settle in, and leave the noise of the day behind.',phase:'At the terminal',hint:'Boarding completed · Doors closed',d:10},
  {id:'push',name:'Pushback',eyebrow:'02 / 08 · Leaving the gate',title:'Leaving the familiar<br>behind.',sub:'The aircraft eases away from the terminal. Your focus time is about to begin.',phase:'Pushback',hint:'Ground crew clear',d:9},
  {id:'taxi',name:'Taxi',eyebrow:'03 / 08 · Taxi to runway',title:'On the way<br>to takeoff.',sub:'Runway lights guide us forward while the airport slowly slips behind.',phase:'Taxiing',hint:'Runway ahead',d:9},
  {id:'takeoff',name:'Takeoff',eyebrow:'04 / 08 · Climb out',title:'And we are<br>off the ground.',sub:'The city falls away beneath us. Let your attention settle into the journey.',phase:'Climb',hint:'Positive rate · Gear up',d:10},
@@ -185,203 +293,234 @@ const total=chapters.reduce((a,b)=>a+b.d,0);
 const savedFlight=JSON.parse(localStorage.getItem('focusFlightActive')||'null');
 const cityNames={MAA:'Chennai',BOM:'Mumbai',DEL:'New Delhi',BLR:'Bengaluru',HYD:'Hyderabad',SIN:'Singapore',BKK:'Bangkok',HKG:'Hong Kong',ICN:'Seoul',NRT:'Tokyo',SYD:'Sydney',MEL:'Melbourne',DXB:'Dubai',DOH:'Doha',LHR:'London',AMS:'Amsterdam',CDG:'Paris',FRA:'Frankfurt',IST:'Istanbul',JFK:'New York',SFO:'San Francisco',LAX:'Los Angeles',ORD:'Chicago',YYZ:'Toronto'};
 const flightVideo=$('flightVideo'),stage=$('stage');
+
 flightVideo.addEventListener('loadeddata',()=>{stage.classList.add('video-live');flightVideo.play().catch(()=>{})});
 flightVideo.addEventListener('error',()=>stage.classList.remove('video-live'));
 flightVideo.load();
-let elapsed=0,last=0,W=1280,H=720,D=1,from='Chennai',to='Tokyo',raf=0;
+
+let elapsed=0,last=0,W=600,H=800,D=1,from='Chennai',to='Singapore',raf=0;
 if(savedFlight){
   from=`${savedFlight.departure} · ${cityNames[savedFlight.departure]||savedFlight.departure}`;
   to=`${savedFlight.destination} · ${cityNames[savedFlight.destination]||savedFlight.destination}`;
   stage.classList.add('booked-session');
   if(savedFlight.seat){
-    const captionEl = document.querySelector('.cabin-caption');
-    if(captionEl){
-      const seatTitle = savedFlight.seatType ? `${savedFlight.seat} · ${savedFlight.seatType.toUpperCase()}` : `${savedFlight.seat} WINDOW SEAT · QUIET CABIN`;
-      captionEl.textContent = seatTitle;
-    }
+    const seatCode = savedFlight.seat.toLowerCase();
+    stage.classList.add(`seat-${seatCode}`);
+    if($('seatDatum')) $('seatDatum').textContent = `${savedFlight.seat} · ${savedFlight.seatType || 'Window'}`;
+    if($('traySeatLabel')) $('traySeatLabel').textContent = `${savedFlight.seat} · ${savedFlight.seatType || 'WINDOW'}`.toUpperCase();
   }
 }
+
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mix=(a,b,t)=>a+(b-a)*t;
 const ease=t=>t*t*(3-2*t),smooth=(a,b,x)=>{let t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)};
-function resize(){let r=canvas.getBoundingClientRect();W=Math.max(1,r.width);H=Math.max(1,r.height);D=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(W*D);canvas.height=Math.round(H*D);c.setTransform(D,0,0,D,0,0)}
+
+function resize(){
+  let r=canvas.getBoundingClientRect();
+  W=Math.max(1,r.width);H=Math.max(1,r.height);
+  D=Math.min(devicePixelRatio||1,2);
+  canvas.width=Math.round(W*D);canvas.height=Math.round(H*D);
+  c.setTransform(D,0,0,D,0,0);
+}
 new ResizeObserver(resize).observe(canvas);resize();
-if(savedFlight){$('fromInput').value=cityNames[savedFlight.departure]||savedFlight.departure;$('toInput').value=cityNames[savedFlight.destination]||savedFlight.destination}
+
 function rect(x,y,w,h,color){c.fillStyle=color;c.fillRect(x,y,w,h)}
 function path(points,color){c.fillStyle=color;c.beginPath();c.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)c.lineTo(points[i][0],points[i][1]);c.closePath();c.fill()}
 function stroke(points,color,width=1){c.strokeStyle=color;c.lineWidth=width;c.beginPath();c.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)c.lineTo(points[i][0],points[i][1]);c.stroke()}
 function grad(y1,y2,stops){let g=c.createLinearGradient(0,y1,0,y2);stops.forEach(s=>g.addColorStop(s[0],s[1]));return g}
 function rand(n){let x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x)}
-function sky(mode='day'){let stops=mode==='night'?[[0,'#0a1c2a'],[.5,'#284b5a'],[1,'#c58e79']]:mode==='dusk'?[[0,'#405e76'],[.47,'#b47c76'],[1,'#f0c99a']]:[[0,'#4c8295'],[.52,'#a5c6c3'],[1,'#e9e0c9']];rect(0,0,W,H,grad(0,H,stops))}
-function cloud(x,y,s=1,alpha=.9,voxel=false){c.save();c.globalAlpha=alpha;if(voxel){let u=14*s;rect(x-2*u,y,u*5,u*1.3,'#edf4ef');rect(x-u,y-u*.72,u*2.3,u*1.3,'#fff');rect(x+.5*u,y-u*.35,u*1.7,u*.95,'#e5efeb');rect(x-1.5*u,y+u*1.1,u*4.2,u*.25,'rgba(96,132,143,.2)')}else{c.fillStyle='#f2f5f0';c.beginPath();c.ellipse(x,y,s*46,s*18,0,0,Math.PI*2);c.ellipse(x-s*23,y+2*s,s*27,s*14,0,0,Math.PI*2);c.ellipse(x+s*25,y+2*s,s*30,s*15,0,0,Math.PI*2);c.fill()}c.restore()}
-function blockMountain(x,base,w,h,color){let step=w/10;for(let i=0;i<10;i++){let peak=1-Math.abs(i-4.5)/5.3;rect(x-w/2+i*step,base-h*peak,step+1,h*peak,color)}}
-function skyline(base,scale=1,lights=false,seed=0){let palette=lights?['#172f3e','#203e4b','#2c4a54']:['#5d8282','#75958f','#91a99b'];for(let i=0;i<Math.ceil(W/25)+3;i++){let x=i*25-((elapsed*7)%25),h=(22+rand(i+seed)*100)*scale;rect(x,base-h,21*scale,h,palette[i%3]);if(scale>.35){for(let yy=base-h+9;yy<base-5;yy+=12)for(let xx=x+5;xx<x+16;xx+=9)if(rand(i*19+yy+xx)>.36)rect(xx,yy,3,4,lights?'#f4d7a0':'#c9d7c5')}}}
-function plane(x,y,s=1,tilt=0){c.save();c.translate(x,y);c.rotate(tilt);c.scale(s,s);
- c.shadowColor='rgba(0,0,0,.3)';c.shadowBlur=14;c.shadowOffsetY=7;
- path([[-122,0],[-88,-7],[-35,-8],[70,-6],[112,-2],[124,0],[112,4],[65,7],[-42,8],[-90,6]],'#f0f4ef');
- c.shadowBlur=0;c.shadowOffsetY=0;
- path([[-24,-4],[26,-4],[88,-48],[105,-47],[75,-3],[48,5],[18,5],[-29,48],[-47,48],[-30,4]],'#cbdad8');
- path([[-83,-4],[-109,-30],[-91,-29],[-49,-5]],'#dbe5e0');
- path([[-82,4],[-110,27],[-92,28],[-48,6]],'#b8cdca');
- path([[75,-2],[108,-13],[117,-10],[93,2]],'#7ebcb0');
- rect(-56,-2,120,2,'#9bbab8');
- // cockpit glazing
- path([[100,-1],[112,-2],[116,0],[108,2]],'#7c9e9e');
- c.restore()}
-function runway(y,scale=1){path([[W*.38,y+H*.32],[W*.62,y+H*.32],[W*.55,y],[W*.45,y]],'#25383e');for(let i=0;i<9;i++){let t=i/8,yy=mix(y,y+H*.3,t),ww=mix(3,15,t);rect(W/2-ww/2,yy,ww,2+2*t,'#f1ead2')}for(let i=0;i<7;i++){let t=i/6,yy=mix(y,y+H*.3,t),dx=mix(W*.055,W*.17,t);rect(W/2-dx,yy,3+2*t,4+2*t,'#f6d58f');rect(W/2+dx,yy,3+2*t,4+2*t,'#f6d58f')}}
-function windowFrame(){let x=W*.76,y=H*.51,w=Math.min(W*.34,430),h=Math.min(H*.57,330),r=Math.min(w,h)*.22;
- c.save();c.shadowColor='rgba(0,0,0,.4)';c.shadowBlur=35;c.fillStyle='#172831';c.beginPath();c.roundRect(x-w/2-18,y-h/2-18,w+36,h+36,r+18);c.fill();c.restore();
- c.strokeStyle='rgba(236,245,239,.34)';c.lineWidth=7;c.beginPath();c.roundRect(x-w/2,y-h/2,w,h,r);c.stroke();
- c.strokeStyle='rgba(255,255,255,.12)';c.lineWidth=1.5;c.beginPath();c.roundRect(x-w/2+7,y-h/2+7,w-14,h-14,r-5);c.stroke();return{x,y,w,h}}
+
+function sky(mode='day'){
+  let stops=mode==='night'?[[0,'#0a1c2a'],[.5,'#284b5a'],[1,'#c58e79']]:mode==='dusk'?[[0,'#405e76'],[.47,'#b47c76'],[1,'#f0c99a']]:[[0,'#3b788e'],[.52,'#8fb9b5'],[1,'#dce8d8']];
+  rect(0,0,W,H,grad(0,H,stops));
+}
+
+function cloud(x,y,s=1,alpha=.9){
+  c.save();c.globalAlpha=alpha;
+  c.fillStyle='#f2f5f0';
+  c.beginPath();
+  c.ellipse(x,y,s*55,s*22,0,0,Math.PI*2);
+  c.ellipse(x-s*28,y+2*s,s*32,s*17,0,0,Math.PI*2);
+  c.ellipse(x+s*30,y+2*s,s*36,s*18,0,0,Math.PI*2);
+  c.fill();
+  c.restore();
+}
+
+function blockMountain(x,base,w,h,color){
+  let step=w/10;
+  for(let i=0;i<10;i++){
+    let peak=1-Math.abs(i-4.5)/5.3;
+    rect(x-w/2+i*step,base-h*peak,step+1,h*peak,color);
+  }
+}
+
+function skyline(base,scale=1,lights=false,seed=0){
+  let palette=lights?['#172f3e','#203e4b','#2c4a54']:['#5d8282','#75958f','#91a99b'];
+  for(let i=0;i<Math.ceil(W/25)+3;i++){
+    let x=i*25-((elapsed*7)%25),h=(22+rand(i+seed)*100)*scale;
+    rect(x,base-h,21*scale,h,palette[i%3]);
+  }
+}
+
+function plane(x,y,s=1,tilt=0){
+  c.save();c.translate(x,y);c.rotate(tilt);c.scale(s,s);
+  c.shadowColor='rgba(0,0,0,.3)';c.shadowBlur=14;c.shadowOffsetY=7;
+  path([[-122,0],[-88,-7],[-35,-8],[70,-6],[112,-2],[124,0],[112,4],[65,7],[-42,8],[-90,6]],'#f0f4ef');
+  c.shadowBlur=0;c.shadowOffsetY=0;
+  path([[-24,-4],[26,-4],[88,-48],[105,-47],[75,-3],[48,5],[18,5],[-29,48],[-47,48],[-30,4]],'#cbdad8');
+  path([[-83,-4],[-109,-30],[-91,-29],[-49,-5]],'#dbe5e0');
+  path([[-82,4],[-110,27],[-92,28],[-48,6]],'#b8cdca');
+  path([[75,-2],[108,-13],[117,-10],[93,2]],'#7ebcb0');
+  rect(-56,-2,120,2,'#9bbab8');
+  c.restore();
+}
+
+function runway(y){
+  path([[W*.35,y+H*.3],[W*.65,y+H*.3],[W*.56,y],[W*.44,y]],'#25383e');
+  for(let i=0;i<8;i++){
+    let t=i/7,yy=mix(y,y+H*.28,t),ww=mix(3,14,t);
+    rect(W/2-ww/2,yy,ww,2+2*t,'#f1ead2');
+  }
+}
+
 function terminalView(t,kind){
- sky('day');let horizon=H*.68;rect(0,horizon,W,H-horizon,'#5c7b73');
- blockMountain(W*.13,horizon,W*.38,H*.22,'#5a7b76');blockMountain(W*.84,horizon,W*.34,H*.2,'#66857d');skyline(horizon,.6,false,2);
- // glass terminal
- rect(W*.04,H*.39,W*.34,H*.28,'#b6c7be');rect(W*.04,H*.39,W*.34,H*.035,'#637e7c');rect(W*.04,H*.65,W*.34,H*.025,'#405e62');
- for(let i=0;i<10;i++){rect(W*.065+i*W*.031,H*.46,W*.022,H*.14,'#4c7078');rect(W*.065+i*W*.031,H*.46,W*.022,3,'rgba(239,246,234,.4)')}
- // apron and taxiway
- path([[0,H*.7],[W,H*.64],[W,H],[0,H]],'#34494a');path([[0,H*.78],[W,H*.7],[W,H*.74],[0,H*.82]],'#64736a');
- for(let i=0;i<17;i++){let x=i*W/14-(elapsed*30%W);rect(x,H*.81+Math.sin(i)*2,12,3,'#f4d38b')}
- let px=kind==='gate'?W*.52:kind==='push'?mix(W*.52,W*.67,t):mix(W*.67,W*.53,t);
- plane(px,H*.64,.78,0);
- // gate bridge
- if(kind==='gate'||kind==='push'){rect(W*.35,H*.55,W*.12,H*.035,'#c8d4cd');rect(W*.43,H*.55,W*.02,H*.1,'#788f8c');rect(W*.32,H*.63,W*.07,H*.02,'#879c95')}
- if(kind==='taxi'){runway(H*.67);for(let i=0;i<8;i++)rect(W*.1+i*W*.11,H*.74,5,4,'#f8d58c')}
+  sky('day');let horizon=H*.66;rect(0,horizon,W,H-horizon,'#5c7b73');
+  blockMountain(W*.13,horizon,W*.38,H*.22,'#5a7b76');blockMountain(W*.84,horizon,W*.34,H*.2,'#66857d');
+  rect(W*.04,H*.39,W*.45,H*.27,'#b6c7be');
+  for(let i=0;i<10;i++) rect(W*.065+i*W*.04,H*.46,W*.025,H*.14,'#4c7078');
+  path([[0,H*.68],[W,H*.64],[W,H],[0,H]],'#34494a');
+  let px=kind==='gate'?W*.5:kind==='push'?mix(W*.5,W*.68,t):mix(W*.68,W*.5,t);
+  plane(px,H*.63,.75,0);
 }
-function takeoffView(t){sky('dusk');cloud(W*.22,H*.43,.75,.8);cloud(W*.78,H*.32,.8,.8);let horizon=mix(H*.73,H*.58,ease(t));blockMountain(W*.2,horizon,W*.5,H*.22,'#52766e');blockMountain(W*.85,horizon,W*.4,H*.25,'#426a68');skyline(horizon,.65,false,7);
- // aircraft wing sweeps across frame
- path([[W*.48,H*.54],[W*.62,H*.57],[W*.96,H*.78],[W*.99,H*.81],[W*.65,H*.66]],'#e0e9e2');stroke([[W*.51,H*.55],[W*.93,H*.78]],'#a9c1bd',2);
- if(t<.72)plane(W*.43,H*.49-t*H*.17,.45-t*.12,-.14);
+
+function takeoffView(t){
+  sky('dusk');cloud(W*.25,H*.38,.8,.8);cloud(W*.75,H*.28,.85,.8);
+  let horizon=mix(H*.72,H*.56,ease(t));
+  blockMountain(W*.2,horizon,W*.5,H*.22,'#52766e');blockMountain(W*.85,horizon,W*.4,H*.25,'#426a68');
 }
+
 function cruiseView(t){
- sky('day');
- // bright atmospheric horizon, subtle light
- let glow=c.createRadialGradient(W*.76,H*.25,2,W*.76,H*.25,W*.48);glow.addColorStop(0,'rgba(255,230,185,.27)');glow.addColorStop(1,'rgba(255,230,185,0)');rect(0,0,W,H,glow);
- // cloud banks drift at different speeds
- for(let i=0;i<13;i++){let x=((i*151+elapsed*(7+i%3)*1.5)%(W+260))-130,y=H*(.22+(i%5)*.115);cloud(x,y,.7+(i%3)*.22,.88,i%2===0)}
- // far away blocky landforms peeking through
- path([[0,H*.68],[W*.18,H*.62],[W*.36,H*.68],[W*.56,H*.61],[W*.77,H*.68],[W,H*.63],[W,H],[0,H]],'#78988d');
- for(let i=0;i<35;i++){let x=rand(i+33)*W,y=H*.68+rand(i+88)*H*.22;rect(x,y,16+rand(i)*32,5+rand(i+4)*7,['#b9b58d','#658779','#d0c39b'][i%3])}
- // passenger wing, unmistakably viewed from seat
- path([[W*.49,H*.58],[W*.65,H*.61],[W*.98,H*.78],[W,H*.82],[W*.67,H*.69]],'#e1e9e3');path([[W*.64,H*.62],[W*.97,H*.79],[W*.99,H*.81],[W*.7,H*.68]],'#b7cbc6');stroke([[W*.54,H*.59],[W*.94,H*.78]],'#a2bbb8',2);
- // tiny engine silhouette
- c.fillStyle='#9db7b3';c.beginPath();c.ellipse(W*.7,H*.7,18,8,-.2,0,Math.PI*2);c.fill();
- const win=windowFrame();
- // foreground seat/cabin edge and warm window glow
- let vign=c.createRadialGradient(win.x,win.y,win.w*.12,win.x,win.y,win.w*.85);vign.addColorStop(0,'rgba(255,255,255,0)');vign.addColorStop(1,'rgba(5,17,25,.2)');rect(0,0,W,H,vign);
- // cabin wall on left edge for POV context
- path([[0,0],[W*.22,0],[W*.28,H],[0,H]],'rgba(13,29,37,.58)');
- path([[W*.19,0],[W*.23,0],[W*.3,H],[W*.25,H]],'rgba(210,224,215,.08)');
- // warm reading light
- c.save();c.globalAlpha=.24;let rg=c.createRadialGradient(W*.32,H*.16,1,W*.32,H*.16,W*.24);rg.addColorStop(0,'#f4d9a9');rg.addColorStop(1,'rgba(244,217,169,0)');rect(0,0,W,H,rg);c.restore();
+  sky('day');
+  // High-altitude atmospheric horizon
+  let glow=c.createRadialGradient(W*.5,H*.25,2,W*.5,H*.25,W*.6);
+  glow.addColorStop(0,'rgba(255,230,185,.28)');glow.addColorStop(1,'rgba(255,230,185,0)');
+  rect(0,0,W,H,glow);
+
+  // Cloud banks drifting past passenger window
+  for(let i=0;i<11;i++){
+    let x=((i*160+elapsed*(7+i%3)*1.6)%(W+300))-150,y=H*(.18+(i%5)*.12);
+    cloud(x,y,.75+(i%3)*.2,.85);
+  }
+
+  // Earth patchwork landscape visible below clouds (matching user image!)
+  path([[0,H*.62],[W*.2,H*.58],[W*.45,H*.64],[W*.7,H*.59],[W,H*.63],[W,H],[0,H]],'#5a7e6b');
+  for(let i=0;i<32;i++){
+    let x=rand(i+42)*W,y=H*.62+rand(i+92)*H*.35;
+    rect(x,y,20+rand(i)*35,8+rand(i+5)*9,['#9aa878','#4d725f','#b5a878','#61846b'][i%4]);
+  }
 }
+
 function destinationView(t,landing){
- sky('dusk');let horizon=landing?mix(H*.62,H*.72,ease(t)):mix(H*.54,H*.65,t);
- blockMountain(W*.15,horizon,W*.4,H*.23,'#55776f');blockMountain(W*.85,horizon,W*.42,H*.29,'#426d6b');skyline(horizon,.72,false,14);
- // destination patchwork
- for(let i=0;i<40;i++){let x=rand(i+130)*W,y=horizon+rand(i+180)*H*.25;rect(x,y,16+rand(i+3)*44,7+rand(i+4)*12,['#c5b991','#73927c','#d3c49b'][i%3])}
- if(landing){
-  path([[W*.4,H],[W*.6,H],[W*.55,H*.58],[W*.45,H*.58]],'#273a3e');
-  for(let i=0;i<8;i++){let q=i/7,y=mix(H*.6,H*.97,q),ww=mix(3,15,q);rect(W/2-ww/2,y,ww,2+q*2,'#f2edd7');rect(W*.45,y,3+q*2,4+q*2,'#f7d58c');rect(W*.55,y,3+q*2,4+q*2,'#f7d58c')}
-  path([[W*.49,H*.58],[W*.64,H*.63],[W*.94,H*.78],[W*.97,H*.81],[W*.66,H*.69]],'#e3eae4');stroke([[W*.51,H*.59],[W*.91,H*.78]],'#a6bdb8',2);
- }else{
-  path([[W*.48,H*.6],[W*.67,H*.64],[W*.96,H*.8],[W*.99,H*.83],[W*.68,H*.71]],'#e3eae4');
-  cloud(W*.25,H*.37,.7,.68);cloud(W*.78,H*.3,.58,.7);
- }
- windowFrame();
+  sky('dusk');let horizon=landing?mix(H*.6,H*.7,ease(t)):mix(H*.52,H*.62,t);
+  blockMountain(W*.15,horizon,W*.4,H*.23,'#55776f');blockMountain(W*.85,horizon,W*.42,H*.29,'#426d6b');
+  for(let i=0;i<35;i++){
+    let x=rand(i+110)*W,y=horizon+rand(i+150)*H*.26;
+    rect(x,y,18+rand(i+3)*40,8+rand(i+4)*10,['#c5b991','#73927c','#d3c49b'][i%3]);
+  }
+  if(landing) runway(H*.65);
 }
+
 function arrivalView(t){
- sky('dusk');skyline(H*.67,.86,false,28);rect(0,H*.69,W,H*.31,'#30494a');
- // airport concourse in the distance
- rect(W*.64,H*.44,W*.27,H*.23,'#b8c8bd');rect(W*.64,H*.44,W*.27,H*.035,'#607d7b');
- for(let i=0;i<8;i++)rect(W*.66+i*W*.03,H*.5,W*.019,H*.12,'#4e6e73');
- for(let i=0;i<14;i++)rect(i*W/13,H*.73,4,4,'#f1d38e');
- plane(mix(W*.4,W*.54,ease(t)),H*.66,.67,0);
- let a=smooth(.18,.58,t);c.save();c.globalAlpha=a;
- c.fillStyle='rgba(5,18,26,.68)';c.beginPath();c.roundRect(W/2-190,H*.12,380,116,18);c.fill();
- c.strokeStyle='rgba(131,224,181,.55)';c.lineWidth=1;c.beginPath();c.roundRect(W/2-190,H*.12,380,116,18);c.stroke();
- c.textAlign='center';c.fillStyle='#83e0b5';c.font='800 11px system-ui';c.fillText('✓  FOCUS FLIGHT COMPLETE',W/2,H*.12+39);
- c.fillStyle='#f0f6f1';c.font='600 25px system-ui';c.fillText('Welcome to '+to,W/2,H*.12+76);c.restore();
+  sky('dusk');skyline(H*.65,.8,false,28);rect(0,H*.67,W,H*.33,'#30494a');
+  plane(mix(W*.38,W*.52,ease(t)),H*.65,.68,0);
 }
+
 function draw(){
- let idx=indexAt(elapsed),s=chapters[idx],start=startAt(idx),t=clamp((elapsed-start)/s.d,0,1);
- c.clearRect(0,0,W,H);
- if(idx===0)terminalView(t,'gate');
- if(idx===1)terminalView(t,'push');
- if(idx===2)terminalView(t,'taxi');
- if(idx===3)takeoffView(t);
- if(idx===4)cruiseView(t);
- if(idx===5)destinationView(t,false);
- if(idx===6)destinationView(t,true);
- if(idx===7)arrivalView(t);
- // restrained filmic overlay
- rect(0,0,W,H,grad(0,H,[[0,'rgba(4,13,19,.12)'],[.52,'rgba(4,13,19,0)'],[1,'rgba(4,13,19,.2)']]));
- updateHud(idx);
+  let idx=indexAt(elapsed),s=chapters[idx],start=startAt(idx),t=clamp((elapsed-start)/s.d,0,1);
+  c.clearRect(0,0,W,H);
+  if(idx===0) terminalView(t,'gate');
+  else if(idx===1) terminalView(t,'push');
+  else if(idx===2) terminalView(t,'taxi');
+  else if(idx===3) takeoffView(t);
+  else if(idx===4) cruiseView(t);
+  else if(idx===5) destinationView(t,false);
+  else if(idx===6) destinationView(t,true);
+  else if(idx===7) arrivalView(t);
+
+  // Soft atmospheric filmic vignette
+  rect(0,0,W,H,grad(0,H,[[0,'rgba(4,13,19,.1)'],[.5,'rgba(4,13,19,0)'],[1,'rgba(4,13,19,.2)']]));
+  updateHud(idx);
 }
-function indexAt(sec){let sum=0;for(let i=0;i<chapters.length;i++){sum+=chapters[i].d;if(sec<sum||i===chapters.length-1)return i}return 0}
-function startAt(idx){let n=0;for(let i=0;i<idx;i++)n+=chapters[i].d;return n}
-function clock(sec){sec=Math.floor(sec);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0')}
+
+function indexAt(sec){
+  let sum=0;
+  for(let i=0;i<chapters.length;i++){
+    sum+=chapters[i].d;
+    if(sec<sum||i===chapters.length-1)return i;
+  }
+  return 0;
+}
+function startAt(idx){let n=0;for(let i=0;i<idx;i++)n+=chapters[i].d;return n;}
+function clock(sec){sec=Math.floor(sec);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
+
 function updateHud(idx){
- let s=chapters[idx];
- $('eyebrow').textContent=s.eyebrow;$('title').innerHTML=s.title;$('subtitle').textContent=s.sub;$('phase').textContent=s.phase;$('hint').textContent=s.hint;
- $('fromDatum').textContent=from;$('toDatum').textContent=to;
- $('routeTop').textContent=from+'   —   '+to;
- $('fill').style.width=(elapsed/total*100)+'%';$('time').textContent=clock(elapsed)+' / '+clock(total);
- $('track').setAttribute('aria-valuenow',Math.round(elapsed/total*100));
- $('status').textContent=idx===7?'Arrived':focusRunning?'In focus':'Ready to start';
- [...$('chapters').children].forEach((b,i)=>b.classList.toggle('active',i===idx));
-}
-function tick(ts){if(focusRunning){const durationSeconds=focusDurationSeconds||focusRemaining;elapsed=durationSeconds?total*(1-focusRemaining/durationSeconds):0}draw();raf=requestAnimationFrame(tick)}
-chapters.forEach((s)=>{let b=document.createElement('span');b.className='chapter';b.title=s.name;b.setAttribute('aria-label',s.name);$('chapters').appendChild(b)});
-$('apply').onclick=()=>{from=$('fromInput').value.trim()||'Origin';to=$('toInput').value.trim()||'Destination';draw()};
-['fromInput','toInput'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')$('apply').click()}));
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&focusRunning)stopFocus()});
-
-// High-fidelity media playback connecting installed webm/mp4 audio and videos.
-// Procedural oscillator synth is deactivated to prevent sound overlapping.
-function startLofi(){
- const audio = $('mediaLofi');
- if (audio && audio.paused) audio.play().catch(()=>{});
-}
-function stopLofi(){
- const audio = $('mediaLofi');
- if (audio && !audio.paused) audio.pause();
-}
-function startCabin(){
- const cabin = $('mediaCabin');
- if (cabin && cabin.paused) cabin.play().catch(()=>{});
-}
-function stopCabin(){
- const cabin = $('mediaCabin');
- if (cabin && !cabin.paused) cabin.pause();
+  let s=chapters[idx];
+  $('eyebrow').textContent=s.eyebrow;
+  $('title').innerHTML=s.title;
+  $('subtitle').textContent=s.sub;
+  $('phase').textContent=s.phase;
+  $('hint').textContent=s.hint;
+  $('fromDatum').textContent=from;
+  $('toDatum').textContent=to;
+  $('routeTop').textContent=from+'   —   '+to;
+  $('fill').style.width=(elapsed/total*100)+'%';
+  $('time').textContent=clock(elapsed)+' / '+clock(total);
+  $('track').setAttribute('aria-valuenow',Math.round(elapsed/total*100));
+  $('status').textContent=idx===7?'Arrived':focusRunning?'In focus':'Ready to start';
+  [...$('chapters').children].forEach((b,i)=>b.classList.toggle('active',i===idx));
 }
 
-// A lightweight local focus timer prototype. It is independent of the flight preview
-// and will later be connected to the real Focus Flight session state.
-let focusRemaining=(savedFlight?.duration||25)*60,focusDurationSeconds=focusRemaining,focusRunning=false,focusInterval=null;
-if(savedFlight){$('studyLength').innerHTML=`<option value="${savedFlight.duration}">${savedFlight.duration} min flight</option><option value="25">25 min</option><option value="50">50 min</option><option value="90">90 min</option>`;$('studyLength').value=String(savedFlight.duration)}
-function paintFocus(){
- const mm=Math.floor(focusRemaining/60),ss=focusRemaining%60;
- $('studyTime').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
- if($('flightTopTimer')) $('flightTopTimer').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
- if($('flightTopPhase')) $('flightTopPhase').textContent=focusRunning?'IN FOCUS':'BOARDING';
- $('studyState').textContent=focusRemaining===0?'Complete':focusRunning?'Focusing':'Ready';
- $('studyToggle').textContent=focusRunning?'Pause':focusRemaining===0?'Again':'Start';
- $('studyNote').textContent=focusRemaining===0?'Focus block complete. Take a short break before the next one.':focusRunning?'One task. One window. Stay with it.':'Settle in. Start your focus timer when you are ready.';
+function tick(ts){
+  if(focusRunning){
+    const durationSeconds=focusDurationSeconds||focusRemaining;
+    elapsed=durationSeconds?total*(1-focusRemaining/durationSeconds):0;
+  }
+  draw();
+  raf=requestAnimationFrame(tick);
 }
-function stopFocus(){focusRunning=false;if(focusInterval){clearInterval(focusInterval);focusInterval=null}paintFocus()}
+
+chapters.forEach((s)=>{
+  let b=document.createElement('span');
+  b.className='chapter';
+  b.title=s.name;
+  b.setAttribute('aria-label',s.name);
+  $('chapters').appendChild(b);
+});
+
+// Focus Timer Logic
+let focusRemaining=(savedFlight?.duration||45)*60,focusDurationSeconds=focusRemaining,focusRunning=false,focusInterval=null;
+
 function startFocus(){
- if(focusRemaining===0){focusRemaining=Number($('studyLength').value)*60;focusDurationSeconds=focusRemaining}
- focusRunning=true;paintFocus();
- focusInterval=setInterval(()=>{if(!focusRunning)return;focusRemaining=Math.max(0,focusRemaining-1);if(focusRemaining===0){stopFocus();window.parent.postMessage({type:'flylofi-landed'},'*')}else paintFocus()},1000);
+  focusRunning=true;
+  focusInterval=setInterval(()=>{
+    if(!focusRunning)return;
+    focusRemaining=Math.max(0,focusRemaining-1);
+    if(focusRemaining===0){
+      focusRunning=false;
+      clearInterval(focusInterval);
+      window.parent.postMessage({type:'flylofi-landed'},'*');
+    }
+  },1000);
 }
-$('studyToggle').onclick=()=>{if(focusRunning)stopFocus();else startFocus()};
-$('studyReset').onclick=()=>{stopFocus();focusRemaining=Number($('studyLength').value)*60;focusDurationSeconds=focusRemaining;elapsed=0;paintFocus()};
-$('studyLength').onchange=()=>{stopFocus();focusRemaining=Number($('studyLength').value)*60;focusDurationSeconds=focusRemaining;elapsed=0;paintFocus()};
-paintFocus();if(savedFlight)startFocus();
-window.addEventListener('pagehide',()=>{try{$('mediaLofi')?.pause();$('mediaCabin')?.pause()}catch(e){}});
-draw();raf=requestAnimationFrame(tick);
+startFocus();
+
+window.addEventListener('pagehide',()=>{
+  try{$('mediaLofi')?.pause();$('mediaCabin')?.pause()}catch(e){}
+});
+
+draw();
+raf=requestAnimationFrame(tick);
 })();
 </script>
-</body>
 <script src="cruise-enhancements.js"></script>
+</body>
 </html>

@@ -11,50 +11,106 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="icon-192.png">
 <style>
-:root{--bg:#071117;--panel:#10242c;--line:rgba(198,220,225,.18);--muted:#91a9b0;--text:#f4f8f8;--accent:#59dfa0;--coral:#ef9a72}
+:root{
+  --bg:#071117;--panel:#10242c;--line:rgba(198,220,225,.18);
+  --muted:#91a9b0;--text:#f4f8f8;--accent:#59dfa0;--coral:#ef9a72;
+  --gold:#f5d070;--perf-color:rgba(198,220,225,.35);
+}
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:radial-gradient(ellipse at 50% 20%,rgba(28,67,76,.45),transparent 58%),linear-gradient(145deg,#071117,#0b1b22 58%,#071117);color:var(--text);font:13px "DM Sans",system-ui,-apple-system,sans-serif;-webkit-text-size-adjust:100%;overflow-x:hidden}
+html,body{
+  margin:0;min-height:100%;
+  background:radial-gradient(ellipse at 50% 20%,rgba(28,67,76,.45),transparent 58%),linear-gradient(145deg,#071117,#0b1b22 58%,#071117);
+  color:var(--text);font:13px "DM Sans",system-ui,-apple-system,sans-serif;
+  -webkit-text-size-adjust:100%;overflow-x:hidden;
+}
 button,select,input{font:inherit}
-button{border:1px solid var(--line);border-radius:8px;padding:10px 14px;background:rgba(12,29,37,.78);color:var(--text);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(89,223,160,.25)}
+button{
+  border:1px solid var(--line);border-radius:8px;padding:10px 14px;
+  background:rgba(12,29,37,.78);color:var(--text);cursor:pointer;
+  touch-action:manipulation;-webkit-tap-highlight-color:rgba(89,223,160,.25);
+  transition:all .15s ease;
+}
 button:hover,button:active{border-color:var(--accent);color:var(--accent)}
 [hidden]{display:none!important}
 .app{min-height:100vh;display:flex;flex-direction:column}
-.topbar{height:65px;padding:0 clamp(16px,4vw,60px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(7,17,23,.88);backdrop-filter:blur(14px);position:sticky;top:0;z-index:10}
+.topbar{
+  height:65px;padding:0 clamp(16px,4vw,60px);display:flex;align-items:center;
+  justify-content:space-between;border-bottom:1px solid var(--line);
+  background:rgba(7,17,23,.88);backdrop-filter:blur(14px);position:sticky;top:0;z-index:10;
+}
 .brand{font:700 15px "Space Grotesk",sans-serif;letter-spacing:2px;display:flex;align-items:center}
 .brand span{color:var(--accent);margin-right:8px;font-size:18px}
 .view{flex:1;overflow-y:auto}
-.home-grid,.ticket-grid{max-width:1180px;margin:auto;padding:clamp(28px,5vw,70px) 20px;display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(24px,5vw,80px);align-items:start}
+.home-grid,.ticket-grid{
+  max-width:1180px;margin:auto;padding:clamp(28px,5vw,70px) 20px;
+  display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(24px,5vw,80px);align-items:start;
+}
 .eyebrow{font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
-.hero h1,.ticket-copy h1,.landing h1{font:700 clamp(36px,5vw,68px)/1 "Space Grotesk",sans-serif;letter-spacing:-2px;margin:16px 0;color:var(--text)}
+.hero h1,.ticket-copy h1,.landing h1{
+  font:700 clamp(36px,5vw,68px)/1 "Space Grotesk",sans-serif;letter-spacing:-2px;
+  margin:16px 0;color:var(--text);
+}
 em{color:var(--coral);font-style:normal}
 .hero p,.ticket-copy p{color:var(--muted);line-height:1.6;max-width:380px;font-size:13px}
 .hero-actions{margin-top:24px;display:flex;flex-direction:column;gap:12px;max-width:340px}
-.quick-board-btn{width:100%;padding:15px 22px;border:none;border-radius:10px;background:var(--accent);color:#071a12;font:800 14px "Space Grotesk",sans-serif;letter-spacing:.05em;cursor:pointer;box-shadow:0 8px 24px rgba(89,223,160,.28);transition:transform .15s,box-shadow .15s}
+.quick-board-btn{
+  width:100%;padding:15px 22px;border:none;border-radius:10px;
+  background:var(--accent);color:#071a12;font:800 14px "Space Grotesk",sans-serif;
+  letter-spacing:.05em;cursor:pointer;box-shadow:0 8px 24px rgba(89,223,160,.28);
+  transition:transform .15s,box-shadow .15s;
+}
 .quick-board-btn:active{transform:scale(.98);box-shadow:0 4px 12px rgba(89,223,160,.2)}
 .stats{display:flex;gap:24px;margin-top:32px}
 .stats strong{display:block;font:600 18px "Space Grotesk",sans-serif}
 .stats small{color:var(--muted);font-size:9px}
-.booking,.ticket-card{border:1px solid var(--line);border-radius:12px;background:linear-gradient(130deg,rgba(255,255,255,.05),transparent 35%),linear-gradient(145deg,#142a34,#0d1c24 68%,#10242c);box-shadow:0 24px 60px rgba(0,0,0,.35);padding:24px}
-.card-head,.ticket-head{display:flex;justify-content:space-between;align-items:start}
+
+.booking{
+  border:1px solid var(--line);border-radius:14px;
+  background:linear-gradient(130deg,rgba(255,255,255,.05),transparent 35%),linear-gradient(145deg,#142a34,#0d1c24 68%,#10242c);
+  box-shadow:0 24px 60px rgba(0,0,0,.35);padding:26px;
+}
+.card-head{display:flex;justify-content:space-between;align-items:start}
 .card-head h2{margin:6px 0 20px;font:700 22px "Space Grotesk",sans-serif;color:var(--text)}
 .card-head.clickable{cursor:pointer;user-select:none;-webkit-user-select:none}
-.flight-no{color:var(--accent);font:700 12px "Space Grotesk",sans-serif;background:rgba(89,223,160,.12);padding:4px 8px;border-radius:6px}
+.flight-no{
+  color:var(--accent);font:700 12px "Space Grotesk",sans-serif;
+  background:rgba(89,223,160,.12);padding:4px 8px;border-radius:6px;
+}
 .route-grid{display:grid;grid-template-columns:1fr 24px 1fr;gap:10px;align-items:end}
 .route-grid label,legend{color:var(--muted);font-size:10px;letter-spacing:.07em;text-transform:uppercase}
-.route-grid select{width:100%;margin-top:7px;padding:12px 10px;border-radius:8px;border:1px solid var(--line);background:#091820;color:var(--text);outline:0;font-size:13px;cursor:pointer}
+.route-grid select{
+  width:100%;margin-top:7px;padding:12px 10px;border-radius:8px;
+  border:1px solid var(--line);background:#091820;color:var(--text);outline:0;font-size:13px;cursor:pointer;
+}
 .arrow{text-align:center;color:var(--coral);font-size:20px;padding-bottom:10px}
 .rule{height:1px;background:var(--line);margin:20px 0}
 fieldset{border:0;padding:0;margin:0 0 18px}
 legend{margin-bottom:10px;font-weight:600}
 .options{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.options label{position:relative;display:grid;place-items:center;padding:12px 6px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(89,223,160,.2);transition:all .15s}
-.options label.active,.options label:has(input:checked){border-color:var(--accent)!important;background:rgba(89,223,160,.16)!important;color:var(--accent)!important;box-shadow:0 0 14px rgba(89,223,160,.2)}
+.options label{
+  position:relative;display:grid;place-items:center;padding:12px 6px;
+  border:1px solid var(--line);border-radius:8px;color:var(--muted);
+  font-size:11px;font-weight:600;cursor:pointer;touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(89,223,160,.2);transition:all .15s;
+}
+.options label.active,.options label:has(input:checked){
+  border-color:var(--accent)!important;background:rgba(89,223,160,.16)!important;
+  color:var(--accent)!important;box-shadow:0 0 14px rgba(89,223,160,.2);
+}
 .options input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;z-index:2}
 
 /* Seat Selection Grid */
 .seat-picker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.seat-pill{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 6px;border:1px solid var(--line);border-radius:10px;background:rgba(9,24,32,.75);color:var(--muted);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(89,223,160,.2);transition:all .15s}
-.seat-pill.active,.seat-pill:has(input:checked){border-color:var(--accent)!important;background:rgba(89,223,160,.16)!important;color:var(--text)!important;box-shadow:0 0 16px rgba(89,223,160,.22)}
+.seat-pill{
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:12px 6px;border:1px solid var(--line);border-radius:10px;background:rgba(9,24,32,.75);
+  color:var(--muted);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(89,223,160,.2);
+  transition:all .15s;
+}
+.seat-pill.active,.seat-pill:has(input:checked){
+  border-color:var(--accent)!important;background:rgba(89,223,160,.16)!important;
+  color:var(--text)!important;box-shadow:0 0 16px rgba(89,223,160,.22);
+}
 .seat-pill input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;z-index:2}
 .seat-icon{font-size:16px;margin-bottom:2px}
 .seat-code{font:700 13px "Space Grotesk",sans-serif;color:var(--text);letter-spacing:.05em}
@@ -63,47 +119,397 @@ legend{margin-bottom:10px;font-weight:600}
 .seat-tag{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-top:3px;font-weight:700}
 .seat-pill.active .seat-tag,.seat-pill:has(input:checked) .seat-tag{color:var(--accent)}
 
-.board{width:100%;margin-top:12px;padding:15px 18px;border:none;border-radius:10px;background:var(--accent);color:#08241a;font:800 14px "Space Grotesk",sans-serif;letter-spacing:.04em;cursor:pointer;box-shadow:0 8px 24px rgba(89,223,160,.28);transition:transform .15s}
+.board{
+  width:100%;margin-top:14px;padding:15px 18px;border:none;border-radius:10px;
+  background:var(--accent);color:#08241a;font:800 14px "Space Grotesk",sans-serif;
+  letter-spacing:.04em;cursor:pointer;box-shadow:0 8px 24px rgba(89,223,160,.28);
+  transition:transform .15s,box-shadow .15s;
+}
 .board:active{transform:scale(.98)}
-.ticket-card{padding:0;overflow:hidden}
-.ticket-head{padding:18px 22px;border-bottom:1px solid var(--line)}
-.ticket-head strong{letter-spacing:.16em;font-size:11px}
-.confirmed{color:var(--accent);font-size:10px;font-weight:700}
-.ticket-route{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:15px;padding:32px 22px}
-.ticket-route small{color:var(--muted);font-size:9px;letter-spacing:.15em}
-.ticket-route strong{display:block;font:700 48px "Space Grotesk",sans-serif;color:var(--accent);margin-top:6px}
-.ticket-route span{color:var(--muted);font-size:11px}
-.ticket-destination{text-align:right}
-.ticket-line{color:var(--coral);text-align:center;font-size:18px}
-.ticket-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:16px 22px;background:rgba(89,223,160,.08)}
-.ticket-meta small,.ticket-meta strong{display:block}
-.ticket-meta small{color:var(--muted);font-size:8px}
-.ticket-meta strong{margin-top:4px;color:var(--text);font-size:12px}
-.ticket-footer{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;gap:15px}
-.ticket-footer span{color:var(--muted);font-size:11px}
-.ticket-actions{display:flex;gap:8px}
+
+/* ==========================================================================
+   2. PHYSICAL MOTION-TEAR BOARDING PASS STYLES
+   ========================================================================== */
+.ticket-wrapper{
+  perspective:1200px;
+  width:100%;
+}
+.boarding-pass-card{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 180px;
+  border:1px solid rgba(198,220,225,.28);
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(255,255,255,.04),transparent 45%),linear-gradient(145deg,#132832,#0c1a22 72%,#0f222b);
+  box-shadow:0 30px 80px rgba(0,0,0,.45);
+  overflow:visible;
+  user-select:none;
+}
+.pass-main{
+  position:relative;
+  padding:26px 24px 22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  border-top-left-radius:16px;
+  border-bottom-left-radius:16px;
+  overflow:hidden;
+}
+.pass-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line);
+}
+.pass-brand{
+  font:700 11px "Space Grotesk",sans-serif;
+  letter-spacing:.18em;
+  color:#cbe0e0;
+}
+.pass-brand span{color:var(--accent);margin-right:4px}
+.pass-type-badge{
+  font-size:9px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--accent);
+  background:rgba(89,223,160,.12);
+  border:1px solid rgba(89,223,160,.25);
+  padding:3px 9px;
+  border-radius:999px;
+  font-weight:700;
+}
+.pass-route{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:16px;
+  margin:22px 0 18px;
+}
+.route-node small{
+  color:var(--muted);
+  font-size:8px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.route-node strong{
+  display:block;
+  font:700 clamp(32px,4.5vw,46px) "Space Grotesk",sans-serif;
+  color:var(--accent);
+  line-height:1;
+  margin:4px 0 2px;
+}
+.route-node span{
+  color:#ccd9dc;
+  font-size:11px;
+}
+.route-node.dest{text-align:right}
+.route-mid-plane{
+  text-align:center;
+  color:var(--coral);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+.route-mid-plane .plane-glyph{font-size:20px}
+.route-mid-plane small{font-size:8px;letter-spacing:.1em;color:var(--muted)}
+
+.pass-meta-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:14px 16px;
+  border-radius:10px;
+  background:rgba(89,223,160,.06);
+  border:1px solid rgba(89,223,160,.12);
+  margin-bottom:16px;
+}
+.pass-meta-grid small{color:var(--muted);font-size:8px;letter-spacing:.12em;text-transform:uppercase}
+.pass-meta-grid strong{display:block;margin-top:3px;font-size:12px;color:var(--text)}
+.pass-meta-grid strong.seat-highlight{color:var(--accent);font-size:14px;font-weight:800}
+
+.pass-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:12px;
+  border-top:1px solid var(--line);
+  gap:14px;
+}
+.barcode-box{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.barcode-bars{
+  width:130px;
+  height:24px;
+  background:repeating-linear-gradient(90deg,#fff 0,#fff 2px,transparent 2px,transparent 4px,#fff 4px,#fff 7px,transparent 7px,transparent 9px,#fff 9px,#fff 10px,transparent 10px,transparent 13px,#fff 13px,#fff 16px,transparent 16px,transparent 17px);
+  opacity:.7;
+}
+.barcode-text{font-size:8px;letter-spacing:.18em;color:var(--muted);font-family:monospace}
+.pass-duration-pill{
+  font-size:10px;
+  color:#bed6d7;
+  letter-spacing:.05em;
+}
+
+/* Perforation Divider with Physical Semi-Circular Notches */
+.perforation-divider{
+  position:absolute;
+  right:179px;
+  top:0;
+  bottom:0;
+  width:2px;
+  z-index:3;
+  pointer-events:none;
+}
+.perf-notch{
+  position:absolute;
+  left:-10px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:#071117;
+  border:1px solid rgba(198,220,225,.28);
+  box-shadow:inset 0 0 6px rgba(0,0,0,.6);
+  z-index:4;
+}
+.perf-notch.top{top:-11px}
+.perf-notch.bottom{bottom:-11px}
+.perf-dashed-line{
+  position:absolute;
+  top:10px;
+  bottom:10px;
+  left:0;
+  width:1px;
+  border-left:2px dashed var(--perf-color);
+  transition:border-color .2s;
+}
+.perf-scissors{
+  position:absolute;
+  top:50%;
+  left:-8px;
+  transform:translateY(-50%);
+  background:#0d1f27;
+  color:var(--coral);
+  font-size:11px;
+  padding:2px 0;
+}
+
+/* Tearable Boarding Stub */
+.pass-stub-tearable{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:22px 16px;
+  background:rgba(255,255,255,.025);
+  border-top-right-radius:16px;
+  border-bottom-right-radius:16px;
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+  cursor:grab;
+  transform-origin:top left;
+  transition:box-shadow .2s ease;
+}
+.pass-stub-tearable:active{cursor:grabbing}
+.pass-stub-tearable.tearing{
+  box-shadow:-6px 8px 30px rgba(0,0,0,.6);
+}
+.pass-stub-tearable.torn-off{
+  animation:stubRipDrop 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events:none;
+}
+@keyframes stubRipDrop{
+  0%{transform:translate(0, 30px) rotate(4deg);opacity:1}
+  40%{transform:translate(28px, 120px) rotate(18deg);opacity:.85}
+  100%{transform:translate(65px, 320px) rotate(45deg);opacity:0}
+}
+
+.stub-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:8px;
+  letter-spacing:.16em;
+  color:var(--muted);
+  text-transform:uppercase;
+  padding-bottom:10px;
+  border-bottom:1px dashed var(--perf-color);
+}
+.stub-seat-box{
+  text-align:center;
+  padding:14px 8px;
+  background:rgba(89,223,160,.08);
+  border:1px solid rgba(89,223,160,.2);
+  border-radius:10px;
+  margin:10px 0;
+}
+.stub-seat-label{font-size:8px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;display:block}
+.stub-seat-num{font:800 24px "Space Grotesk",sans-serif;color:var(--accent);display:block;margin-top:2px}
+.stub-seat-desc{font-size:8px;color:#bed7d5;display:block;margin-top:2px}
+
+.stub-flight-details{
+  display:flex;
+  justify-content:space-between;
+  font-size:9px;
+  color:var(--muted);
+  padding:6px 0;
+}
+.stub-flight-details strong{color:var(--text);display:block;font-size:11px}
+
+/* Tactile Tear Motion Drag Handle */
+.stub-motion-handle{
+  position:relative;
+  margin-top:12px;
+  padding:12px 10px;
+  border:1px dashed var(--accent);
+  background:rgba(89,223,160,.12);
+  border-radius:10px;
+  text-align:center;
+  cursor:grab;
+  transition:background .2s,border-color .2s;
+}
+.stub-motion-handle:hover{
+  background:rgba(89,223,160,.18);
+}
+.handle-arrow{
+  font-size:14px;
+  color:var(--accent);
+  animation:pulseDown 1.4s ease-in-out infinite;
+}
+@keyframes pulseDown{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(4px)}
+}
+.handle-text{
+  font:700 9px "Space Grotesk",sans-serif;
+  letter-spacing:.1em;
+  color:var(--text);
+  margin-top:4px;
+  text-transform:uppercase;
+  line-height:1.3;
+}
+.tear-progress-track{
+  margin-top:8px;
+  height:4px;
+  background:rgba(255,255,255,.1);
+  border-radius:99px;
+  overflow:hidden;
+}
+.tear-progress-fill{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--coral));
+  transition:width .05s linear;
+}
+
+.quick-rip-button{
+  width:100%;
+  margin-top:8px;
+  padding:8px 6px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.05em;
+  border-radius:8px;
+  border:1px solid rgba(89,223,160,.3);
+  background:rgba(9,24,32,.9);
+  color:var(--accent);
+  cursor:pointer;
+}
+.quick-rip-button:hover{background:rgba(89,223,160,.2)}
+
+/* Realistic Inked Boarding Stamp */
+.boarded-stamp{
+  position:absolute;
+  right:32px;
+  top:50%;
+  transform:translateY(-50%) rotate(-14deg) scale(0);
+  padding:14px 22px;
+  border:3px solid var(--accent);
+  border-radius:12px;
+  color:var(--accent);
+  font:900 20px "Space Grotesk",sans-serif;
+  letter-spacing:.18em;
+  text-align:center;
+  pointer-events:none;
+  background:rgba(7,28,20,.85);
+  box-shadow:0 0 35px rgba(89,223,160,.4);
+  opacity:0;
+  transition:all .28s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  z-index:5;
+}
+.boarded-stamp.stamped{
+  opacity:1;
+  transform:translateY(-50%) rotate(-14deg) scale(1);
+}
+.boarded-stamp small{
+  display:block;
+  font-size:8px;
+  letter-spacing:.2em;
+  margin-top:4px;
+  color:#9ff5ca;
+}
+
+/* Cruise View Container */
 .cruise-view{position:fixed;inset:65px 0 0;background:#071117;z-index:20}
 .cruise-view iframe{width:100%;height:100%;border:0}
-.cruise-close{position:absolute;z-index:25;right:16px;top:14px;color:var(--muted);font-size:11px;background:rgba(7,17,23,.85);border:1px solid var(--line);border-radius:6px;padding:6px 12px}
+.cruise-close{
+  position:absolute;z-index:25;right:16px;top:14px;color:var(--muted);
+  font-size:11px;background:rgba(7,17,23,.85);border:1px solid var(--line);
+  border-radius:6px;padding:6px 12px;
+}
+
+/* Passport Arrival Visa Stamp on Landing Screen */
 .landing{min-height:calc(100vh - 65px);display:grid;place-items:center;text-align:center;padding:30px}
-.landing-mark{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;color:var(--accent);background:rgba(89,223,160,.12);font-size:28px;margin:auto}
-.landing h1{margin-bottom:12px}
-.landing p{color:var(--muted)}
-.landing .board{width:auto;margin-top:22px;padding:12px 28px}
+.passport-stamp{
+  margin:20px auto 24px;
+  width:160px;
+  height:160px;
+  border:3px dashed var(--accent);
+  border-radius:50%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:var(--accent);
+  background:rgba(89,223,160,.06);
+  transform:rotate(-8deg);
+  box-shadow:0 0 40px rgba(89,223,160,.15);
+}
+.passport-stamp-star{font-size:22px}
+.passport-stamp-text{font:800 11px "Space Grotesk",sans-serif;letter-spacing:.2em;margin:4px 0}
+.passport-stamp-city{font:700 16px "Space Grotesk",sans-serif;letter-spacing:.1em;color:#fff}
+.passport-stamp-date{font-size:8px;letter-spacing:.15em;color:var(--muted);margin-top:4px}
+
 @media(max-width:780px){
   .topbar{height:58px}
   .home-grid,.ticket-grid{grid-template-columns:1fr;padding:20px 14px;gap:24px}
   .hero h1,.ticket-copy h1{font-size:38px}
   .stats{margin-top:18px}
   .booking{padding:18px}
-  .ticket-route{padding:24px 16px}
-  .ticket-route strong{font-size:36px}
-  .ticket-meta{padding:14px 16px}
-  .ticket-footer{padding:16px;flex-direction:column;align-items:stretch}
-  .ticket-footer .ticket-actions{width:100%}
-  .ticket-footer .ticket-actions button{flex:1}
-  .cruise-view{inset:58px 0 0}
   .seat-picker-grid{grid-template-columns:repeat(2,1fr)}
+  .boarding-pass-card{grid-template-columns:1fr;overflow:visible}
+  .perforation-divider{
+    right:0;left:0;top:auto;bottom:148px;width:100%;height:2px;
+  }
+  .perf-notch.top{left:-11px;top:-9px}
+  .perf-notch.bottom{right:-11px;left:auto;top:-9px}
+  .perf-dashed-line{
+    top:0;bottom:0;left:10px;right:10px;width:auto;height:1px;
+    border-left:none;border-top:2px dashed var(--perf-color);
+  }
+  .perf-scissors{left:50%;top:-9px;transform:translateX(-50%)}
+  .pass-stub-tearable{
+    border-top-right-radius:0;border-bottom-left-radius:16px;
+    border-top:1px dashed var(--perf-color);
+    padding:16px;
+  }
+  .cruise-view{inset:58px 0 0}
 }
 .top-actions{display:flex;align-items:center;gap:12px}
 .top-actions button{padding:7px 13px;font-size:11px;font-weight:600;color:var(--muted);background:rgba(12,29,37,.7)}
@@ -123,12 +529,13 @@ legend{margin-bottom:10px;font-weight:600}
     </div>
   </header>
 
+  <!-- HOME / BOOKING VIEW -->
   <section class="view" id="homeView">
     <div class="home-grid">
       <div class="hero">
-        <div class="eyebrow">THE FOCUS ROUTE · SESSION 001</div>
+        <div class="eyebrow">THE FOCUS ROUTE · FLIGHT CABIN</div>
         <h1>Make focus<br><em>a destination.</em></h1>
-        <p>Choose your route, select your preferred seat, and settle into a rich cruise-study experience.</p>
+        <p>Choose your route, select your preferred seat perspective, and tear your boarding pass to settle into a rich focus journey.</p>
         <div class="hero-actions">
           <button class="quick-board-btn" id="heroQuickBoard" type="button">✈ QUICK START FLIGHT →</button>
         </div>
@@ -177,7 +584,7 @@ legend{margin-bottom:10px;font-weight:600}
         </fieldset>
 
         <fieldset>
-          <legend>Select aircraft seat</legend>
+          <legend>Select aircraft seat perspective</legend>
           <div class="seat-picker-grid" id="seatOptions">
             <label class="seat-pill active">
               <input type="radio" name="seat" value="14A" data-type="Window Seat · Quiet Cabin" checked>
@@ -210,58 +617,144 @@ legend{margin-bottom:10px;font-weight:600}
           </div>
         </fieldset>
 
-        <button class="board" id="submitBookFlight" type="submit">✈ Book Flight & Board Aircraft →</button>
+        <button class="board" id="submitBookFlight" type="submit">✈ Review Boarding Pass &amp; Board →</button>
       </form>
     </div>
   </section>
 
+  <!-- TICKET / MOTION-TEAR BOARDING PASS VIEW -->
   <section class="view" id="ticketView" hidden>
     <div class="ticket-grid">
       <div class="ticket-copy">
-        <div class="eyebrow">ITINERARY CONFIRMED · READY FOR BOARDING</div>
-        <h1>Your focus flight<br><em>is booked.</em></h1>
-        <p>Keep this pass close. Boarding starts when you are ready to commit to the full route.</p>
+        <div class="eyebrow">ITINERARY CONFIRMED · PHYSICAL BOARDING</div>
+        <h1>Tear pass to<br><em>take your seat.</em></h1>
+        <p>Swipe or drag down the boarding stub along the perforated line to physically board your focus aircraft.</p>
         <button id="editButton" type="button">← Edit itinerary</button>
       </div>
-      <article class="ticket-card">
-        <div class="ticket-head">
-          <strong>FLYLOFI · BOARDING PASS</strong>
-          <span class="confirmed">● CONFIRMED</span>
-        </div>
-        <div class="ticket-route">
-          <div><small>FROM</small><strong id="ticketFromCode">MAA</strong><span id="ticketFromName">Chennai</span></div>
-          <div class="ticket-line">✈<br><small style="font-size:8px">SIMULATED ROUTE</small></div>
-          <div class="ticket-destination"><small>TO</small><strong id="ticketToCode">SIN</strong><span id="ticketToName">Singapore</span></div>
-        </div>
-        <div class="ticket-meta">
-          <div><small>SEAT</small><strong id="ticketSeat">14A</strong></div>
-          <div><small>GATE</small><strong>F04</strong></div>
-          <div><small>GROUP</small><strong>FOCUS 1</strong></div>
-          <div><small>CLASS</small><strong id="ticketCategory">PROGRAMMING</strong></div>
-        </div>
-        <div class="ticket-footer">
-          <span id="ticketDuration">45 minutes · Full credit on landing</span>
-          <div class="ticket-actions">
-            <button id="showDestination" type="button">Destination view</button>
-            <button class="board" id="boardButton" type="button">Board aircraft →</button>
+
+      <div class="ticket-wrapper">
+        <article class="boarding-pass-card" id="boardingPass">
+          <!-- Main Ticket Body -->
+          <div class="pass-main">
+            <div class="pass-header">
+              <div class="pass-brand"><span>✈</span> FLYLOFI AIRWAYS</div>
+              <div class="pass-type-badge">FOCUS CABIN</div>
+              <span class="flight-no">FF-042</span>
+            </div>
+
+            <div class="pass-route">
+              <div class="route-node">
+                <small>DEPARTURE</small>
+                <strong id="ticketFromCode">MAA</strong>
+                <span id="ticketFromName">Chennai</span>
+              </div>
+              <div class="route-mid-plane">
+                <span class="plane-glyph">✈</span>
+                <small>NON-STOP FOCUS</small>
+              </div>
+              <div class="route-node dest">
+                <small>DESTINATION</small>
+                <strong id="ticketToCode">SIN</strong>
+                <span id="ticketToName">Singapore</span>
+              </div>
+            </div>
+
+            <div class="pass-meta-grid">
+              <div>
+                <small>SEAT</small>
+                <strong class="seat-highlight" id="ticketSeat">14A</strong>
+              </div>
+              <div>
+                <small>GATE</small>
+                <strong>F04</strong>
+              </div>
+              <div>
+                <small>GROUP</small>
+                <strong>FOCUS 1</strong>
+              </div>
+              <div>
+                <small>CLASS</small>
+                <strong id="ticketCategory">CODE</strong>
+              </div>
+            </div>
+
+            <div class="pass-bottom">
+              <div class="barcode-box">
+                <div class="barcode-bars"></div>
+                <span class="barcode-text">FF 092847 042</span>
+              </div>
+              <span class="pass-duration-pill" id="ticketDuration">45 minutes · Deep cruise</span>
+            </div>
+
+            <!-- Inked Boarded Stamp (Revealed upon tearing) -->
+            <div class="boarded-stamp" id="boardedStamp">
+              <span>✓ BOARDED</span>
+              <small>GATE CLOSED · CLEARED FOR FLIGHT</small>
+            </div>
           </div>
-        </div>
-      </article>
+
+          <!-- Perforation Divider Line -->
+          <div class="perforation-divider" id="perforationDivider">
+            <div class="perf-notch top"></div>
+            <div class="perf-dashed-line"></div>
+            <span class="perf-scissors">✂</span>
+            <div class="perf-notch bottom"></div>
+          </div>
+
+          <!-- Interactive Tearable Stub -->
+          <div class="pass-stub-tearable" id="passStubTearable">
+            <div class="stub-header">
+              <span>PASSENGER STUB</span>
+              <span>FF-042</span>
+            </div>
+
+            <div class="stub-seat-box">
+              <span class="stub-seat-label">ASSIGNED SEAT</span>
+              <span class="stub-seat-num" id="stubSeatVal">14A</span>
+              <span class="stub-seat-desc" id="stubSeatDesc">WINDOW</span>
+            </div>
+
+            <div class="stub-flight-details">
+              <div><small>FROM</small><strong id="stubFrom">MAA</strong></div>
+              <div><small>TO</small><strong id="stubTo">SIN</strong></div>
+              <div><small>TIME</small><strong id="stubTime">45M</strong></div>
+            </div>
+
+            <!-- Tactile Motion Tear Handle -->
+            <div class="stub-motion-handle" id="stubTearHandle" title="Drag / Swipe Down to Tear Stub">
+              <div class="handle-arrow">▼</div>
+              <div class="handle-text">DRAG DOWN<br>TO TEAR STUB</div>
+              <div class="tear-progress-track">
+                <div class="tear-progress-fill" id="tearProgressFill"></div>
+              </div>
+            </div>
+
+            <button type="button" class="quick-rip-button" id="quickRipBtn">✂ Rip to Board</button>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
+  <!-- FLIGHT CRUISE VIEW -->
   <section class="cruise-view" id="cruiseView" hidden>
     <button class="cruise-close" id="closeCruise" type="button">← Exit Flight</button>
     <iframe id="cruiseFrame" title="Flylofi cruise study experience" src="cruise.html"></iframe>
   </section>
 
+  <!-- LANDING / IMMIGRATION PASSPORT STAMP VIEW -->
   <section class="view landing" id="landingView" hidden>
     <div>
-      <div class="landing-mark">✦</div>
+      <div class="passport-stamp">
+        <div class="passport-stamp-star">★</div>
+        <div class="passport-stamp-text">FLYLOFI ARRIVAL</div>
+        <div class="passport-stamp-city" id="passportCity">SINGAPORE</div>
+        <div class="passport-stamp-date" id="passportDate">FOCUS COMPLETED</div>
+      </div>
       <div class="eyebrow">FLIGHT COMPLETE · SUCCESSFULLY LANDED</div>
       <h1>You made<br><em>it all the way.</em></h1>
       <p id="landingText">Your focus journey is complete.</p>
-      <button class="board" id="homeButton" type="button">Book another flight</button>
+      <button class="board" id="homeButton" type="button" style="width:auto;display:inline-block;padding:12px 28px;margin-top:20px">Book another flight</button>
     </div>
   </section>
 </div>
@@ -307,14 +800,31 @@ function launchFlight(data){
 }
 
 function showTicket(data){
-  activeFlight=data;
-  $('ticketFromCode').textContent=data.departure;
-  $('ticketToCode').textContent=data.destination;
-  $('ticketFromName').textContent=airports[data.departure]||data.departure;
-  $('ticketToName').textContent=airports[data.destination]||data.destination;
-  $('ticketCategory').textContent=data.category.toUpperCase();
-  $('ticketDuration').textContent=`${data.duration} minutes · Full credit on landing`;
-  if($('ticketSeat')) $('ticketSeat').textContent=data.seat || '14A';
+  activeFlight = data;
+  $('ticketFromCode').textContent = data.departure;
+  $('ticketToCode').textContent = data.destination;
+  $('ticketFromName').textContent = airports[data.departure] || data.departure;
+  $('ticketToName').textContent = airports[data.destination] || data.destination;
+  $('ticketCategory').textContent = data.category.toUpperCase();
+  $('ticketDuration').textContent = `${data.duration} minutes · Deep cruise`;
+  $('ticketSeat').textContent = data.seat || '14A';
+
+  // Stub data
+  $('stubSeatVal').textContent = data.seat || '14A';
+  $('stubFrom').textContent = data.departure;
+  $('stubTo').textContent = data.destination;
+  $('stubTime').textContent = `${data.duration}M`;
+
+  const descMap = {
+    '14A': 'WINDOW',
+    '14C': 'AISLE',
+    '01A': 'SUITE',
+    '02F': 'WING'
+  };
+  if ($('stubSeatDesc')) $('stubSeatDesc').textContent = descMap[data.seat] || 'CABIN';
+
+  // Reset tear state
+  resetTearState();
   selectView('ticketView');
 }
 
@@ -341,13 +851,11 @@ document.querySelectorAll('.options label, .seat-picker-grid label').forEach((la
 });
 updateOptionVisuals();
 
-// Form submit -> directly launch flight with selected seat
-$('bookingForm').addEventListener('submit', (event) => {
-  event.preventDefault();
+function collectFormData() {
   const durInput = document.querySelector('input[name="duration"]:checked');
   const catInput = document.querySelector('input[name="category"]:checked');
   const seatInput = document.querySelector('input[name="seat"]:checked');
-  const data = {
+  return {
     departure: departure.value || 'MAA',
     destination: destination.value || 'SIN',
     duration: durInput ? Number(durInput.value) : 45,
@@ -356,25 +864,21 @@ $('bookingForm').addEventListener('submit', (event) => {
     seatType: seatInput ? (seatInput.getAttribute('data-type') || 'Window Seat · Quiet Cabin') : 'Window Seat · Quiet Cabin',
     number: '042'
   };
-  launchFlight(data);
+}
+
+// Form submit -> Show Boarding Pass for Physical Motion Tear
+$('bookingForm').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const data = collectFormData();
+  showTicket(data);
 });
 
 // Quick board in hero
 const heroBtn = $('heroQuickBoard');
 if (heroBtn) {
   heroBtn.addEventListener('click', () => {
-    const durInput = document.querySelector('input[name="duration"]:checked');
-    const catInput = document.querySelector('input[name="category"]:checked');
-    const seatInput = document.querySelector('input[name="seat"]:checked');
-    launchFlight({
-      departure: departure.value || 'MAA',
-      destination: destination.value || 'SIN',
-      duration: durInput ? Number(durInput.value) : 45,
-      category: catInput ? catInput.value : 'Programming',
-      seat: seatInput ? seatInput.value : '14A',
-      seatType: seatInput ? (seatInput.getAttribute('data-type') || 'Window Seat · Quiet Cabin') : 'Window Seat · Quiet Cabin',
-      number: '042'
-    });
+    const data = collectFormData();
+    showTicket(data);
   });
 }
 
@@ -382,11 +886,11 @@ if (heroBtn) {
 const navBoard = $('quickLaunchNav');
 if (navBoard) {
   navBoard.addEventListener('click', () => {
-    launchFlight(activeFlight);
+    showTicket(activeFlight);
   });
 }
 
-// Card head click scroll/focus
+// Card head click scroll
 const cardHead = $('cardHeadClickable');
 if (cardHead) {
   cardHead.addEventListener('click', () => {
@@ -394,20 +898,185 @@ if (cardHead) {
   });
 }
 
-$('editButton').onclick=()=>selectView('homeView');
-$('boardButton').onclick=()=>launchFlight(activeFlight);
-$('closeCruise').onclick=()=>selectView('homeView');
-$('homeNavButton').onclick=()=>{selectView('homeView');};
-$('homeButton').onclick=()=>selectView('homeView');
+$('editButton').onclick = () => selectView('homeView');
+$('closeCruise').onclick = () => selectView('homeView');
+$('homeNavButton').onclick = () => selectView('homeView');
+$('homeButton').onclick = () => selectView('homeView');
 
 window.addEventListener('message', (event) => {
   if (event.data?.type === 'flylofi-landed') {
     selectView('landingView');
+    const destName = airports[activeFlight.destination] || activeFlight.destination;
     $('landingText').textContent = `${activeFlight.duration} minutes of ${activeFlight.category.toLowerCase()} focus are now yours.`;
+    if ($('passportCity')) $('passportCity').textContent = destName.toUpperCase();
+    if ($('passportDate')) $('passportDate').textContent = `${activeFlight.duration} MIN COMPLETED`;
   }
 });
 
-if('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
+/* ==========================================================================
+   3. PHYSICAL MOTION-TEAR GESTURE & WEB AUDIO SYNTHESIZER
+   ========================================================================== */
+const stub = $('passStubTearable');
+const tearHandle = $('stubTearHandle');
+const tearProgress = $('tearProgressFill');
+const stamp = $('boardedStamp');
+const quickRip = $('quickRipBtn');
+
+let isDragging = false;
+let startY = 0;
+let currentDeltaY = 0;
+let hasTorn = false;
+let lastSoundDelta = 0;
+
+// Web Audio Paper Tear Sound Generator (Procedural, Zero Latency)
+function playTearSound(type = 'rip') {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const duration = type === 'final' ? 0.35 : 0.08;
+    const bufferSize = Math.floor(ctx.sampleRate * duration);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const output = buffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+      const progress = i / bufferSize;
+      const decay = Math.pow(1 - progress, type === 'final' ? 1.5 : 2.5);
+      // Pink/White noise crackle
+      output[i] = (Math.random() * 2 - 1) * decay * (Math.random() > 0.35 ? 1 : 0.2);
+    }
+
+    const whiteNoise = ctx.createBufferSource();
+    whiteNoise.buffer = buffer;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(type === 'final' ? 1600 : 2200, ctx.currentTime);
+    filter.frequency.exponentialRampToValueAtTime(type === 'final' ? 650 : 1200, ctx.currentTime + duration);
+    filter.Q.value = 3.5;
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(type === 'final' ? 0.45 : 0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+
+    whiteNoise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    whiteNoise.start();
+  } catch (e) {}
+}
+
+function resetTearState() {
+  hasTorn = false;
+  isDragging = false;
+  currentDeltaY = 0;
+  if (stub) {
+    stub.classList.remove('tearing', 'torn-off');
+    stub.style.transform = '';
+  }
+  if (tearProgress) tearProgress.style.width = '0%';
+  if (stamp) stamp.classList.remove('stamped');
+}
+
+function triggerCompleteTear() {
+  if (hasTorn) return;
+  hasTorn = true;
+  isDragging = false;
+
+  // Final rip sound & haptics
+  playTearSound('final');
+  if (navigator.vibrate) {
+    try { navigator.vibrate([25, 45, 30]); } catch (e) {}
+  }
+
+  // Animation: Stub drops and separates
+  stub.classList.add('torn-off');
+
+  // Stamp slams down
+  setTimeout(() => {
+    if (stamp) stamp.classList.add('stamped');
+  }, 220);
+
+  // Auto transition to cockpit after satisfaction delay
+  setTimeout(() => {
+    launchFlight(activeFlight);
+  }, 750);
+}
+
+// Pointer Events for Physical Touch & Mouse Motion Drag
+function onPointerDown(e) {
+  if (hasTorn) return;
+  isDragging = true;
+  startY = e.clientY;
+  currentDeltaY = 0;
+  lastSoundDelta = 0;
+  stub.classList.add('tearing');
+  stub.setPointerCapture(e.pointerId);
+  playTearSound('drag');
+}
+
+function onPointerMove(e) {
+  if (!isDragging || hasTorn) return;
+  const dy = Math.max(0, e.clientY - startY);
+  currentDeltaY = dy;
+
+  // Real-time transform: vertical pull with slight rotation
+  const rot = Math.min(18, dy * 0.12);
+  const shiftX = Math.min(24, dy * 0.18);
+  stub.style.transform = `translate(${shiftX}px, ${dy}px) rotate(${rot}deg)`;
+
+  // Fill progress bar (threshold is 70px)
+  const pct = Math.min(100, (dy / 70) * 100);
+  if (tearProgress) tearProgress.style.width = `${pct}%`;
+
+  // Sound crackle at intervals during motion
+  if (dy - lastSoundDelta > 16) {
+    playTearSound('drag');
+    lastSoundDelta = dy;
+    if (navigator.vibrate) {
+      try { navigator.vibrate(10); } catch (e) {}
+    }
+  }
+
+  // If dragged past threshold, complete tear!
+  if (dy >= 70) {
+    triggerCompleteTear();
+  }
+}
+
+function onPointerUp(e) {
+  if (!isDragging || hasTorn) return;
+  isDragging = false;
+  stub.classList.remove('tearing');
+
+  if (currentDeltaY >= 65) {
+    triggerCompleteTear();
+  } else {
+    // Spring back
+    stub.style.transition = 'transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28)';
+    stub.style.transform = '';
+    if (tearProgress) tearProgress.style.width = '0%';
+    setTimeout(() => {
+      stub.style.transition = '';
+    }, 300);
+  }
+}
+
+if (stub) {
+  stub.addEventListener('pointerdown', onPointerDown);
+  stub.addEventListener('pointermove', onPointerMove);
+  stub.addEventListener('pointerup', onPointerUp);
+  stub.addEventListener('pointercancel', onPointerUp);
+}
+
+if (quickRip) {
+  quickRip.addEventListener('click', (e) => {
+    e.stopPropagation();
+    triggerCompleteTear();
+  });
+}
+
+if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   });

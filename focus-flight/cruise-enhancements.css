@@ -1,30 +1,35 @@
-/* FlyLofi Focus Flight — Cabin Entertainment & Parallax Engine Styles */
+/* FlyLofi Focus Flight — Cabin Entertainment & Aircraft Window Bezel Engine */
 
 :root {
-  --deck-bg: rgba(7, 20, 28, 0.85);
-  --deck-border: rgba(131, 224, 181, 0.25);
-  --deck-line: rgba(220, 239, 237, 0.15);
+  --deck-bg: rgba(7, 20, 28, 0.88);
+  --deck-border: rgba(131, 224, 181, 0.28);
+  --deck-line: rgba(220, 239, 237, 0.16);
   --mint: #83e0b5;
-  --mint-glow: rgba(131, 224, 181, 0.35);
+  --mint-glow: rgba(131, 224, 181, 0.38);
+  --gold: #f4d07b;
+  --cabin-dark: #050d12;
+  --window-shade-pull: 0%;
 }
 
-/* 1. Cockpit Media Deck: Compact, Frosted-Glass 2-Row Control Unit */
-.cruise-media-deck, .cruise-tools {
+/* ==========================================================================
+   1. COCKPIT MEDIA DECK (Compact 2-Row Control Unit)
+   ========================================================================== */
+.cruise-media-deck {
   position: absolute;
-  z-index: 10;
-  top: 16px;
-  right: 16px;
+  z-index: 20;
+  top: 14px;
+  right: 14px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
   padding: 8px 10px;
   border: 1px solid var(--deck-border);
   border-radius: 14px;
   background: var(--deck-bg);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.38);
-  width: clamp(290px, 32vw, 410px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+  width: clamp(285px, 31vw, 400px);
   box-sizing: border-box;
   transition: all 0.25s ease;
 }
@@ -41,7 +46,7 @@
   min-width: 0;
 }
 
-/* Buttons */
+/* Deck Buttons */
 .deck-btn {
   display: inline-flex;
   align-items: center;
@@ -78,7 +83,7 @@
   background: var(--mint);
   color: #071f17;
   border-color: var(--mint);
-  box-shadow: 0 0 12px var(--mint-glow);
+  box-shadow: 0 0 14px var(--mint-glow);
 }
 
 .deck-btn.cabin-btn {
@@ -149,8 +154,8 @@
   color: #a7bcc1;
 }
 
-.volume-slider, .volume {
-  width: 54px;
+.volume-slider {
+  width: 52px;
   height: 4px;
   accent-color: var(--mint);
   cursor: pointer;
@@ -158,57 +163,92 @@
   border-radius: 4px;
 }
 
-/* 2. Flight Timer Bar (hidden to unblock lofi deck and scenery) */
-.flight-timer-bar {
-  display: none !important;
-  position: absolute;
-  z-index: 4;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+/* ==========================================================================
+   2. AUTHENTIC AIRPLANE OVAL WINDOW FRAME (Matching User Photo)
+   ========================================================================== */
+.stage {
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 50% 50%, #0d212c 0%, #061117 65%, #02070a 100%);
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 16px;
-  border: 1px solid rgba(227, 242, 239, 0.22);
-  border-radius: 999px;
-  background: rgba(5, 17, 25, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  white-space: nowrap;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.timer-kicker, .timer-phase {
-  color: #a9bdbe;
-  font-size: 8px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+/* Cabin interior atmosphere around window */
+.cabin-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 75% 20%, rgba(131, 224, 181, 0.05), transparent 35%),
+              linear-gradient(180deg, rgba(3, 10, 15, 0.7) 0%, transparent 25%, transparent 75%, rgba(3, 10, 15, 0.85) 100%);
+  z-index: 1;
 }
 
-.flight-timer-bar strong {
-  color: var(--mint);
-  font: 600 18px "Space Grotesk", sans-serif;
-  letter-spacing: 0.04em;
+/* The Authentic Commercial Aircraft Oval Window Portal */
+.airplane-window-portal {
+  position: absolute;
+  z-index: 5;
+  width: clamp(290px, 42vw, 520px);
+  height: clamp(420px, 78vh, 720px);
+  aspect-ratio: 1 / 1.42;
+  border-radius: 46% / 40%;
+  padding: 16px;
+  box-sizing: border-box;
+  background: linear-gradient(175deg, #f2f7f8 0%, #d8e4e8 22%, #b5c7ce 64%, #879ca5 100%);
+  box-shadow: 
+    inset 0 22px 38px rgba(0, 0, 0, 0.88),
+    inset 0 -18px 34px rgba(0, 0, 0, 0.65),
+    inset 16px 0 30px rgba(0, 0, 0, 0.52),
+    inset -16px 0 30px rgba(0, 0, 0, 0.52),
+    0 0 0 16px #11222d,
+    0 0 0 28px #08141b,
+    0 35px 95px rgba(0, 0, 0, 0.95);
+  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0);
+  transition: transform 0.35s ease-out;
 }
 
-.timer-phase {
-  color: var(--mint);
-  border-left: 1px solid rgba(227, 242, 239, 0.18);
-  padding-left: 12px;
+/* First Class Suite Custom Bezel (Gold/Woodgrain Trim) */
+.seat-01a .airplane-window-portal {
+  background: linear-gradient(175deg, #ecd6b2 0%, #c4aa82 25%, #8c7352 65%, #58442e 100%);
+  box-shadow: 
+    inset 0 22px 38px rgba(0, 0, 0, 0.9),
+    inset 0 -18px 34px rgba(0, 0, 0, 0.7),
+    inset 16px 0 30px rgba(0, 0, 0, 0.55),
+    inset -16px 0 30px rgba(0, 0, 0, 0.55),
+    0 0 0 16px #241d16,
+    0 0 0 28px #120e0b,
+    0 0 45px rgba(244, 208, 123, 0.15),
+    0 35px 95px rgba(0, 0, 0, 0.95);
 }
 
-/* 3. Scenic Video Player */
+/* Inner Window Aperture: Masks the outside world into the oval */
+.window-aperture {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 42% / 36%;
+  overflow: hidden;
+  background: #040c11;
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.85);
+}
+
+/* Scenic Video inside the Window Aperture */
 .flight-video {
   position: absolute;
   inset: 0;
-  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
   transition: opacity 0.6s ease;
-  filter: saturate(0.85) contrast(1.05) brightness(0.8);
+  filter: saturate(0.9) contrast(1.05) brightness(0.85);
+  z-index: 1;
+}
+
+.stage.video-live .flight-video {
+  opacity: 1;
 }
 
 .stage.video-live #scene {
@@ -216,180 +256,490 @@
   transition: opacity 0.6s ease;
 }
 
-.stage.video-live .flight-video {
-  opacity: 1;
-}
-
-/* 4. Realistic Airplane Window Frame & Parallax Layer */
-.cabin-layer {
+/* Outside Canvas Scenery */
+#scene {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
+  display: block;
+}
+
+/* Window Glass Glare & Reflections */
+.window-glass-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
   pointer-events: none;
-  overflow: hidden;
-  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0);
-  transition: transform 0.35s ease-out;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 22%, transparent 35%, transparent 68%, rgba(255, 255, 255, 0.08) 85%, transparent 100%);
+  mix-blend-mode: screen;
 }
 
-.stage {
-  isolation: isolate;
+.window-vignette-inner {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  box-shadow: inset 0 0 35px rgba(2, 8, 12, 0.7);
 }
 
-.cabin-layer:before {
+/* ==========================================================================
+   3. INTERACTIVE DRAGGABLE AIRPLANE WINDOW SHADE
+   ========================================================================== */
+.window-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  z-index: 8;
+  transform: translateY(calc(var(--window-shade-pull, 0%) - 100%));
+  transition: transform 0.05s linear;
+  touch-action: none;
+  pointer-events: none;
+}
+
+.window-shade.animating {
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.shade-panel {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #d3dee2 0%, #b2c2c9 50%, #9cb0b8 95%, #889da6 100%);
+  box-shadow: inset 0 -4px 10px rgba(0, 0, 0, 0.4), inset 0 10px 20px rgba(0, 0, 0, 0.35);
+  border-bottom: 2px solid #6b8089;
+}
+
+.shade-grooves {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, transparent 0, transparent 18px, rgba(255, 255, 255, 0.15) 19px, rgba(0, 0, 0, 0.15) 20px);
+  opacity: 0.65;
+}
+
+/* The Tactile Shade Pull Handle (Matching User Photo) */
+.shade-handle {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 32px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background: linear-gradient(180deg, #9bb0b8 0%, #768c95 60%, #5d737b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  cursor: grab;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  touch-action: none;
+}
+
+.shade-handle:active {
+  cursor: grabbing;
+}
+
+.shade-grip-ridges {
+  width: 44px;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, #44565e 0, #44565e 2px, #8ca2aa 2px, #8ca2aa 4px);
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+.shade-grip-text {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #e5f1f3;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Starry Sky when Shade is Closed (Night Study Mode) */
+.window-shade.closed .shade-panel:after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(100deg, rgba(8, 20, 28, 0.32), transparent 28%, transparent 72%, rgba(8, 20, 28, 0.2));
+  background: radial-gradient(circle at 40% 30%, rgba(131, 224, 181, 0.15), transparent 45%),
+              radial-gradient(circle at 70% 65%, rgba(244, 208, 123, 0.1), transparent 35%);
+}
+
+/* ==========================================================================
+   4. SEAT-SPECIFIC VISUAL PERSPECTIVES
+   ========================================================================== */
+.seat-view-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* 02F: Wing Window (Swept Airliner Wing & Turbofan Engine Glow) */
+.wing-structure {
+  position: absolute;
+  inset: 0;
+  display: none;
+  pointer-events: none;
+}
+
+.seat-02f .wing-structure {
+  display: block;
+}
+
+.wing-svg {
+  width: 100%;
+  height: 100%;
+  transform-origin: bottom right;
+  animation: wingFlex 6s ease-in-out infinite;
+}
+
+@keyframes wingFlex {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(0.4deg); }
+}
+
+.strobe-light {
+  fill: #fff;
+  filter: drop-shadow(0 0 6px #59dfa0);
+  animation: strobeFlash 1.4s infinite;
+}
+
+@keyframes strobeFlash {
+  0%, 82%, 100% { opacity: 0; }
+  85%, 90% { opacity: 1; }
+  92%, 96% { opacity: 1; }
+}
+
+/* 01A: First Class Smart Tint (Electrochromic Cobalt Glass) */
+.smart-tint-glass {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(16, 68, 142, var(--tint-opacity, 0)), rgba(4, 25, 62, calc(var(--tint-opacity, 0) * 1.3)));
   mix-blend-mode: multiply;
+  transition: background 0.8s ease;
+  pointer-events: none;
 }
 
-.overhead-light {
+/* 14C: Aisle Seat Foreground (Seatback & Reading Light Beam) */
+.aisle-foreground {
   position: absolute;
-  top: 3%;
-  left: 18%;
-  right: 18%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #d8f6df 20%, #fff5cf 50%, #d8f6df 80%, transparent);
-  box-shadow: 0 0 28px 8px rgba(212, 244, 218, 0.18);
-  opacity: 0.7;
+  inset: 0;
+  display: none;
 }
 
-.seat-shell {
+.seat-14c .aisle-foreground {
+  display: block;
+}
+
+.aisle-seatback {
   position: absolute;
-  left: -4%;
-  bottom: -15%;
-  width: 43%;
-  height: 48%;
-  border-radius: 34% 50% 0 0;
-  background: linear-gradient(145deg, rgba(11, 28, 37, 0.9), rgba(4, 14, 21, 0.98));
-  box-shadow: inset 0 3px 0 rgba(153, 196, 184, 0.25), 25px -10px 70px rgba(2, 10, 16, 0.5);
+  left: -20px;
+  bottom: -25px;
+  width: 140px;
+  height: 240px;
+  border-radius: 40px 60px 0 0;
+  background: linear-gradient(150deg, #10232d 0%, #07131a 80%);
+  box-shadow: 15px -8px 30px rgba(0, 0, 0, 0.7);
+  border-top: 2px solid rgba(131, 224, 181, 0.2);
 }
 
-.seat-shell:before {
-  content: "";
+.seatback-headrest {
   position: absolute;
-  right: 11%;
-  top: 9%;
-  width: 38%;
-  height: 18%;
-  border-radius: 45%;
-  background: rgba(127, 181, 164, 0.12);
-  box-shadow: inset 0 1px 0 rgba(198, 235, 219, 0.16);
+  top: 15px;
+  left: 20px;
+  right: 20px;
+  height: 55px;
+  border-radius: 14px;
+  background: rgba(131, 224, 181, 0.08);
+  border: 1px solid rgba(131, 224, 181, 0.15);
 }
 
-.seat-shell:after {
-  content: "";
+.reading-light-beam {
   position: absolute;
-  right: -20%;
-  top: 28%;
-  width: 44%;
-  height: 2px;
-  background: rgba(175, 213, 198, 0.16);
-  transform: rotate(-9deg);
-  box-shadow: 0 26px 0 rgba(175, 213, 198, 0.08);
+  top: 0;
+  left: 15%;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 240, 200, 0.12) 0%, transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
 }
 
-.window-glow {
+/* ==========================================================================
+   5. STANDOUT FEATURES: SEATBELT SIGN, TELEMETRY, IN-FLIGHT TRAY TABLE
+   ========================================================================== */
+/* Overhead Fasten Seatbelt Sign & Chime Indicator */
+.seatbelt-sign-hud {
   position: absolute;
-  right: 5%;
-  top: 15%;
-  width: 41%;
-  height: 64%;
-  border-radius: 45%;
-  background: radial-gradient(ellipse at 42% 48%, rgba(231, 249, 230, 0.16), transparent 58%);
-  box-shadow: inset 0 0 0 1px rgba(225, 243, 235, 0.08), 0 0 90px rgba(174, 227, 209, 0.08);
+  z-index: 20;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid rgba(131, 224, 181, 0.35);
+  border-radius: 999px;
+  background: rgba(7, 22, 30, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--mint);
+  font: 700 9px "Space Grotesk", sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 12px rgba(131, 224, 181, 0.15);
+  transition: all 0.2s ease;
+  user-select: none;
 }
 
-.reflection {
-  position: absolute;
-  width: 18%;
-  height: 130%;
-  top: -15%;
-  background: linear-gradient(90deg, transparent, rgba(244, 255, 241, 0.12), transparent);
-  filter: blur(8px);
-  transform: rotate(12deg);
-  animation: windowReflection 12s linear infinite;
+.seatbelt-sign-hud:hover {
+  background: rgba(131, 224, 181, 0.18);
+  box-shadow: 0 0 18px var(--mint-glow);
 }
 
-.reflection-one {
-  right: 34%;
+.seatbelt-glyph {
+  font-size: 13px;
 }
 
-.reflection-two {
-  right: 15%;
-  animation-delay: -5s;
-  opacity: 0.5;
-}
-
-.cabin-particle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
+.chime-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: #dbf4e4;
-  box-shadow: 0 0 12px 2px rgba(219, 244, 228, 0.55);
-  animation: floatParticle 8s ease-in-out infinite;
+  background: var(--mint);
+  box-shadow: 0 0 8px var(--mint);
+  animation: chimePulse 2s infinite;
 }
 
-.particle-one {
-  left: 58%;
-  top: 24%;
-  animation-delay: -1s;
+@keyframes chimePulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }
 
-.particle-two {
-  left: 70%;
-  top: 43%;
-  animation-delay: -5s;
-}
-
-.particle-three {
-  left: 48%;
-  top: 62%;
-  animation-delay: -3s;
-}
-
-.cabin-caption {
+/* In-Flight Cockpit Telemetry HUD Strip */
+.flight-telemetry-hud {
   position: absolute;
-  left: 3%;
-  bottom: 4%;
-  color: rgba(214, 235, 226, 0.5);
-  font-size: 8px;
-  letter-spacing: 0.18em;
+  z-index: 15;
+  bottom: 14px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(5, 17, 24, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(220, 239, 237, 0.1);
+  pointer-events: none;
+}
+
+.telemetry-item {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.telem-label {
+  font-size: 7px;
+  letter-spacing: 0.15em;
+  color: #8da4aa;
   text-transform: uppercase;
 }
 
-@keyframes windowReflection {
-  0% { transform: translateX(-20%) rotate(12deg); opacity: 0; }
-  18%, 72% { opacity: 0.7; }
-  100% { transform: translateX(130%) rotate(12deg); opacity: 0; }
+.telem-val {
+  font: 700 10px "Space Grotesk", sans-serif;
+  color: #e5f2f0;
+  letter-spacing: 0.05em;
 }
 
-@keyframes floatParticle {
-  0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.15; }
-  50% { transform: translate3d(14px, -22px, 0); opacity: 0.75; }
+/* In-Flight Fold-Out Tray Table / Focus Notepad (Matching User Photo!) */
+.tray-table-drawer {
+  position: absolute;
+  z-index: 22;
+  bottom: 14px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
-.study-card {
-  display: none !important;
+.tray-table-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: rgba(11, 28, 38, 0.9);
+  border: 1px solid var(--deck-border);
+  color: var(--mint);
+  font: 700 10px "Space Grotesk", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s ease;
 }
 
-/* 5. Mobile & Responsive Layout Rules */
+.tray-table-toggle:hover {
+  background: rgba(131, 224, 181, 0.2);
+  border-color: var(--mint);
+  transform: translateY(-1px);
+}
+
+.tray-table-content {
+  display: none;
+  width: 320px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(198, 220, 225, 0.25);
+  border-radius: 14px;
+  background: linear-gradient(145deg, #102530, #0a1922 80%);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.tray-table-drawer.open .tray-table-content {
+  display: block;
+  animation: trayUnfold 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes trayUnfold {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.tray-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(220, 239, 237, 0.12);
+}
+
+.tray-brand {
+  font: 700 10px "Space Grotesk", sans-serif;
+  letter-spacing: 0.15em;
+  color: var(--mint);
+}
+
+.tray-brand span { margin-right: 4px; }
+
+.tray-close-btn {
+  background: transparent;
+  border: none;
+  color: #90a5ab;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.tray-close-btn:hover { color: #fff; }
+
+.tray-task-box {
+  margin: 12px 0 10px;
+}
+
+.tray-task-box label, .tray-notes-box label {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  color: #8fa5ab;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.tray-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(5, 17, 24, 0.85);
+  border: 1px solid rgba(220, 239, 237, 0.15);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.tray-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--mint);
+  cursor: pointer;
+}
+
+.tray-input-row input[type="text"] {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #edf6f4;
+  font-size: 11px;
+}
+
+.tray-input-row input[type="text"]:focus {
+  color: #fff;
+}
+
+.tray-notes-box textarea {
+  width: 100%;
+  border-radius: 8px;
+  background: rgba(5, 17, 24, 0.85);
+  border: 1px solid rgba(220, 239, 237, 0.15);
+  color: #edf6f4;
+  font: 11px/1.4 "DM Sans", sans-serif;
+  padding: 8px 10px;
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.tray-notes-box textarea:focus {
+  border-color: var(--mint);
+}
+
+.tray-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(220, 239, 237, 0.1);
+  font-size: 8px;
+  color: #82989e;
+}
+
+.tray-autosave {
+  color: var(--mint);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE MEDIA QUERIES (Mobile & Small Screens)
+   ========================================================================== */
 @media (max-width: 860px) {
-  .flight-timer-bar {
-    top: 10px;
-    padding: 6px 12px;
-    gap: 8px;
-  }
-  .timer-kicker {
-    display: none;
+  .airplane-window-portal {
+    width: min(84vw, 380px);
+    height: min(68vh, 520px);
+    padding: 12px;
   }
   .cruise-media-deck {
     top: 56px;
-    right: 12px;
-    left: 12px;
+    right: 10px;
+    left: 10px;
     width: auto;
     max-width: none;
+  }
+  .flight-telemetry-hud {
+    display: none;
+  }
+  .tray-table-content {
+    width: min(88vw, 300px);
   }
 }
 
@@ -403,9 +753,12 @@
     padding: 5px 6px;
   }
   .volume-slider {
-    width: 44px;
+    width: 42px;
   }
-  .cabin-caption {
-    display: none;
+  .seatbelt-sign-hud {
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    font-size: 8px;
   }
 }

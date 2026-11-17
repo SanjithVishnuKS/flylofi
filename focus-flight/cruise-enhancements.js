@@ -1,20 +1,21 @@
-// FlyLofi Focus Flight — Cabin Entertainment & Parallax Engine
+// FlyLofi Focus Flight — Cabin Entertainment, Window Shade & Standout Systems
 (() => {
   'use strict';
 
-  // 1. Cabin Mouse & Touch Parallax
+  // 1. Cabin Mouse & Touch Parallax for 3D Window Depth
   const stage = document.getElementById('stage');
-  if (stage) {
+  const portal = document.getElementById('airplaneWindowPortal');
+  if (stage && portal) {
     stage.addEventListener('pointermove', (event) => {
       const rect = stage.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 8;
-      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 5;
-      stage.style.setProperty('--parallax-x', `${x}px`);
-      stage.style.setProperty('--parallax-y', `${y}px`);
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 12;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 8;
+      portal.style.setProperty('--parallax-x', `${x}px`);
+      portal.style.setProperty('--parallax-y', `${y}px`);
     });
     stage.addEventListener('pointerleave', () => {
-      stage.style.setProperty('--parallax-x', '0px');
-      stage.style.setProperty('--parallax-y', '0px');
+      portal.style.setProperty('--parallax-x', '0px');
+      portal.style.setProperty('--parallax-y', '0px');
     });
   }
 
@@ -33,14 +34,27 @@
   const customAudioFile = document.getElementById('customAudioFile');
   const customVideoFile = document.getElementById('customVideoFile');
 
+  // Standout Elements
+  const windowShade = document.getElementById('windowShade');
+  const shadeHandle = document.getElementById('shadeHandle');
+  const seatbeltSign = document.getElementById('seatbeltSignHud');
+  const chimeDot = document.getElementById('chimeDot');
+  const trayToggle = document.getElementById('trayTableToggle');
+  const trayClose = document.getElementById('trayCloseBtn');
+  const trayDrawer = document.getElementById('trayTableDrawer');
+  const trayTaskInput = document.getElementById('trayTaskInput');
+  const trayTaskDone = document.getElementById('trayTaskDone');
+  const trayNotesInput = document.getElementById('trayNotesInput');
+  const smartTintGlass = document.getElementById('smartTintGlass');
+
   if (!lofiAudio || !cabinAudio || !flightVideo) return;
 
-  // Ensure video is strictly muted so it never overlaps with music
+  // Video strictly muted to protect audio isolation
   flightVideo.muted = true;
   flightVideo.defaultMuted = true;
   flightVideo.volume = 0;
 
-  // 3. Candidate Path Generator
+  // 3. Audio & Video Candidate Path Generator
   function getCandidatePaths(src) {
     if (!src || src.startsWith('blob:') || src.startsWith('data:') || src.startsWith('http://') || src.startsWith('https://')) {
       return [src];
@@ -63,7 +77,7 @@
     return [...new Set(candidates)];
   }
 
-  // Master Volume State
+  // Master Volume
   const getVolumeLevel = () => {
     return volumeSlider ? Number(volumeSlider.value) / 100 : 0.45;
   };
@@ -71,7 +85,6 @@
   function updateAudioVolumes() {
     const vol = getVolumeLevel();
     lofiAudio.volume = vol;
-    // Cabin white noise is ambient: 65% of master volume
     cabinAudio.volume = vol * 0.65;
   }
   updateAudioVolumes();
@@ -80,7 +93,7 @@
     volumeSlider.addEventListener('input', updateAudioVolumes);
   }
 
-  // 4. Robust Media Playback with Path Fallback
+  // Robust Media Playback with Path Fallback
   async function playSourceWithFallback(mediaElement, candidateList, index = 0) {
     if (!candidateList || index >= candidateList.length) {
       throw new Error('All candidate paths failed');
@@ -98,7 +111,7 @@
     }
   }
 
-  // 5. Lofi Music Player (Single-Channel, Zero Overlap)
+  // 4. Lofi Music Player (Single-Channel, Zero Overlap)
   let isMusicPlaying = false;
 
   function updatePlayButtonUI(playing) {
@@ -123,7 +136,6 @@
       return;
     }
 
-    // Stop current track before switching
     if (!lofiAudio.paused) {
       lofiAudio.pause();
     }
@@ -146,7 +158,7 @@
       lofiAudio.pause();
       updatePlayButtonUI(false);
     } else {
-      const selectedSrc = lofiTrackSelect ? lofiTrackSelect.value : '../media/flight/audio/bedtime-lofi.webm';
+      const selectedSrc = lofiTrackSelect ? lofiTrackSelect.value : '../media/flight/audio/afternoon-jazz.webm';
       startTrackPlayback(selectedSrc);
     }
   }
@@ -166,12 +178,10 @@
     });
   }
 
-  // Handle HTML5 Audio element events
   lofiAudio.addEventListener('play', () => updatePlayButtonUI(true));
   lofiAudio.addEventListener('pause', () => updatePlayButtonUI(false));
   lofiAudio.addEventListener('ended', () => updatePlayButtonUI(false));
 
-  // Custom Audio File Upload
   if (customAudioFile && lofiTrackSelect) {
     customAudioFile.addEventListener('change', (e) => {
       const file = e.target.files?.[0];
@@ -180,7 +190,6 @@
       const blobUrl = URL.createObjectURL(file);
       const cleanName = '♪ ' + file.name.replace(/\.[^/.]+$/, '').slice(0, 18);
 
-      // Add to select dropdown
       const opt = document.createElement('option');
       opt.value = blobUrl;
       opt.textContent = cleanName;
@@ -191,7 +200,7 @@
     });
   }
 
-  // 6. Cabin Ambience (airplane-cabin-white.webm)
+  // 5. Cabin White Noise Ambience
   const cabinCandidates = [
     'media/flight/audio/airplane-cabin-white.webm',
     './media/flight/audio/airplane-cabin-white.webm',
@@ -241,7 +250,7 @@
   cabinAudio.addEventListener('play', () => updateCabinUI(true));
   cabinAudio.addEventListener('pause', () => updateCabinUI(false));
 
-  // 7. Scenic Backdrop Video & Canvas Mode
+  // 6. Scenic Video Backdrop
   async function loadVideoScene(sceneSrc) {
     if (!sceneSrc || sceneSrc === '__canvas__') {
       flightVideo.pause();
@@ -269,25 +278,20 @@
         if (stage) stage.classList.add('video-live');
         loaded = true;
         break;
-      } catch (e) {
-        // try next candidate
-      }
+      } catch (e) {}
     }
 
-    if (!loaded) {
-      console.warn('Could not load video scene:', sceneSrc);
-      if (stage) stage.classList.remove('video-live');
+    if (!loaded && stage) {
+      stage.classList.remove('video-live');
     }
   }
 
   if (videoSceneSelect) {
     videoSceneSelect.addEventListener('change', () => {
-      const val = videoSceneSelect.value;
-      loadVideoScene(val);
+      loadVideoScene(videoSceneSelect.value);
     });
   }
 
-  // Custom Video File Upload
   if (customVideoFile && videoSceneSelect) {
     customVideoFile.addEventListener('change', (e) => {
       const file = e.target.files?.[0];
@@ -306,10 +310,8 @@
     });
   }
 
-  // Initial video attempt with user gesture listener fallback
   loadVideoScene(videoSceneSelect?.value || 'media/flight/clips/gemini_generated_video_09c1b3d1.mp4');
 
-  // If browser blocked initial video autoplay, unlock on first user click anywhere in the window
   const unlockAutoplay = () => {
     if (stage && !stage.classList.contains('video-live') && videoSceneSelect?.value && videoSceneSelect.value !== '__canvas__') {
       flightVideo.muted = true;
@@ -323,7 +325,205 @@
   window.addEventListener('pointerdown', unlockAutoplay, { once: true });
   window.addEventListener('keydown', unlockAutoplay, { once: true });
 
-  // 8. Server Media Auto-Discovery (/api/media)
+  // ==========================================================================
+  // 7. STANDOUT FEATURE: INTERACTIVE DRAGGABLE AIRPLANE WINDOW SHADE
+  // ==========================================================================
+  let isDraggingShade = false;
+  let shadeStartY = 0;
+  let currentShadePercent = 0;
+
+  function playShadeMechanicalSound() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(180, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.04);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.04);
+    } catch (e) {}
+  }
+
+  function setShadePull(percent, animate = false) {
+    currentShadePercent = Math.max(0, Math.min(100, percent));
+    document.documentElement.style.setProperty('--window-shade-pull', `${currentShadePercent}%`);
+    if (windowShade) {
+      windowShade.classList.toggle('animating', animate);
+      windowShade.classList.toggle('closed', currentShadePercent > 85);
+    }
+  }
+
+  if (shadeHandle && windowShade) {
+    shadeHandle.addEventListener('pointerdown', (e) => {
+      isDraggingShade = true;
+      shadeStartY = e.clientY;
+      windowShade.classList.remove('animating');
+      shadeHandle.setPointerCapture(e.pointerId);
+      playShadeMechanicalSound();
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isDraggingShade) return;
+      const portalEl = document.getElementById('airplaneWindowPortal');
+      const portalHeight = portalEl ? portalEl.clientHeight : 500;
+      const deltaY = e.clientY - shadeStartY;
+      const addedPct = (deltaY / portalHeight) * 100;
+      setShadePull(currentShadePercent + addedPct);
+      shadeStartY = e.clientY;
+      if (Math.abs(deltaY) > 8) playShadeMechanicalSound();
+    });
+
+    window.addEventListener('pointerup', () => {
+      if (!isDraggingShade) return;
+      isDraggingShade = false;
+      // Snap to closed if > 60%, else snap open
+      if (currentShadePercent > 55) {
+        setShadePull(92, true);
+      } else {
+        setShadePull(0, true);
+      }
+      playShadeMechanicalSound();
+    });
+
+    // Tap handle to toggle
+    shadeHandle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (currentShadePercent > 30) {
+        setShadePull(0, true);
+      } else {
+        setShadePull(92, true);
+      }
+      playShadeMechanicalSound();
+    });
+  }
+
+  // ==========================================================================
+  // 8. STANDOUT FEATURE: AUTHENTIC TWO-TONE CABIN CHIME ("Ding-Dong!")
+  // ==========================================================================
+  function playCabinTwoToneChime() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+
+      // Tone 1: High tone (D5 - 587.33 Hz)
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(587.33, ctx.currentTime);
+      gain1.gain.setValueAtTime(0.28, ctx.currentTime);
+      gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+      osc1.connect(gain1);
+      gain1.connect(ctx.destination);
+      osc1.start(ctx.currentTime);
+      osc1.stop(ctx.currentTime + 0.45);
+
+      // Tone 2: Low chime tone (A4 - 440 Hz) starting slightly after
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(440.00, ctx.currentTime + 0.22);
+      gain2.gain.setValueAtTime(0.001, ctx.currentTime);
+      gain2.gain.setValueAtTime(0.32, ctx.currentTime + 0.22);
+      gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.85);
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+      osc2.start(ctx.currentTime + 0.22);
+      osc2.stop(ctx.currentTime + 0.85);
+
+      // Flash overhead seatbelt sign
+      if (seatbeltSign) {
+        seatbeltSign.style.boxShadow = '0 0 24px rgba(131, 224, 181, 0.7)';
+        setTimeout(() => { seatbeltSign.style.boxShadow = ''; }, 900);
+      }
+    } catch (e) {}
+  }
+
+  if (seatbeltSign) {
+    seatbeltSign.addEventListener('click', () => {
+      playCabinTwoToneChime();
+    });
+  }
+
+  // Play subtle chime on boarding entry
+  setTimeout(() => {
+    playCabinTwoToneChime();
+  }, 1200);
+
+  // ==========================================================================
+  // 9. STANDOUT FEATURE: SEAT 01A FIRST CLASS SMART TINT
+  // ==========================================================================
+  const savedFlightData = JSON.parse(localStorage.getItem('focusFlightActive') || '{}');
+  if (savedFlightData?.seat === '01A' && smartTintGlass) {
+    let tintLevel = 0;
+    const tintLevels = [0, 0.25, 0.5, 0.75, 0.9];
+    
+    // Add Smart Tint button to deck
+    const deckRow = document.querySelector('.cruise-media-deck .deck-row:last-child');
+    if (deckRow) {
+      const tintBtn = document.createElement('button');
+      tintBtn.className = 'deck-btn';
+      tintBtn.id = 'smartTintBtn';
+      tintBtn.title = 'Adjust Boeing 787 Electrochromic Smart Tint Window';
+      tintBtn.innerHTML = '<span>🔘 Tint: 0</span>';
+      tintBtn.addEventListener('click', () => {
+        tintLevel = (tintLevel + 1) % tintLevels.length;
+        document.documentElement.style.setProperty('--tint-opacity', String(tintLevels[tintLevel]));
+        tintBtn.innerHTML = `<span>🔘 Tint: ${tintLevel}</span>`;
+        playShadeMechanicalSound();
+      });
+      deckRow.appendChild(tintBtn);
+    }
+  }
+
+  // ==========================================================================
+  // 10. STANDOUT FEATURE: IN-FLIGHT TRAY TABLE / FOCUS MISSION NOTEPAD
+  // ==========================================================================
+  if (trayToggle && trayDrawer) {
+    trayToggle.addEventListener('click', () => {
+      trayDrawer.classList.toggle('open');
+    });
+  }
+
+  if (trayClose && trayDrawer) {
+    trayClose.addEventListener('click', () => {
+      trayDrawer.classList.remove('open');
+    });
+  }
+
+  // Restore saved task & notes from localStorage
+  if (trayTaskInput) {
+    trayTaskInput.value = localStorage.getItem('flylofi_flight_task') || '';
+    trayTaskInput.addEventListener('input', () => {
+      localStorage.setItem('flylofi_flight_task', trayTaskInput.value);
+    });
+  }
+
+  if (trayTaskDone) {
+    trayTaskDone.checked = localStorage.getItem('flylofi_flight_task_done') === 'true';
+    trayTaskDone.addEventListener('change', () => {
+      localStorage.setItem('flylofi_flight_task_done', String(trayTaskDone.checked));
+      if (trayTaskDone.checked) {
+        playCabinTwoToneChime();
+      }
+    });
+  }
+
+  if (trayNotesInput) {
+    trayNotesInput.value = localStorage.getItem('flylofi_flight_notes') || '';
+    trayNotesInput.addEventListener('input', () => {
+      localStorage.setItem('flylofi_flight_notes', trayNotesInput.value);
+    });
+  }
+
+  // 11. Server Media Auto-Discovery (/api/media)
   async function discoverServerMedia() {
     const apiEndpoints = [
       '/api/media',
@@ -339,9 +539,7 @@
           mediaFiles = await resp.json();
           break;
         }
-      } catch (e) {
-        // try next endpoint
-      }
+      } catch (e) {}
     }
 
     if (!Array.isArray(mediaFiles)) return;
@@ -349,7 +547,6 @@
     mediaFiles.forEach((file) => {
       const lower = file.name.toLowerCase();
 
-      // Audio file discovery
       if (file.type === 'audio' || /\.(mp3|wav|ogg|m4a|webm|flac)$/i.test(lower)) {
         if (lower.includes('cabin') || lower.includes('white')) {
           if (!cabinCandidates.includes(file.path)) {
@@ -367,7 +564,6 @@
         }
       }
 
-      // Video file discovery
       if (file.type === 'video' || /\.(mp4|webm|mov)$/i.test(lower)) {
         if (videoSceneSelect) {
           const exists = [...videoSceneSelect.options].some((opt) => opt.value.includes(file.name));
@@ -385,7 +581,7 @@
 
   discoverServerMedia().catch(() => {});
 
-  // 9. Legacy API Aliases (guarantees backward compatibility)
+  // Legacy Global API Aliases
   window.FlyLofiAudio = {
     play: startTrackPlayback,
     pause: () => { lofiAudio.pause(); updatePlayButtonUI(false); },
@@ -395,6 +591,8 @@
       if (volumeSlider) volumeSlider.value = String(val);
       updateAudioVolumes();
     },
-    loadScene: loadVideoScene
+    loadScene: loadVideoScene,
+    playChime: playCabinTwoToneChime,
+    setShade: setShadePull
   };
 })();
