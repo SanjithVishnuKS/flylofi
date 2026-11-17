@@ -1,12 +1,24 @@
 {
+  "id": "/?source=pwa",
   "name": "Flylofi Focus Flight",
   "short_name": "Flylofi",
   "description": "Simulated in-flight deep focus study experience with lofi music and cabin ambience",
-  "start_url": "app.html",
+  "start_url": "index.html",
+  "scope": "./",
   "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
   "orientation": "any",
   "background_color": "#071117",
   "theme_color": "#071117",
+  "categories": [
+    "productivity",
+    "music",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "icon-192.png",
@@ -19,6 +31,38 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "feature-graphic-1024x500.png",
+      "sizes": "1024x500",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Flylofi In-Flight Cabin Focus Experience"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Quick Flight Boarding",
+      "short_name": "Flight",
+      "description": "Launch 45-minute commercial flight cruise",
+      "url": "cruise.html?embedded=1",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Night Drive Car",
+      "short_name": "Night Drive",
+      "description": "Launch night highway drive focus session",
+      "url": "cruise.html?mode=car",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Sleeper Bus",
+      "short_name": "Sleeper Bus",
+      "description": "Launch panoramic sleeper bus focus session",
+      "url": "cruise.html?mode=bus",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

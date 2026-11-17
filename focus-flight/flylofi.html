@@ -584,6 +584,236 @@ legend{margin-bottom:10px;font-weight:600}
   border: 1px solid rgba(89, 223, 160, 0.3);
 }
 
+/* Platforms Banner & Downloads Hub */
+.download-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(131, 224, 181, 0.12);
+  border: 1px solid rgba(131, 224, 181, 0.35);
+  color: var(--accent);
+  font: 700 11px "Space Grotesk", sans-serif;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.download-trigger-btn:hover {
+  background: rgba(131, 224, 181, 0.24);
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(131, 224, 181, 0.3);
+  transform: translateY(-1px);
+}
+
+.platforms-banner {
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(10, 24, 32, 0.65);
+  border: 1px solid rgba(214, 235, 237, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.platforms-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 700 10px "Space Grotesk", sans-serif;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.platform-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.platform-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.platform-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(12, 30, 39, 0.85);
+  border: 1px solid rgba(214, 235, 237, 0.18);
+  color: var(--text);
+  font: 600 11px "Space Grotesk", sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.platform-chip:hover {
+  border-color: var(--accent);
+  background: rgba(89, 223, 160, 0.14);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.platform-chip .p-icon {
+  font-size: 13px;
+}
+.platform-chip .p-name {
+  font-weight: 600;
+}
+.platform-chip .p-tag {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+.platform-chip:hover .p-tag {
+  background: rgba(89, 223, 160, 0.25);
+  color: var(--accent);
+}
+
+/* Download Modal */
+.download-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(3, 10, 15, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.download-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.download-modal-card {
+  width: min(560px, 95vw);
+  background: #091720;
+  border: 1px solid rgba(89, 223, 160, 0.3);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+}
+.download-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.download-modal-title {
+  font: 700 18px "Space Grotesk", sans-serif;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.download-modal-close {
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  line-height: 1;
+}
+.download-modal-close:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+}
+.platform-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.platform-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(14, 34, 44, 0.7);
+  border: 1px solid rgba(214, 235, 237, 0.12);
+  gap: 12px;
+}
+.platform-row-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.platform-row-icon {
+  font-size: 26px;
+}
+.platform-row-text strong {
+  display: block;
+  font: 700 14px "Space Grotesk", sans-serif;
+  color: var(--text);
+}
+.platform-row-text small {
+  color: var(--muted);
+  font-size: 11px;
+}
+.platform-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.dl-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font: 700 11px "Space Grotesk", sans-serif;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 1px solid rgba(89, 223, 160, 0.35);
+  background: rgba(89, 223, 160, 0.14);
+  color: var(--accent);
+  transition: all 0.2s ease;
+}
+.dl-btn:hover {
+  background: var(--accent);
+  color: #07131c;
+  transform: translateY(-1px);
+}
+.dl-btn.secondary {
+  border-color: rgba(214, 235, 237, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+.dl-btn.secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(89, 223, 160, 0.1);
+}
+.linux-code-box {
+  background: #050d12;
+  border: 1px solid rgba(214, 235, 237, 0.1);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--accent);
+  margin-top: 6px;
+  user-select: all;
+}
+
 @media(max-width:960px){
   .topbar{height:56px}
   .home-grid{grid-template-columns:1fr;padding:18px 12px;gap:24px}
@@ -617,6 +847,10 @@ legend{margin-bottom:10px;font-weight:600}
 
     <!-- Top Action Buttons -->
     <div class="top-actions">
+      <button id="downloadModalTrigger" type="button" class="download-trigger-btn" title="Download Flylofi for Windows, Linux &amp; Android">
+        <span class="dl-icon">📥</span>
+        <span>Download App</span>
+      </button>
       <button id="exitCruiseTopBtn" type="button" class="back-to-ticket-btn" hidden>← Back to Ticket</button>
       <button id="quickLaunchNav" type="button" style="background:rgba(89,223,160,.18);color:var(--accent);border-color:rgba(89,223,160,.4)">✈ Board</button>
       <button id="homeNavButton" type="button">Home</button>
@@ -629,7 +863,37 @@ legend{margin-bottom:10px;font-weight:600}
       
       <!-- LEFT COLUMN: ITINERARY & ACTUAL AIRPLANE SEAT MAP -->
       <div class="booking-col">
-        <!-- Transit Mode Selector: Flight (Live) vs Car & Bus (Future Multi-Transit Roadmap) -->
+        <!-- Cross-Platform Availability Strip (Windows, Linux, Android, PWA) -->
+        <div class="platforms-banner">
+          <div class="platforms-title">
+            <span class="platform-dot"></span>
+            <span>AVAILABLE FOR:</span>
+          </div>
+          <div class="platform-chips">
+            <a href="Flylofi.exe" class="platform-chip win" download title="Download Flylofi Standalone App for Windows (91 KB)">
+              <span class="p-icon">🪟</span>
+              <span class="p-name">Windows</span>
+              <span class="p-tag">.EXE</span>
+            </a>
+            <a href="flylofi-linux.tar.gz" class="platform-chip lin" download title="Download Flylofi Desktop Bundle for Linux (214 KB)">
+              <span class="p-icon">🐧</span>
+              <span class="p-name">Linux</span>
+              <span class="p-tag">.TAR.GZ</span>
+            </a>
+            <a href="focus-flight.apk" class="platform-chip and" download title="Download Flylofi Android APK (94 MB)">
+              <span class="p-icon">🤖</span>
+              <span class="p-name">Android</span>
+              <span class="p-tag">.APK</span>
+            </a>
+            <button type="button" class="platform-chip pwa" id="installPwaChip" title="Install Desktop App directly to Start menu / Applications Menu">
+              <span class="p-icon">💻</span>
+              <span class="p-name">Desktop PWA</span>
+              <span class="p-tag">INSTALL</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Transit Mode Selector: Flight (Live) vs Car &amp; Bus (Future Multi-Transit Roadmap) -->
         <div class="transit-mode-bar">
           <div class="transit-mode-label">Select Transit Mode:</div>
           <div class="transit-mode-pills">
@@ -2184,6 +2448,144 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || win
     navigator.serviceWorker.register('sw.js').catch(() => {});
   });
 }
+
+// Download Hub Modal Logic & Desktop PWA Installation
+const downloadModal = $('downloadModal');
+const downloadModalTrigger = $('downloadModalTrigger');
+const downloadModalClose = $('downloadModalClose');
+const installPwaChip = $('installPwaChip');
+const modalInstallPwaBtn = $('modalInstallPwaBtn');
+
+let deferredInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+});
+
+function openDownloadModal() {
+  if (downloadModal) {
+    downloadModal.classList.add('open');
+    downloadModal.setAttribute('aria-hidden', 'false');
+  }
+}
+
+function closeDownloadModal() {
+  if (downloadModal) {
+    downloadModal.classList.remove('open');
+    downloadModal.setAttribute('aria-hidden', 'true');
+  }
+}
+
+if (downloadModalTrigger) downloadModalTrigger.onclick = openDownloadModal;
+if (downloadModalClose) downloadModalClose.onclick = closeDownloadModal;
+if (downloadModal) {
+  downloadModal.onclick = (e) => {
+    if (e.target === downloadModal) closeDownloadModal();
+  };
+}
+
+async function triggerPwaInstall() {
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    const choice = await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+  } else {
+    openDownloadModal();
+  }
+}
+
+if (installPwaChip) installPwaChip.onclick = triggerPwaInstall;
+if (modalInstallPwaBtn) modalInstallPwaBtn.onclick = triggerPwaInstall;
+</script>
+
+<!-- DOWNLOAD HUB MODAL (Windows, Linux, Android, PWA) -->
+<div class="download-modal-backdrop" id="downloadModal" aria-hidden="true">
+  <div class="download-modal-card" role="dialog" aria-labelledby="modalTitle">
+    <div class="download-modal-header">
+      <div class="download-modal-title" id="modalTitle">
+        <span>📥</span> Download Flylofi
+      </div>
+      <button class="download-modal-close" id="downloadModalClose" type="button" aria-label="Close dialog">×</button>
+    </div>
+
+    <div class="platform-grid">
+      <!-- Windows -->
+      <div class="platform-row">
+        <div class="platform-row-info">
+          <span class="platform-row-icon">🪟</span>
+          <div class="platform-row-text">
+            <strong>Windows Desktop</strong>
+            <small>Windows 10 / 11 · Standalone .EXE &amp; Portable ZIP</small>
+          </div>
+        </div>
+        <div class="platform-row-actions">
+          <a href="Flylofi.exe" class="dl-btn" download title="Download Standalone Flylofi.exe (91 KB)">
+            <span>⬇</span> .EXE (91 KB)
+          </a>
+          <a href="Flylofi-Windows.zip" class="dl-btn secondary" download title="Download Portable ZIP package">
+            <span>📦</span> .ZIP
+          </a>
+        </div>
+      </div>
+
+      <!-- Linux -->
+      <div class="platform-row" style="flex-direction:column;align-items:stretch">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="platform-row-info">
+            <span class="platform-row-icon">🐧</span>
+            <div class="platform-row-text">
+              <strong>Linux Desktop</strong>
+              <small>Ubuntu, Debian, Fedora, Arch · .tar.gz bundle + 1-click install</small>
+            </div>
+          </div>
+          <div class="platform-row-actions">
+            <a href="flylofi-linux.tar.gz" class="dl-btn" download title="Download Linux .tar.gz package">
+              <span>⬇</span> .tar.gz (214 KB)
+            </a>
+            <a href="flylofi-linux.zip" class="dl-btn secondary" download title="Download Linux .zip package">
+              <span>📦</span> .zip
+            </a>
+          </div>
+        </div>
+        <div class="linux-code-box" title="Click to copy Linux installation command">
+          tar -xzf flylofi-linux.tar.gz &amp;&amp; cd flylofi-linux &amp;&amp; ./install.sh
+        </div>
+      </div>
+
+      <!-- Android -->
+      <div class="platform-row">
+        <div class="platform-row-info">
+          <span class="platform-row-icon">🤖</span>
+          <div class="platform-row-text">
+            <strong>Android Mobile</strong>
+            <small>Android 7.0+ · Signed Release APK (v2 + v3 Merkle Tree)</small>
+          </div>
+        </div>
+        <div class="platform-row-actions">
+          <a href="focus-flight.apk" class="dl-btn" download title="Download Signed Android APK">
+            <span>⬇</span> .APK (94 MB)
+          </a>
+        </div>
+      </div>
+
+      <!-- Browser / PWA -->
+      <div class="platform-row">
+        <div class="platform-row-info">
+          <span class="platform-row-icon">💻</span>
+          <div class="platform-row-text">
+            <strong>Desktop PWA (Windows &amp; Linux)</strong>
+            <small>Install directly into Start Menu, Taskbar or Dock via Chrome / Edge / Brave</small>
+          </div>
+        </div>
+        <div class="platform-row-actions">
+          <button type="button" class="dl-btn" id="modalInstallPwaBtn">
+            <span>⚡</span> Install App
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </script>
 <script src="app-controls.js"></script>
 </body>
