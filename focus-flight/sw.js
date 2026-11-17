@@ -1,5 +1,5 @@
-// Flylofi Service Worker for offline PWA support
-const CACHE_NAME = 'flylofi-v2';
+// Flylofi Service Worker for offline PWA support with Network-First Fresh Updates
+const CACHE_NAME = 'flylofi-v3';
 const CORE_ASSETS = [
   './',
   'app.html',
@@ -13,8 +13,9 @@ const CORE_ASSETS = [
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)).catch(() => {})
   );
 });
 
@@ -35,8 +36,16 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Cache-first for core static assets
+  // Network-first for static assets: always get latest updates from network, fallback to cache
   event.respondWith(
-    caches.match(event.request).then((cached) => cached || fetch(event.request))
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.status === 200 && event.request.method === 'GET') {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone)).catch(() => {});
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
