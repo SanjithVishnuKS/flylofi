@@ -84,12 +84,12 @@
 
 To push this repository to your GitHub account:
 
-1. Create a new repository on GitHub (e.g. `flylofi-focus-flight`).
+1. Create a new repository on GitHub (e.g. `flylofi`).
 2. Run the following commands from your terminal:
 
 ```bash
 cd "d:\SERVER APP"
-git remote add origin https://github.com/SanjithVishnuKS/flylofi-focus-flight.git
+git remote add origin https://github.com/SanjithVishnuKS/flylofi.git
 git branch -M main
 git push -u origin main
 ```
