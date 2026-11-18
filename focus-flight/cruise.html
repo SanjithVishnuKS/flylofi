@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07131c">
+<meta name="theme-color" content="#101415">
 <title>Flylofi — Cruise &amp; Study Mode</title>
 <script>
 try {
@@ -17,8 +17,16 @@ try {
 <link rel="stylesheet" href="cruise-enhancements.css">
 <style>
 :root{
-  --bg:#07131c;--panel:#0b1c27;--line:rgba(214,235,237,.13);
-  --text:#edf5f3;--muted:#9aafb5;--mint:#83e0b5;--gold:#f3cf91;
+  --bg:#101415;
+  --panel:#171d1f;
+  --panel-soft:#1f2628;
+  --line:rgba(214,206,194,.16);
+  --text:#fbf8f1;
+  --beige:#f4ede2;
+  --muted:#8e9e99;
+  --mint:#cb2d50;
+  --accent:#cb2d50;
+  --gold:#d4af37;
 }
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -33,20 +41,20 @@ html.embedded-view .shell{grid-template-rows:minmax(0,1fr) auto!important;paddin
 
 .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}
-.brand-icon{width:32px;height:32px;border:1px solid rgba(131,224,181,.38);border-radius:10px;display:grid;place-items:center;color:var(--mint);background:linear-gradient(145deg,rgba(131,224,181,.13),rgba(131,224,181,.025));font-size:16px}
+.brand-icon{width:32px;height:32px;border:1px solid rgba(203,45,80,.38);border-radius:10px;display:grid;place-items:center;color:var(--mint);background:linear-gradient(145deg,rgba(203,45,80,.13),rgba(203,45,80,.025));font-size:16px}
 .route-top{font-size:11px;color:#c3d1d2;letter-spacing:.13em;text-transform:uppercase}
 .top-right{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}
 
 /* Stage Area (Dark Aircraft Cabin Environment) */
-.stage{position:relative;min-height:0;overflow:hidden;border:1px solid rgba(220,239,237,.13);border-radius:20px;background:#061219;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+.stage{position:relative;min-height:0;overflow:hidden;border:1px solid rgba(220,239,237,.13);border-radius:20px;background:#0e1314;box-shadow:0 24px 80px rgba(0,0,0,.45)}
 
 /* HUD Text */
 .hud{position:absolute;inset:0;z-index:10;pointer-events:none;padding:clamp(14px,2.2vw,28px);display:flex;flex-direction:column;justify-content:space-between}
 .hud-top{max-width:min(440px,55%)}
-.eyebrow{font-size:9px;letter-spacing:.23em;text-transform:uppercase;color:#d1e1df;text-shadow:0 2px 15px #08151d}
+.eyebrow{font-size:9px;letter-spacing:.23em;text-transform:uppercase;color:#d1e1df;text-shadow:0 2px 15px #0d1112}
 h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font-weight:620;margin:8px 0 6px;text-shadow:0 4px 25px rgba(0,0,0,.3)}
-.subtitle{font-size:clamp(10px,1.1vw,13px);line-height:1.5;color:#e0eae6;max-width:360px;text-shadow:0 2px 14px #08151d}
+.subtitle{font-size:clamp(10px,1.1vw,13px);line-height:1.5;color:#e0eae6;max-width:360px;text-shadow:0 2px 14px #0d1112}
 
 /* HUD Bottom: Strict flex row, Departure on left, Phase & Hint on right (NEVER OVERLAP) */
 .hud-bottom{
@@ -55,7 +63,7 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
 }
 .route-data{display:flex;gap:clamp(12px,2vw,26px);flex-wrap:nowrap;min-width:0}
 .datum-label{font-size:8px;letter-spacing:.19em;text-transform:uppercase;color:#bdcece}
-.datum-value{font-size:12px;font-weight:650;margin-top:3px;letter-spacing:.02em;text-shadow:0 2px 12px #08151d;white-space:nowrap}
+.datum-value{font-size:12px;font-weight:650;margin-top:3px;letter-spacing:.02em;text-shadow:0 2px 12px #0d1112;white-space:nowrap}
 
 .hud-status-group{
   display:flex;flex-direction:column;align-items:flex-end;gap:5px;
@@ -79,12 +87,12 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
 .progress-area{display:flex;align-items:center;gap:12px;min-width:0}
 .track{height:4px;position:relative;flex:1;background:rgba(226,239,235,.14);border-radius:10px;cursor:pointer}
 .track-fill{height:100%;width:0;background:var(--mint);border-radius:10px;position:relative}
-.track-fill:after{content:"";position:absolute;right:-3px;top:-3px;width:10px;height:10px;border-radius:50%;background:#dff9eb;box-shadow:0 0 10px rgba(131,224,181,.65)}
+.track-fill:after{content:"";position:absolute;right:-3px;top:-3px;width:10px;height:10px;border-radius:50%;background:#fbf8f1;box-shadow:0 0 10px rgba(203,45,80,.65)}
 .time{font-size:10px;color:#a7b9bd;font-variant-numeric:tabular-nums;white-space:nowrap}
 .chapters{display:flex;align-items:center;gap:5px}
 .chapter{width:7px;height:7px;border-radius:50%;border:0;padding:0;background:#40525a;cursor:pointer;transition:.2s}
 .chapter.active{width:18px;border-radius:8px;background:var(--mint)}
-.chapter:hover{background:#c0e6d5}
+.chapter:hover{background:#cb2d50}
 
 @media(max-width:760px){
   .shell{padding:6px;gap:6px}
@@ -109,7 +117,7 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
     <div class="route-top" id="routeTop">Chennai · MAA&nbsp;&nbsp; — &nbsp;&nbsp;Singapore · SIN</div>
     <div class="top-right">
       <i class="live-dot"></i><span id="status">In focus</span>
-      <button class="standalone-exit-btn" id="standaloneExitBtn" type="button" title="Return to Boarding Pass Ticket" style="margin-left:8px;padding:4px 10px;border-radius:6px;border:1px solid rgba(131,224,181,.35);background:rgba(131,224,181,.12);color:var(--mint);font-size:10px;font-weight:700;cursor:pointer">← Back to Ticket</button>
+      <button class="standalone-exit-btn" id="standaloneExitBtn" type="button" title="Return to Boarding Pass Ticket" style="margin-left:8px;padding:4px 10px;border-radius:6px;border:1px solid rgba(203,45,80,.35);background:rgba(203,45,80,.12);color:var(--mint);font-size:10px;font-weight:700;cursor:pointer">← Back to Ticket</button>
     </div>
   </header>
 
@@ -167,7 +175,7 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
                 <linearGradient id="wingletGradient" x1="0%" y1="100%" x2="0%" y2="0%">
                   <stop offset="0%" stop-color="#b0c2c8"/>
                   <stop offset="70%" stop-color="#d6e3e6"/>
-                  <stop offset="100%" stop-color="#59dfa0"/>
+                  <stop offset="100%" stop-color="#cb2d50"/>
                 </linearGradient>
                 <linearGradient id="engineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#738992"/>

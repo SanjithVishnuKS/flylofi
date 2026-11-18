@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071117">
+<meta name="theme-color" content="#101415">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,22 +12,35 @@
 <link rel="icon" type="image/png" href="icon-192.png">
 <style>
 :root{
-  --bg:#071117;--panel:#10242c;--line:rgba(198,220,225,.18);
-  --muted:#91a9b0;--text:#f4f8f8;--accent:#59dfa0;--coral:#ef9a72;
-  --gold:#f5d070;--perf-color:rgba(198,220,225,.35);
+  /* Refined Luxury Palette: Sage Grey, Warm Beige, Rich Burgundy */
+  --bg:#101415;
+  --panel:#171d1f;
+  --panel-soft:#1f2628;
+  --line:rgba(214,206,194,.16);
+  --muted:#8e9e99;
+  --text:#fbf8f1;
+  --beige:#f4ede2;
+  --beige-muted:#d5cbba;
+  --accent:#a82342;
+  --accent-bright:#cb2d50;
+  --accent-glow:rgba(203,45,80,.45);
+  --accent-subtle:rgba(168,35,66,.2);
+  --coral:#e07a5f;
+  --gold:#d4af37;
+  --perf-color:rgba(214,206,194,.28);
 }
 *{box-sizing:border-box}
 html,body{
   margin:0;min-height:100%;
-  background:radial-gradient(ellipse at 50% 20%,rgba(28,67,76,.45),transparent 58%),linear-gradient(145deg,#071117,#0b1b22 58%,#071117);
+  background:radial-gradient(ellipse at 50% 18%,rgba(52,63,66,.45),transparent 60%),linear-gradient(155deg,#0d1112 0%,#151c1e 52%,#0f1314 100%);
   color:var(--text);font:13px "DM Sans",system-ui,-apple-system,sans-serif;
   -webkit-text-size-adjust:100%;overflow-x:hidden;
 }
 button,select,input{font:inherit}
 button{
   border:1px solid var(--line);border-radius:8px;padding:10px 14px;
-  background:rgba(12,29,37,.78);color:var(--text);cursor:pointer;
-  touch-action:manipulation;-webkit-tap-highlight-color:rgba(89,223,160,.25);
+  background:rgba(23,29,31,.78);color:var(--text);cursor:pointer;
+  touch-action:manipulation;-webkit-tap-highlight-color:rgba(203, 45, 80,.25);
   transition:all .15s ease;
 }
 button:hover,button:active{border-color:var(--accent);color:var(--accent)}
@@ -38,7 +51,7 @@ button:hover,button:active{border-color:var(--accent);color:var(--accent)}
 .topbar{
   height:60px;padding:0 clamp(14px,3.5vw,50px);display:flex;align-items:center;
   justify-content:space-between;border-bottom:1px solid var(--line);
-  background:rgba(7,17,23,.95);backdrop-filter:blur(16px);position:sticky;top:0;z-index:30;
+  background:rgba(19,24,26,.95);backdrop-filter:blur(16px);position:sticky;top:0;z-index:30;
 }
 .brand{font:700 15px "Space Grotesk",sans-serif;letter-spacing:2px;display:flex;align-items:center}
 .brand span{color:var(--accent);margin-right:8px;font-size:18px}
@@ -49,15 +62,15 @@ button:hover,button:active{border-color:var(--accent);color:var(--accent)}
   gap:8px;
   padding:5px 14px;
   border-radius:999px;
-  background:rgba(16,36,44,.75);
-  border:1px solid rgba(89,223,160,.25);
+  background:rgba(27,34,36,.75);
+  border:1px solid rgba(203, 45, 80,.25);
   font:700 11px "Space Grotesk",sans-serif;
   letter-spacing:.06em;
-  color:#e2f2ef;
+  color:#f5eee4;
 }
 .route-arrow{color:var(--coral);font-size:12px}
 .route-seat{
-  background:rgba(89,223,160,.18);
+  background:rgba(203, 45, 80,.18);
   color:var(--accent);
   padding:2px 7px;
   border-radius:5px;
@@ -65,13 +78,13 @@ button:hover,button:active{border-color:var(--accent);color:var(--accent)}
 }
 
 .top-actions{display:flex;align-items:center;gap:10px}
-.top-actions button{padding:7px 13px;font-size:11px;font-weight:600;color:var(--muted);background:rgba(12,29,37,.7)}
+.top-actions button{padding:7px 13px;font-size:11px;font-weight:600;color:var(--muted);background:rgba(23,29,31,.7)}
 .top-actions button:hover{color:var(--accent);border-color:var(--accent)}
 
 .back-to-ticket-btn{
-  background:rgba(89,223,160,.18)!important;
+  background:rgba(203, 45, 80,.18)!important;
   color:var(--accent)!important;
-  border-color:rgba(89,223,160,.4)!important;
+  border-color:rgba(203, 45, 80,.4)!important;
   font-weight:700!important;
 }
 
@@ -94,7 +107,7 @@ em{color:var(--coral);font-style:normal}
 
 .booking{
   border:1px solid var(--line);border-radius:14px;
-  background:linear-gradient(130deg,rgba(255,255,255,.05),transparent 35%),linear-gradient(145deg,#142a34,#0d1c24 68%,#10242c);
+  background:linear-gradient(130deg,rgba(255,255,255,.05),transparent 35%),linear-gradient(145deg,#171d1f,#121719 68%,#171d1f);
   box-shadow:0 24px 60px rgba(0,0,0,.35);padding:24px;
 }
 .card-head{display:flex;justify-content:space-between;align-items:start}
@@ -102,13 +115,13 @@ em{color:var(--coral);font-style:normal}
 .card-head.clickable{cursor:pointer;user-select:none;-webkit-user-select:none}
 .flight-no{
   color:var(--accent);font:700 12px "Space Grotesk",sans-serif;
-  background:rgba(89,223,160,.12);padding:4px 8px;border-radius:6px;
+  background:rgba(203, 45, 80,.12);padding:4px 8px;border-radius:6px;
 }
 .route-grid{display:grid;grid-template-columns:1fr 24px 1fr;gap:10px;align-items:end}
 .route-grid label,legend{color:var(--muted);font-size:10px;letter-spacing:.07em;text-transform:uppercase}
 .route-grid select{
   width:100%;margin-top:7px;padding:12px 10px;border-radius:8px;
-  border:1px solid var(--line);background:#091820;color:var(--text);outline:0;font-size:13px;cursor:pointer;
+  border:1px solid var(--line);background:#111617;color:var(--text);outline:0;font-size:13px;cursor:pointer;
 }
 .arrow{text-align:center;color:var(--coral);font-size:20px;padding-bottom:10px}
 .rule{height:1px;background:var(--line);margin:18px 0}
@@ -119,17 +132,17 @@ legend{margin-bottom:10px;font-weight:600}
 .duration-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
 .dur-btn{
   padding:10px 4px;border-radius:8px;border:1px solid var(--line);
-  background:rgba(12,29,37,.78);color:var(--muted);font:700 11px "Space Grotesk",sans-serif;
+  background:rgba(23,29,31,.78);color:var(--muted);font:700 11px "Space Grotesk",sans-serif;
   cursor:pointer;transition:all .15s ease;text-align:center;
 }
-.dur-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(89,223,160,.1)}
+.dur-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(203, 45, 80,.1)}
 .dur-btn.active{
-  border-color:var(--accent)!important;background:rgba(89,223,160,.2)!important;
-  color:var(--accent)!important;box-shadow:0 0 14px rgba(89,223,160,.25)!important;
+  border-color:var(--accent)!important;background:rgba(203, 45, 80,.2)!important;
+  color:var(--accent)!important;box-shadow:0 0 14px rgba(203, 45, 80,.25)!important;
 }
 .custom-timer-box{
   margin-top:10px;padding:10px 14px;border-radius:8px;
-  background:rgba(16,36,44,.6);border:1px solid var(--line);
+  background:rgba(27,34,36,.6);border:1px solid var(--line);
   display:flex;align-items:center;gap:10px;
 }
 .custom-timer-icon{font-size:16px;color:var(--accent)}
@@ -137,15 +150,15 @@ legend{margin-bottom:10px;font-weight:600}
 .custom-timer-field{display:flex;align-items:center;gap:6px;margin-left:auto}
 .timer-step-btn{
   width:28px;height:28px;padding:0;display:grid;place-items:center;
-  border-radius:6px;border:1px solid var(--line);background:rgba(12,29,37,.85);
+  border-radius:6px;border:1px solid var(--line);background:rgba(23,29,31,.85);
   color:var(--text);font:700 14px "Space Grotesk",sans-serif;cursor:pointer;
 }
-.timer-step-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(89,223,160,.15)}
+.timer-step-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(203, 45, 80,.15)}
 .custom-timer-field input{
   width:64px;padding:5px 6px;border-radius:6px;border:1px solid var(--line);
-  background:#091820;color:var(--text);font:700 13px "Space Grotesk",sans-serif;text-align:center;
+  background:#111617;color:var(--text);font:700 13px "Space Grotesk",sans-serif;text-align:center;
 }
-.custom-timer-field input:focus{border-color:var(--accent);outline:0;box-shadow:0 0 8px rgba(89,223,160,.3)}
+.custom-timer-field input:focus{border-color:var(--accent);outline:0;box-shadow:0 0 8px rgba(203, 45, 80,.3)}
 .custom-timer-field span{font-size:11px;color:var(--muted);font-weight:600}
 
 .options{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -153,11 +166,11 @@ legend{margin-bottom:10px;font-weight:600}
   position:relative;display:grid;place-items:center;padding:12px 6px;
   border:1px solid var(--line);border-radius:8px;color:var(--muted);
   font-size:11px;font-weight:600;cursor:pointer;touch-action:manipulation;
-  -webkit-tap-highlight-color:rgba(89,223,160,.2);transition:all .15s;
+  -webkit-tap-highlight-color:rgba(203, 45, 80,.2);transition:all .15s;
 }
 .options label.active,.options label:has(input:checked){
-  border-color:var(--accent)!important;background:rgba(89,223,160,.16)!important;
-  color:var(--accent)!important;box-shadow:0 0 14px rgba(89,223,160,.2);
+  border-color:var(--accent)!important;background:rgba(203, 45, 80,.16)!important;
+  color:var(--accent)!important;box-shadow:0 0 14px rgba(203, 45, 80,.2);
 }
 .options input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;z-index:2}
 
@@ -166,7 +179,7 @@ legend{margin-bottom:10px;font-weight:600}
    ========================================================================== */
 .transit-mode-bar{
   margin-bottom:16px;padding:12px 14px;border-radius:12px;
-  background:rgba(12,29,37,.65);border:1px solid var(--line);
+  background:rgba(23,29,31,.65);border:1px solid var(--line);
   display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
 }
 .transit-mode-label{
@@ -176,26 +189,26 @@ legend{margin-bottom:10px;font-weight:600}
 .transit-mode-pills{display:flex;align-items:center;gap:8px}
 .mode-pill{
   display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:8px;
-  border:1px solid var(--line);background:rgba(16,36,44,.75);color:var(--text);
+  border:1px solid var(--line);background:rgba(27,34,36,.75);color:var(--text);
   font:700 11px "Space Grotesk",sans-serif;cursor:pointer;transition:all .15s ease;
 }
 .mode-pill:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
 .mode-pill.active{
-  border-color:var(--accent)!important;background:rgba(89,223,160,.16)!important;
-  color:var(--accent)!important;box-shadow:0 0 14px rgba(89,223,160,.25);
+  border-color:var(--accent)!important;background:rgba(203, 45, 80,.16)!important;
+  color:var(--accent)!important;box-shadow:0 0 14px rgba(203, 45, 80,.25);
 }
 .mode-glyph{font-size:14px}
 .mode-status-tag{
   font-size:8px;font-weight:800;letter-spacing:.1em;padding:2px 5px;border-radius:4px;text-transform:uppercase;
 }
-.mode-status-tag.live{background:var(--accent);color:#06171f}
+.mode-status-tag.live{background:var(--accent);color:#0f1415}
 .mode-status-tag.soon{background:rgba(239,154,114,.2);color:var(--coral);border:1px solid rgba(239,154,114,.4)}
 
 /* Multi-Transit Roadmap Universe Card */
 .future-universe-card{
   margin-top:28px;padding:22px;border-radius:14px;
-  background:linear-gradient(135deg,rgba(255,255,255,.03),transparent 45%),linear-gradient(145deg,#0d1e27,#0a171f 68%,#0b1a22);
-  border:1px solid rgba(89,223,160,.2);box-shadow:0 20px 50px rgba(0,0,0,.4);
+  background:linear-gradient(135deg,rgba(255,255,255,.03),transparent 45%),linear-gradient(145deg,#141a1c,#121719 68%,#13181a);
+  border:1px solid rgba(203, 45, 80,.2);box-shadow:0 20px 50px rgba(0,0,0,.4);
 }
 .universe-header{margin-bottom:16px}
 .universe-badge{
@@ -216,15 +229,15 @@ legend{margin-bottom:10px;font-weight:600}
 }
 .transit-card{
   padding:14px 12px;border-radius:10px;border:1px solid var(--line);
-  background:rgba(16,36,44,.55);display:flex;flex-direction:column;justify-content:space-between;
+  background:rgba(27,34,36,.55);display:flex;flex-direction:column;justify-content:space-between;
   transition:all .2s ease;
 }
-.transit-card.live-card{border-color:rgba(89,223,160,.35);background:rgba(89,223,160,.05)}
+.transit-card.live-card{border-color:rgba(203, 45, 80,.35);background:rgba(203, 45, 80,.05)}
 .transit-card.upcoming-card:hover{border-color:var(--coral);transform:translateY(-2px)}
 .transit-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .transit-card-icon{font-size:20px}
 .transit-card-status{font:800 8px "Space Grotesk",sans-serif;letter-spacing:.12em;padding:2px 6px;border-radius:4px}
-.transit-card-status.active{background:rgba(89,223,160,.2);color:var(--accent);border:1px solid rgba(89,223,160,.4)}
+.transit-card-status.active{background:rgba(203, 45, 80,.2);color:var(--accent);border:1px solid rgba(203, 45, 80,.4)}
 .transit-card-status.upcoming{background:rgba(239,154,114,.15);color:var(--coral);border:1px solid rgba(239,154,114,.3)}
 .transit-card h4{margin:4px 0 6px;font:700 12px "Space Grotesk",sans-serif;color:var(--text)}
 .transit-card p{font-size:10px;line-height:1.5;color:var(--muted);margin:0 0 10px;flex:1}
@@ -238,27 +251,27 @@ legend{margin-bottom:10px;font-weight:600}
 
 /* Interactive Transit Preview Modal */
 .transit-modal-overlay{
-  position:fixed;inset:0;background:rgba(4,10,14,.82);backdrop-filter:blur(14px);
+  position:fixed;inset:0;background:rgba(15,19,20,.82);backdrop-filter:blur(14px);
   z-index:90;display:flex;align-items:center;justify-content:center;padding:16px;
   animation:fadeIn .2s ease;
 }
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .transit-modal{
-  width:100%;max-width:540px;background:#0b1b24;border:1px solid rgba(198,220,225,.25);
+  width:100%;max-width:540px;background:#13181a;border:1px solid rgba(214, 206, 194,.25);
   border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.65);overflow:hidden;
   animation:scaleUp .25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 @keyframes scaleUp{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
 .transit-modal-top{
-  padding:16px 20px 14px;background:rgba(16,36,44,.7);border-bottom:1px solid var(--line);
+  padding:16px 20px 14px;background:rgba(27,34,36,.7);border-bottom:1px solid var(--line);
   display:flex;justify-content:space-between;align-items:center;
 }
 .modal-tabs{display:flex;gap:8px}
 .modal-tab-btn{
   padding:7px 14px;border-radius:8px;border:1px solid var(--line);
-  background:rgba(12,29,37,.6);color:var(--muted);font:700 11px "Space Grotesk",sans-serif;cursor:pointer;
+  background:rgba(23,29,31,.6);color:var(--muted);font:700 11px "Space Grotesk",sans-serif;cursor:pointer;
 }
-.modal-tab-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(89,223,160,.12)}
+.modal-tab-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(203, 45, 80,.12)}
 .modal-close-icon{
   width:30px;height:30px;border-radius:50%;border:1px solid var(--line);
   background:transparent;color:var(--muted);font-size:16px;line-height:1;cursor:pointer;
@@ -275,7 +288,7 @@ legend{margin-bottom:10px;font-weight:600}
 .modal-features-list{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
 .modal-feat-item{
   display:flex;gap:12px;padding:12px;border-radius:10px;
-  background:rgba(16,36,44,.5);border:1px solid rgba(198,220,225,.1);
+  background:rgba(27,34,36,.5);border:1px solid rgba(214, 206, 194,.1);
 }
 .modal-feat-icon{font-size:20px;flex-shrink:0}
 .modal-feat-text strong{display:block;font:700 12px "Space Grotesk",sans-serif;color:var(--text)}
@@ -284,30 +297,30 @@ legend{margin-bottom:10px;font-weight:600}
   display:flex;flex-direction:column;gap:10px;padding-top:14px;border-top:1px solid var(--line);
 }
 .modal-sound-btn{
-  width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(89,223,160,.3);
-  background:rgba(89,223,160,.08);color:var(--accent);font:700 12px "Space Grotesk",sans-serif;
+  width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(203, 45, 80,.3);
+  background:rgba(203, 45, 80,.08);color:var(--accent);font:700 12px "Space Grotesk",sans-serif;
   cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.modal-sound-btn.playing{background:var(--accent);color:#06171f}
+.modal-sound-btn.playing{background:var(--accent);color:#0f1415}
 .modal-vote-btn{
   width:100%;padding:12px 14px;border-radius:10px;border:none;
   background:linear-gradient(135deg,var(--coral),#d87346);color:#fff;font:800 12px "Space Grotesk",sans-serif;
   letter-spacing:.04em;cursor:pointer;box-shadow:0 6px 20px rgba(239,154,114,.35);
 }
-.modal-vote-btn.voted{background:rgba(89,223,160,.2);color:var(--accent);border:1px solid var(--accent);box-shadow:none}
+.modal-vote-btn.voted{background:rgba(203, 45, 80,.2);color:var(--accent);border:1px solid var(--accent);box-shadow:none}
 
 /* ==========================================================================
    AUTHENTIC AIRLINE CABIN SEAT MAP
    ========================================================================== */
 .aircraft-fuselage{
-  position:relative;background:linear-gradient(180deg,#0b1e27 0%,#081720 100%);
-  border:2px solid rgba(89,223,160,.25);border-radius:90px 90px 24px 24px;
+  position:relative;background:linear-gradient(180deg,#13181a 0%,#101415 100%);
+  border:2px solid rgba(203, 45, 80,.25);border-radius:90px 90px 24px 24px;
   padding:22px 14px 16px;margin-top:10px;
   box-shadow:0 16px 40px rgba(0,0,0,.5),inset 0 0 30px rgba(0,0,0,.4);
 }
 .cockpit-nose{
   text-align:center;font:700 9px "Space Grotesk",sans-serif;letter-spacing:.22em;
-  color:var(--accent);padding-bottom:10px;border-bottom:1px dashed rgba(89,223,160,.2);
+  color:var(--accent);padding-bottom:10px;border-bottom:1px dashed rgba(203, 45, 80,.2);
   margin-bottom:14px;text-transform:uppercase;
 }
 .wings-indicator{
@@ -316,7 +329,7 @@ legend{margin-bottom:10px;font-weight:600}
   letter-spacing:.14em;color:rgba(239,154,114,.85);text-transform:uppercase;
 }
 .wing-tag{
-  background:rgba(14,34,42,.95);padding:4px 8px;border:1px solid rgba(239,154,114,.35);
+  background:rgba(25,32,34,.95);padding:4px 8px;border:1px solid rgba(239,154,114,.35);
   border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,.5);
 }
 .cabin-section-label{
@@ -334,41 +347,41 @@ legend{margin-bottom:10px;font-weight:600}
 .cabin-aisle{width:16px}
 .seat-btn{
   position:relative;width:34px;height:34px;padding:0;border-radius:7px;
-  border:1px solid rgba(198,220,225,.2);background:rgba(16,36,44,.85);color:#d1e1df;
+  border:1px solid rgba(214, 206, 194,.2);background:rgba(27,34,36,.85);color:#d1e1df;
   font:700 10px "Space Grotesk",sans-serif;display:flex;flex-direction:column;
   align-items:center;justify-content:center;cursor:pointer;transition:all .15s ease;user-select:none;
 }
 .seat-btn:hover:not(:disabled){
-  border-color:var(--accent);background:rgba(89,223,160,.18);color:var(--accent);transform:scale(1.06);
+  border-color:var(--accent);background:rgba(203, 45, 80,.18);color:var(--accent);transform:scale(1.06);
 }
 .seat-btn.selected{
   border-color:var(--accent)!important;background:var(--accent)!important;
-  color:#06171f!important;font-weight:800!important;box-shadow:0 0 16px rgba(89,223,160,.6)!important;
+  color:#0f1415!important;font-weight:800!important;box-shadow:0 0 16px rgba(203, 45, 80,.6)!important;
   transform:scale(1.08);
 }
 .seat-btn:disabled,.seat-btn.occupied{
-  opacity:.28;cursor:not-allowed;background:rgba(10,20,26,.5);border-color:rgba(255,255,255,.05);color:#60757d;
+  opacity:.28;cursor:not-allowed;background:rgba(20,25,27,.5);border-color:rgba(255,255,255,.05);color:#60757d;
 }
 .seat-btn.window-seat::before{content:'🪟';position:absolute;top:-5px;font-size:7px;opacity:.85}
 .seat-map-legend{
   display:flex;justify-content:center;align-items:center;gap:14px;
-  margin-top:14px;padding-top:10px;border-top:1px dashed rgba(89,223,160,.2);
+  margin-top:14px;padding-top:10px;border-top:1px dashed rgba(203, 45, 80,.2);
   font-size:9px;color:var(--muted);
 }
 .legend-box{width:10px;height:10px;border-radius:3px;display:inline-block;vertical-align:middle;margin-right:4px}
 .legend-box.selected{background:var(--accent)}
-.legend-box.available{border:1px solid rgba(198,220,225,.3);background:rgba(16,36,44,.85)}
-.legend-box.occupied{background:rgba(10,20,26,.5);opacity:.4}
+.legend-box.available{border:1px solid rgba(214, 206, 194,.3);background:rgba(27,34,36,.85)}
+.legend-box.occupied{background:rgba(20,25,27,.5);opacity:.4}
 
 /* Selected Seat Badge & Live Preview */
 .selected-seat-info-card{
   margin-top:12px;padding:10px 14px;border-radius:10px;
-  background:rgba(89,223,160,.08);border:1px solid rgba(89,223,160,.25);
+  background:rgba(203, 45, 80,.08);border:1px solid rgba(203, 45, 80,.25);
   display:flex;align-items:center;justify-content:space-between;gap:12px;
 }
 .seat-info-left strong{display:block;font:700 13px "Space Grotesk",sans-serif;color:var(--accent)}
 .seat-info-left small{font-size:9px;color:#bed7d5}
-.seat-preview-thumb{width:54px;height:38px;border-radius:6px;object-fit:cover;border:1px solid rgba(89,223,160,.3)}
+.seat-preview-thumb{width:54px;height:38px;border-radius:6px;object-fit:cover;border:1px solid rgba(203, 45, 80,.3)}
 
 /* ==========================================================================
    PHYSICAL MOTION-TEAR BOARDING PASS
@@ -376,8 +389,8 @@ legend{margin-bottom:10px;font-weight:600}
 .ticket-wrapper{perspective:1200px;width:100%}
 .boarding-pass-card{
   position:relative;display:grid;grid-template-columns:1fr 180px;
-  border:1px solid rgba(198,220,225,.28);border-radius:16px;
-  background:linear-gradient(135deg,rgba(255,255,255,.04),transparent 45%),linear-gradient(145deg,#132832,#0c1a22 72%,#0f222b);
+  border:1px solid rgba(214, 206, 194,.28);border-radius:16px;
+  background:linear-gradient(135deg,rgba(255,255,255,.04),transparent 45%),linear-gradient(145deg,#1c2427,#161e20 72%,#192123);
   box-shadow:0 30px 80px rgba(0,0,0,.45);overflow:visible;user-select:none;
 }
 .pass-main{
@@ -389,7 +402,7 @@ legend{margin-bottom:10px;font-weight:600}
 .pass-brand span{color:var(--accent);margin-right:4px}
 .pass-type-badge{
   font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
-  background:rgba(89,223,160,.12);border:1px solid rgba(89,223,160,.25);padding:3px 9px;border-radius:999px;font-weight:700;
+  background:rgba(203, 45, 80,.12);border:1px solid rgba(203, 45, 80,.25);padding:3px 9px;border-radius:999px;font-weight:700;
 }
 .pass-route{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;margin:22px 0 18px}
 .route-node small{color:var(--muted);font-size:8px;letter-spacing:.18em;text-transform:uppercase}
@@ -402,7 +415,7 @@ legend{margin-bottom:10px;font-weight:600}
 
 .pass-meta-grid{
   display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px 16px;
-  border-radius:10px;background:rgba(89,223,160,.06);border:1px solid rgba(89,223,160,.12);margin-bottom:16px;
+  border-radius:10px;background:rgba(203, 45, 80,.06);border:1px solid rgba(203, 45, 80,.12);margin-bottom:16px;
 }
 .pass-meta-grid small{color:var(--muted);font-size:8px;letter-spacing:.12em;text-transform:uppercase}
 .pass-meta-grid strong{display:block;margin-top:3px;font-size:12px;color:var(--text)}
@@ -420,11 +433,11 @@ legend{margin-bottom:10px;font-weight:600}
 
 /* Perforation Divider */
 .perforation-divider{position:absolute;right:179px;top:0;bottom:0;width:2px;z-index:3;pointer-events:none}
-.perf-notch{position:absolute;left:-10px;width:20px;height:20px;border-radius:50%;background:#071117;border:1px solid rgba(198,220,225,.28);box-shadow:inset 0 0 6px rgba(0,0,0,.6);z-index:4}
+.perf-notch{position:absolute;left:-10px;width:20px;height:20px;border-radius:50%;background:#101415;border:1px solid rgba(214, 206, 194,.28);box-shadow:inset 0 0 6px rgba(0,0,0,.6);z-index:4}
 .perf-notch.top{top:-11px}
 .perf-notch.bottom{bottom:-11px}
 .perf-dashed-line{position:absolute;top:10px;bottom:10px;left:0;width:1px;border-left:2px dashed var(--perf-color);transition:border-color .2s}
-.perf-scissors{position:absolute;top:50%;left:-8px;transform:translateY(-50%);background:#0d1f27;color:var(--coral);font-size:11px;padding:2px 0}
+.perf-scissors{position:absolute;top:50%;left:-8px;transform:translateY(-50%);background:#182023;color:var(--coral);font-size:11px;padding:2px 0}
 
 /* Tearable Boarding Stub */
 .pass-stub-tearable{
@@ -441,7 +454,7 @@ legend{margin-bottom:10px;font-weight:600}
   100%{transform:translate(65px, 320px) rotate(45deg);opacity:0}
 }
 .stub-header{display:flex;justify-content:space-between;align-items:center;font-size:8px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;padding-bottom:10px;border-bottom:1px dashed var(--perf-color)}
-.stub-seat-box{text-align:center;padding:14px 8px;background:rgba(89,223,160,.08);border:1px solid rgba(89,223,160,.2);border-radius:10px;margin:10px 0}
+.stub-seat-box{text-align:center;padding:14px 8px;background:rgba(203, 45, 80,.08);border:1px solid rgba(203, 45, 80,.2);border-radius:10px;margin:10px 0}
 .stub-seat-label{font-size:8px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;display:block}
 .stub-seat-num{font:800 24px "Space Grotesk",sans-serif;color:var(--accent);display:block;margin-top:2px}
 .stub-seat-desc{font-size:8px;color:#bed7d5;display:block;margin-top:2px}
@@ -450,9 +463,9 @@ legend{margin-bottom:10px;font-weight:600}
 
 .stub-motion-handle{
   position:relative;margin-top:12px;padding:12px 10px;border:1px dashed var(--accent);
-  background:rgba(89,223,160,.12);border-radius:10px;text-align:center;cursor:grab;transition:background .2s,border-color .2s;
+  background:rgba(203, 45, 80,.12);border-radius:10px;text-align:center;cursor:grab;transition:background .2s,border-color .2s;
 }
-.stub-motion-handle:hover{background:rgba(89,223,160,.18)}
+.stub-motion-handle:hover{background:rgba(203, 45, 80,.18)}
 .handle-arrow{font-size:14px;color:var(--accent);animation:pulseDown 1.4s ease-in-out infinite}
 @keyframes pulseDown{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
 .handle-text{font:700 9px "Space Grotesk",sans-serif;letter-spacing:.1em;color:var(--text);margin-top:4px;text-transform:uppercase;line-height:1.3}
@@ -461,22 +474,22 @@ legend{margin-bottom:10px;font-weight:600}
 
 .quick-rip-button{
   width:100%;margin-top:8px;padding:8px 6px;font-size:10px;font-weight:700;letter-spacing:.05em;
-  border-radius:8px;border:1px solid rgba(89,223,160,.3);background:rgba(9,24,32,.9);color:var(--accent);cursor:pointer;
+  border-radius:8px;border:1px solid rgba(203, 45, 80,.3);background:rgba(21,27,29,.9);color:var(--accent);cursor:pointer;
 }
-.quick-rip-button:hover{background:rgba(89,223,160,.2)}
+.quick-rip-button:hover{background:rgba(203, 45, 80,.2)}
 
 .boarded-stamp{
   position:absolute;right:32px;top:50%;transform:translateY(-50%) rotate(-14deg) scale(0);
   padding:14px 22px;border:3px solid var(--accent);border-radius:12px;color:var(--accent);
   font:900 20px "Space Grotesk",sans-serif;letter-spacing:.18em;text-align:center;pointer-events:none;
-  background:rgba(7,28,20,.85);box-shadow:0 0 35px rgba(89,223,160,.4);opacity:0;
+  background:rgba(7,28,20,.85);box-shadow:0 0 35px rgba(203, 45, 80,.4);opacity:0;
   transition:all .28s cubic-bezier(0.18, 0.89, 0.32, 1.28);z-index:5;
 }
 .boarded-stamp.stamped{opacity:1;transform:translateY(-50%) rotate(-14deg) scale(1)}
 .boarded-stamp small{display:block;font-size:8px;letter-spacing:.2em;margin-top:4px;color:#9ff5ca}
 
 /* Cruise View Container: Clean, zero-overlap iframe fill */
-.cruise-view{position:fixed;inset:60px 0 0;background:#071117;z-index:20}
+.cruise-view{position:fixed;inset:60px 0 0;background:#101415;z-index:20}
 .cruise-view iframe{width:100%;height:100%;border:0}
 
 /* Landing / Passport Stamp Screen */
@@ -484,7 +497,7 @@ legend{margin-bottom:10px;font-weight:600}
 .passport-stamp{
   margin:20px auto 24px;width:160px;height:160px;border:3px dashed var(--accent);border-radius:50%;
   display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--accent);
-  background:rgba(89,223,160,.06);transform:rotate(-8deg);box-shadow:0 0 40px rgba(89,223,160,.15);
+  background:rgba(203, 45, 80,.06);transform:rotate(-8deg);box-shadow:0 0 40px rgba(203, 45, 80,.15);
 }
 .passport-stamp-star{font-size:22px}
 .passport-stamp-text{font:800 11px "Space Grotesk",sans-serif;letter-spacing:.2em;margin:4px 0}
@@ -497,8 +510,8 @@ legend{margin-bottom:10px;font-weight:600}
 /* Car Cabin Chassis */
 .car-chassis-map {
   position: relative;
-  background: linear-gradient(180deg, #0e1e27 0%, #08151d 100%);
-  border: 2px solid rgba(89, 223, 160, 0.25);
+  background: linear-gradient(180deg, #141a1c 0%, #101415 100%);
+  border: 2px solid rgba(203, 45, 80, 0.25);
   border-radius: 46px 46px 28px 28px;
   padding: 24px 18px 20px;
   margin-top: 10px;
@@ -510,8 +523,8 @@ legend{margin-bottom:10px;font-weight:600}
   letter-spacing: 0.18em;
   color: var(--accent);
   padding: 6px 12px;
-  background: rgba(89, 223, 160, 0.08);
-  border: 1px solid rgba(89, 223, 160, 0.25);
+  background: rgba(203, 45, 80, 0.08);
+  border: 1px solid rgba(203, 45, 80, 0.25);
   border-radius: 20px 20px 6px 6px;
   margin-bottom: 16px;
   text-transform: uppercase;
@@ -532,7 +545,7 @@ legend{margin-bottom:10px;font-weight:600}
 .car-center-console {
   width: 44px;
   height: 44px;
-  background: rgba(16, 38, 48, 0.65);
+  background: rgba(27, 34, 36, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   display: flex;
@@ -545,9 +558,9 @@ legend{margin-bottom:10px;font-weight:600}
   text-align: center;
 }
 .seat-btn.locked {
-  background: rgba(20, 32, 40, 0.6) !important;
+  background: rgba(28, 35, 37, 0.6) !important;
   border-color: rgba(255, 255, 255, 0.08) !important;
-  color: #556c75 !important;
+  color: #8e9e99 !important;
   cursor: not-allowed !important;
   opacity: 0.65;
   box-shadow: none !important;
@@ -560,8 +573,8 @@ legend{margin-bottom:10px;font-weight:600}
 /* Bus Cabin Chassis */
 .bus-chassis-map {
   position: relative;
-  background: linear-gradient(180deg, #0e1e27 0%, #08151d 100%);
-  border: 2px solid rgba(89, 223, 160, 0.25);
+  background: linear-gradient(180deg, #141a1c 0%, #101415 100%);
+  border: 2px solid rgba(203, 45, 80, 0.25);
   border-radius: 28px 28px 22px 22px;
   padding: 22px 14px 18px;
   margin-top: 10px;
@@ -573,16 +586,16 @@ legend{margin-bottom:10px;font-weight:600}
   letter-spacing: 0.18em;
   color: var(--accent);
   padding: 6px 12px;
-  background: rgba(89, 223, 160, 0.08);
-  border: 1px solid rgba(89, 223, 160, 0.25);
+  background: rgba(203, 45, 80, 0.08);
+  border: 1px solid rgba(203, 45, 80, 0.25);
   border-radius: 12px;
   margin-bottom: 14px;
   text-transform: uppercase;
 }
 .mode-status-tag.glimpse {
-  background: rgba(89, 223, 160, 0.15);
+  background: rgba(203, 45, 80, 0.15);
   color: var(--accent);
-  border: 1px solid rgba(89, 223, 160, 0.3);
+  border: 1px solid rgba(203, 45, 80, 0.3);
 }
 
 /* Platforms Banner & Downloads Hub */
@@ -592,8 +605,8 @@ legend{margin-bottom:10px;font-weight:600}
   gap: 6px;
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(131, 224, 181, 0.12);
-  border: 1px solid rgba(131, 224, 181, 0.35);
+  background: rgba(203, 45, 80, 0.15);
+  border: 1px solid rgba(203, 45, 80, 0.35);
   color: var(--accent);
   font: 700 11px "Space Grotesk", sans-serif;
   letter-spacing: 0.05em;
@@ -601,9 +614,9 @@ legend{margin-bottom:10px;font-weight:600}
   transition: all 0.2s ease;
 }
 .download-trigger-btn:hover {
-  background: rgba(131, 224, 181, 0.24);
+  background: rgba(203, 45, 80, 0.25);
   border-color: var(--accent);
-  box-shadow: 0 0 14px rgba(131, 224, 181, 0.3);
+  box-shadow: 0 0 14px rgba(203, 45, 80, 0.35);
   transform: translateY(-1px);
 }
 
@@ -611,8 +624,8 @@ legend{margin-bottom:10px;font-weight:600}
   margin-bottom: 14px;
   padding: 10px 14px;
   border-radius: 14px;
-  background: rgba(10, 24, 32, 0.65);
-  border: 1px solid rgba(214, 235, 237, 0.12);
+  background: rgba(20, 25, 27, 0.65);
+  border: 1px solid rgba(214, 206, 194, 0.12);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -647,8 +660,8 @@ legend{margin-bottom:10px;font-weight:600}
   gap: 6px;
   padding: 5px 10px;
   border-radius: 8px;
-  background: rgba(12, 30, 39, 0.85);
-  border: 1px solid rgba(214, 235, 237, 0.18);
+  background: rgba(23, 29, 31, 0.85);
+  border: 1px solid rgba(214, 206, 194, 0.18);
   color: var(--text);
   font: 600 11px "Space Grotesk", sans-serif;
   text-decoration: none;
@@ -657,7 +670,7 @@ legend{margin-bottom:10px;font-weight:600}
 }
 .platform-chip:hover {
   border-color: var(--accent);
-  background: rgba(89, 223, 160, 0.14);
+  background: rgba(203, 45, 80, 0.14);
   color: var(--accent);
   transform: translateY(-1px);
 }
@@ -677,7 +690,7 @@ legend{margin-bottom:10px;font-weight:600}
   letter-spacing: 0.06em;
 }
 .platform-chip:hover .p-tag {
-  background: rgba(89, 223, 160, 0.25);
+  background: rgba(203, 45, 80, 0.25);
   color: var(--accent);
 }
 
@@ -686,7 +699,7 @@ legend{margin-bottom:10px;font-weight:600}
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(3, 10, 15, 0.8);
+  background: rgba(14, 18, 19, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: grid;
@@ -702,8 +715,8 @@ legend{margin-bottom:10px;font-weight:600}
 }
 .download-modal-card {
   width: min(560px, 95vw);
-  background: #091720;
-  border: 1px solid rgba(89, 223, 160, 0.3);
+  background: #111617;
+  border: 1px solid rgba(203, 45, 80, 0.3);
   border-radius: 20px;
   padding: 24px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
@@ -747,8 +760,8 @@ legend{margin-bottom:10px;font-weight:600}
   justify-content: space-between;
   padding: 14px 16px;
   border-radius: 12px;
-  background: rgba(14, 34, 44, 0.7);
-  border: 1px solid rgba(214, 235, 237, 0.12);
+  background: rgba(25, 32, 34, 0.7);
+  border: 1px solid rgba(214, 206, 194, 0.12);
   gap: 12px;
 }
 .platform-row-info {
@@ -783,29 +796,29 @@ legend{margin-bottom:10px;font-weight:600}
   align-items: center;
   gap: 6px;
   cursor: pointer;
-  border: 1px solid rgba(89, 223, 160, 0.35);
-  background: rgba(89, 223, 160, 0.14);
+  border: 1px solid rgba(203, 45, 80, 0.35);
+  background: rgba(203, 45, 80, 0.14);
   color: var(--accent);
   transition: all 0.2s ease;
 }
 .dl-btn:hover {
   background: var(--accent);
-  color: #07131c;
+  color: #101415;
   transform: translateY(-1px);
 }
 .dl-btn.secondary {
-  border-color: rgba(214, 235, 237, 0.2);
+  border-color: rgba(214, 206, 194, 0.2);
   background: rgba(255, 255, 255, 0.05);
   color: var(--text);
 }
 .dl-btn.secondary:hover {
   border-color: var(--accent);
   color: var(--accent);
-  background: rgba(89, 223, 160, 0.1);
+  background: rgba(203, 45, 80, 0.1);
 }
 .linux-code-box {
-  background: #050d12;
-  border: 1px solid rgba(214, 235, 237, 0.1);
+  background: #0d1112;
+  border: 1px solid rgba(214, 206, 194, 0.1);
   border-radius: 8px;
   padding: 8px 12px;
   font-family: monospace;
@@ -830,8 +843,8 @@ legend{margin-bottom:10px;font-weight:600}
   margin-bottom: 12px;
   padding: 8px 12px;
   border-radius: 12px;
-  background: rgba(14, 30, 40, 0.6);
-  border: 1px solid rgba(89, 223, 160, 0.2);
+  background: rgba(25, 32, 34, 0.6);
+  border: 1px solid rgba(203, 45, 80, 0.2);
 }
 .origin-mode-label {
   font: 700 9px "Space Grotesk", sans-serif;
@@ -851,8 +864,8 @@ legend{margin-bottom:10px;font-weight:600}
   gap: 5px;
   padding: 4px 9px;
   border-radius: 8px;
-  background: rgba(12, 26, 34, 0.8);
-  border: 1px solid rgba(214, 235, 237, 0.15);
+  background: rgba(23, 29, 31, 0.8);
+  border: 1px solid rgba(214, 206, 194, 0.15);
   color: var(--text);
   font: 600 10px "Space Grotesk", sans-serif;
   cursor: pointer;
@@ -863,10 +876,10 @@ legend{margin-bottom:10px;font-weight:600}
   color: var(--accent);
 }
 .origin-pill.active {
-  background: rgba(89, 223, 160, 0.15);
+  background: rgba(203, 45, 80, 0.15);
   border-color: var(--accent);
   color: var(--accent);
-  box-shadow: 0 0 12px rgba(89, 223, 160, 0.2);
+  box-shadow: 0 0 12px rgba(203, 45, 80, 0.2);
 }
 .origin-city-tag {
   font-weight: 800;
@@ -879,11 +892,11 @@ legend{margin-bottom:10px;font-weight:600}
 }
 .origin-pill.active .origin-city-tag {
   background: var(--accent);
-  color: #07131c;
+  color: #101415;
 }
 .change-base-btn {
   background: transparent;
-  border: 1px dashed rgba(89, 223, 160, 0.35);
+  border: 1px dashed rgba(203, 45, 80, 0.35);
   color: var(--muted);
   font: 600 9px "Space Grotesk", sans-serif;
   padding: 4px 8px;
@@ -902,8 +915,8 @@ legend{margin-bottom:10px;font-weight:600}
   min-width: 0;
   max-width: 100%;
   box-sizing: border-box;
-  background: radial-gradient(circle at center, #091c28 0%, #051017 100%);
-  border: 1px solid rgba(89, 223, 160, 0.28);
+  background: radial-gradient(circle at center, #1c2427 0%, #101415 100%);
+  border: 1px solid rgba(203, 45, 80, 0.28);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.7), 0 8px 30px rgba(0, 0, 0, 0.4);
@@ -925,9 +938,9 @@ legend{margin-bottom:10px;font-weight:600}
   letter-spacing: 0.16em;
   padding: 3px 8px;
   border-radius: 999px;
-  background: rgba(6, 18, 25, 0.85);
+  background: rgba(18, 23, 25, 0.85);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(89, 223, 160, 0.3);
+  border: 1px solid rgba(203, 45, 80, 0.3);
   color: var(--accent);
   display: inline-flex;
   align-items: center;
@@ -937,7 +950,7 @@ legend{margin-bottom:10px;font-weight:600}
   font: 700 9px "Space Grotesk", sans-serif;
   letter-spacing: 0.08em;
   color: #ffcc00;
-  background: rgba(6, 18, 25, 0.85);
+  background: rgba(18, 23, 25, 0.85);
   backdrop-filter: blur(8px);
   padding: 3px 8px;
   border-radius: 999px;
@@ -958,8 +971,8 @@ legend{margin-bottom:10px;font-weight:600}
   box-sizing: border-box;
   padding: 8px 12px 6px;
   border-radius: 12px;
-  background: rgba(10, 24, 32, 0.5);
-  border: 1px solid rgba(214, 235, 237, 0.1);
+  background: rgba(20, 25, 27, 0.5);
+  border: 1px solid rgba(214, 206, 194, 0.1);
 }
 .scrubber-header {
   display: flex;
@@ -981,7 +994,7 @@ legend{margin-bottom:10px;font-weight:600}
   width: 100%;
   height: 6px;
   -webkit-appearance: none;
-  background: rgba(214, 235, 237, 0.15);
+  background: rgba(214, 206, 194, 0.15);
   border-radius: 6px;
   outline: none;
   cursor: pointer;
@@ -1058,14 +1071,14 @@ legend{margin-bottom:10px;font-weight:600}
   max-width: 100%;
   padding: 4px 2px 10px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(89, 223, 160, 0.3) transparent;
+  scrollbar-color: rgba(203, 45, 80, 0.3) transparent;
   scroll-snap-type: x mandatory;
 }
 .dest-carousel::-webkit-scrollbar {
   height: 4px;
 }
 .dest-carousel::-webkit-scrollbar-thumb {
-  background: rgba(89, 223, 160, 0.3);
+  background: rgba(203, 45, 80, 0.3);
   border-radius: 4px;
 }
 
@@ -1073,8 +1086,8 @@ legend{margin-bottom:10px;font-weight:600}
 .dest-card {
   flex: 0 0 135px;
   scroll-snap-align: start;
-  background: rgba(11, 26, 36, 0.85);
-  border: 1px solid rgba(214, 235, 237, 0.15);
+  background: rgba(21, 27, 29, 0.85);
+  border: 1px solid rgba(214, 206, 194, 0.15);
   border-radius: 14px;
   padding: 12px 10px;
   cursor: pointer;
@@ -1087,13 +1100,13 @@ legend{margin-bottom:10px;font-weight:600}
   user-select: none;
 }
 .dest-card:hover {
-  border-color: rgba(89, 223, 160, 0.45);
+  border-color: rgba(203, 45, 80, 0.45);
   transform: translateY(-2px);
-  background: rgba(14, 34, 46, 0.95);
+  background: rgba(25, 32, 34, 0.95);
 }
 .dest-card.active {
   background: #ffffff !important;
-  color: #07131c !important;
+  color: #101415 !important;
   border-color: #ffffff !important;
   box-shadow: 0 8px 24px rgba(255, 255, 255, 0.22), 0 0 0 2px var(--accent) !important;
   transform: translateY(-2px);
@@ -1103,14 +1116,14 @@ legend{margin-bottom:10px;font-weight:600}
   align-items: center;
   gap: 4px;
   background: #ffcc00;
-  color: #07131c;
+  color: #101415;
   font: 800 10px "Space Grotesk", sans-serif;
   padding: 2px 6px;
   border-radius: 5px;
   letter-spacing: 0.05em;
 }
 .dest-card.active .dest-badge {
-  background: #07131c;
+  background: #101415;
   color: #ffcc00;
 }
 .dest-city {
@@ -1122,7 +1135,7 @@ legend{margin-bottom:10px;font-weight:600}
   width: 100%;
 }
 .dest-card.active .dest-city {
-  color: #07131c;
+  color: #101415;
 }
 .dest-stats {
   display: flex;
@@ -1133,14 +1146,14 @@ legend{margin-bottom:10px;font-weight:600}
   color: var(--muted);
 }
 .dest-card.active .dest-stats {
-  color: #4a5c63;
+  color: #8e9e99;
 }
 .dest-time {
   font-weight: 700;
   color: var(--accent);
 }
 .dest-card.active .dest-time {
-  color: #0d8050;
+  color: #cb2d50;
 }
 .dest-vibe {
   font-size: 8px;
@@ -1152,7 +1165,7 @@ legend{margin-bottom:10px;font-weight:600}
   width: 100%;
 }
 .dest-card.active .dest-vibe {
-  color: #556c75;
+  color: #8e9e99;
 }
 
 /* ==========================================================================
@@ -1162,8 +1175,8 @@ legend{margin-bottom:10px;font-weight:600}
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(8, 22, 30, 0.9);
-  border: 1px solid rgba(89, 223, 160, 0.25);
+  background: rgba(20, 26, 28, 0.9);
+  border: 1px solid rgba(203, 45, 80, 0.25);
   border-radius: 14px;
   padding: 8px 12px;
   margin-bottom: 20px;
@@ -1188,11 +1201,11 @@ legend{margin-bottom:10px;font-weight:600}
   min-width: 0;
 }
 .step-nav-btn:hover {
-  background: rgba(89, 223, 160, 0.08);
+  background: rgba(203, 45, 80, 0.08);
   color: var(--text);
 }
 .step-nav-btn.active {
-  background: rgba(89, 223, 160, 0.16);
+  background: rgba(203, 45, 80, 0.16);
   color: var(--accent);
 }
 .step-num {
@@ -1210,12 +1223,12 @@ legend{margin-bottom:10px;font-weight:600}
 }
 .step-nav-btn.active .step-num {
   background: var(--accent);
-  color: #071f17;
+  color: #fbf8f1;
   border-color: var(--accent);
-  box-shadow: 0 0 12px rgba(89, 223, 160, 0.45);
+  box-shadow: 0 0 12px rgba(203, 45, 80, 0.45);
 }
 .step-nav-btn.completed .step-num {
-  background: rgba(89, 223, 160, 0.25);
+  background: rgba(203, 45, 80, 0.25);
   color: var(--accent);
   border-color: var(--accent);
 }
@@ -1264,8 +1277,8 @@ legend{margin-bottom:10px;font-weight:600}
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
-  background: rgba(89, 223, 160, 0.12);
-  border: 1px solid rgba(89, 223, 160, 0.28);
+  background: rgba(203, 45, 80, 0.12);
+  border: 1px solid rgba(203, 45, 80, 0.28);
   padding: 3px 8px;
   border-radius: 6px;
   margin-bottom: 6px;
@@ -1274,7 +1287,7 @@ legend{margin-bottom:10px;font-weight:600}
   font-size: 20px;
   font-weight: 700;
   margin: 4px 0 4px;
-  color: #edf5f3;
+  color: #fbf8f1;
   letter-spacing: -0.02em;
 }
 .step-description {
@@ -1293,21 +1306,21 @@ legend{margin-bottom:10px;font-weight:600}
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
-  background: rgba(11, 26, 35, 0.7);
+  background: rgba(21, 27, 29, 0.7);
   padding: 14px 16px;
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .transit-experience-card:hover {
-  border-color: rgba(89, 223, 160, 0.4);
-  background: rgba(14, 32, 43, 0.85);
+  border-color: rgba(203, 45, 80, 0.4);
+  background: rgba(25, 32, 34, 0.85);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 .transit-experience-card.active {
   border-color: var(--accent);
-  background: linear-gradient(145deg, rgba(89, 223, 160, 0.12) 0%, rgba(11, 26, 35, 0.9) 100%);
-  box-shadow: 0 0 24px rgba(89, 223, 160, 0.2);
+  background: linear-gradient(145deg, rgba(203, 45, 80, 0.12) 0%, rgba(21, 27, 29, 0.9) 100%);
+  box-shadow: 0 0 24px rgba(203, 45, 80, 0.2);
 }
 .tec-top {
   display: flex;
@@ -1326,9 +1339,9 @@ legend{margin-bottom:10px;font-weight:600}
   text-transform: uppercase;
 }
 .tec-tag.live {
-  background: rgba(89, 223, 160, 0.2);
+  background: rgba(203, 45, 80, 0.2);
   color: var(--accent);
-  border: 1px solid rgba(89, 223, 160, 0.45);
+  border: 1px solid rgba(203, 45, 80, 0.45);
 }
 .tec-tag.glimpse {
   background: rgba(244, 208, 123, 0.18);
@@ -1337,7 +1350,7 @@ legend{margin-bottom:10px;font-weight:600}
 }
 .tec-title {
   font: 700 15px "Space Grotesk", sans-serif;
-  color: #edf5f3;
+  color: #fbf8f1;
   margin-bottom: 2px;
 }
 .tec-sub {
@@ -1375,7 +1388,7 @@ legend{margin-bottom:10px;font-weight:600}
 }
 .transit-experience-card.active .tec-status {
   background: var(--accent);
-  color: #071f17;
+  color: #fbf8f1;
   font-weight: 800;
 }
 .step-footer {
@@ -1406,18 +1419,18 @@ legend{margin-bottom:10px;font-weight:600}
   font: 800 12px "Space Grotesk", sans-serif;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  background: linear-gradient(135deg, var(--accent), #41b981);
-  color: #051610;
+  background: linear-gradient(135deg, #a82342, #781026);
+  color: #fbf8f1;
   border: 0;
   padding: 10px 18px;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 16px rgba(89, 223, 160, 0.35);
+  box-shadow: 0 4px 16px rgba(203, 45, 80, 0.35);
 }
 .step-next-btn:hover, .step-confirm-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(89, 223, 160, 0.5);
+  box-shadow: 0 6px 22px rgba(203, 45, 80, 0.5);
 }
 .step-back-btn {
   display: inline-flex;
@@ -1438,8 +1451,8 @@ legend{margin-bottom:10px;font-weight:600}
   color: #fff;
 }
 .journey-confirmation-card {
-  background: linear-gradient(145deg, rgba(89, 223, 160, 0.08) 0%, rgba(9, 23, 31, 0.95) 100%);
-  border: 1px solid rgba(89, 223, 160, 0.28);
+  background: linear-gradient(145deg, rgba(203, 45, 80, 0.08) 0%, rgba(21, 27, 29, 0.95) 100%);
+  border: 1px solid rgba(203, 45, 80, 0.28);
   border-radius: 14px;
   padding: 16px;
   margin-top: 14px;
@@ -1455,7 +1468,7 @@ legend{margin-bottom:10px;font-weight:600}
   font: 800 8.5px "Space Grotesk", sans-serif;
   letter-spacing: 0.16em;
   color: var(--accent);
-  background: rgba(89, 223, 160, 0.18);
+  background: rgba(203, 45, 80, 0.18);
   padding: 3px 8px;
   border-radius: 5px;
 }
@@ -1470,7 +1483,7 @@ legend{margin-bottom:10px;font-weight:600}
   justify-content: space-between;
   margin-bottom: 14px;
   padding: 10px 12px;
-  background: rgba(5, 15, 20, 0.7);
+  background: rgba(16, 20, 21, 0.7);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -1485,7 +1498,7 @@ legend{margin-bottom:10px;font-weight:600}
 }
 .jcc-val {
   font: 700 14px "Space Grotesk", sans-serif;
-  color: #edf5f3;
+  color: #fbf8f1;
 }
 .jcc-arrow {
   font-size: 18px;
@@ -1507,7 +1520,7 @@ legend{margin-bottom:10px;font-weight:600}
 }
 @keyframes passGlowPulse {
   from { box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
-  to { box-shadow: 0 0 35px rgba(89, 223, 160, 0.6), 0 25px 70px rgba(0,0,0,0.8); }
+  to { box-shadow: 0 0 35px rgba(203, 45, 80, 0.6), 0 25px 70px rgba(0,0,0,0.8); }
 }
 @media (max-width: 680px) {
   .custom-stepper-bar {
@@ -1536,7 +1549,7 @@ legend{margin-bottom:10px;font-weight:600}
   position: fixed;
   inset: 0;
   z-index: 1050;
-  background: rgba(3, 10, 15, 0.8);
+  background: rgba(14, 18, 19, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: grid;
@@ -1552,8 +1565,8 @@ legend{margin-bottom:10px;font-weight:600}
 }
 .change-base-card {
   width: min(480px, 95vw);
-  background: #091720;
-  border: 1px solid rgba(89, 223, 160, 0.3);
+  background: #111617;
+  border: 1px solid rgba(203, 45, 80, 0.3);
   border-radius: 20px;
   padding: 22px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
@@ -1563,8 +1576,8 @@ legend{margin-bottom:10px;font-weight:600}
   width: 100%;
   padding: 10px 14px;
   border-radius: 10px;
-  background: rgba(5, 14, 20, 0.9);
-  border: 1px solid rgba(214, 235, 237, 0.2);
+  background: rgba(16, 20, 21, 0.9);
+  border: 1px solid rgba(214, 206, 194, 0.2);
   color: var(--text);
   font: 600 12px "Space Grotesk", sans-serif;
   margin-bottom: 12px;
@@ -1573,7 +1586,7 @@ legend{margin-bottom:10px;font-weight:600}
 .base-search-input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 12px rgba(89, 223, 160, 0.25);
+  box-shadow: 0 0 12px rgba(203, 45, 80, 0.25);
 }
 .base-list {
   max-height: 280px;
@@ -1588,13 +1601,13 @@ legend{margin-bottom:10px;font-weight:600}
   justify-content: space-between;
   padding: 10px 12px;
   border-radius: 10px;
-  background: rgba(14, 32, 42, 0.6);
-  border: 1px solid rgba(214, 235, 237, 0.1);
+  background: rgba(25, 32, 34, 0.6);
+  border: 1px solid rgba(214, 206, 194, 0.1);
   cursor: pointer;
   transition: all 0.15s;
 }
 .base-item:hover {
-  background: rgba(89, 223, 160, 0.12);
+  background: rgba(203, 45, 80, 0.12);
   border-color: var(--accent);
   transform: translateX(3px);
 }
@@ -1608,7 +1621,7 @@ legend{margin-bottom:10px;font-weight:600}
   padding: 2px 7px;
   border-radius: 5px;
   background: #ffcc00;
-  color: #07131c;
+  color: #101415;
 }
 .base-item-city {
   font: 700 13px "Space Grotesk", sans-serif;
@@ -1626,12 +1639,27 @@ legend{margin-bottom:10px;font-weight:600}
   .stats{margin-top:18px}
   .booking{padding:16px}
   .boarding-pass-card{grid-template-columns:1fr;overflow:visible}
-  .perforation-divider{right:0;left:0;top:auto;bottom:148px;width:100%;height:2px}
-  .perf-notch.top{left:-11px;top:-9px}
-  .perf-notch.bottom{right:-11px;left:auto;top:-9px}
-  .perf-dashed-line{top:0;bottom:0;left:10px;right:10px;width:auto;height:1px;border-left:none;border-top:2px dashed var(--perf-color)}
-  .perf-scissors{left:50%;top:-9px;transform:translateX(-50%)}
-  .pass-stub-tearable{border-top-right-radius:0;border-bottom-left-radius:16px;border-top:1px dashed var(--perf-color);padding:16px}
+  .perforation-divider{display:none!important}
+  .pass-main{border-bottom-left-radius:0;border-top-right-radius:16px;padding:20px 16px}
+  .pass-stub-tearable{
+    border-top-right-radius:0;
+    border-bottom-left-radius:16px;
+    border-bottom-right-radius:16px;
+    border-top:2px dashed var(--perf-color)!important;
+    padding:18px 16px;
+    touch-action:none!important;
+    -webkit-user-select:none;
+    user-select:none;
+  }
+  .quick-rip-button{
+    padding:12px 10px!important;
+    font-size:12px!important;
+    touch-action:manipulation;
+    background:linear-gradient(135deg,#a82342,#781026)!important;
+    color:#fbf8f1!important;
+    border:1px solid rgba(203,45,80,.6)!important;
+    box-shadow:0 3px 12px rgba(168,35,66,.35);
+  }
   .cruise-view{inset:56px 0 0}
 }
 </style>
@@ -1657,7 +1685,7 @@ legend{margin-bottom:10px;font-weight:600}
         <span>Download App</span>
       </button>
       <button id="exitCruiseTopBtn" type="button" class="back-to-ticket-btn" hidden>← Back to Ticket</button>
-      <button id="quickLaunchNav" type="button" style="background:rgba(89,223,160,.18);color:var(--accent);border-color:rgba(89,223,160,.4)">✈ Board</button>
+      <button id="quickLaunchNav" type="button" style="background:rgba(203, 45, 80,.18);color:var(--accent);border-color:rgba(203, 45, 80,.4)">✈ Board</button>
       <button id="homeNavButton" type="button">Home</button>
     </div>
   </header>
@@ -1668,58 +1696,6 @@ legend{margin-bottom:10px;font-weight:600}
       
       <!-- LEFT COLUMN: ITINERARY & ACTUAL AIRPLANE SEAT MAP -->
       <div class="booking-col">
-        <!-- Cross-Platform Availability Strip (Windows, Linux, Android, PWA) -->
-        <div class="platforms-banner">
-          <div class="platforms-title">
-            <span class="platform-dot"></span>
-            <span>AVAILABLE FOR:</span>
-          </div>
-          <div class="platform-chips">
-            <a href="Flylofi.exe" class="platform-chip win" download title="Download Flylofi Standalone App for Windows (91 KB)">
-              <span class="p-icon">🪟</span>
-              <span class="p-name">Windows</span>
-              <span class="p-tag">.EXE</span>
-            </a>
-            <a href="flylofi-linux.tar.gz" class="platform-chip lin" download title="Download Flylofi Desktop Bundle for Linux (214 KB)">
-              <span class="p-icon">🐧</span>
-              <span class="p-name">Linux</span>
-              <span class="p-tag">.TAR.GZ</span>
-            </a>
-            <a href="focus-flight.apk" class="platform-chip and" download title="Download Flylofi Android APK (94 MB)">
-              <span class="p-icon">🤖</span>
-              <span class="p-name">Android</span>
-              <span class="p-tag">.APK</span>
-            </a>
-            <button type="button" class="platform-chip pwa" id="installPwaChip" title="Install Desktop App directly to Start menu / Applications Menu">
-              <span class="p-icon">💻</span>
-              <span class="p-name">Desktop PWA</span>
-              <span class="p-tag">INSTALL</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Transit Mode Selector: Flight (Live) vs Car &amp; Bus (Future Multi-Transit Roadmap) -->
-        <div class="transit-mode-bar">
-          <div class="transit-mode-label">Select Transit Mode:</div>
-          <div class="transit-mode-pills">
-            <button type="button" class="mode-pill active" data-mode="flight" id="modeFlightPill" title="Commercial Flight (Available Now)">
-              <span class="mode-glyph">✈</span>
-              <span>Flight</span>
-              <span class="mode-status-tag live">LIVE</span>
-            </button>
-            <button type="button" class="mode-pill" data-mode="car" id="modeCarPill" title="Experience Focus Drive (Night Highway Car)">
-              <span class="mode-glyph">🚗</span>
-              <span>Night Drive</span>
-              <span class="mode-status-tag glimpse">GLIMPSE</span>
-            </button>
-            <button type="button" class="mode-pill" data-mode="bus" id="modeBusPill" title="Experience Focus Transit (Cross-Country Sleeper Bus)">
-              <span class="mode-glyph">🚌</span>
-              <span>Sleeper Bus</span>
-              <span class="mode-status-tag glimpse">GLIMPSE</span>
-            </button>
-          </div>
-        </div>
-
         <form class="booking" id="bookingForm" onsubmit="event.preventDefault();">
           <div class="card-head clickable" id="cardHeadClickable" title="Tap to configure itinerary">
             <div>
@@ -1937,7 +1913,7 @@ legend{margin-bottom:10px;font-weight:600}
             </div>
 
             <!-- AUTHENTIC COMMERCIAL AIRLINE CABIN SEAT MAP -->
-            <fieldset style="border:1px solid rgba(89,223,160,.25);border-radius:14px;padding:14px;background:rgba(89,223,160,.03);margin-top:8px">
+            <fieldset style="border:1px solid rgba(203, 45, 80,.25);border-radius:14px;padding:14px;background:rgba(203, 45, 80,.03);margin-top:8px">
               <legend id="seatMapLegend" style="padding:0 6px;color:var(--accent);font-weight:700">Commercial Aircraft Cabin Map (Tap Seat to Select)</legend>
               
               <!-- Mode 1: Commercial Airliner Fuselage Map -->
@@ -2107,7 +2083,7 @@ legend{margin-bottom:10px;font-weight:600}
                   <div class="seat-map-legend" style="margin-top:20px">
                     <div><span class="legend-box selected"></span>Selected</div>
                     <div><span class="legend-box available"></span>Available Passenger Seat (3 total)</div>
-                    <div><span class="legend-box" style="background:rgba(20,32,40,0.6);border-color:rgba(255,255,255,0.08)">🔒</span>Chauffeur (Locked)</div>
+                    <div><span class="legend-box" style="background:rgba(28,35,37,0.6);border-color:rgba(255,255,255,0.08)">🔒</span>Chauffeur (Locked)</div>
                   </div>
                 </div>
               </div>
@@ -2183,7 +2159,7 @@ legend{margin-bottom:10px;font-weight:600}
                   <div class="seat-map-legend" style="margin-top:20px">
                     <div><span class="legend-box selected"></span>Selected</div>
                     <div><span class="legend-box available"></span>Available Passenger Berth (22 total)</div>
-                    <div><span class="legend-box" style="background:rgba(20,32,40,0.6);border-color:rgba(255,255,255,0.08)">🔒</span>Bus Captain (Locked)</div>
+                    <div><span class="legend-box" style="background:rgba(28,35,37,0.6);border-color:rgba(255,255,255,0.08)">🔒</span>Bus Captain (Locked)</div>
                   </div>
                 </div>
               </div>
@@ -2218,7 +2194,7 @@ legend{margin-bottom:10px;font-weight:600}
             </div>
 
             <!-- DURATION SELECTION (Presets + Custom Timer) -->
-            <fieldset style="border:1px solid rgba(89,223,160,.25);border-radius:14px;padding:14px;background:rgba(89,223,160,.03);margin-bottom:14px">
+            <fieldset style="border:1px solid rgba(203, 45, 80,.25);border-radius:14px;padding:14px;background:rgba(203, 45, 80,.03);margin-bottom:14px">
               <legend style="padding:0 6px;color:var(--accent);font-weight:700">Flight Duration (Select Preset or Custom)</legend>
               <div class="duration-grid" id="durationGrid">
                 <button type="button" class="dur-btn" data-mins="15">15 min</button>
@@ -2244,7 +2220,7 @@ legend{margin-bottom:10px;font-weight:600}
             </fieldset>
 
             <!-- FOCUS CATEGORY -->
-            <fieldset style="border:1px solid rgba(89,223,160,.25);border-radius:14px;padding:14px;background:rgba(89,223,160,.03);margin-bottom:14px">
+            <fieldset style="border:1px solid rgba(203, 45, 80,.25);border-radius:14px;padding:14px;background:rgba(203, 45, 80,.03);margin-bottom:14px">
               <legend style="padding:0 6px;color:var(--accent);font-weight:700">Focus Category</legend>
               <div class="options" id="categoryOptions">
                 <label class="active"><input type="radio" name="category" value="Programming" checked>Code</label>
@@ -2391,50 +2367,6 @@ legend{margin-bottom:10px;font-weight:600}
           <div><strong>24</strong><small>Destinations</small></div>
           <div><strong>86%</strong><small>Completion rate</small></div>
           <div><strong>03h 42m</strong><small>Time in the air</small></div>
-        </div>
-
-        <!-- Standout Showcase: Multi-Transit Universe (Flight, Car, Bus) -->
-        <div class="future-universe-card" id="futureUniverseCard">
-          <div class="universe-header">
-            <div class="universe-badge">EXCLUSIVE TO FLYLOFI · MULTI-TRANSIT UNIVERSE</div>
-            <h3>Beyond Airplane Windows.</h3>
-            <p>While Mac's <em>Focus Flight</em> is confined strictly to airplanes, Flylofi is evolving into a full multi-transit study universe:</p>
-          </div>
-
-          <div class="transit-cards-grid">
-            <!-- Mode 1: Flight (Live) -->
-            <div class="transit-card live-card">
-              <div class="transit-card-top">
-                <span class="transit-card-icon">✈️</span>
-                <span class="transit-card-status active">ACTIVE NOW</span>
-              </div>
-              <h4>Commercial Airliner</h4>
-              <p>38,000 ft stratospheric window, 50-seat commercial fuselage map, cabin white noise &amp; physical tearable boarding pass.</p>
-              <div class="transit-card-perk">✓ 50 Selectable Seats · 4 Perspectives</div>
-            </div>
-
-            <!-- Mode 2: Car (Upcoming) -->
-            <div class="transit-card upcoming-card" id="cardCarPreview" title="Click to view Night Highway Car preview">
-              <div class="transit-card-top">
-                <span class="transit-card-icon">🚗</span>
-                <span class="transit-card-status upcoming">COMING NEXT</span>
-              </div>
-              <h4>Midnight Highway Drive</h4>
-              <p>Rainy windshield wipers, glowing amber dashboard gauges, highway rumble &amp; digital toll ticket pass.</p>
-              <button type="button" class="transit-peek-btn" id="openCarModalBtn">Preview Mode 🚗</button>
-            </div>
-
-            <!-- Mode 3: Bus (Upcoming) -->
-            <div class="transit-card upcoming-card" id="cardBusPreview" title="Click to view Sleeper Bus preview">
-              <div class="transit-card-top">
-                <span class="transit-card-icon">🚌</span>
-                <span class="transit-card-status upcoming">IN PIPELINE</span>
-              </div>
-              <h4>Cross-Country Sleeper Bus</h4>
-              <p>Panoramic front-deck windshield over mountain passes, steady diesel purr, reading lamp &amp; punched retro ticket.</p>
-              <button type="button" class="transit-peek-btn" id="openBusModalBtn">Preview Mode 🚌</button>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -3191,12 +3123,12 @@ function drawRadarScreen(canvas) {
     const r = maxRadiusPx * step;
     ctx.beginPath();
     ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(89, 223, 160, 0.14)';
+    ctx.strokeStyle = 'rgba(203, 45, 80, 0.14)';
     ctx.stroke();
 
     // NM Ring Label
     const ringDist = Math.round(maxRadarNm * step);
-    ctx.fillStyle = 'rgba(89, 223, 160, 0.45)';
+    ctx.fillStyle = 'rgba(203, 45, 80, 0.45)';
     ctx.fillText(`${ringDist} NM`, cx + 6, cy - r + 11);
   });
 
@@ -3206,11 +3138,11 @@ function drawRadarScreen(canvas) {
   ctx.lineTo(cx + maxRadiusPx, cy);
   ctx.moveTo(cx, cy - maxRadiusPx);
   ctx.lineTo(cx, cy + maxRadiusPx);
-  ctx.strokeStyle = 'rgba(89, 223, 160, 0.12)';
+  ctx.strokeStyle = 'rgba(203, 45, 80, 0.12)';
   ctx.stroke();
 
   // Compass Cardinal Labels (N, E, S, W)
-  ctx.fillStyle = 'rgba(214, 235, 237, 0.4)';
+  ctx.fillStyle = 'rgba(214, 206, 194, 0.4)';
   ctx.font = '700 8px "Space Grotesk", sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -3223,8 +3155,8 @@ function drawRadarScreen(canvas) {
   radarSweepAngle = (radarSweepAngle + 0.02) % (Math.PI * 2);
   ctx.save();
   const sweepGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxRadiusPx);
-  sweepGrad.addColorStop(0, 'rgba(89, 223, 160, 0.28)');
-  sweepGrad.addColorStop(1, 'rgba(89, 223, 160, 0.01)');
+  sweepGrad.addColorStop(0, 'rgba(203, 45, 80, 0.28)');
+  sweepGrad.addColorStop(1, 'rgba(203, 45, 80, 0.01)');
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.arc(cx, cy, maxRadiusPx, radarSweepAngle - 0.28, radarSweepAngle);
@@ -3235,7 +3167,7 @@ function drawRadarScreen(canvas) {
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.lineTo(cx + Math.cos(radarSweepAngle) * maxRadiusPx, cy + Math.sin(radarSweepAngle) * maxRadiusPx);
-  ctx.strokeStyle = 'rgba(89, 223, 160, 0.65)';
+  ctx.strokeStyle = 'rgba(203, 45, 80, 0.65)';
   ctx.lineWidth = 1.5;
   ctx.stroke();
   ctx.restore();
@@ -3247,17 +3179,17 @@ function drawRadarScreen(canvas) {
   ctx.save();
   ctx.beginPath();
   ctx.arc(cx, cy, rangeRadiusPx, 0, Math.PI * 2);
-  ctx.fillStyle = 'rgba(89, 223, 160, 0.08)';
+  ctx.fillStyle = 'rgba(203, 45, 80, 0.08)';
   ctx.fill();
 
   ctx.lineWidth = 1.5;
-  ctx.strokeStyle = 'rgba(89, 223, 160, 0.55)';
+  ctx.strokeStyle = 'rgba(203, 45, 80, 0.55)';
   ctx.setLineDash([5, 4]);
   ctx.stroke();
 
   ctx.beginPath();
   ctx.arc(cx, cy, Math.max(1, rangeRadiusPx + breath), 0, Math.PI * 2);
-  ctx.strokeStyle = 'rgba(89, 223, 160, 0.25)';
+  ctx.strokeStyle = 'rgba(203, 45, 80, 0.25)';
   ctx.setLineDash([]);
   ctx.stroke();
   ctx.restore();
@@ -3317,7 +3249,7 @@ function drawRadarScreen(canvas) {
     ctx.strokeStyle = '#ffffff';
     ctx.lineWidth = 2;
     ctx.setLineDash([4, 4]);
-    ctx.shadowColor = 'rgba(89, 223, 160, 0.7)';
+    ctx.shadowColor = 'rgba(203, 45, 80, 0.7)';
     ctx.shadowBlur = 8;
     ctx.stroke();
     ctx.restore();
@@ -3357,7 +3289,7 @@ function drawRadarScreen(canvas) {
     // Pin Dot
     ctx.beginPath();
     ctx.arc(x, y, isSelected ? 4.5 : (isReachable ? 3.5 : 2.5), 0, Math.PI * 2);
-    ctx.fillStyle = isSelected ? '#ffffff' : (isReachable ? '#ffcc00' : 'rgba(214, 235, 237, 0.35)');
+    ctx.fillStyle = isSelected ? '#ffffff' : (isReachable ? '#ffcc00' : 'rgba(214, 206, 194, 0.35)');
     ctx.fill();
 
     if (isSelected) {
@@ -3389,18 +3321,18 @@ function drawRadarScreen(canvas) {
       ctx.strokeStyle = '#ffcc00';
       ctx.lineWidth = 1.5;
       ctx.stroke();
-      ctx.fillStyle = '#07131c';
+      ctx.fillStyle = '#101415';
     } else if (isReachable) {
       ctx.fillStyle = '#ffcc00';
       ctx.fill();
-      ctx.fillStyle = '#07131c';
+      ctx.fillStyle = '#101415';
     } else {
-      ctx.fillStyle = 'rgba(7, 19, 28, 0.75)';
+      ctx.fillStyle = 'rgba(19, 24, 26, 0.75)';
       ctx.fill();
-      ctx.strokeStyle = 'rgba(214, 235, 237, 0.2)';
+      ctx.strokeStyle = 'rgba(214, 206, 194, 0.2)';
       ctx.lineWidth = 1;
       ctx.stroke();
-      ctx.fillStyle = 'rgba(214, 235, 237, 0.4)';
+      ctx.fillStyle = 'rgba(214, 206, 194, 0.4)';
     }
 
     ctx.textAlign = 'center';
@@ -3418,7 +3350,7 @@ function drawRadarScreen(canvas) {
 
   ctx.beginPath();
   ctx.arc(cx, cy, 10, 0, Math.PI * 2);
-  ctx.strokeStyle = '#59dfa0';
+  ctx.strokeStyle = '#cb2d50';
   ctx.lineWidth = 2;
   ctx.stroke();
 
@@ -3433,13 +3365,13 @@ function drawRadarScreen(canvas) {
   } else {
     ctx.rect(cx - depW / 2, cy + 14, depW, depH);
   }
-  ctx.fillStyle = 'rgba(6, 18, 25, 0.9)';
+  ctx.fillStyle = 'rgba(18, 23, 25, 0.9)';
   ctx.fill();
-  ctx.strokeStyle = '#59dfa0';
+  ctx.strokeStyle = '#cb2d50';
   ctx.lineWidth = 1.2;
   ctx.stroke();
 
-  ctx.fillStyle = '#59dfa0';
+  ctx.fillStyle = '#cb2d50';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(depLabel, cx, cy + 14 + depH / 2);
@@ -4253,13 +4185,13 @@ window.addEventListener('message', (event) => {
 });
 
 /* ==========================================================================
-   PHYSICAL MOTION-TEAR GESTURE & WEB AUDIO SYNTHESIZER
+   PHYSICAL MOTION-TEAR GESTURE & WEB AUDIO SYNTHESIZER (MOBILE & DESKTOP ROBUST)
    ========================================================================== */
-const stub = $('passStubTearable');
-const tearHandle = $('stubTearHandle');
-const tearProgress = $('tearProgressFill');
-const stamp = $('boardedStamp');
-const quickRip = $('quickRipBtn');
+const stub = passStubTearable;
+const tearHandle = stubTearHandle;
+const tearProgress = tearProgressFill;
+const stamp = boardedStamp;
+const quickRip = quickRipBtn;
 
 let isDragging = false;
 let startY = 0;
@@ -4325,7 +4257,11 @@ function triggerCompleteTear() {
     try { navigator.vibrate([25, 45, 30]); } catch (e) {}
   }
 
-  stub.classList.add('torn-off');
+  if (stub) {
+    stub.classList.remove('tearing');
+    stub.classList.add('torn-off');
+    if (tearProgress) tearProgress.style.width = '100%';
+  }
 
   setTimeout(() => {
     if (stamp) stamp.classList.add('stamped');
@@ -4336,30 +4272,47 @@ function triggerCompleteTear() {
   }, 750);
 }
 
-function onPointerDown(e) {
-  if (hasTorn) return;
-  isDragging = true;
-  startY = e.clientY;
-  currentDeltaY = 0;
-  lastSoundDelta = 0;
-  stub.classList.add('tearing');
-  stub.setPointerCapture(e.pointerId);
-  playTearSound('drag');
+// 1. Infallible Quick Rip Button (Works across Mobile Touch, Pointer, and Click)
+if (quickRip) {
+  const handleQuickRip = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerCompleteTear();
+  };
+  quickRip.addEventListener('click', handleQuickRip);
+  quickRip.addEventListener('touchend', handleQuickRip);
 }
 
-function onPointerMove(e) {
+// 2. Touch & Pointer Dragging Logic with Page-Scroll Lock
+function startDrag(clientY, target) {
+  if (hasTorn) return false;
+  // If user touched the Quick Rip button, do NOT hijack with drag
+  if (target && target.closest && target.closest('#quickRipBtn')) {
+    return false;
+  }
+  isDragging = true;
+  startY = clientY;
+  currentDeltaY = 0;
+  lastSoundDelta = 0;
+  if (stub) stub.classList.add('tearing');
+  playTearSound('drag');
+  return true;
+}
+
+function moveDrag(clientY) {
   if (!isDragging || hasTorn) return;
-  const dy = Math.max(0, e.clientY - startY);
+  const dy = Math.max(0, clientY - startY);
   currentDeltaY = dy;
 
-  const rot = Math.min(18, dy * 0.12);
+  const rot = Math.min(18, dy * 0.14);
   const shiftX = Math.min(24, dy * 0.18);
-  stub.style.transform = `translate(${shiftX}px, ${dy}px) rotate(${rot}deg)`;
+  if (stub) stub.style.transform = 	ranslate(px, px) rotate(deg);
 
-  const pct = Math.min(100, (dy / 70) * 100);
-  if (tearProgress) tearProgress.style.width = `${pct}%`;
+  const targetLimit = window.innerWidth <= 600 ? 45 : 65;
+  const pct = Math.min(100, (dy / targetLimit) * 100);
+  if (tearProgress) tearProgress.style.width = ${pct}%;
 
-  if (dy - lastSoundDelta > 16) {
+  if (dy - lastSoundDelta > 14) {
     playTearSound('drag');
     lastSoundDelta = dy;
     if (navigator.vibrate) {
@@ -4367,38 +4320,84 @@ function onPointerMove(e) {
     }
   }
 
-  if (dy >= 70) {
+  if (dy >= targetLimit) {
     triggerCompleteTear();
   }
 }
 
-function onPointerUp(e) {
+function endDrag() {
   if (!isDragging || hasTorn) return;
   isDragging = false;
-  stub.classList.remove('tearing');
+  if (stub) stub.classList.remove('tearing');
 
-  if (currentDeltaY >= 65) {
+  const minReleaseThreshold = window.innerWidth <= 600 ? 40 : 55;
+  if (currentDeltaY >= minReleaseThreshold) {
     triggerCompleteTear();
   } else {
-    stub.style.transition = 'transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28)';
-    stub.style.transform = '';
+    if (stub) {
+      stub.style.transition = 'transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28)';
+      stub.style.transform = '';
+      setTimeout(() => {
+        if (stub) stub.style.transition = '';
+      }, 300);
+    }
     if (tearProgress) tearProgress.style.width = '0%';
-    setTimeout(() => {
-      stub.style.transition = '';
-    }, 300);
   }
 }
 
+// Touch events for Mobile: { passive: false } allows e.preventDefault() to lock page scrolling while dragging
 if (stub) {
-  stub.addEventListener('pointerdown', onPointerDown);
-  stub.addEventListener('pointermove', onPointerMove);
-  stub.addEventListener('pointerup', onPointerUp);
-  stub.addEventListener('pointercancel', onPointerUp);
+  stub.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      if (startDrag(e.touches[0].clientY, e.target)) {
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+
+  stub.addEventListener('touchmove', (e) => {
+    if (isDragging && e.touches && e.touches.length > 0) {
+      e.preventDefault(); // Crucial: stops mobile browser pull-to-refresh & vertical page scroll
+      moveDrag(e.touches[0].clientY);
+    }
+  }, { passive: false });
+
+  stub.addEventListener('touchend', (e) => {
+    if (isDragging) endDrag();
+  });
+
+  stub.addEventListener('touchcancel', () => {
+    if (isDragging) endDrag();
+  });
+
+  // Pointer events for Desktop Mouse Dragging
+  stub.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'touch') return; // Handled by touch events
+    if (startDrag(e.clientY, e.target)) {
+      try { stub.setPointerCapture(e.pointerId); } catch(err) {}
+    }
+  });
+
+  stub.addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'touch') return;
+    moveDrag(e.clientY);
+  });
+
+  stub.addEventListener('pointerup', (e) => {
+    if (e.pointerType === 'touch') return;
+    endDrag();
+  });
+
+  stub.addEventListener('pointercancel', (e) => {
+    if (e.pointerType === 'touch') return;
+    endDrag();
+  });
 }
 
-if (quickRip) {
-  quickRip.addEventListener('click', (e) => {
-    e.stopPropagation();
+// Make tapping anywhere on the motion handle also tear immediately on mobile/desktop
+if (tearHandle) {
+  tearHandle.addEventListener('click', (e) => {
+    if (e.target.closest && e.target.closest('#quickRipBtn')) return;
     triggerCompleteTear();
   });
 }
