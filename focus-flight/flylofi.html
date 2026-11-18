@@ -2400,6 +2400,178 @@ body::before {
   color: #fbf8f1 !important;
 }
 
+
+
+/* ==========================================================================
+   HUMAN CRAFTSMANSHIP: MOTION PHYSICS, SPOTLIGHTS & TACTILE INTERACTIONS
+   ========================================================================== */
+
+/* Step Spatial Slide Engine */
+.wizard-steps-container {
+  position: relative;
+  width: 100%;
+}
+
+.wizard-step {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform, opacity;
+}
+
+.wizard-step.step-slide-in-right {
+  opacity: 0 !important;
+  transform: translateX(36px) !important;
+}
+
+.wizard-step.step-slide-in-left {
+  opacity: 0 !important;
+  transform: translateX(-36px) !important;
+}
+
+.wizard-step.active {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+.wizard-step.step-slide-out-left {
+  opacity: 0 !important;
+  transform: translateX(-36px) !important;
+  position: absolute !important;
+  top: 0; left: 0; right: 0;
+  pointer-events: none !important;
+}
+
+.wizard-step.step-slide-out-right {
+  opacity: 0 !important;
+  transform: translateX(36px) !important;
+  position: absolute !important;
+  top: 0; left: 0; right: 0;
+  pointer-events: none !important;
+}
+
+/* Dynamic Spotlight Sheen on Cards */
+.transit-experience-card, .dest-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.transit-experience-card::before, .dest-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(203, 45, 80, 0.22), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.transit-experience-card:hover::before, .dest-card:hover::before {
+  opacity: 1;
+}
+
+/* 3D Boarding Pass Card Tilt */
+.boarding-pass-card {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease !important;
+  will-change: transform;
+}
+
+/* Seat Pulse Ripple Effect */
+@keyframes seatSelectionPulse {
+  0% { transform: scale(0.92); box-shadow: 0 0 0 0 rgba(203, 45, 80, 0.8); }
+  50% { transform: scale(1.12); box-shadow: 0 0 0 8px rgba(203, 45, 80, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 14px rgba(203, 45, 80, 0.6); }
+}
+
+.chassis-seat.active {
+  animation: seatSelectionPulse 0.38s cubic-bezier(0.18, 0.89, 0.32, 1.28) !important;
+}
+
+/* Animated Seat Code Flip in Ticket */
+@keyframes seatCodeFlip {
+  0% { transform: scale(1) translateY(0); color: var(--accent-bright); }
+  50% { transform: scale(1.22) translateY(-2px); color: #ffffff; text-shadow: 0 0 20px rgba(203, 45, 80, 0.9); }
+  100% { transform: scale(1) translateY(0); color: var(--accent-bright); }
+}
+
+.seat-code-flip {
+  animation: seatCodeFlip 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) !important;
+}
+
+/* Paper Rumble & Stamp Animation on Tear */
+@keyframes paperTearRumble {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, 3px) rotate(-0.5deg); }
+  40% { transform: translate(2px, -2px) rotate(0.5deg); }
+  60% { transform: translate(-1px, 2px); }
+  80% { transform: translate(1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+.boarding-pass-card.rumble {
+  animation: paperTearRumble 0.35s ease !important;
+}
+
+.boarded-stamp {
+  position: absolute !important;
+  right: 32px !important;
+  top: 50% !important;
+  transform: translateY(-50%) rotate(-14deg) scale(2.5) !important;
+  padding: 16px 26px !important;
+  border: 3.5px solid var(--accent-bright) !important;
+  border-radius: 14px !important;
+  color: var(--accent-bright) !important;
+  font-family: var(--font-display) !important;
+  font-weight: 900 !important;
+  font-size: 22px !important;
+  letter-spacing: 0.18em !important;
+  opacity: 0 !important;
+  background: rgba(16, 20, 21, 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0 0 35px rgba(203, 45, 80, 0.6), inset 0 0 14px rgba(203, 45, 80, 0.3) !important;
+  pointer-events: none !important;
+  z-index: 25 !important;
+  transition: transform 0.28s cubic-bezier(0.12, 0.8, 0.32, 1.2), opacity 0.25s ease !important;
+}
+
+.boarded-stamp.stamped {
+  opacity: 1 !important;
+  transform: translateY(-50%) rotate(-12deg) scale(1) !important;
+}
+
+.boarded-stamp small {
+  display: block !important;
+  font-family: var(--font-mono) !important;
+  font-size: 9px !important;
+  letter-spacing: 0.22em !important;
+  margin-top: 4px !important;
+  color: var(--gold-light) !important;
+}
+
+/* Tear Particle Embers */
+.tear-particle {
+  position: fixed;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 99999;
+  animation: particleFly 0.65s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+}
+
+@keyframes particleFly {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0) rotate(var(--rot)); opacity: 0; }
+}
+
+/* Micro-Haptic Click on Buttons */
+button:active {
+  transform: scale(0.97) !important;
+  transition: transform 0.08s ease !important;
+}
+
 </style>
 </head>
 <body>
@@ -3345,6 +3517,167 @@ body::before {
 </div>
 
 <script>
+/* ==========================================================================
+   HUMAN TOUCH: WEB AUDIO SYNTHESIZER & FLUID MOTION ENGINE
+   ========================================================================== */
+
+let _craftAudioCtx = null;
+function getCraftAudio() {
+  if (!_craftAudioCtx) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) _craftAudioCtx = new AudioContextClass();
+  }
+  if (_craftAudioCtx && _craftAudioCtx.state === 'suspended') {
+    _craftAudioCtx.resume().catch(() => {});
+  }
+  return _craftAudioCtx;
+}
+
+// 1. Tactile Glass Click (Buttons, Tabs, Chips)
+function playHapticClick(pitch = 1) {
+  try {
+    const ctx = getCraftAudio();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(750 * pitch, now);
+    osc.frequency.exponentialRampToValueAtTime(220, now + 0.04);
+    gain.gain.setValueAtTime(0.06, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.045);
+  } catch(e) {}
+}
+
+// 2. VIP Seat Selection Chime (Warm Dual-Tone Harmonic)
+function playSeatChime() {
+  try {
+    const ctx = getCraftAudio();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    [587.33, 880].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, now + i * 0.05);
+      gain.gain.setValueAtTime(0.06, now + i * 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.05 + 0.35);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + i * 0.05);
+      osc.stop(now + i * 0.05 + 0.36);
+    });
+  } catch(e) {}
+}
+
+// 3. Fluid Spatial Step Slide Swish
+function playStepSlide() {
+  try {
+    const ctx = getCraftAudio();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(320, now);
+    osc.frequency.exponentialRampToValueAtTime(560, now + 0.09);
+    gain.gain.setValueAtTime(0.04, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.095);
+  } catch(e) {}
+}
+
+// 4. Physical Rubber Ink Stamp Slam (Thud)
+function playStampSound() {
+  try {
+    const ctx = getCraftAudio();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(140, now);
+    osc.frequency.exponentialRampToValueAtTime(45, now + 0.12);
+    gain.gain.setValueAtTime(0.18, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.125);
+  } catch(e) {}
+}
+
+// 5. Particle Burst on Boarding Tear
+function burstBoardingParticles(originX, originY) {
+  const colors = ['#cb2d50', '#d4af37', '#f5eee4', '#a82342', '#f5d070'];
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'tear-particle';
+    p.style.left = `${originX}px`;
+    p.style.top = `${originY}px`;
+    p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 35 + Math.random() * 85;
+    p.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+    p.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+    p.style.setProperty('--rot', `${Math.random() * 360}deg`);
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 700);
+  }
+}
+
+// 6. Interactive 3D Card Tilt & Mouse Spotlight Tracking
+function initCraftMicroInteractions() {
+  // 3D Tilt for Boarding Pass
+  const bp = document.getElementById('boardingPass');
+  if (bp) {
+    bp.addEventListener('mousemove', (e) => {
+      const rect = bp.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const rotX = -(y / (rect.height / 2)) * 4.2;
+      const rotY = (x / (rect.width / 2)) * 4.2;
+      bp.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-2px)`;
+    });
+    bp.addEventListener('mouseleave', () => {
+      bp.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+    });
+  }
+
+  // Spotlight Torch Effect for Cards
+  const trackCards = document.querySelectorAll('.transit-experience-card, .dest-card');
+  trackCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+
+  // Haptic Clicks on Buttons
+  document.querySelectorAll('button:not(#passStubTearable button)').forEach(btn => {
+    btn.addEventListener('click', () => playHapticClick(1));
+  });
+}
+
+// Hook into DOMContentLoaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCraftMicroInteractions);
+} else {
+  initCraftMicroInteractions();
+}
+
+
+
 /* ==========================================================================
    GLOBAL AIRPORT & MULTI-TRANSIT REGISTRY (ZERO-GPS PRIVACY ENGINE)
    ========================================================================== */
@@ -4606,6 +4939,8 @@ function getSeatInfo(seatCode) {
 }
 
 function selectSeat(seatCode) {
+  playSeatChime();
+  const seatBadge = document.getElementById('ticketSeat'); if (seatBadge) { seatBadge.classList.remove('seat-code-flip'); void seatBadge.offsetWidth; seatBadge.classList.add('seat-code-flip'); }
   const seatInfo = getSeatInfo(seatCode);
   activeFlight.seat = seatCode;
   activeFlight.seatType = seatInfo.type;
@@ -5001,13 +5336,22 @@ function triggerCompleteTear() {
     if (tearProgress) tearProgress.style.width = '100%';
   }
 
+  // Authentic rubber stamp slam & particle burst
+  const bp = document.getElementById('boardingPass');
+  if (bp) {
+    bp.classList.add('rumble');
+    const rect = bp.getBoundingClientRect();
+    burstBoardingParticles(rect.right - 100, rect.top + rect.height / 2);
+  }
+
   setTimeout(() => {
+    playStampSound();
     if (stamp) stamp.classList.add('stamped');
   }, 220);
 
   setTimeout(() => {
     launchFlight(activeFlight);
-  }, 750);
+  }, 850);
 }
 
 // 1. Infallible Quick Rip Button (Works across Mobile Touch, Pointer, and Click)
@@ -5229,17 +5573,41 @@ let currentWizardStep = 1;
 
 function goToCustomStep(stepNum) {
   if (stepNum < 1 || stepNum > 4) return;
+  const prevStep = currentWizardStep || 1;
+  const isForward = stepNum >= prevStep;
   currentWizardStep = stepNum;
 
-  // Toggle visibility of each step
+  playStepSlide();
+
+  const oldEl = document.getElementById(`wizardStep${prevStep}`);
+  const newEl = document.getElementById(`wizardStep${stepNum}`);
+
+  // Spatial directional slide
+  if (oldEl && oldEl !== newEl) {
+    oldEl.classList.remove('active', 'step-slide-in-right', 'step-slide-in-left');
+    oldEl.classList.add(isForward ? 'step-slide-out-left' : 'step-slide-out-right');
+    setTimeout(() => {
+      if (oldEl.classList.contains('step-slide-out-left') || oldEl.classList.contains('step-slide-out-right')) {
+        oldEl.style.display = 'none';
+        oldEl.classList.remove('step-slide-out-left', 'step-slide-out-right');
+      }
+    }, 280);
+  }
+
+  if (newEl) {
+    newEl.style.display = 'block';
+    newEl.classList.remove('active', 'step-slide-out-left', 'step-slide-out-right', 'step-slide-in-right', 'step-slide-in-left');
+    newEl.classList.add(isForward ? 'step-slide-in-right' : 'step-slide-in-left');
+    void newEl.offsetWidth; // Force reflow for smooth momentum
+    newEl.classList.add('active');
+    setTimeout(() => {
+      newEl.classList.remove('step-slide-in-right', 'step-slide-in-left');
+    }, 320);
+  }
+
+  // Update navigation tabs
   for (let s = 1; s <= 4; s++) {
-    const stepEl = document.getElementById(`wizardStep${s}`);
     const navEl = document.getElementById(`stepNav${s}`);
-    if (stepEl) {
-      stepEl.style.display = (s === stepNum) ? 'block' : 'none';
-      if (s === stepNum) stepEl.classList.add('active');
-      else stepEl.classList.remove('active');
-    }
     if (navEl) {
       navEl.classList.toggle('active', s === stepNum);
       navEl.classList.toggle('completed', s < stepNum);
@@ -5247,16 +5615,17 @@ function goToCustomStep(stepNum) {
     }
   }
 
-  // Update step connector active states
+  // Update step connectors
   const connectors = document.querySelectorAll('.step-connector');
   connectors.forEach((conn, idx) => {
     conn.classList.toggle('active', idx < stepNum - 1);
   });
 
-  // Redraw tactical radar if moving into step 2
+  // Redraw radar if on step 2
   if (stepNum === 2) {
     setTimeout(() => {
-      if (typeof drawFlightRadar === 'function') drawFlightRadar();
+      const c = document.getElementById('flightRadarCanvas');
+      if (c && typeof drawRadarScreen === 'function') drawRadarScreen(c);
       if (typeof updateRadarAndCarousel === 'function') updateRadarAndCarousel();
     }, 60);
   }
@@ -5347,6 +5716,8 @@ const targetStep = paramStep ? parseInt(paramStep, 10) : (initStepMatch ? parseI
 goToCustomStep(targetStep);
 updateWizardSummaries();
 </script>
-<script src="app-controls.js"></script>
+<script src="app-controls.js">
+
+</script>
 </body>
 </html>
