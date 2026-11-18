@@ -8,6 +8,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Flylofi — Focus Flight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="icon-192.png">
 <style>
@@ -4304,15 +4307,15 @@ function moveDrag(clientY) {
   const dy = Math.max(0, clientY - startY);
   currentDeltaY = dy;
 
-  const rot = Math.min(18, dy * 0.14);
+    const rot = Math.min(18, dy * 0.14);
   const shiftX = Math.min(24, dy * 0.18);
-  if (stub) stub.style.transform = 	ranslate(px, px) rotate(deg);
+  if (stub) stub.style.transform = `translate(${shiftX}px, ${dy}px) rotate(${rot}deg)`;
 
   const targetLimit = window.innerWidth <= 600 ? 45 : 65;
   const pct = Math.min(100, (dy / targetLimit) * 100);
-  if (tearProgress) tearProgress.style.width = ${pct}%;
+  if (tearProgress) tearProgress.style.width = `${pct}%`;
 
-  if (dy - lastSoundDelta > 14) {
+if (dy - lastSoundDelta > 14) {
     playTearSound('drag');
     lastSoundDelta = dy;
     if (navigator.vibrate) {
@@ -4595,6 +4598,10 @@ $('step4ConfirmBtn')?.addEventListener('click', () => {
     bp.classList.add('pass-pulse-glow');
     bp.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
+  // Seamlessly initiate tear and transition into cruise
+  setTimeout(() => {
+    triggerCompleteTear();
+  }, 450);
 });
 
 // Initialize wizard step from URL query (?step=2), hash (#step2), or default to step 1

@@ -1,5 +1,5 @@
 // Flylofi Service Worker for offline PWA support with Network-First Fresh Updates
-const CACHE_NAME = 'flylofi-v4';
+const CACHE_NAME = 'flylofi-v6-refreshed-sage-burgundy';
 const CORE_ASSETS = [
   './',
   'app.html',
