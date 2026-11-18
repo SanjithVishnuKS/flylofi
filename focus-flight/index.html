@@ -1155,6 +1155,382 @@ legend{margin-bottom:10px;font-weight:600}
   color: #556c75;
 }
 
+/* ==========================================================================
+   CONCIERGE STEP-BY-STEP CUSTOMIZATION WIZARD (FLIGHT, DRIVE, BUS)
+   ========================================================================== */
+.custom-stepper-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(8, 22, 30, 0.9);
+  border: 1px solid rgba(89, 223, 160, 0.25);
+  border-radius: 14px;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.step-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  color: var(--muted);
+  min-width: 0;
+}
+.step-nav-btn:hover {
+  background: rgba(89, 223, 160, 0.08);
+  color: var(--text);
+}
+.step-nav-btn.active {
+  background: rgba(89, 223, 160, 0.16);
+  color: var(--accent);
+}
+.step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font: 700 11px "Space Grotesk", sans-serif;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.step-nav-btn.active .step-num {
+  background: var(--accent);
+  color: #071f17;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(89, 223, 160, 0.45);
+}
+.step-nav-btn.completed .step-num {
+  background: rgba(89, 223, 160, 0.25);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.step-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+}
+.step-title {
+  font: 700 11px "Space Grotesk", sans-serif;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.step-sub {
+  font: 500 9px "Space Grotesk", sans-serif;
+  opacity: 0.75;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.step-connector {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 4px;
+  min-width: 8px;
+  transition: background 0.2s;
+}
+.step-connector.active {
+  background: var(--accent);
+}
+.wizard-step {
+  animation: stepFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes stepFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.step-banner {
+  margin-bottom: 18px;
+}
+.step-badge {
+  display: inline-block;
+  font: 800 9px "Space Grotesk", sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(89, 223, 160, 0.12);
+  border: 1px solid rgba(89, 223, 160, 0.28);
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+.step-heading {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 4px 0 4px;
+  color: #edf5f3;
+  letter-spacing: -0.02em;
+}
+.step-description {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.45;
+}
+.transit-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.transit-experience-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(11, 26, 35, 0.7);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.transit-experience-card:hover {
+  border-color: rgba(89, 223, 160, 0.4);
+  background: rgba(14, 32, 43, 0.85);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.transit-experience-card.active {
+  border-color: var(--accent);
+  background: linear-gradient(145deg, rgba(89, 223, 160, 0.12) 0%, rgba(11, 26, 35, 0.9) 100%);
+  box-shadow: 0 0 24px rgba(89, 223, 160, 0.2);
+}
+.tec-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.tec-icon {
+  font-size: 24px;
+}
+.tec-tag {
+  font: 800 8.5px "Space Grotesk", sans-serif;
+  letter-spacing: 0.14em;
+  padding: 3px 7px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.tec-tag.live {
+  background: rgba(89, 223, 160, 0.2);
+  color: var(--accent);
+  border: 1px solid rgba(89, 223, 160, 0.45);
+}
+.tec-tag.glimpse {
+  background: rgba(244, 208, 123, 0.18);
+  color: #f4d07b;
+  border: 1px solid rgba(244, 208, 123, 0.35);
+}
+.tec-title {
+  font: 700 15px "Space Grotesk", sans-serif;
+  color: #edf5f3;
+  margin-bottom: 2px;
+}
+.tec-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.tec-perks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tec-perks li {
+  font-size: 11px;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tec-action {
+  display: flex;
+  justify-content: flex-end;
+}
+.tec-status {
+  font: 700 10px "Space Grotesk", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+.transit-experience-card.active .tec-status {
+  background: var(--accent);
+  color: #071f17;
+  font-weight: 800;
+}
+.step-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+}
+.step-summary-pill {
+  font: 600 11px "Space Grotesk", sans-serif;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.step-summary-pill strong {
+  color: var(--accent);
+}
+.step-next-btn, .step-confirm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 800 12px "Space Grotesk", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--accent), #41b981);
+  color: #051610;
+  border: 0;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(89, 223, 160, 0.35);
+}
+.step-next-btn:hover, .step-confirm-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(89, 223, 160, 0.5);
+}
+.step-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 700 11px "Space Grotesk", sans-serif;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 9px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.step-back-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.journey-confirmation-card {
+  background: linear-gradient(145deg, rgba(89, 223, 160, 0.08) 0%, rgba(9, 23, 31, 0.95) 100%);
+  border: 1px solid rgba(89, 223, 160, 0.28);
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.jcc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.jcc-badge {
+  font: 800 8.5px "Space Grotesk", sans-serif;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  background: rgba(89, 223, 160, 0.18);
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+.jcc-code {
+  font: 800 11px "Space Grotesk", sans-serif;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+.jcc-route-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: rgba(5, 15, 20, 0.7);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.jcc-node {
+  display: flex;
+  flex-direction: column;
+}
+.jcc-label {
+  font: 700 8.5px "Space Grotesk", sans-serif;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+.jcc-val {
+  font: 700 14px "Space Grotesk", sans-serif;
+  color: #edf5f3;
+}
+.jcc-arrow {
+  font-size: 18px;
+  color: var(--accent);
+}
+.jcc-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.jcc-subval {
+  display: block;
+  font: 600 12px "Space Grotesk", sans-serif;
+  color: #e2e8f0;
+  margin-top: 2px;
+}
+.pass-pulse-glow {
+  animation: passGlowPulse 1.8s ease-in-out infinite alternate;
+}
+@keyframes passGlowPulse {
+  from { box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+  to { box-shadow: 0 0 35px rgba(89, 223, 160, 0.6), 0 25px 70px rgba(0,0,0,0.8); }
+}
+@media (max-width: 680px) {
+  .custom-stepper-bar {
+    padding: 6px 8px;
+  }
+  .step-meta {
+    display: none;
+  }
+  .step-nav-btn {
+    padding: 4px;
+  }
+  .step-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .step-next-btn, .step-confirm-btn, .step-back-btn {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+
+
 /* Change Base Modal */
 .change-base-modal {
   position: fixed;
@@ -1347,379 +1723,569 @@ legend{margin-bottom:10px;font-weight:600}
         <form class="booking" id="bookingForm" onsubmit="event.preventDefault();">
           <div class="card-head clickable" id="cardHeadClickable" title="Tap to configure itinerary">
             <div>
-              <div class="eyebrow">New Itinerary &amp; Cabin Seat</div>
+              <div class="eyebrow">Interactive Journey Concierge</div>
               <h2 id="bookFlightTitle">Book Focus Flight ✈</h2>
             </div>
-            <span class="flight-no">FF-042</span>
+            <span class="flight-no" id="bookingFormFlightNo">FF-042</span>
           </div>
 
-          <!-- Departure Origin Hub Mode Bar (0% GPS Privacy Guarantee) -->
-          <div class="origin-mode-bar" id="originModeBar">
-            <div class="origin-mode-label">Departure Origin:</div>
-            <div class="origin-pills">
-              <button type="button" class="origin-pill active" id="originOdysseyPill" title="Continuous World Tour: Depart from where you last landed">
-                <span class="origin-glyph">🌍</span>
-                <span>Last Landed</span>
-                <span class="origin-city-tag" id="lastLandedTag">SIN</span>
-              </button>
-              <button type="button" class="origin-pill" id="originHomePill" title="Depart from your chosen Home Base Hub (No GPS required)">
-                <span class="origin-glyph">🏠</span>
-                <span>Home Base</span>
-                <span class="origin-city-tag" id="homeBaseTag">MAA</span>
-              </button>
-              <button type="button" class="change-base-btn" id="changeBaseBtn" title="Set a different Home Base city">
-                <span>⚙ Set Base</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Interactive Dynamic Flight Range Radar & Route Vector Canvas -->
-          <div class="flight-radar-card" id="flightRadarCard">
-            <div class="radar-header">
-              <span class="radar-badge" id="radarModeBadge">
-                <span id="radarModeIcon">✈</span>
-                <span id="radarModeTitle">Aviation Radar</span>
+          <!-- Guided Stepper Progress Bar -->
+          <div class="custom-stepper-bar" id="customStepperBar" role="tablist" aria-label="Journey customization steps">
+            <button type="button" class="step-nav-btn active" data-step="1" id="stepNav1" role="tab" aria-selected="true" title="Step 1: Choose Transit Atmosphere">
+              <span class="step-num">1</span>
+              <span class="step-meta">
+                <span class="step-title">Atmosphere</span>
+                <span class="step-sub" id="stepSub1">Flight ✈</span>
               </span>
-              <span class="radar-range-readout" id="radarRangeReadout">Range: ~45 min (380 NM)</span>
-            </div>
-            <canvas class="radar-canvas" id="flightRadarCanvas" width="560" height="220" aria-label="Flight range tactical radar"></canvas>
+            </button>
+            <div class="step-connector"></div>
+            <button type="button" class="step-nav-btn" data-step="2" id="stepNav2" role="tab" aria-selected="false" title="Step 2: Plot Route & Range Radar">
+              <span class="step-num">2</span>
+              <span class="step-meta">
+                <span class="step-title">Route &amp; Radar</span>
+                <span class="step-sub" id="stepSub2">45m Range</span>
+              </span>
+            </button>
+            <div class="step-connector"></div>
+            <button type="button" class="step-nav-btn" data-step="3" id="stepNav3" role="tab" aria-selected="false" title="Step 3: Select Cabin Seat Perspective">
+              <span class="step-num">3</span>
+              <span class="step-meta">
+                <span class="step-title">Cabin Seat</span>
+                <span class="step-sub" id="stepSub3">14A Window</span>
+              </span>
+            </button>
+            <div class="step-connector"></div>
+            <button type="button" class="step-nav-btn" data-step="4" id="stepNav4" role="tab" aria-selected="false" title="Step 4: Objective & Boarding Pass">
+              <span class="step-num">4</span>
+              <span class="step-meta">
+                <span class="step-title">Focus Goal</span>
+                <span class="step-sub" id="stepSub4">Code · 45m</span>
+              </span>
+            </button>
           </div>
 
-          <!-- Continuous Duration Scrubber with Tick Marks (Matching User Screenshot!) -->
-          <div class="radar-scrubber-box">
-            <div class="scrubber-header">
-              <span class="scrubber-label">Focus Flight Duration:</span>
-              <span class="scrubber-val" id="scrubberValueDisplay">45 min</span>
+          <!-- ==============================================================
+               STEP 1: SELECT TRANSIT EXPERIENCE
+               ============================================================== -->
+          <div class="wizard-step" id="wizardStep1" data-step="1">
+            <div class="step-banner">
+              <div class="step-badge">STEP 1 OF 4 · TRANSIT ATMOSPHERE</div>
+              <h3 class="step-heading">Choose Your Transit Sanctuary</h3>
+              <p class="step-description">Select how you want to travel while you focus. Every mode delivers a distinct acoustic and visual haven.</p>
             </div>
-            <input type="range" class="range-slider" id="radarDurationSlider" min="15" max="180" step="5" value="45" aria-label="Flight duration scrubber">
-            <div class="scrubber-ticks" id="scrubberTicks">
-              <span class="scrubber-tick" data-mins="15">15m</span>
-              <span class="scrubber-tick" data-mins="30">30m</span>
-              <span class="scrubber-tick active" data-mins="45">45m</span>
-              <span class="scrubber-tick" data-mins="60">1h</span>
-              <span class="scrubber-tick" data-mins="90">1h30</span>
-              <span class="scrubber-tick" data-mins="120">2h</span>
-              <span class="scrubber-tick" data-mins="180">3h</span>
-            </div>
-          </div>
 
-          <!-- Reachable Destination Carousel Cards (Matching User Screenshot!) -->
-          <div class="dest-carousel-wrapper">
-            <div class="dest-carousel-header">
-              <span class="dest-carousel-title" id="destCarouselTitle">Reachable Destinations within Focus Range:</span>
-              <span class="dest-carousel-count" id="destCarouselCount">Tap card to select route</span>
-            </div>
-            <div class="dest-carousel" id="reachableCarousel" role="listbox" aria-label="Reachable airport destinations">
-              <!-- Populated dynamically based on duration and departure -->
-            </div>
-          </div>
-
-          <!-- Hidden accessible fallback selects for full backward compatibility -->
-          <div style="display:none" aria-hidden="true">
-            <select id="departure"></select>
-            <select id="destination"></select>
-          </div>
-
-          <div class="rule"></div>
-
-          <!-- DURATION SELECTION (Presets + Custom Timer) -->
-          <fieldset>
-            <legend>Flight Duration (Select Preset or Custom)</legend>
-            <div class="duration-grid" id="durationGrid">
-              <button type="button" class="dur-btn" data-mins="15">15 min</button>
-              <button type="button" class="dur-btn" data-mins="25">25 min</button>
-              <button type="button" class="dur-btn active" data-mins="45">45 min</button>
-              <button type="button" class="dur-btn" data-mins="60">60 min</button>
-              <button type="button" class="dur-btn" data-mins="90">90 min</button>
-              <button type="button" class="dur-btn" data-mins="120">120 min</button>
-            </div>
-            <div class="custom-timer-box">
-              <span class="custom-timer-icon">⏱</span>
-              <div>
-                <label for="customTimerInput">Custom Timer</label>
-                <div style="font-size:9px;color:var(--muted)">Set any custom duration (1 - 360 min)</div>
+            <div class="transit-card-grid">
+              <!-- Card 1: Commercial Airliner -->
+              <div class="transit-experience-card active" data-mode="flight" id="cardModeFlight">
+                <div class="tec-top">
+                  <span class="tec-icon">✈</span>
+                  <span class="tec-tag live">LIVE EXPERIENCE</span>
+                </div>
+                <div class="tec-title">Commercial Airliner</div>
+                <div class="tec-sub">Boeing 787 Dreamliner · 35,000 ft High Altitude Cruise</div>
+                <ul class="tec-perks">
+                  <li>☁️ Stratospheric cloud vistas &amp; sunset horizon</li>
+                  <li>🎧 Deep jet turbine engine drone &amp; lo-fi jazz</li>
+                  <li>💺 Window, middle, aisle &amp; first class suites</li>
+                </ul>
+                <div class="tec-action">
+                  <span class="tec-status">Selected</span>
+                </div>
               </div>
-              <div class="custom-timer-field">
-                <button type="button" id="timerMinusBtn" class="timer-step-btn" title="Decrease 5 min">−</button>
-                <input type="number" id="customTimerInput" min="1" max="360" value="45" placeholder="45">
-                <button type="button" id="timerPlusBtn" class="timer-step-btn" title="Increase 5 min">+</button>
-                <span>min</span>
+
+              <!-- Card 2: Highway GT Car -->
+              <div class="transit-experience-card" data-mode="car" id="cardModeCar">
+                <div class="tec-top">
+                  <span class="tec-icon">🚗</span>
+                  <span class="tec-tag glimpse">EXCLUSIVE GLIMPSE</span>
+                </div>
+                <div class="tec-title">Night Highway Drive</div>
+                <div class="tec-sub">Grand Tourer · Rainy Coastal Freeway</div>
+                <ul class="tec-perks">
+                  <li>🌧️ Raindrops on glass &amp; neon reflections</li>
+                  <li>🎧 Rhythmic wipers &amp; highway tire hum</li>
+                  <li>💺 Front shotgun &amp; rear leather lounge (driver locked)</li>
+                </ul>
+                <div class="tec-action">
+                  <span class="tec-status">Tap to Select</span>
+                </div>
+              </div>
+
+              <!-- Card 3: Sleeper Coach -->
+              <div class="transit-experience-card" data-mode="bus" id="cardModeBus">
+                <div class="tec-top">
+                  <span class="tec-icon">🚌</span>
+                  <span class="tec-tag glimpse">EXCLUSIVE GLIMPSE</span>
+                </div>
+                <div class="tec-title">Overnight Sleeper Coach</div>
+                <div class="tec-sub">Double-Decker Express · Mountain Highway</div>
+                <ul class="tec-perks">
+                  <li>🛣️ Real asphalt highway &amp; misty mountain pines</li>
+                  <li>🎧 Low engine purr &amp; passing highway breeze</li>
+                  <li>💺 Upper observation deck &amp; private wood berth</li>
+                </ul>
+                <div class="tec-action">
+                  <span class="tec-status">Tap to Select</span>
+                </div>
               </div>
             </div>
-          </fieldset>
 
-          <!-- FOCUS CATEGORY -->
-          <fieldset>
-            <legend>Focus Category</legend>
-            <div class="options" id="categoryOptions">
-              <label class="active"><input type="radio" name="category" value="Programming" checked>Code</label>
-              <label><input type="radio" name="category" value="Studying">Study</label>
-              <label><input type="radio" name="category" value="Engineering">Build</label>
-              <label><input type="radio" name="category" value="Personal">Read</label>
+            <div class="step-footer">
+              <div class="step-summary-pill">
+                <span>Selected: <strong id="step1SummaryMode">Commercial Airliner ✈</strong></span>
+              </div>
+              <button type="button" class="step-next-btn" id="step1NextBtn">
+                Continue to Route &amp; Radar →
+              </button>
             </div>
-          </fieldset>
+          </div>
 
-          <!-- AUTHENTIC COMMERCIAL AIRLINE CABIN SEAT MAP -->
-          <fieldset style="border:1px solid rgba(89,223,160,.25);border-radius:14px;padding:14px;background:rgba(89,223,160,.03);margin-top:16px">
-            <legend id="seatMapLegend" style="padding:0 6px;color:var(--accent);font-weight:700">Commercial Aircraft Cabin Map (Tap Seat to Select)</legend>
-            
-            <!-- Mode 1: Commercial Airliner Fuselage Map -->
-            <div id="fuselageFlight" class="fuselage-wrapper">
-              <div class="aircraft-fuselage">
-                <div class="cockpit-nose">▲ BOEING 787 FLIGHT DECK ▲</div>
+          <!-- ==============================================================
+               STEP 2: ROUTE, RADAR & DURATION RANGE
+               ============================================================== -->
+          <div class="wizard-step" id="wizardStep2" data-step="2" style="display:none">
+            <div class="step-banner">
+              <div class="step-badge">STEP 2 OF 4 · ROUTE &amp; RADAR</div>
+              <h3 class="step-heading" id="step2Heading">Plot Route &amp; Tactical Radar</h3>
+              <p class="step-description">Select your departure hub and scrub your focus duration to reveal reachable destinations on the tactical radar.</p>
+            </div>
+
+            <!-- Departure Origin Hub Mode Bar (0% GPS Privacy Guarantee) -->
+            <div class="origin-mode-bar" id="originModeBar">
+              <div class="origin-mode-label">Departure Origin:</div>
+              <div class="origin-pills">
+                <button type="button" class="origin-pill active" id="originOdysseyPill" title="Continuous World Tour: Depart from where you last landed">
+                  <span class="origin-glyph">🌍</span>
+                  <span>Last Landed</span>
+                  <span class="origin-city-tag" id="lastLandedTag">SIN</span>
+                </button>
+                <button type="button" class="origin-pill" id="originHomePill" title="Depart from your chosen Home Base Hub (No GPS required)">
+                  <span class="origin-glyph">🏠</span>
+                  <span>Home Base</span>
+                  <span class="origin-city-tag" id="homeBaseTag">MAA</span>
+                </button>
+                <button type="button" class="change-base-btn" id="changeBaseBtn" title="Set a different Home Base city">
+                  <span>⚙ Set Base</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Interactive Dynamic Flight Range Radar & Route Vector Canvas -->
+            <div class="flight-radar-card" id="flightRadarCard">
+              <div class="radar-header">
+                <span class="radar-badge" id="radarModeBadge">
+                  <span id="radarModeIcon">✈</span>
+                  <span id="radarModeTitle">Aviation Radar</span>
+                </span>
+                <span class="radar-range-readout" id="radarRangeReadout">Range: ~45 min (380 NM)</span>
+              </div>
+              <canvas class="radar-canvas" id="flightRadarCanvas" width="560" height="220" aria-label="Flight range tactical radar"></canvas>
+            </div>
+
+            <!-- Continuous Duration Scrubber with Tick Marks (Matching User Screenshot!) -->
+            <div class="radar-scrubber-box">
+              <div class="scrubber-header">
+                <span class="scrubber-label">Focus Journey Duration:</span>
+                <span class="scrubber-val" id="scrubberValueDisplay">45 min</span>
+              </div>
+              <input type="range" class="range-slider" id="radarDurationSlider" min="15" max="180" step="5" value="45" aria-label="Flight duration scrubber">
+              <div class="scrubber-ticks" id="scrubberTicks">
+                <span class="scrubber-tick" data-mins="15">15m</span>
+                <span class="scrubber-tick" data-mins="30">30m</span>
+                <span class="scrubber-tick active" data-mins="45">45m</span>
+                <span class="scrubber-tick" data-mins="60">1h</span>
+                <span class="scrubber-tick" data-mins="90">1h30</span>
+                <span class="scrubber-tick" data-mins="120">2h</span>
+                <span class="scrubber-tick" data-mins="180">3h</span>
+              </div>
+            </div>
+
+            <!-- Reachable Destination Carousel Cards (Matching User Screenshot!) -->
+            <div class="dest-carousel-wrapper">
+              <div class="dest-carousel-header">
+                <span class="dest-carousel-title" id="destCarouselTitle">Reachable Destinations within Focus Range:</span>
+                <span class="dest-carousel-count" id="destCarouselCount">Tap card to select route</span>
+              </div>
+              <div class="dest-carousel" id="reachableCarousel" role="listbox" aria-label="Reachable destinations">
+                <!-- Populated dynamically based on duration and departure -->
+              </div>
+            </div>
+
+            <!-- Hidden accessible fallback selects for full backward compatibility -->
+            <div style="display:none" aria-hidden="true">
+              <select id="departure"></select>
+              <select id="destination"></select>
+            </div>
+
+            <div class="step-footer">
+              <button type="button" class="step-back-btn" id="step2BackBtn">← Back to Mode</button>
+              <div class="step-summary-pill">
+                <span>Route: <strong id="step2SummaryRoute">MAA → SIN (45m)</strong></span>
+              </div>
+              <button type="button" class="step-next-btn" id="step2NextBtn">Continue to Cabin Seat →</button>
+            </div>
+          </div>
+
+          <!-- ==============================================================
+               STEP 3: CABIN & SEAT PERSPECTIVE
+               ============================================================== -->
+          <div class="wizard-step" id="wizardStep3" data-step="3" style="display:none">
+            <div class="step-banner">
+              <div class="step-badge">STEP 3 OF 4 · CABIN &amp; SEAT</div>
+              <h3 class="step-heading" id="step3Heading">Select Your Cabin Vantage Point</h3>
+              <p class="step-description">Tap your desired seat on the vehicle chassis map. Every seat has its own photorealistic perspective.</p>
+            </div>
+
+            <!-- AUTHENTIC COMMERCIAL AIRLINE CABIN SEAT MAP -->
+            <fieldset style="border:1px solid rgba(89,223,160,.25);border-radius:14px;padding:14px;background:rgba(89,223,160,.03);margin-top:8px">
+              <legend id="seatMapLegend" style="padding:0 6px;color:var(--accent);font-weight:700">Commercial Aircraft Cabin Map (Tap Seat to Select)</legend>
               
-              <div class="wings-indicator">
-                <span class="wing-tag">◀ PORT WING &amp; TURBINE</span>
-                <span class="wing-tag">STARBOARD WING &amp; TURBINE ▶</span>
-              </div>
-
-              <!-- Section 1: First Class Suites -->
-              <div class="cabin-section-label">First Class Suite · Sunset Horizon View</div>
-              <div class="seat-row">
-                <span class="row-num">01</span>
-                <button type="button" class="seat-btn window-seat" data-seat="01A" title="Seat 01A - Sunset Horizon Window Suite">01A</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="01B" title="Seat 01B - Center First Suite">01B</button>
-                <div class="cabin-aisle" style="width:28px"></div>
-                <button type="button" class="seat-btn" data-seat="01E" title="Seat 01E - Center First Suite">01E</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn window-seat" data-seat="01F" title="Seat 01F - Sunset Horizon Window Suite">01F</button>
-              </div>
-              <div class="seat-row">
-                <span class="row-num">02</span>
-                <button type="button" class="seat-btn window-seat" data-seat="02A" title="Seat 02A - Sunset Horizon Window Suite">02A</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="02B" title="Seat 02B - Center First Suite">02B</button>
-                <div class="cabin-aisle" style="width:28px"></div>
-                <button type="button" class="seat-btn" data-seat="02E" title="Seat 02E - Center First Suite">02E</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn window-seat" data-seat="02F" title="Seat 02F - Wing &amp; Jet Engine Window">02F</button>
-              </div>
-
-              <!-- Emergency Exit Row -->
-              <div class="exit-row-divider">
-                <span>◀ EMERGENCY EXIT</span>
-                <span>OVERWING SECTION</span>
-                <span>EMERGENCY EXIT ▶</span>
-              </div>
-
-              <!-- Section 2: Overwing & Jet Turbine -->
-              <div class="cabin-section-label">Forward Cabin · Overwing &amp; Jet Turbine View</div>
-              <div class="seat-row">
-                <span class="row-num">03</span>
-                <button type="button" class="seat-btn window-seat" data-seat="03A" title="Seat 03A - Wing &amp; Engine Window">03A</button>
-                <button type="button" class="seat-btn" data-seat="03B" title="Seat 03B - Forward Cabin Middle Seat">03B</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="03C" title="Seat 03C - Forward Cabin Aisle Seat">03C</button>
-                <button type="button" class="seat-btn" data-seat="03D" title="Seat 03D - Forward Cabin Aisle Seat">03D</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="03E" title="Seat 03E - Forward Cabin Middle Seat">03E</button>
-                <button type="button" class="seat-btn window-seat" data-seat="03F" title="Seat 03F - Wing &amp; Engine Window">03F</button>
-              </div>
-              <div class="seat-row">
-                <span class="row-num">05</span>
-                <button type="button" class="seat-btn window-seat" data-seat="05A" title="Seat 05A - Wing &amp; Engine Window">05A</button>
-                <button type="button" class="seat-btn" data-seat="05B" title="Seat 05B - Forward Cabin Middle Seat">05B</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="05C" title="Seat 05C - Forward Cabin Aisle Seat">05C</button>
-                <button type="button" class="seat-btn" data-seat="05D" title="Seat 05D - Forward Cabin Aisle Seat">05D</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="05E" title="Seat 05E - Forward Cabin Middle Seat">05E</button>
-                <button type="button" class="seat-btn window-seat" data-seat="06F" title="Seat 06F - Wing View Window">06F</button>
-              </div>
-
-              <!-- Section 3: Mid Cabin Aerial Vista (User Reference Photo Match) -->
-              <div class="cabin-section-label">Main Cabin · 35,000 ft Aerial Earth Vista</div>
-              <div class="seat-row">
-                <span class="row-num">11</span>
-                <button type="button" class="seat-btn window-seat" data-seat="11A" title="Seat 11A - Aerial Earth Vista Window">11A</button>
-                <button type="button" class="seat-btn" data-seat="11B" title="Seat 11B - Main Cabin Middle Seat">11B</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="11C" title="Seat 11C - Main Cabin Aisle Seat">11C</button>
-                <button type="button" class="seat-btn" data-seat="11D" title="Seat 11D - Main Cabin Aisle Seat">11D</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="11E" title="Seat 11E - Main Cabin Middle Seat">11E</button>
-                <button type="button" class="seat-btn window-seat" data-seat="11F" title="Seat 11F - Aerial Earth Vista Window">11F</button>
-              </div>
-              <div class="seat-row">
-                <span class="row-num">12</span>
-                <button type="button" class="seat-btn window-seat" data-seat="12A" title="Seat 12A - Aerial Earth Vista Window">12A</button>
-                <button type="button" class="seat-btn" data-seat="12B" title="Seat 12B - Main Cabin Middle Seat">12B</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="12C" title="Seat 12C - Main Cabin Aisle Seat">12C</button>
-                <button type="button" class="seat-btn" data-seat="12D" title="Seat 12D - Main Cabin Aisle Seat">12D</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="12E" title="Seat 12E - Main Cabin Middle Seat">12E</button>
-                <button type="button" class="seat-btn window-seat" data-seat="14F" title="Seat 14F - Aerial Earth Vista Window">14F</button>
-              </div>
-              <div class="seat-row">
-                <span class="row-num">14</span>
-                <button type="button" class="seat-btn window-seat selected" data-seat="14A" title="Seat 14A - Aerial Earth Vista Window">14A</button>
-                <button type="button" class="seat-btn" data-seat="14B" title="Seat 14B - Main Cabin Middle Seat">14B</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="14C" title="Seat 14C - Main Cabin Aisle Seat">14C</button>
-                <button type="button" class="seat-btn" data-seat="14D" title="Seat 14D - Main Cabin Aisle Seat">14D</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="14E" title="Seat 14E - Main Cabin Middle Seat">14E</button>
-                <button type="button" class="seat-btn window-seat" data-seat="15F" title="Seat 15F - Aerial Earth Vista Window">15F</button>
-              </div>
-
-              <!-- Section 4: Aft Cabin Night Lights -->
-              <div class="cabin-section-label">Aft Cabin · Night Flight &amp; City Lights View</div>
-              <div class="seat-row">
-                <span class="row-num">16</span>
-                <button type="button" class="seat-btn window-seat" data-seat="16A" title="Seat 16A - Night City Lights Window">16A</button>
-                <button type="button" class="seat-btn" data-seat="16B" title="Seat 16B - Aft Cabin Middle Seat">16B</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="16C" title="Seat 16C - Aft Cabin Aisle Seat">16C</button>
-                <button type="button" class="seat-btn" data-seat="16D" title="Seat 16D - Aft Cabin Aisle Seat">16D</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="16E" title="Seat 16E - Aft Cabin Middle Seat">16E</button>
-                <button type="button" class="seat-btn window-seat" data-seat="17F" title="Seat 17F - Night City Lights Window">17F</button>
-              </div>
-              <div class="seat-row">
-                <span class="row-num">18</span>
-                <button type="button" class="seat-btn window-seat" data-seat="18A" title="Seat 18A - Night City Lights Window">18A</button>
-                <button type="button" class="seat-btn" data-seat="18B" title="Seat 18B - Aft Cabin Middle Seat">18B</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="18C" title="Seat 18C - Aft Cabin Aisle Seat">18C</button>
-                <button type="button" class="seat-btn" data-seat="18D" title="Seat 18D - Aft Cabin Aisle Seat">18D</button>
-                <div class="cabin-aisle"></div>
-                <button type="button" class="seat-btn" data-seat="18E" title="Seat 18E - Aft Cabin Middle Seat">18E</button>
-                <button type="button" class="seat-btn window-seat" data-seat="19F" title="Seat 19F - Night City Lights Window">19F</button>
-              </div>
-
-              <div class="seat-map-legend">
-                <div><span class="legend-box selected"></span>Selected</div>
-                <div><span class="legend-box available"></span>Available Seat</div>
-                <div><span style="font-size:12px;margin-right:2px">🪟</span>Window Seat</div>
-              </div>
-            </div>
-            </div>
-
-            <!-- Mode 2: Highway GT Car Cabin Chassis (4 Seats: DR Locked, FP, RL, RR Accessible) -->
-            <div id="fuselageCar" class="fuselage-wrapper" hidden>
-              <div class="car-chassis-map">
-                <div class="car-windshield-nose">▲ DUAL-MOTOR HIGHWAY CABIN ▲</div>
-                <div class="car-cabin-grid">
-                  <!-- Front Row -->
-                  <div class="cabin-section-label">Front Cockpit · Rain on Windshield &amp; Highway POV</div>
-                  <div class="car-cabin-row">
-                    <button type="button" class="seat-btn locked driver-seat" disabled title="Driver / Chauffeur Seat (Locked — Non-Selectable)">
-                      🔒 DR
-                    </button>
-                    <div class="car-center-console">CONSOLE<br>D7</div>
-                    <button type="button" class="seat-btn window-seat selected" data-seat="FP" title="Seat FP - Front Passenger (Shotgun Window)">
-                      💺 FP
-                    </button>
-                  </div>
-
-                  <!-- Rear Row -->
-                  <div class="cabin-section-label" style="margin-top:10px">Rear Passenger Cabin · Window Droplets &amp; Guardrails</div>
-                  <div class="car-cabin-row">
-                    <button type="button" class="seat-btn window-seat" data-seat="RL" title="Seat RL - Rear Left Window">
-                      💺 RL
-                    </button>
-                    <div class="car-center-console" style="height:36px">ARMREST</div>
-                    <button type="button" class="seat-btn window-seat" data-seat="RR" title="Seat RR - Rear Right Window">
-                      💺 RR
-                    </button>
-                  </div>
-                </div>
-
-                <div class="seat-map-legend" style="margin-top:20px">
-                  <div><span class="legend-box selected"></span>Selected</div>
-                  <div><span class="legend-box available"></span>Available Passenger Seat (3 total)</div>
-                  <div><span class="legend-box" style="background:rgba(20,32,40,0.6);border-color:rgba(255,255,255,0.08)">🔒</span>Chauffeur (Locked)</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Mode 3: Cross-Country Sleeper Coach Chassis (Driver Cab Locked, All Berths Accessible) -->
-            <div id="fuselageBus" class="fuselage-wrapper" hidden>
-              <div class="bus-chassis-map">
-                <div class="bus-cab-nose">▲ SLEEPER COACH UPPER &amp; LOWER DECKS ▲</div>
+              <!-- Mode 1: Commercial Airliner Fuselage Map -->
+              <div id="fuselageFlight" class="fuselage-wrapper">
+                <div class="aircraft-fuselage">
+                  <div class="cockpit-nose">▲ BOEING 787 FLIGHT DECK ▲</div>
                 
-                <!-- Driver Cab Section -->
-                <div class="cabin-section-label">Driver Cab · Non-Selectable</div>
-                <div class="seat-row" style="justify-content:center;margin-bottom:12px">
-                  <button type="button" class="seat-btn locked driver-seat" disabled title="Bus Captain Cab (Locked — Non-Selectable)" style="width:140px">
-                    🔒 BUS CAPTAIN (DR)
-                  </button>
+                <div class="wings-indicator">
+                  <span class="wing-tag">◀ PORT WING &amp; TURBINE</span>
+                  <span class="wing-tag">STARBOARD WING &amp; TURBINE ▶</span>
                 </div>
 
-                <!-- Upper Observation Deck -->
-                <div class="cabin-section-label">Upper Observation Deck · Forward Highway Panorama</div>
-                <div class="seat-row" style="justify-content:center;gap:36px;margin-bottom:14px">
-                  <button type="button" class="seat-btn window-seat selected" data-seat="01A" title="Berth 01A - Upper Panorama Window Deck" style="width:72px">
-                    🌄 01A
-                  </button>
-                  <div class="cabin-aisle" style="width:20px"></div>
-                  <button type="button" class="seat-btn window-seat" data-seat="01B" title="Berth 01B - Upper Panorama Window Deck" style="width:72px">
-                    🌄 01B
-                  </button>
+                <!-- Section 1: First Class Suites -->
+                <div class="cabin-section-label">First Class Suite · Sunset Horizon View</div>
+                <div class="seat-row">
+                  <span class="row-num">01</span>
+                  <button type="button" class="seat-btn window-seat" data-seat="01A" title="Seat 01A - Sunset Horizon Window Suite">01A</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="01B" title="Seat 01B - Center First Suite">01B</button>
+                  <div class="cabin-aisle" style="width:28px"></div>
+                  <button type="button" class="seat-btn" data-seat="01E" title="Seat 01E - Center First Suite">01E</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn window-seat" data-seat="01F" title="Seat 01F - Sunset Horizon Window Suite">01F</button>
                 </div>
-
-                <!-- Sleeper Berths Rows 02 to 06 -->
-                <div class="cabin-section-label">Private Sleeper Berths · Upper &amp; Lower Window Bunks</div>
                 <div class="seat-row">
                   <span class="row-num">02</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="02A" title="Berth 02A - Lower Window Berth">02A</button>
-                  <button type="button" class="seat-btn" data-seat="02B" title="Berth 02B - Lower Aisle Berth">02B</button>
+                  <button type="button" class="seat-btn window-seat" data-seat="02A" title="Seat 02A - Sunset Horizon Window Suite">02A</button>
                   <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="02C" title="Berth 02C - Upper Aisle Berth">02C</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="02D" title="Berth 02D - Upper Window Berth">02D</button>
+                  <button type="button" class="seat-btn" data-seat="02B" title="Seat 02B - Center First Suite">02B</button>
+                  <div class="cabin-aisle" style="width:28px"></div>
+                  <button type="button" class="seat-btn" data-seat="02E" title="Seat 02E - Center First Suite">02E</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn window-seat" data-seat="02F" title="Seat 02F - Wing &amp; Jet Engine Window">02F</button>
                 </div>
+
+                <!-- Emergency Exit Row -->
+                <div class="exit-row-divider">
+                  <span>◀ EMERGENCY EXIT</span>
+                  <span>OVERWING SECTION</span>
+                  <span>EMERGENCY EXIT ▶</span>
+                </div>
+
+                <!-- Section 2: Overwing & Jet Turbine -->
+                <div class="cabin-section-label">Forward Cabin · Overwing &amp; Jet Turbine View</div>
                 <div class="seat-row">
                   <span class="row-num">03</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="03A" title="Berth 03A - Lower Window Berth">03A</button>
-                  <button type="button" class="seat-btn" data-seat="03B" title="Berth 03B - Lower Aisle Berth">03B</button>
+                  <button type="button" class="seat-btn window-seat" data-seat="03A" title="Seat 03A - Wing &amp; Engine Window">03A</button>
+                  <button type="button" class="seat-btn" data-seat="03B" title="Seat 03B - Forward Cabin Middle Seat">03B</button>
                   <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="03C" title="Berth 03C - Upper Aisle Berth">03C</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="03D" title="Berth 03D - Upper Window Berth">03D</button>
-                </div>
-                <div class="seat-row">
-                  <span class="row-num">04</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="04A" title="Berth 04A - Lower Window Berth">04A</button>
-                  <button type="button" class="seat-btn" data-seat="04B" title="Berth 04B - Lower Aisle Berth">04B</button>
+                  <button type="button" class="seat-btn" data-seat="03C" title="Seat 03C - Forward Cabin Aisle Seat">03C</button>
+                  <button type="button" class="seat-btn" data-seat="03D" title="Seat 03D - Forward Cabin Aisle Seat">03D</button>
                   <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="04C" title="Berth 04C - Upper Aisle Berth">04C</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="04D" title="Berth 04D - Upper Window Berth">04D</button>
+                  <button type="button" class="seat-btn" data-seat="03E" title="Seat 03E - Forward Cabin Middle Seat">03E</button>
+                  <button type="button" class="seat-btn window-seat" data-seat="03F" title="Seat 03F - Wing &amp; Engine Window">03F</button>
                 </div>
                 <div class="seat-row">
                   <span class="row-num">05</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="05A" title="Berth 05A - Lower Window Berth">05A</button>
-                  <button type="button" class="seat-btn" data-seat="05B" title="Berth 05B - Lower Aisle Berth">05B</button>
+                  <button type="button" class="seat-btn window-seat" data-seat="05A" title="Seat 05A - Wing &amp; Engine Window">05A</button>
+                  <button type="button" class="seat-btn" data-seat="05B" title="Seat 05B - Forward Cabin Middle Seat">05B</button>
                   <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="05C" title="Berth 05C - Upper Aisle Berth">05C</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="05D" title="Berth 05D - Upper Window Berth">05D</button>
+                  <button type="button" class="seat-btn" data-seat="05C" title="Seat 05C - Forward Cabin Aisle Seat">05C</button>
+                  <button type="button" class="seat-btn" data-seat="05D" title="Seat 05D - Forward Cabin Aisle Seat">05D</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="05E" title="Seat 05E - Forward Cabin Middle Seat">05E</button>
+                  <button type="button" class="seat-btn window-seat" data-seat="06F" title="Seat 06F - Wing View Window">06F</button>
+                </div>
+
+                <!-- Section 3: Mid Cabin Aerial Vista (User Reference Photo Match) -->
+                <div class="cabin-section-label">Main Cabin · 35,000 ft Aerial Earth Vista</div>
+                <div class="seat-row">
+                  <span class="row-num">11</span>
+                  <button type="button" class="seat-btn window-seat" data-seat="11A" title="Seat 11A - Aerial Earth Vista Window">11A</button>
+                  <button type="button" class="seat-btn" data-seat="11B" title="Seat 11B - Main Cabin Middle Seat">11B</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="11C" title="Seat 11C - Main Cabin Aisle Seat">11C</button>
+                  <button type="button" class="seat-btn" data-seat="11D" title="Seat 11D - Main Cabin Aisle Seat">11D</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="11E" title="Seat 11E - Main Cabin Middle Seat">11E</button>
+                  <button type="button" class="seat-btn window-seat" data-seat="11F" title="Seat 11F - Aerial Earth Vista Window">11F</button>
                 </div>
                 <div class="seat-row">
-                  <span class="row-num">06</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="06A" title="Berth 06A - Lower Window Berth">06A</button>
-                  <button type="button" class="seat-btn" data-seat="06B" title="Berth 06B - Lower Aisle Berth">06B</button>
+                  <span class="row-num">12</span>
+                  <button type="button" class="seat-btn window-seat" data-seat="12A" title="Seat 12A - Aerial Earth Vista Window">12A</button>
+                  <button type="button" class="seat-btn" data-seat="12B" title="Seat 12B - Main Cabin Middle Seat">12B</button>
                   <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="06C" title="Berth 06C - Upper Aisle Berth">06C</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="06D" title="Berth 06D - Upper Window Berth">06D</button>
+                  <button type="button" class="seat-btn" data-seat="12C" title="Seat 12C - Main Cabin Aisle Seat">12C</button>
+                  <button type="button" class="seat-btn" data-seat="12D" title="Seat 12D - Main Cabin Aisle Seat">12D</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="12E" title="Seat 12E - Main Cabin Middle Seat">12E</button>
+                  <button type="button" class="seat-btn window-seat" data-seat="14F" title="Seat 14F - Aerial Earth Vista Window">14F</button>
+                </div>
+                <div class="seat-row">
+                  <span class="row-num">14</span>
+                  <button type="button" class="seat-btn window-seat selected" data-seat="14A" title="Seat 14A - Aerial Earth Vista Window">14A</button>
+                  <button type="button" class="seat-btn" data-seat="14B" title="Seat 14B - Main Cabin Middle Seat">14B</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="14C" title="Seat 14C - Main Cabin Aisle Seat">14C</button>
+                  <button type="button" class="seat-btn" data-seat="14D" title="Seat 14D - Main Cabin Aisle Seat">14D</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="14E" title="Seat 14E - Main Cabin Middle Seat">14E</button>
+                  <button type="button" class="seat-btn window-seat" data-seat="15F" title="Seat 15F - Aerial Earth Vista Window">15F</button>
                 </div>
 
-                <div class="seat-map-legend" style="margin-top:20px">
+                <!-- Section 4: Aft Cabin Night Lights -->
+                <div class="cabin-section-label">Aft Cabin · Night Flight &amp; City Lights View</div>
+                <div class="seat-row">
+                  <span class="row-num">16</span>
+                  <button type="button" class="seat-btn window-seat" data-seat="16A" title="Seat 16A - Night City Lights Window">16A</button>
+                  <button type="button" class="seat-btn" data-seat="16B" title="Seat 16B - Aft Cabin Middle Seat">16B</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="16C" title="Seat 16C - Aft Cabin Aisle Seat">16C</button>
+                  <button type="button" class="seat-btn" data-seat="16D" title="Seat 16D - Aft Cabin Aisle Seat">16D</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="16E" title="Seat 16E - Aft Cabin Middle Seat">16E</button>
+                  <button type="button" class="seat-btn window-seat" data-seat="17F" title="Seat 17F - Night City Lights Window">17F</button>
+                </div>
+                <div class="seat-row">
+                  <span class="row-num">18</span>
+                  <button type="button" class="seat-btn window-seat" data-seat="18A" title="Seat 18A - Night City Lights Window">18A</button>
+                  <button type="button" class="seat-btn" data-seat="18B" title="Seat 18B - Aft Cabin Middle Seat">18B</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="18C" title="Seat 18C - Aft Cabin Aisle Seat">18C</button>
+                  <button type="button" class="seat-btn" data-seat="18D" title="Seat 18D - Aft Cabin Aisle Seat">18D</button>
+                  <div class="cabin-aisle"></div>
+                  <button type="button" class="seat-btn" data-seat="18E" title="Seat 18E - Aft Cabin Middle Seat">18E</button>
+                  <button type="button" class="seat-btn window-seat" data-seat="19F" title="Seat 19F - Night City Lights Window">19F</button>
+                </div>
+
+                <div class="seat-map-legend">
                   <div><span class="legend-box selected"></span>Selected</div>
-                  <div><span class="legend-box available"></span>Available Passenger Berth (22 total)</div>
-                  <div><span class="legend-box" style="background:rgba(20,32,40,0.6);border-color:rgba(255,255,255,0.08)">🔒</span>Bus Captain (Locked)</div>
+                  <div><span class="legend-box available"></span>Available Seat</div>
+                  <div><span style="font-size:12px;margin-right:2px">🪟</span>Window Seat</div>
                 </div>
+              </div>
+              </div>
+
+              <!-- Mode 2: Highway GT Car Cabin Chassis (4 Seats: DR Locked, FP, RL, RR Accessible) -->
+              <div id="fuselageCar" class="fuselage-wrapper" hidden>
+                <div class="car-chassis-map">
+                  <div class="car-windshield-nose">▲ DUAL-MOTOR HIGHWAY CABIN ▲</div>
+                  <div class="car-cabin-grid">
+                    <!-- Front Row -->
+                    <div class="cabin-section-label">Front Cockpit · Rain on Windshield &amp; Highway POV</div>
+                    <div class="car-cabin-row">
+                      <button type="button" class="seat-btn locked driver-seat" disabled title="Driver / Chauffeur Seat (Locked — Non-Selectable)">
+                        🔒 DR
+                      </button>
+                      <div class="car-center-console">CONSOLE<br>D7</div>
+                      <button type="button" class="seat-btn window-seat selected" data-seat="FP" title="Seat FP - Front Passenger (Shotgun Window)">
+                        💺 FP
+                      </button>
+                    </div>
+
+                    <!-- Rear Row -->
+                    <div class="cabin-section-label" style="margin-top:10px">Rear Passenger Cabin · Window Droplets &amp; Guardrails</div>
+                    <div class="car-cabin-row">
+                      <button type="button" class="seat-btn window-seat" data-seat="RL" title="Seat RL - Rear Left Window">
+                        💺 RL
+                      </button>
+                      <div class="car-center-console" style="height:36px">ARMREST</div>
+                      <button type="button" class="seat-btn window-seat" data-seat="RR" title="Seat RR - Rear Right Window">
+                        💺 RR
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="seat-map-legend" style="margin-top:20px">
+                    <div><span class="legend-box selected"></span>Selected</div>
+                    <div><span class="legend-box available"></span>Available Passenger Seat (3 total)</div>
+                    <div><span class="legend-box" style="background:rgba(20,32,40,0.6);border-color:rgba(255,255,255,0.08)">🔒</span>Chauffeur (Locked)</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mode 3: Cross-Country Sleeper Coach Chassis (Driver Cab Locked, All Berths Accessible) -->
+              <div id="fuselageBus" class="fuselage-wrapper" hidden>
+                <div class="bus-chassis-map">
+                  <div class="bus-cab-nose">▲ SLEEPER COACH UPPER &amp; LOWER DECKS ▲</div>
+                  
+                  <!-- Driver Cab Section -->
+                  <div class="cabin-section-label">Driver Cab · Non-Selectable</div>
+                  <div class="seat-row" style="justify-content:center;margin-bottom:12px">
+                    <button type="button" class="seat-btn locked driver-seat" disabled title="Bus Captain Cab (Locked — Non-Selectable)" style="width:140px">
+                      🔒 BUS CAPTAIN (DR)
+                    </button>
+                  </div>
+
+                  <!-- Upper Observation Deck -->
+                  <div class="cabin-section-label">Upper Observation Deck · Forward Highway Panorama</div>
+                  <div class="seat-row" style="justify-content:center;gap:36px;margin-bottom:14px">
+                    <button type="button" class="seat-btn window-seat selected" data-seat="01A" title="Berth 01A - Upper Panorama Window Deck" style="width:72px">
+                      🌄 01A
+                    </button>
+                    <div class="cabin-aisle" style="width:20px"></div>
+                    <button type="button" class="seat-btn window-seat" data-seat="01B" title="Berth 01B - Upper Panorama Window Deck" style="width:72px">
+                      🌄 01B
+                    </button>
+                  </div>
+
+                  <!-- Sleeper Berths Rows 02 to 06 -->
+                  <div class="cabin-section-label">Private Sleeper Berths · Upper &amp; Lower Window Bunks</div>
+                  <div class="seat-row">
+                    <span class="row-num">02</span>
+                    <button type="button" class="seat-btn window-seat" data-seat="02A" title="Berth 02A - Lower Window Berth">02A</button>
+                    <button type="button" class="seat-btn" data-seat="02B" title="Berth 02B - Lower Aisle Berth">02B</button>
+                    <div class="cabin-aisle"></div>
+                    <button type="button" class="seat-btn" data-seat="02C" title="Berth 02C - Upper Aisle Berth">02C</button>
+                    <button type="button" class="seat-btn window-seat" data-seat="02D" title="Berth 02D - Upper Window Berth">02D</button>
+                  </div>
+                  <div class="seat-row">
+                    <span class="row-num">03</span>
+                    <button type="button" class="seat-btn window-seat" data-seat="03A" title="Berth 03A - Lower Window Berth">03A</button>
+                    <button type="button" class="seat-btn" data-seat="03B" title="Berth 03B - Lower Aisle Berth">03B</button>
+                    <div class="cabin-aisle"></div>
+                    <button type="button" class="seat-btn" data-seat="03C" title="Berth 03C - Upper Aisle Berth">03C</button>
+                    <button type="button" class="seat-btn window-seat" data-seat="03D" title="Berth 03D - Upper Window Berth">03D</button>
+                  </div>
+                  <div class="seat-row">
+                    <span class="row-num">04</span>
+                    <button type="button" class="seat-btn window-seat" data-seat="04A" title="Berth 04A - Lower Window Berth">04A</button>
+                    <button type="button" class="seat-btn" data-seat="04B" title="Berth 04B - Lower Aisle Berth">04B</button>
+                    <div class="cabin-aisle"></div>
+                    <button type="button" class="seat-btn" data-seat="04C" title="Berth 04C - Upper Aisle Berth">04C</button>
+                    <button type="button" class="seat-btn window-seat" data-seat="04D" title="Berth 04D - Upper Window Berth">04D</button>
+                  </div>
+                  <div class="seat-row">
+                    <span class="row-num">05</span>
+                    <button type="button" class="seat-btn window-seat" data-seat="05A" title="Berth 05A - Lower Window Berth">05A</button>
+                    <button type="button" class="seat-btn" data-seat="05B" title="Berth 05B - Lower Aisle Berth">05B</button>
+                    <div class="cabin-aisle"></div>
+                    <button type="button" class="seat-btn" data-seat="05C" title="Berth 05C - Upper Aisle Berth">05C</button>
+                    <button type="button" class="seat-btn window-seat" data-seat="05D" title="Berth 05D - Upper Window Berth">05D</button>
+                  </div>
+                  <div class="seat-row">
+                    <span class="row-num">06</span>
+                    <button type="button" class="seat-btn window-seat" data-seat="06A" title="Berth 06A - Lower Window Berth">06A</button>
+                    <button type="button" class="seat-btn" data-seat="06B" title="Berth 06B - Lower Aisle Berth">06B</button>
+                    <div class="cabin-aisle"></div>
+                    <button type="button" class="seat-btn" data-seat="06C" title="Berth 06C - Upper Aisle Berth">06C</button>
+                    <button type="button" class="seat-btn window-seat" data-seat="06D" title="Berth 06D - Upper Window Berth">06D</button>
+                  </div>
+
+                  <div class="seat-map-legend" style="margin-top:20px">
+                    <div><span class="legend-box selected"></span>Selected</div>
+                    <div><span class="legend-box available"></span>Available Passenger Berth (22 total)</div>
+                    <div><span class="legend-box" style="background:rgba(20,32,40,0.6);border-color:rgba(255,255,255,0.08)">🔒</span>Bus Captain (Locked)</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Selected Seat Details & Live Scenic Preview -->
+              <div class="selected-seat-info-card" id="selectedSeatCard">
+                <div class="seat-info-left">
+                  <strong id="selectedSeatCode">Seat 14A • Window View</strong>
+                  <small id="selectedSeatDesc">Aerial Earth Vista • 35,000 ft patchwork fields &amp; rivers</small>
+                </div>
+                <img id="selectedSeatThumb" class="seat-preview-thumb" src="media/flight/scenes/seat_14a_aerial_earth.jpg" alt="Selected perspective preview">
+              </div>
+            </fieldset>
+
+            <div class="step-footer">
+              <button type="button" class="step-back-btn" id="step3BackBtn">← Back to Route</button>
+              <div class="step-summary-pill">
+                <span>Seat: <strong id="step3SummarySeat">14A · Window</strong></span>
+              </div>
+              <button type="button" class="step-next-btn" id="step3NextBtn">Continue to Focus Goal →</button>
+            </div>
+          </div>
+
+          <!-- ==============================================================
+               STEP 4: FOCUS OBJECTIVE & BOARDING CONFIRMATION
+               ============================================================== -->
+          <div class="wizard-step" id="wizardStep4" data-step="4" style="display:none">
+            <div class="step-banner">
+              <div class="step-badge">STEP 4 OF 4 · OBJECTIVE &amp; BOARDING</div>
+              <h3 class="step-heading">Set Focus Goal &amp; Prepare to Board</h3>
+              <p class="step-description">Fine-tune your timer, pick your focus discipline, and review your journey itinerary before boarding.</p>
+            </div>
+
+            <!-- DURATION SELECTION (Presets + Custom Timer) -->
+            <fieldset style="border:1px solid rgba(89,223,160,.25);border-radius:14px;padding:14px;background:rgba(89,223,160,.03);margin-bottom:14px">
+              <legend style="padding:0 6px;color:var(--accent);font-weight:700">Flight Duration (Select Preset or Custom)</legend>
+              <div class="duration-grid" id="durationGrid">
+                <button type="button" class="dur-btn" data-mins="15">15 min</button>
+                <button type="button" class="dur-btn" data-mins="25">25 min</button>
+                <button type="button" class="dur-btn active" data-mins="45">45 min</button>
+                <button type="button" class="dur-btn" data-mins="60">60 min</button>
+                <button type="button" class="dur-btn" data-mins="90">90 min</button>
+                <button type="button" class="dur-btn" data-mins="120">120 min</button>
+              </div>
+              <div class="custom-timer-box">
+                <span class="custom-timer-icon">⏱</span>
+                <div>
+                  <label for="customTimerInput">Custom Timer</label>
+                  <div style="font-size:9px;color:var(--muted)">Set any custom duration (1 - 360 min)</div>
+                </div>
+                <div class="custom-timer-field">
+                  <button type="button" id="timerMinusBtn" class="timer-step-btn" title="Decrease 5 min">−</button>
+                  <input type="number" id="customTimerInput" min="1" max="360" value="45" placeholder="45">
+                  <button type="button" id="timerPlusBtn" class="timer-step-btn" title="Increase 5 min">+</button>
+                  <span>min</span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- FOCUS CATEGORY -->
+            <fieldset style="border:1px solid rgba(89,223,160,.25);border-radius:14px;padding:14px;background:rgba(89,223,160,.03);margin-bottom:14px">
+              <legend style="padding:0 6px;color:var(--accent);font-weight:700">Focus Category</legend>
+              <div class="options" id="categoryOptions">
+                <label class="active"><input type="radio" name="category" value="Programming" checked>Code</label>
+                <label><input type="radio" name="category" value="Studying">Study</label>
+                <label><input type="radio" name="category" value="Engineering">Build</label>
+                <label><input type="radio" name="category" value="Personal">Read</label>
+              </div>
+            </fieldset>
+
+            <!-- Complete Journey Confirmation Card -->
+            <div class="journey-confirmation-card" id="journeyConfirmationCard">
+              <div class="jcc-head">
+                <span class="jcc-badge">READY FOR DEPARTURE</span>
+                <span class="jcc-code" id="jccCode">FF-042</span>
+              </div>
+              <div class="jcc-route-row">
+                <div class="jcc-node">
+                  <span class="jcc-label">FROM</span>
+                  <strong class="jcc-val" id="jccFrom">MAA · Chennai</strong>
+                </div>
+                <div class="jcc-arrow" id="jccArrow">✈</div>
+                <div class="jcc-node" style="text-align:right">
+                  <span class="jcc-label">TO</span>
+                  <strong class="jcc-val" id="jccTo">SIN · Singapore</strong>
+                </div>
+              </div>
+              <div class="jcc-details-grid">
+                <div><span class="jcc-label">MODE</span><span class="jcc-subval" id="jccMode">Commercial Flight</span></div>
+                <div><span class="jcc-label">SEAT</span><span class="jcc-subval" id="jccSeat">14A · Window View</span></div>
+                <div><span class="jcc-label">DURATION</span><span class="jcc-subval" id="jccDuration">45 Minutes</span></div>
+                <div><span class="jcc-label">OBJECTIVE</span><span class="jcc-subval" id="jccCategory">Programming</span></div>
               </div>
             </div>
 
-            <!-- Selected Seat Details & Live Scenic Preview -->
-            <div class="selected-seat-info-card" id="selectedSeatCard">
-              <div class="seat-info-left">
-                <strong id="selectedSeatCode">Seat 14A • Window View</strong>
-                <small id="selectedSeatDesc">Aerial Earth Vista • 35,000 ft patchwork fields &amp; rivers</small>
-              </div>
-              <img id="selectedSeatThumb" class="seat-preview-thumb" src="media/flight/scenes/seat_14a_aerial_earth.jpg" alt="Selected perspective preview">
+            <div class="step-footer">
+              <button type="button" class="step-back-btn" id="step4BackBtn">← Back to Seat</button>
+              <button type="button" class="step-confirm-btn" id="step4ConfirmBtn">
+                🎫 Confirm &amp; Rip Stub to Board
+              </button>
             </div>
-          </fieldset>
+          </div>
         </form>
       </div>
 
@@ -3109,6 +3675,8 @@ function updateLiveBoardingPass() {
   if ($('stubTo')) $('stubTo').textContent = destCode;
   if ($('stubTime')) $('stubTime').textContent = `${activeFlight.duration}M`;
   if ($('stubSeatDesc')) $('stubSeatDesc').textContent = `${seatInfo.class} · ${seatInfo.type}`.toUpperCase();
+
+  if (typeof updateWizardSummaries === 'function') updateWizardSummaries();
 }
 
 function switchTransitMode(mode) {
@@ -3119,6 +3687,14 @@ function switchTransitMode(mode) {
   // Update mode pills
   document.querySelectorAll('.mode-pill').forEach((pill) => {
     pill.classList.toggle('active', pill.dataset.mode === mode);
+  });
+
+  // Update step 1 transit experience cards
+  document.querySelectorAll('.transit-experience-card').forEach((card) => {
+    const isTarget = (card.dataset.mode === mode);
+    card.classList.toggle('active', isTarget);
+    const statusEl = card.querySelector('.tec-status');
+    if (statusEl) statusEl.textContent = isTarget ? 'Selected' : 'Tap to Select';
   });
 
   // Update titles & labels
@@ -3857,12 +4433,18 @@ function closeDownloadModal() {
 // Deep hash navigation support (e.g. #ticket, #booking, #car, #bus, #download)
 function checkHash() {
   resetTearState();
-  if (window.location.hash.includes('car')) {
+  const urlP = new URLSearchParams(window.location.search);
+  const qMode = urlP.get('mode');
+  if (qMode === 'car' || window.location.hash.includes('car')) {
     switchTransitMode('car');
-  } else if (window.location.hash.includes('bus')) {
+  } else if (qMode === 'bus' || window.location.hash.includes('bus')) {
     switchTransitMode('bus');
   } else {
     updateLiveBoardingPass();
+  }
+  const stepMatch = window.location.hash.match(/#step([1-4])/);
+  if (stepMatch && typeof goToCustomStep === 'function') {
+    goToCustomStep(parseInt(stepMatch[1], 10));
   }
   if (window.location.hash === '#booking' || window.location.hash === '#ticket') {
     selectView('homeView');
@@ -3902,6 +4484,127 @@ async function triggerPwaInstall() {
 
 if (installPwaChip) installPwaChip.onclick = triggerPwaInstall;
 if (modalInstallPwaBtn) modalInstallPwaBtn.onclick = triggerPwaInstall;
+
+// ==========================================================================
+// CONCIERGE STEP-BY-STEP CUSTOMIZATION WIZARD CONTROLLER
+// ==========================================================================
+let currentWizardStep = 1;
+
+function goToCustomStep(stepNum) {
+  if (stepNum < 1 || stepNum > 4) return;
+  currentWizardStep = stepNum;
+
+  // Toggle visibility of each step
+  for (let s = 1; s <= 4; s++) {
+    const stepEl = document.getElementById(`wizardStep${s}`);
+    const navEl = document.getElementById(`stepNav${s}`);
+    if (stepEl) {
+      stepEl.style.display = (s === stepNum) ? 'block' : 'none';
+      if (s === stepNum) stepEl.classList.add('active');
+      else stepEl.classList.remove('active');
+    }
+    if (navEl) {
+      navEl.classList.toggle('active', s === stepNum);
+      navEl.classList.toggle('completed', s < stepNum);
+      navEl.setAttribute('aria-selected', s === stepNum ? 'true' : 'false');
+    }
+  }
+
+  // Update step connector active states
+  const connectors = document.querySelectorAll('.step-connector');
+  connectors.forEach((conn, idx) => {
+    conn.classList.toggle('active', idx < stepNum - 1);
+  });
+
+  // Redraw tactical radar if moving into step 2
+  if (stepNum === 2) {
+    setTimeout(() => {
+      if (typeof drawFlightRadar === 'function') drawFlightRadar();
+      if (typeof updateRadarAndCarousel === 'function') updateRadarAndCarousel();
+    }, 60);
+  }
+
+  updateWizardSummaries();
+}
+
+function updateWizardSummaries() {
+  const cfg = (typeof TRANSIT_CONFIG !== 'undefined' && TRANSIT_CONFIG[currentTransitMode]) ? TRANSIT_CONFIG[currentTransitMode] : { routes: {}, title: 'Commercial Flight' };
+  const modeName = currentTransitMode === 'car' ? 'Night Drive 🚗' : currentTransitMode === 'bus' ? 'Sleeper Coach 🚌' : 'Commercial Flight ✈';
+  
+  if ($('stepSub1')) $('stepSub1').textContent = modeName;
+  if ($('step1SummaryMode')) $('step1SummaryMode').textContent = modeName;
+
+  const dep = activeFlight?.departure || 'MAA';
+  const dest = activeFlight?.destination || 'SIN';
+  const dur = activeFlight?.duration || 45;
+  const routeText = `${dep} → ${dest} (${dur}m)`;
+  if ($('stepSub2')) $('stepSub2').textContent = `${dur}m Range`;
+  if ($('step2SummaryRoute')) $('step2SummaryRoute').textContent = routeText;
+
+  const seatText = `${activeFlight?.seat || '14A'} · ${activeFlight?.seatType || 'Window'}`;
+  if ($('stepSub3')) $('stepSub3').textContent = `${activeFlight?.seat || '14A'} ${activeFlight?.seatType || 'Seat'}`;
+  if ($('step3SummarySeat')) $('step3SummarySeat').textContent = seatText;
+
+  const cat = activeFlight?.focusCategory || 'Code';
+  if ($('stepSub4')) $('stepSub4').textContent = `${cat} · ${dur}m`;
+
+  // Step 4 Confirmation Card values
+  if ($('jccCode')) $('jccCode').textContent = activeFlight?.flightNo || 'FF-042';
+  if ($('jccFrom')) $('jccFrom').textContent = `${dep} · ${cfg.routes?.[dep]?.name || dep}`;
+  if ($('jccTo')) $('jccTo').textContent = `${dest} · ${cfg.routes?.[dest]?.name || dest}`;
+  if ($('jccArrow')) $('jccArrow').textContent = currentTransitMode === 'car' ? '🚗' : currentTransitMode === 'bus' ? '🚌' : '✈';
+  if ($('jccMode')) $('jccMode').textContent = cfg.title || modeName;
+  if ($('jccSeat')) $('jccSeat').textContent = seatText;
+  if ($('jccDuration')) $('jccDuration').textContent = `${dur} Minutes`;
+  if ($('jccCategory')) $('jccCategory').textContent = cat;
+}
+
+// Hook up Stepper Top Bar Tabs
+for (let s = 1; s <= 4; s++) {
+  const btn = document.getElementById(`stepNav${s}`);
+  if (btn) {
+    btn.addEventListener('click', () => goToCustomStep(s));
+  }
+}
+
+// Hook up Step 1 Transit Experience Cards
+document.querySelectorAll('.transit-experience-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const m = card.dataset.mode;
+    if (m) {
+      switchTransitMode(m);
+      updateWizardSummaries();
+    }
+  });
+});
+
+// Hook up Next & Back buttons
+$('step1NextBtn')?.addEventListener('click', () => goToCustomStep(2));
+$('step2BackBtn')?.addEventListener('click', () => goToCustomStep(1));
+$('step2NextBtn')?.addEventListener('click', () => goToCustomStep(3));
+$('step3BackBtn')?.addEventListener('click', () => goToCustomStep(2));
+$('step3NextBtn')?.addEventListener('click', () => goToCustomStep(4));
+$('step4BackBtn')?.addEventListener('click', () => goToCustomStep(3));
+
+// Confirm & Rip Stub Button
+$('step4ConfirmBtn')?.addEventListener('click', () => {
+  updateLiveBoardingPass();
+  const bp = $('boardingPass');
+  if (bp) {
+    bp.classList.remove('pass-pulse-glow');
+    void bp.offsetWidth; // trigger reflow
+    bp.classList.add('pass-pulse-glow');
+    bp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+
+// Initialize wizard step from URL query (?step=2), hash (#step2), or default to step 1
+const wizardUrlParams = new URLSearchParams(window.location.search);
+const paramStep = wizardUrlParams.get('step');
+const initStepMatch = window.location.hash.match(/#?step([1-4])/i);
+const targetStep = paramStep ? parseInt(paramStep, 10) : (initStepMatch ? parseInt(initStepMatch[1], 10) : 1);
+goToCustomStep(targetStep);
+updateWizardSummaries();
 </script>
 <script src="app-controls.js"></script>
 </body>

@@ -496,7 +496,7 @@ h1{font-size:clamp(20px,3.2vw,42px);line-height:1.02;letter-spacing:-.045em;font
 (()=>{
 'use strict';
 const $=id=>document.getElementById(id),canvas=$('scene'),c=canvas.getContext('2d');
-const chapters=[
+const flightChapters=[
  {id:'gate',name:'Boarding',eyebrow:'01 / 08 · Airport departure',title:'A new journey<br>starts here.',sub:'Take a breath, settle in, and leave the noise of the day behind.',phase:'At the terminal',hint:'Boarding completed · Doors closed',d:10},
  {id:'push',name:'Pushback',eyebrow:'02 / 08 · Leaving the gate',title:'Leaving the familiar<br>behind.',sub:'The aircraft eases away from the terminal. Your focus time is about to begin.',phase:'Pushback',hint:'Ground crew clear',d:9},
  {id:'taxi',name:'Taxi',eyebrow:'03 / 08 · Taxi to runway',title:'On the way<br>to takeoff.',sub:'Runway lights guide us forward while the airport slowly slips behind.',phase:'Taxiing',hint:'Runway ahead',d:9},
@@ -506,7 +506,29 @@ const chapters=[
  {id:'approach',name:'Approach',eyebrow:'07 / 08 · Final approach',title:'Almost at<br>our destination.',sub:'The runway lines up ahead as the aircraft makes its final approach.',phase:'Final approach',hint:'Landing clearance',d:9},
  {id:'land',name:'Arrival',eyebrow:'08 / 08 · Journey complete',title:'You made<br>it.',sub:'Welcome to your destination. Your focus journey is complete.',phase:'Arrived',hint:'Welcome · Flight completed',d:8}
 ];
-const total=chapters.reduce((a,b)=>a+b.d,0);
+
+const busChapters=[
+ {id:'gate',name:'Terminal',eyebrow:'01 / 08 · Coach terminal',title:'Stepping aboard<br>the night express.',sub:'Stow your luggage, climb into your berth, and let the city bustle fade.',phase:'At coach bay',hint:'Passengers boarded · Luggage secured',d:10},
+ {id:'push',name:'Departure',eyebrow:'02 / 08 · Leaving coach bay',title:'Rolling out into<br>the evening.',sub:'Air brakes release with a hiss. The long-distance coach glides into the streets.',phase:'City departure',hint:'Engine idling low · Route plotted',d:9},
+ {id:'taxi',name:'Highway Merge',eyebrow:'03 / 08 · Tollway approach',title:'Merging onto the<br>open expressway.',sub:'Streetlamps blur rhythmically past as we pick up steady cruising speed.',phase:'Highway merge',hint:'Speed limit settled · Open road',d:9},
+ {id:'takeoff',name:'Cruising Speed',eyebrow:'04 / 08 · Night highway',title:'Smooth asphalt<br>ahead.',sub:'The rhythmic hum of highway asphalt and passing roadside lamps create deep focus.',phase:'Asphalt cruise',hint:'Steady pace · Deep focus',d:10},
+ {id:'cruise',name:'Deep Transit',eyebrow:'05 / 08 · Mountain pass & forest',title:'A quieter path<br>through the night.',sub:'Pine trees, misty valleys, and roadside markers glide through your panoramic window.',phase:'Highland transit',hint:'Berth settled · Midnight flow',d:27},
+ {id:'descent',name:'Valley Descent',eyebrow:'06 / 08 · Valley approach',title:'Distant city glow<br>appears.',sub:'The coach slows along gentle mountain curves as morning dawn hints at the horizon.',phase:'Valley approach',hint:'Approaching metro outskirts',d:10},
+ {id:'approach',name:'City Outskirts',eyebrow:'07 / 08 · Boulevard glide',title:'Entering the<br>destination city.',sub:'Morning streetlights guide the coach down wide avenue boulevards.',phase:'City arrival',hint:'Boulevard glide · Final miles',d:9},
+ {id:'land',name:'Arrival',eyebrow:'08 / 08 · Express terminal',title:'You have<br>arrived.',sub:'The coach docks smoothly at the platform. Your journey and focus session are complete.',phase:'Destination dock',hint:'Coach arrived · Rested & accomplished',d:8}
+];
+
+const carChapters=[
+ {id:'gate',name:'Ignition',eyebrow:'01 / 08 · Engine start',title:'Settling into the<br>passenger seat.',sub:'Adjust your seat, feel the leather, and cue the late-night lo-fi soundtrack.',phase:'Parked',hint:'Engine purring · Cabin cozy',d:10},
+ {id:'push',name:'Suburban Roll',eyebrow:'02 / 08 · Leaving driveway',title:'Quiet suburban<br>streets.',sub:'Pavement glides under tires as the neighborhood fades into rearview mirrors.',phase:'Neighborhood glide',hint:'Headlights on · Route set',d:9},
+ {id:'taxi',name:'Expressway On-Ramp',eyebrow:'03 / 08 · Ramp acceleration',title:'Accelerating onto<br>the freeway.',sub:'Sweeping around the illuminated cloverleaf ramp into the steady stream of traffic.',phase:'On-ramp acceleration',hint:'Merging smoothly into flow',d:9},
+ {id:'takeoff',name:'Highway Flow',eyebrow:'04 / 08 · Open freeway',title:'Steady rain &amp;<br>neon bokeh.',sub:'Wipers hum rhythmically against the glass. Distant taillights blur into amber and ruby.',phase:'Freeway cruise',hint:'Speed locked · Rhythmic wipers',d:10},
+ {id:'cruise',name:'Midnight Drive',eyebrow:'05 / 08 · Coastal highway',title:'Pure midnight<br>serenity.',sub:'Miles of dark asphalt ahead, cool night air, and complete immersion in your work.',phase:'Midnight cruise',hint:'Coastline dark · Deep immersion',d:27},
+ {id:'descent',name:'Off-Ramp',eyebrow:'06 / 08 · Coastal descent',title:'Exiting into the<br>valley road.',sub:'Blinkers click softly as the car eases down the exit ramp toward coastal lights.',phase:'Exit deceleration',hint:'Approaching coastal valley',d:10},
+ {id:'approach',name:'Downtown Avenue',eyebrow:'07 / 08 · Downtown approach',title:'City lights reflect<br>on wet glass.',sub:'Skyscrapers rise overhead, glowing in soft amber and blue neon reflections.',phase:'Downtown approach',hint:'Traffic lights pulsing green',d:9},
+ {id:'land',name:'Destination',eyebrow:'08 / 08 · Journey complete',title:'Arrived at the<br>overlook.',sub:'The car pulls to a quiet stop with a view. Deep focus session accomplished.',phase:'Parked at overlook',hint:'Drive complete · Session done',d:8}
+];
+
 const urlParams = new URLSearchParams(window.location.search);
 let savedFlight = JSON.parse(localStorage.getItem('focusFlightActive') || 'null');
 if (urlParams.get('mode')) {
@@ -523,6 +545,10 @@ if (urlParams.get('mode')) {
   if (urlParams.get('seat')) savedFlight.seat = urlParams.get('seat');
   if (urlParams.get('mode')) savedFlight.transitMode = urlParams.get('mode');
 }
+
+const currentTransitMode = (urlParams.get('mode') || savedFlight?.transitMode || 'flight').toLowerCase();
+const chapters = currentTransitMode === 'bus' ? busChapters : currentTransitMode === 'car' ? carChapters : flightChapters;
+const total=chapters.reduce((a,b)=>a+b.d,0);
 const cityNames={
   MAA:'Chennai',BOM:'Mumbai',DEL:'New Delhi',BLR:'Bengaluru',HYD:'Hyderabad',SIN:'Singapore',BKK:'Bangkok',HKG:'Hong Kong',ICN:'Seoul',NRT:'Tokyo',SYD:'Sydney',MEL:'Melbourne',DXB:'Dubai',DOH:'Doha',LHR:'London',AMS:'Amsterdam',CDG:'Paris',FRA:'Frankfurt',IST:'Istanbul',JFK:'New York',SFO:'San Francisco',LAX:'Los Angeles',ORD:'Chicago',YYZ:'Toronto',
   PCH:'Pacific Coast Highway',SUR:'Big Sur Bixby',C1:'Tokyo Shuto C1',ODA:'Odaiba Rainbow Bridge',R66:'Route 66',SED:'Sedona Red Rock',A8:'German Autobahn',SAL:'Salzburg Pass',AC:'Amalfi Coast',RAV:'Ravello Ocean',
@@ -539,6 +565,34 @@ if(savedFlight){
   from=`${savedFlight.departure} · ${cityNames[savedFlight.departure]||savedFlight.departure}`;
   to=`${savedFlight.destination} · ${cityNames[savedFlight.destination]||savedFlight.destination}`;
   stage.classList.add('booked-session');
+  
+  if (savedFlight.transitMode) {
+    stage.classList.add('transit-' + savedFlight.transitMode);
+  }
+
+  // Authentic Road vs Aerial Scenery Setup
+  if (savedFlight.transitMode === 'bus') {
+    if ($('cloudDrift')) $('cloudDrift').style.display = 'none';
+    if ($('brandIcon')) $('brandIcon').textContent = '🚌';
+    if ($('brandTitle')) $('brandTitle').textContent = 'Flylofi Coach';
+    const isFrontObs = (savedFlight.seat === '01A' || savedFlight.seat === '01B');
+    const busImg = isFrontObs ? 'media/flight/scenes/bus_observation_deck.jpg' : 'media/flight/scenes/bus_window_berth.jpg';
+    if ($('photoSceneImg')) $('photoSceneImg').src = busImg;
+    savedFlight.sceneImg = busImg;
+  } else if (savedFlight.transitMode === 'car') {
+    if ($('cloudDrift')) $('cloudDrift').style.display = 'none';
+    if ($('brandIcon')) $('brandIcon').textContent = '🚗';
+    if ($('brandTitle')) $('brandTitle').textContent = 'Flylofi GT';
+    const isFrontShotgun = (savedFlight.seat === 'FP');
+    const carImg = isFrontShotgun ? 'media/flight/scenes/car_front_passenger.jpg' : 'media/flight/scenes/car_rear_passenger.jpg';
+    if ($('photoSceneImg')) $('photoSceneImg').src = carImg;
+    savedFlight.sceneImg = carImg;
+  } else {
+    if (savedFlight.sceneImg && $('photoSceneImg')) {
+      $('photoSceneImg').src = savedFlight.sceneImg;
+    }
+  }
+
   if(savedFlight.seat){
     const seatCode = savedFlight.seat.toLowerCase();
     stage.classList.add(`seat-${seatCode}`);
