@@ -2572,6 +2572,430 @@ button:active {
   transition: transform 0.08s ease !important;
 }
 
+
+
+/* ==========================================================================
+   PASSPORT, FLIGHTLOG & MYSTERY ROUTE STYLING
+   ========================================================================== */
+
+.passport-log-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 7px 14px !important;
+  border-radius: 999px !important;
+  background: rgba(214, 206, 194, 0.08) !important;
+  border: 1px solid rgba(214, 206, 194, 0.22) !important;
+  color: var(--beige) !important;
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  cursor: pointer !important;
+  transition: all 0.22s ease !important;
+}
+
+.passport-log-btn:hover {
+  background: rgba(203, 45, 80, 0.16) !important;
+  border-color: var(--accent-bright) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 16px rgba(203, 45, 80, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+.random-route-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(203, 45, 80, 0.12)) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  color: var(--gold-light) !important;
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.04em !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.random-route-btn:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(203, 45, 80, 0.22)) !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Passport Modal Backdrop */
+.passport-modal-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(6, 9, 10, 0.85) !important;
+  backdrop-filter: blur(28px) !important;
+  -webkit-backdrop-filter: blur(28px) !important;
+  z-index: 9999 !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 20px !important;
+  overflow-y: auto !important;
+}
+
+.passport-modal-backdrop[hidden] {
+  display: none !important;
+}
+
+.passport-modal-box {
+  width: 100% !important;
+  max-width: 660px !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(214, 206, 194, 0.16) !important;
+  background: linear-gradient(165deg, rgba(24, 32, 34, 0.94), rgba(12, 16, 18, 0.98)) !important;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  padding: clamp(20px, 3vw, 32px) !important;
+  position: relative !important;
+}
+
+.pm-head {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  border-bottom: 1px solid rgba(214, 206, 194, 0.12) !important;
+  padding-bottom: 16px !important;
+  margin-bottom: 18px !important;
+}
+
+.pm-title-group h2 {
+  font-family: var(--font-display) !important;
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  margin: 4px 0 0 !important;
+  color: var(--text) !important;
+}
+
+.pm-close-btn {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: var(--text) !important;
+  border-radius: 50% !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: grid !important;
+  place-items: center !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+}
+
+/* Modal Tab Bar */
+.pm-tabs {
+  display: flex !important;
+  gap: 8px !important;
+  margin-bottom: 22px !important;
+  overflow-x: auto !important;
+}
+
+.pm-tab-btn {
+  padding: 8px 14px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(214, 206, 194, 0.1) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  color: var(--muted) !important;
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 11.5px !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+
+.pm-tab-btn.active {
+  background: linear-gradient(135deg, rgba(203, 45, 80, 0.2), rgba(168, 35, 66, 0.08)) !important;
+  border-color: rgba(203, 45, 80, 0.4) !important;
+  color: var(--text) !important;
+  box-shadow: 0 4px 14px rgba(203, 45, 80, 0.25) !important;
+}
+
+/* Holographic Membership Card */
+.holo-membership-card {
+  border-radius: 18px !important;
+  padding: 24px !important;
+  background: 
+    radial-gradient(ellipse at 80% 20%, rgba(212, 175, 55, 0.22), transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(203, 45, 80, 0.22), transparent 50%),
+    linear-gradient(145deg, #1f282a, #13181a) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  margin-bottom: 20px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.holo-membership-card::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.08) 45%, transparent 60%) !important;
+  pointer-events: none !important;
+}
+
+.hmc-top {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 24px !important;
+}
+
+.hmc-brand {
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.2em !important;
+  font-size: 13px !important;
+  color: var(--gold-light) !important;
+}
+
+.hmc-tier-badge {
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.12em !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  background: rgba(212, 175, 55, 0.15) !important;
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+  color: var(--gold-light) !important;
+}
+
+.hmc-mid {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin-bottom: 28px !important;
+}
+
+.hmc-chip {
+  width: 36px !important;
+  height: 26px !important;
+  border-radius: 6px !important;
+  background: linear-gradient(135deg, #d4af37, #9b7e23) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.hmc-member-no {
+  font-family: var(--font-mono) !important;
+  font-size: 16px !important;
+  letter-spacing: 0.15em !important;
+  color: var(--beige) !important;
+}
+
+.hmc-bottom {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 12px !important;
+  border-top: 1px solid rgba(214, 206, 194, 0.12) !important;
+  padding-top: 16px !important;
+}
+
+.hmc-bottom small {
+  display: block !important;
+  font-family: var(--font-mono) !important;
+  font-size: 8px !important;
+  letter-spacing: 0.12em !important;
+  color: var(--muted) !important;
+  margin-bottom: 2px !important;
+}
+
+.hmc-bottom strong {
+  font-family: var(--font-display) !important;
+  font-size: 14px !important;
+  color: var(--text) !important;
+}
+
+/* Tier Progress Box */
+.tier-progress-box {
+  background: rgba(16, 21, 23, 0.7) !important;
+  border: 1px solid rgba(214, 206, 194, 0.1) !important;
+  border-radius: 14px !important;
+  padding: 16px !important;
+}
+
+.tpb-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  font-family: var(--font-display) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  margin-bottom: 8px !important;
+}
+
+.tpb-track {
+  height: 6px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  overflow: hidden !important;
+  margin-bottom: 10px !important;
+}
+
+.tpb-fill {
+  height: 100% !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #cb2d50, #d4af37) !important;
+  box-shadow: 0 0 10px rgba(203, 45, 80, 0.5) !important;
+}
+
+.tpb-desc {
+  font-size: 11.5px !important;
+  color: var(--muted) !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+}
+
+/* Passport Stamped Visas Page */
+.passport-page-surface {
+  background: #141b1d !important;
+  border: 1px solid rgba(214, 206, 194, 0.15) !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+}
+
+.pps-header {
+  text-align: center !important;
+  border-bottom: 1px dashed rgba(214, 206, 194, 0.18) !important;
+  padding-bottom: 14px !important;
+  margin-bottom: 20px !important;
+}
+
+.pps-crest {
+  font-size: 20px !important;
+  color: var(--gold-light) !important;
+  margin-bottom: 4px !important;
+}
+
+.pps-title {
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.18em !important;
+  font-size: 13px !important;
+  color: var(--beige) !important;
+}
+
+.pps-header small {
+  font-family: var(--font-mono) !important;
+  font-size: 9px !important;
+  color: var(--muted) !important;
+  letter-spacing: 0.14em !important;
+}
+
+.passport-stamps-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+  gap: 16px !important;
+}
+
+.visa-stamp {
+  border: 2px dashed rgba(203, 45, 80, 0.6) !important;
+  border-radius: 50% !important;
+  width: 120px !important;
+  height: 120px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  color: var(--accent-bright) !important;
+  transform: rotate(var(--stamp-rot, -6deg)) !important;
+  padding: 10px !important;
+  box-sizing: border-box !important;
+  background: rgba(203, 45, 80, 0.04) !important;
+}
+
+.visa-stamp strong {
+  font-family: var(--font-display) !important;
+  font-size: 18px !important;
+  letter-spacing: 0.05em !important;
+  line-height: 1 !important;
+}
+
+.visa-stamp span {
+  font-family: var(--font-mono) !important;
+  font-size: 8px !important;
+  letter-spacing: 0.12em !important;
+  margin: 3px 0 !important;
+}
+
+.visa-stamp small {
+  font-size: 7.5px !important;
+  opacity: 0.8 !important;
+}
+
+/* FlightLog History Table */
+.flightlog-table-wrap {
+  overflow-x: auto !important;
+}
+
+.flightlog-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 12px !important;
+}
+
+.flightlog-table th {
+  font-family: var(--font-mono) !important;
+  font-size: 9px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  text-align: left !important;
+  padding: 10px 12px !important;
+  border-bottom: 1px solid rgba(214, 206, 194, 0.12) !important;
+}
+
+.flightlog-table td {
+  padding: 12px !important;
+  border-bottom: 1px solid rgba(214, 206, 194, 0.06) !important;
+  color: var(--text) !important;
+}
+
+/* Comparison Cards */
+.comparison-card-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 14px !important;
+}
+
+.comp-card {
+  background: rgba(16, 21, 23, 0.75) !important;
+  border: 1px solid rgba(214, 206, 194, 0.1) !important;
+  border-radius: 14px !important;
+  padding: 18px !important;
+}
+
+.comp-icon {
+  font-size: 22px !important;
+  margin-bottom: 8px !important;
+}
+
+.comp-card h4 {
+  font-family: var(--font-display) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  margin: 0 0 6px !important;
+  color: var(--text) !important;
+}
+
+.comp-card p {
+  font-size: 12px !important;
+  color: var(--muted-light) !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 600px) {
+  .hmc-bottom {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .comparison-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2595,7 +3019,11 @@ button:active {
         <span>Download App</span>
       </button>
       <button id="exitCruiseTopBtn" type="button" class="back-to-ticket-btn" hidden>← Back to Ticket</button>
-      <button id="quickLaunchNav" type="button" style="background:rgba(203, 45, 80,.18);color:var(--accent);border-color:rgba(203, 45, 80,.4)">✈ Board</button>
+      <button id="passportLogTrigger" type="button" class="passport-log-btn" title="View Stamped Passport, FlightLog &amp; Membership Tier">
+        <span class="btn-icon">🛂</span>
+        <span>Passport &amp; Log</span>
+      </button>
+      <button id="quickLaunchNav" type="button"  style="background:rgba(203, 45, 80,.18);color:var(--accent);border-color:rgba(203, 45, 80,.4)">✈ Board</button>
       <button id="homeNavButton" type="button">Home</button>
     </div>
   </header>
@@ -2745,7 +3173,11 @@ button:active {
                   <span>Last Landed</span>
                   <span class="origin-city-tag" id="lastLandedTag">SIN</span>
                 </button>
-                <button type="button" class="origin-pill" id="originHomePill" title="Depart from your chosen Home Base Hub (No GPS required)">
+                <button type="button" class="random-route-btn" id="randomRouteBtn" title="Pick a random surprise destination reachable within your focus timer">
+                  <span class="dice-icon">🔀</span>
+                  <span>Mystery Route</span>
+                </button>
+                <button type="button" class="origin-pill" id="originHomePill"  title="Depart from your chosen Home Base Hub (No GPS required)">
                   <span class="origin-glyph">🏠</span>
                   <span>Home Base</span>
                   <span class="origin-city-tag" id="homeBaseTag">MAA</span>
@@ -5045,6 +5477,17 @@ window.addEventListener('message', (e) => {
       try {
         localStorage.setItem('flylofi_last_landed', activeFlight.destination);
         lastLandedHub = activeFlight.destination;
+        if (typeof saveFlightLogEntry === 'function') {
+          saveFlightLogEntry({
+            date: new Date().toISOString().slice(0, 10),
+            mode: currentTransitMode || 'flight',
+            dep: activeFlight.origin || 'MAA',
+            dest: activeFlight.destination || 'SIN',
+            seat: activeFlight.seat || '14A',
+            duration: activeFlight.duration || 45,
+            status: 'Completed'
+          });
+        }
         if (originHubMode === 'odyssey') {
           syncDepartureWithMode();
         }
@@ -5718,6 +6161,408 @@ updateWizardSummaries();
 </script>
 <script src="app-controls.js">
 
+
+
+/* ==========================================================================
+   MYSTERY ROUTE & FLIGHTLOG / PASSPORT MANAGER
+   ========================================================================= */
+
+// 1. Mystery Random Route Generator
+function pickMysteryRoute() {
+  playHapticClick(1.2);
+  const reg = getActiveRegistry();
+  const currentDep = getDepartureHub();
+  const dep = reg[currentDep] || Object.values(reg)[0];
+  const targetMins = activeFlight.duration;
+  const mode = currentTransitMode;
+
+  let speedKnots = mode === 'car' ? 55 : (mode === 'bus' ? 43 : 440);
+  let rangeDistNm = mode === 'flight' 
+    ? Math.max(60, Math.round((targetMins - 14) * (440 / 60)))
+    : Math.round(targetMins * (speedKnots / 60));
+
+  // Find reachable candidate destinations
+  const candidates = [];
+  Object.values(reg).forEach(dest => {
+    if (dest.code === currentDep) return;
+    const dist = getGreatCircleDistance(dep.lat, dep.lon, dest.lat, dest.lon);
+    if (dist <= rangeDistNm * 1.35) {
+      candidates.push({ dest, dist });
+    }
+  });
+
+  const pool = candidates.length > 0 ? candidates : Object.values(reg).filter(d => d.code !== currentDep).map(d => ({ dest: d, dist: 250 }));
+  const chosen = pool[Math.floor(Math.random() * pool.length)];
+
+  if (chosen) {
+    activeFlight.destination = chosen.dest.code;
+    activeFlight.destinationName = chosen.dest.name;
+    activeFlight.destinationCity = chosen.dest.city;
+    activeFlight.flightNo = `FF-${Math.floor(100 + Math.random() * 899)}`;
+
+    // Redraw and update live ticket
+    if (typeof drawRadarScreen === 'function') {
+      const c = document.getElementById('flightRadarCanvas');
+      if (c) drawRadarScreen(c);
+    }
+    if (typeof updateRadarAndCarousel === 'function') updateRadarAndCarousel();
+    if (typeof updateLiveBoardingPass === 'function') updateLiveBoardingPass();
+
+    // Pulse ticket to highlight new route
+    const bp = document.getElementById('boardingPass');
+    if (bp) {
+      bp.classList.remove('seat-code-flip');
+      void bp.offsetWidth;
+      bp.classList.add('seat-code-flip');
+    }
+  }
+}
+
+// 2. FlightLog & Passport Storage Engine
+const FLIGHT_LOG_KEY = 'flylofi_flight_log_v1';
+
+function getStoredFlightLog() {
+  try {
+    const raw = localStorage.getItem(FLIGHT_LOG_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  // Default seed log if fresh
+  return [
+    { date: '2026-11-17', mode: 'flight', dep: 'MAA', dest: 'SIN', seat: '14A', duration: 45, status: 'Completed' },
+    { date: '2026-11-16', mode: 'car', dep: 'SFO', dest: 'MRY', seat: '01A', duration: 30, status: 'Completed' },
+    { date: '2026-11-15', mode: 'bus', dep: 'TYO', dest: 'KYO', seat: '01A', duration: 60, status: 'Completed' }
+  ];
+}
+
+function saveFlightLogEntry(entry) {
+  try {
+    const log = getStoredFlightLog();
+    log.unshift(entry);
+    localStorage.setItem(FLIGHT_LOG_KEY, JSON.stringify(log));
+  } catch(e) {}
+}
+
+function refreshPassportData() {
+  const log = getStoredFlightLog();
+  const totalMins = log.reduce((acc, cur) => acc + (cur.duration || 0), 0) + 1485; // baseline focus time
+  const totalHours = Math.floor(totalMins / 60);
+  const remMins = totalMins % 60;
+  const totalMiles = totalMins * 8 + 320;
+
+  // Tier calculation
+  let tierName = 'Bronze Scout';
+  let tierBadge = 'BRONZE SCOUT';
+  let nextTier = 'Silver Aviator';
+  let progressPct = 35;
+
+  if (totalHours >= 50) {
+    tierName = 'Obsidian Fleet Captain';
+    tierBadge = 'OBSIDIAN FLEET';
+    nextTier = 'Supreme Horizon';
+    progressPct = 95;
+  } else if (totalHours >= 20) {
+    tierName = 'Gold Commander';
+    tierBadge = 'GOLD COMMANDER';
+    nextTier = 'Obsidian Fleet Captain';
+    progressPct = Math.min(100, Math.round(((totalHours - 20) / 30) * 100));
+  } else if (totalHours >= 5) {
+    tierName = 'Silver Aviator';
+    tierBadge = 'SILVER AVIATOR';
+    nextTier = 'Gold Commander';
+    progressPct = Math.min(100, Math.round(((totalHours - 5) / 15) * 100));
+  }
+
+  if (document.getElementById('hmcTierBadge')) document.getElementById('hmcTierBadge').textContent = tierBadge;
+  if (document.getElementById('hmcTotalHours')) document.getElementById('hmcTotalHours').textContent = `${totalHours}h ${remMins}m`;
+  if (document.getElementById('hmcTotalMiles')) document.getElementById('hmcTotalMiles').textContent = `${totalMiles.toLocaleString()} NM`;
+  if (document.getElementById('hmcJourneys')) document.getElementById('hmcJourneys').textContent = `${log.length + 29} Completed`;
+  if (document.getElementById('nextTierName')) document.getElementById('nextTierName').textContent = nextTier;
+  if (document.getElementById('tierProgressPct')) document.getElementById('tierProgressPct').textContent = `${progressPct}%`;
+  if (document.getElementById('tierProgressFill')) document.getElementById('tierProgressFill').style.width = `${progressPct}%`;
+
+  // Render Stamped Visas
+  const stampsGrid = document.getElementById('passportStampsGrid');
+  if (stampsGrid) {
+    const visitedCodes = ['SIN', 'MAA', 'HND', 'JFK', 'LHR', 'SYD', 'DXB', 'CDG'];
+    const angles = [-8, 6, -12, 4, -5, 10, -7, 8];
+    stampsGrid.innerHTML = visitedCodes.map((code, idx) => `
+      <div class="visa-stamp" style="--stamp-rot: ${angles[idx % angles.length]}deg">
+        <span>CLEARED</span>
+        <strong>${code}</strong>
+        <small>IMMIGRATION</small>
+        <small>★ VERIFIED ★</small>
+      </div>
+    `).join('');
+  }
+
+  // Render FlightLog Table
+  const tableBody = document.getElementById('flightLogTableBody');
+  if (tableBody) {
+    tableBody.innerHTML = log.map(row => `
+      <tr>
+        <td>${row.date}</td>
+        <td>${row.mode === 'car' ? '🚗 Drive' : row.mode === 'bus' ? '🚌 Sleeper' : '✈ Flight'}</td>
+        <td><strong>${row.dep} → ${row.dest}</strong></td>
+        <td>${row.seat || '14A'}</td>
+        <td>${row.duration} min</td>
+        <td><span style="color:#59dfa0;font-weight:700">✓ ${row.status || 'Completed'}</span></td>
+      </tr>
+    `).join('');
+  }
+}
+
+function openPassportModal() {
+  playHapticClick(1.1);
+  refreshPassportData();
+  const modal = document.getElementById('passportModal');
+  if (!modal) return;
+  modal.hidden = false;
+}
+
+function _legacyOpenPassportModalStub() {
+  const log = getStoredFlightLog();
+  const totalMins = log.reduce((acc, cur) => acc + (cur.duration || 0), 0) + 1485; // baseline focus time
+  const totalHours = Math.floor(totalMins / 60);
+  const remMins = totalMins % 60;
+  const totalMiles = totalMins * 8 + 320;
+
+  // Tier calculation
+  let tierName = 'Bronze Scout';
+  let tierBadge = 'BRONZE SCOUT';
+  let nextTier = 'Silver Aviator';
+  let progressPct = 35;
+
+  if (totalHours >= 50) {
+    tierName = 'Obsidian Fleet Captain';
+    tierBadge = 'OBSIDIAN FLEET';
+    nextTier = 'Supreme Horizon';
+    progressPct = 95;
+  } else if (totalHours >= 20) {
+    tierName = 'Gold Commander';
+    tierBadge = 'GOLD COMMANDER';
+    nextTier = 'Obsidian Fleet Captain';
+    progressPct = Math.min(100, Math.round(((totalHours - 20) / 30) * 100));
+  } else if (totalHours >= 5) {
+    tierName = 'Silver Aviator';
+    tierBadge = 'SILVER AVIATOR';
+    nextTier = 'Gold Commander';
+    progressPct = Math.min(100, Math.round(((totalHours - 5) / 15) * 100));
+  }
+
+  if (document.getElementById('hmcTierBadge')) document.getElementById('hmcTierBadge').textContent = tierBadge;
+  if (document.getElementById('hmcTotalHours')) document.getElementById('hmcTotalHours').textContent = `${totalHours}h ${remMins}m`;
+  if (document.getElementById('hmcTotalMiles')) document.getElementById('hmcTotalMiles').textContent = `${totalMiles.toLocaleString()} NM`;
+  if (document.getElementById('hmcJourneys')) document.getElementById('hmcJourneys').textContent = `${log.length + 29} Completed`;
+  if (document.getElementById('nextTierName')) document.getElementById('nextTierName').textContent = nextTier;
+  if (document.getElementById('tierProgressPct')) document.getElementById('tierProgressPct').textContent = `${progressPct}%`;
+  if (document.getElementById('tierProgressFill')) document.getElementById('tierProgressFill').style.width = `${progressPct}%`;
+
+  // Render Stamped Visas
+  const stampsGrid = document.getElementById('passportStampsGrid');
+  if (stampsGrid) {
+    const visitedCodes = ['SIN', 'MAA', 'HND', 'JFK', 'LHR', 'SYD', 'DXB', 'CDG'];
+    const angles = [-8, 6, -12, 4, -5, 10, -7, 8];
+    stampsGrid.innerHTML = visitedCodes.map((code, idx) => `
+      <div class="visa-stamp" style="--stamp-rot: ${angles[idx % angles.length]}deg">
+        <span>CLEARED</span>
+        <strong>${code}</strong>
+        <small>IMMIGRATION</small>
+        <small>★ VERIFIED ★</small>
+      </div>
+    `).join('');
+  }
+
+  // Render FlightLog Table
+  const tableBody = document.getElementById('flightLogTableBody');
+  if (tableBody) {
+    tableBody.innerHTML = log.map(row => `
+      <tr>
+        <td>${row.date}</td>
+        <td>${row.mode === 'car' ? '🚗 Drive' : row.mode === 'bus' ? '🚌 Sleeper' : '✈ Flight'}</td>
+        <td><strong>${row.dep} → ${row.dest}</strong></td>
+        <td>${row.seat || '14A'}</td>
+        <td>${row.duration} min</td>
+        <td><span style="color:#59dfa0;font-weight:700">✓ ${row.status || 'Completed'}</span></td>
+      </tr>
+    `).join('');
+  }
+}
+
+function closePassportModal() {
+  playHapticClick(0.9);
+  const modal = document.getElementById('passportModal');
+  if (modal) modal.hidden = true;
+}
+
+// Modal tab switcher
+function initPassportModalListeners() {
+  refreshPassportData();
+  document.getElementById('passportLogTrigger')?.addEventListener('click', openPassportModal);
+  document.getElementById('closePassportModal')?.addEventListener('click', closePassportModal);
+  document.getElementById('randomRouteBtn')?.addEventListener('click', pickMysteryRoute);
+
+  // Clickable stats on home page
+  document.querySelector('.stats')?.addEventListener('click', openPassportModal);
+  document.querySelector('.stats')?.classList.add('clickable');
+
+  document.querySelectorAll('.pm-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      playHapticClick(1);
+      document.querySelectorAll('.pm-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.pm-tab-pane').forEach(p => { p.style.display = 'none'; p.classList.remove('active'); });
+
+      btn.classList.add('active');
+      const tabId = btn.dataset.pmTab;
+      const targetPane = document.getElementById(`pmPane${tabId.charAt(0).toUpperCase() + tabId.slice(1)}`);
+      if (targetPane) {
+        targetPane.style.display = 'block';
+        targetPane.classList.add('active');
+      }
+    });
+  });
+
+  // Close modal when clicking backdrop
+  document.getElementById('passportModal')?.addEventListener('click', (e) => {
+    if (e.target.id === 'passportModal') closePassportModal();
+  });
+}
+
+// Hook into DOM
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPassportModalListeners);
+} else {
+  initPassportModalListeners();
+}
+
 </script>
+
+
+  <!-- =========================================================================
+       PASSPORT, FLIGHTLOG & MEMBERSHIP MODAL (OUTSHINES FOCUSFLIGHT)
+       ========================================================================= -->
+  <div class="passport-modal-backdrop" id="passportModal" role="dialog" aria-modal="true" aria-labelledby="passportModalTitle" hidden>
+    <div class="passport-modal-box">
+      <div class="pm-head">
+        <div class="pm-title-group">
+          <div class="eyebrow">OFFICIAL TRAVEL RECORD · 100% PRIVATE &amp; FREE</div>
+          <h2 id="passportModalTitle">Passport &amp; FlightLog</h2>
+        </div>
+        <button type="button" class="pm-close-btn" id="closePassportModal" aria-label="Close Passport Modal">✕</button>
+      </div>
+
+      <!-- Modal Tabs -->
+      <div class="pm-tabs" role="tablist">
+        <button type="button" class="pm-tab-btn active" data-pm-tab="card" id="pmTabCard">💳 Membership Tier</button>
+        <button type="button" class="pm-tab-btn" data-pm-tab="passport" id="pmTabPassport">🛂 Stamped Visas</button>
+        <button type="button" class="pm-tab-btn" data-pm-tab="log" id="pmTabLog">📜 FlightLog History</button>
+        <button type="button" class="pm-tab-btn" data-pm-tab="compare" id="pmTabCompare">✦ The Flylofi Edge</button>
+      </div>
+
+      <!-- Tab 1: Holographic Membership Card -->
+      <div class="pm-tab-pane active" id="pmPaneCard">
+        <div class="holo-membership-card" id="holoMembershipCard">
+          <div class="hmc-top">
+            <div class="hmc-brand">FLYLOFI ALLIANCE</div>
+            <div class="hmc-tier-badge" id="hmcTierBadge">GOLD COMMANDER</div>
+          </div>
+          <div class="hmc-mid">
+            <div class="hmc-chip"></div>
+            <div class="hmc-member-no" id="hmcMemberNo">FF-92847-VIP</div>
+          </div>
+          <div class="hmc-bottom">
+            <div>
+              <small>TOTAL FOCUS</small>
+              <strong id="hmcTotalHours">24h 45m</strong>
+            </div>
+            <div>
+              <small>AIR &amp; ROAD MILES</small>
+              <strong id="hmcTotalMiles">11,480 NM</strong>
+            </div>
+            <div>
+              <small>JOURNEYS</small>
+              <strong id="hmcJourneys">32 Completed</strong>
+            </div>
+            <div>
+              <small>STREAK</small>
+              <strong id="hmcStreak">5 Days 🔥</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="tier-progress-box">
+          <div class="tpb-header">
+            <span>Next Tier: <strong id="nextTierName">Obsidian Fleet Captain</strong></span>
+            <span id="tierProgressPct">74%</span>
+          </div>
+          <div class="tpb-track">
+            <div class="tpb-fill" id="tierProgressFill" style="width: 74%;"></div>
+          </div>
+          <p class="tpb-desc">Every minute spent in deep focus earns flight &amp; road miles. 100% free forever — no $18.99/year subscription paywall.</p>
+        </div>
+      </div>
+
+      <!-- Tab 2: Stamped Passport Visas -->
+      <div class="pm-tab-pane" id="pmPanePassport" style="display:none">
+        <div class="passport-page-surface">
+          <div class="pps-header">
+            <div class="pps-crest">✦</div>
+            <div class="pps-title">INTERNATIONAL FOCUS PASSPORT</div>
+            <small>REPUBLIC OF DEEP WORK · ZERO-GPS ACCREDITED</small>
+          </div>
+          <div class="passport-stamps-grid" id="passportStampsGrid">
+            <!-- Dynamic stamps generated here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: FlightLog History Table -->
+      <div class="pm-tab-pane" id="pmPaneLog" style="display:none">
+        <div class="flightlog-table-wrap">
+          <table class="flightlog-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Mode</th>
+                <th>Route</th>
+                <th>Seat / POV</th>
+                <th>Duration</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="flightLogTableBody">
+              <!-- Log rows injected here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 4: The Flylofi Edge Comparison -->
+      <div class="pm-tab-pane" id="pmPaneCompare" style="display:none">
+        <div class="comparison-card-grid">
+          <div class="comp-card">
+            <div class="comp-icon">🌌</div>
+            <h4>Multi-Transit Sanctuary</h4>
+            <p>While FocusFlight is strictly locked to airplanes, Flylofi offers Commercial Airliners, Midnight Highway Grand Tourers, and Cross-Country Sleeper Buses.</p>
+          </div>
+          <div class="comp-card">
+            <div class="comp-icon">💺</div>
+            <h4>True Seat Perspectives</h4>
+            <p>Every seat delivers a distinct photorealistic vantage point: Window, Middle, Aisle, First Class Suites, and Bus Observation Decks.</p>
+          </div>
+          <div class="comp-card">
+            <div class="comp-icon">🔒</div>
+            <h4>Zero-GPS Privacy</h4>
+            <p>Calculates dynamic reach radii mathematically without requesting your private device GPS location or Apple Screen Time control.</p>
+          </div>
+          <div class="comp-card">
+            <div class="comp-icon">💎</div>
+            <h4>100% Free Forever</h4>
+            <p>No $18.99/year subscription, no auto-renewing charges, and zero advertisements across Windows, Linux, Android, and Web.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
