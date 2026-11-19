@@ -2996,6 +2996,17 @@ button:active {
   }
 }
 
+
+
+@keyframes pulseHighlight {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(203, 45, 80, 0)); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 16px rgba(203, 45, 80, 0.8)); color: #ff5277 !important; }
+  100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(203, 45, 80, 0)); }
+}
+.pulse-highlight {
+  animation: pulseHighlight 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
 </style>
 </head>
 <body>
@@ -3019,7 +3030,7 @@ button:active {
         <span>Download App</span>
       </button>
       <button id="exitCruiseTopBtn" type="button" class="back-to-ticket-btn" hidden>← Back to Ticket</button>
-      <button id="passportLogTrigger" type="button" class="passport-log-btn" title="View Stamped Passport, FlightLog &amp; Membership Tier">
+      <button id="passportLogTrigger" type="button" class="passport-log-btn" onclick="openPassportModal()" title="View Stamped Passport, FlightLog &amp; Membership Tier">
         <span class="btn-icon">🛂</span>
         <span>Passport &amp; Log</span>
       </button>
@@ -3173,7 +3184,7 @@ button:active {
                   <span>Last Landed</span>
                   <span class="origin-city-tag" id="lastLandedTag">SIN</span>
                 </button>
-                <button type="button" class="random-route-btn" id="randomRouteBtn" title="Pick a random surprise destination reachable within your focus timer">
+                <button type="button" class="random-route-btn" id="randomRouteBtn" onclick="pickMysteryRoute()" title="Pick a random surprise destination reachable within your focus timer">
                   <span class="dice-icon">🔀</span>
                   <span>Mystery Route</span>
                 </button>
@@ -4522,7 +4533,15 @@ function selectDestination(destCode) {
   if (!registry[destCode]) return;
 
   activeFlight.destination = destCode;
-  if (destination) destination.value = destCode;
+  if (typeof destination !== 'undefined' && destination) {
+    if (destination.tagName === 'SELECT' && !destination.querySelector(`option[value="${destCode}"]`)) {
+      const opt = document.createElement('option');
+      opt.value = destCode;
+      opt.textContent = `${registry[destCode].city || registry[destCode].name} (${destCode})`;
+      destination.appendChild(opt);
+    }
+    destination.value = destCode;
+  }
 
   // Update carousel active state
   document.querySelectorAll('.dest-card').forEach((card) => {
@@ -4532,6 +4551,7 @@ function selectDestination(destCode) {
   });
 
   updateLiveBoardingPass();
+  if (typeof updateWizardSummaries === 'function') updateWizardSummaries();
   playSeatClickTone();
 }
 
@@ -5079,10 +5099,15 @@ function launchFlight(data) {
 
 function updateLiveBoardingPass() {
   const cfg = TRANSIT_CONFIG[currentTransitMode] || TRANSIT_CONFIG.flight;
-  const depCode = departure.value || cfg.defaultFrom;
-  const destCode = destination.value || cfg.defaultTo;
-  const depName = cfg.routes[depCode]?.name || depCode;
-  const destName = cfg.routes[destCode]?.name || destCode;
+  const reg = (typeof getActiveRegistry === 'function') ? getActiveRegistry() : {};
+
+  const depCode = activeFlight.departure || (typeof departure !== 'undefined' && departure?.value) || cfg.defaultFrom;
+  const destCode = activeFlight.destination || (typeof destination !== 'undefined' && destination?.value) || cfg.defaultTo;
+
+  const depObj = reg[depCode] || cfg.routes?.[depCode];
+  const destObj = reg[destCode] || cfg.routes?.[destCode];
+  const depName = depObj?.city || depObj?.name || depCode;
+  const destName = destObj?.city || destObj?.name || destCode;
 
   activeFlight.transitMode = currentTransitMode;
   activeFlight.departure = depCode;
@@ -6156,10 +6181,15 @@ const wizardUrlParams = new URLSearchParams(window.location.search);
 const paramStep = wizardUrlParams.get('step');
 const initStepMatch = window.location.hash.match(/#?step([1-4])/i);
 const targetStep = paramStep ? parseInt(paramStep, 10) : (initStepMatch ? parseInt(initStepMatch[1], 10) : 1);
-goToCustomStep(targetStep);
-updateWizardSummaries();
-</script>
-<script src="app-controls.js">
+
+// Expose on window for inline handlers & sub-scopes
+window.activeFlight = activeFlight;
+window.pickMysteryRoute = pickMysteryRoute;
+window.openPassportModal = openPassportModal;
+window.closePassportModal = closePassportModal;
+window.selectDestination = selectDestination;
+
+
 
 
 
@@ -6170,50 +6200,61 @@ updateWizardSummaries();
 // 1. Mystery Random Route Generator
 function pickMysteryRoute() {
   playHapticClick(1.2);
-  const reg = getActiveRegistry();
-  const currentDep = getDepartureHub();
-  const dep = reg[currentDep] || Object.values(reg)[0];
+  const depCode = getDepartureHub();
   const targetMins = activeFlight.duration;
   const mode = currentTransitMode;
 
-  let speedKnots = mode === 'car' ? 55 : (mode === 'bus' ? 43 : 440);
-  let rangeDistNm = mode === 'flight' 
-    ? Math.max(60, Math.round((targetMins - 14) * (440 / 60)))
-    : Math.round(targetMins * (speedKnots / 60));
+  const candidates = getReachableDestinations(depCode, targetMins, mode);
+  if (!candidates || candidates.length === 0) return;
 
-  // Find reachable candidate destinations
-  const candidates = [];
-  Object.values(reg).forEach(dest => {
-    if (dest.code === currentDep) return;
-    const dist = getGreatCircleDistance(dep.lat, dep.lon, dest.lat, dest.lon);
-    if (dist <= rangeDistNm * 1.35) {
-      candidates.push({ dest, dist });
-    }
-  });
-
-  const pool = candidates.length > 0 ? candidates : Object.values(reg).filter(d => d.code !== currentDep).map(d => ({ dest: d, dist: 250 }));
-  const chosen = pool[Math.floor(Math.random() * pool.length)];
+  // Pick a candidate that is NOT the current destination (if possible)
+  const pool = candidates.filter(c => c.code !== activeFlight.destination && c.code !== depCode);
+  const chosen = (pool.length > 0 ? pool : candidates)[Math.floor(Math.random() * (pool.length > 0 ? pool.length : candidates.length))];
 
   if (chosen) {
-    activeFlight.destination = chosen.dest.code;
-    activeFlight.destinationName = chosen.dest.name;
-    activeFlight.destinationCity = chosen.dest.city;
-    activeFlight.flightNo = `FF-${Math.floor(100 + Math.random() * 899)}`;
+    // 1. Select the destination through the official app engine
+    selectDestination(chosen.code);
 
-    // Redraw and update live ticket
+    // 2. Redraw tactical radar screen so radar path line points to the mystery destination
     if (typeof drawRadarScreen === 'function') {
       const c = document.getElementById('flightRadarCanvas');
       if (c) drawRadarScreen(c);
     }
-    if (typeof updateRadarAndCarousel === 'function') updateRadarAndCarousel();
+
+    // 3. Update all wizard summaries & boarding pass
+    if (typeof updateWizardSummaries === 'function') updateWizardSummaries();
     if (typeof updateLiveBoardingPass === 'function') updateLiveBoardingPass();
 
-    // Pulse ticket to highlight new route
-    const bp = document.getElementById('boardingPass');
-    if (bp) {
-      bp.classList.remove('seat-code-flip');
-      void bp.offsetWidth;
-      bp.classList.add('seat-code-flip');
+    // 4. Scroll active card into view in reachable carousel
+    const activeCard = document.querySelector(`.dest-card[data-code="${chosen.code}"]`);
+    if (activeCard) {
+      activeCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      activeCard.classList.remove('pulse-highlight');
+      void activeCard.offsetWidth;
+      activeCard.classList.add('pulse-highlight');
+    }
+
+    // 5. Visual pulse effect on boarding pass destination code
+    const destCodeEl = document.getElementById('ticketDest');
+    if (destCodeEl) {
+      destCodeEl.classList.remove('pulse-highlight');
+      void destCodeEl.offsetWidth;
+      destCodeEl.classList.add('pulse-highlight');
+    }
+
+    // 6. Flash readout in radar range badge
+    const radarReadout = document.getElementById('radarRangeReadout');
+    if (radarReadout) {
+      radarReadout.textContent = `🔀 Mystery Locked: ${chosen.code} (${chosen.city || chosen.name})!`;
+      setTimeout(() => {
+        if (radarReadout && radarReadout.textContent.includes('Mystery Locked:')) {
+          const speedKnots = mode === 'car' ? 55 : (mode === 'bus' ? 43 : 440);
+          const estRangeNm = mode === 'flight' 
+            ? Math.max(50, Math.round((targetMins - 14) * (440 / 60)))
+            : Math.round(targetMins * (speedKnots / 60));
+          radarReadout.textContent = `Range: ~${targetMins}m (${estRangeNm} NM)`;
+        }
+      }, 3500);
     }
   }
 }
@@ -6434,8 +6475,12 @@ if (document.readyState === 'loading') {
   initPassportModalListeners();
 }
 
-</script>
 
+
+goToCustomStep(targetStep);
+updateWizardSummaries();
+initPassportModalListeners();
+</script>
 
   <!-- =========================================================================
        PASSPORT, FLIGHTLOG & MEMBERSHIP MODAL (OUTSHINES FOCUSFLIGHT)
@@ -6447,7 +6492,7 @@ if (document.readyState === 'loading') {
           <div class="eyebrow">OFFICIAL TRAVEL RECORD · 100% PRIVATE &amp; FREE</div>
           <h2 id="passportModalTitle">Passport &amp; FlightLog</h2>
         </div>
-        <button type="button" class="pm-close-btn" id="closePassportModal" aria-label="Close Passport Modal">✕</button>
+        <button type="button" class="pm-close-btn" id="closePassportModal" onclick="closePassportModal()" aria-label="Close Passport Modal">✕</button>
       </div>
 
       <!-- Modal Tabs -->
@@ -6564,5 +6609,6 @@ if (document.readyState === 'loading') {
     </div>
   </div>
 
+<script src="app-controls.js"></script>
 </body>
 </html>
