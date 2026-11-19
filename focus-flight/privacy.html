@@ -3,99 +3,188 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy - FlyLofi Focus Flight</title>
+  <title>Zero-GPS Privacy Charter · Flylofi Focus Flight</title>
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg: #071117;
-      --card-bg: rgba(14, 25, 34, 0.85);
-      --accent: #2dd4bf;
-      --text: #e2e8f0;
-      --text-muted: #94a3b8;
-      --border: rgba(45, 212, 191, 0.2);
+      --bg: #101415;
+      --card-bg: rgba(23, 29, 31, 0.92);
+      --accent: #cb2d50;
+      --text: #fbf8f1;
+      --text-muted: #8e9e99;
+      --border: rgba(214, 206, 194, 0.14);
+      --gold: #d4af37;
+      --gold-light: #f4e2a1;
+      --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-crest: 'Cinzel', serif;
+      --font-mono: 'Space Mono', monospace;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--bg);
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(203, 45, 80, 0.08) 0%, transparent 50%),
+        linear-gradient(180deg, #0e1213 0%, #121719 100%);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      padding: 2rem 1rem;
+      font-family: var(--font-display);
+      line-height: 1.7;
+      padding: 3rem 1.5rem;
       display: flex;
       justify-content: center;
+      -webkit-font-smoothing: antialiased;
     }
     .container {
-      max-width: 760px;
+      max-width: 780px;
       width: 100%;
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2.5rem;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      padding: clamp(24px, 4vw, 44px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     }
     header {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
-      margin-bottom: 2rem;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2.2rem;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 1.5rem;
+      padding-bottom: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
     header img {
-      width: 64px;
-      height: 64px;
+      width: 58px;
+      height: 58px;
       border-radius: 14px;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(212, 175, 55, 0.3);
     }
-    h1 { font-size: 1.8rem; color: #fff; }
-    .subtitle { color: var(--accent); font-size: 0.95rem; font-weight: 500; }
-    h2 { font-size: 1.25rem; color: #fff; margin-top: 1.75rem; margin-bottom: 0.5rem; }
-    p { margin-bottom: 1rem; color: var(--text-muted); font-size: 0.98rem; }
-    ul { margin-left: 1.5rem; margin-bottom: 1rem; color: var(--text-muted); }
-    li { margin-bottom: 0.35rem; }
-    .updated { font-size: 0.85rem; color: var(--accent); opacity: 0.8; margin-top: 2rem; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      color: var(--text);
+      line-height: 1.25;
+    }
+    .subtitle {
+      font-family: var(--font-mono);
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 10px;
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 15px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fbf8f1;
+      background: rgba(203, 45, 80, 0.16);
+      border: 1px solid rgba(203, 45, 80, 0.4);
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover {
+      background: rgba(203, 45, 80, 0.28);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: #fff;
+      margin-top: 2rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h2::before {
+      content: "✦";
+      color: var(--gold);
+      font-size: 1rem;
+    }
+    p { margin-bottom: 1.1rem; color: var(--text-muted); font-size: 0.96rem; }
+    ul { margin-bottom: 1.2rem; padding-left: 1.3rem; }
+    li { margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.94rem; }
+    strong { color: var(--text); }
+    .badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.12);
+      color: var(--gold-light);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      margin-bottom: 1.2rem;
+    }
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #63706c;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <main class="container">
     <header>
-      <img src="icon-192.png" alt="FlyLofi Logo">
-      <div>
-        <h1>FlyLofi Focus Flight</h1>
-        <div class="subtitle">Privacy Policy</div>
+      <div class="brand-group">
+        <img src="icon-192.png" alt="Flylofi Logo">
+        <div>
+          <h1>Zero-GPS Privacy Charter</h1>
+          <div class="subtitle">100% Offline-First · Handcrafted in Chennai</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" class="nav-btn">✈ Flight Concierge</a>
+        <a href="about.html" class="nav-btn">✒️ About the Maker</a>
       </div>
     </header>
 
-    <h2>1. Introduction</h2>
-    <p>FlyLofi Focus Flight ("FlyLofi", "we", "our") is a focus and productivity application designed to provide relaxing aviation-themed audio and visual sessions. We respect your privacy and are committed to protecting it through this policy.</p>
+    <div class="badge">OFFICIAL ATELIER COVENANT · EFFECTIVE 2026</div>
 
-    <h2>2. Data Collection and Usage</h2>
-    <p>FlyLofi is designed with a strict privacy-first principle:</p>
+    <p>Flylofi Focus Flight was built upon a fundamental architectural promise: <strong>deep work requires peace of mind</strong>. You should never be forced to sacrifice your personal location, screen activity, or device telemetry to enter a focused flow state.</p>
+
+    <h2>1. Mathematical Great-Circle Coordinates (Zero GPS)</h2>
+    <p>Unlike competing focus flight apps that query Apple/Android device location APIs or require invasive Screen Time permissions, Flylofi calculates all avionics radar projections mathematically:</p>
     <ul>
-      <li><strong>No Personal Data Collection:</strong> We do not collect, store, transmit, or share any personal identifying information (PII) such as names, phone numbers, email addresses, or precise GPS locations.</li>
-      <li><strong>No Tracking or Analytics:</strong> The app does not include third-party advertising SDKs, behavioral tracking trackers, or telemetry software.</li>
-      <li><strong>Local Processing:</strong> All timer configurations, flight routes, audio playback, and custom user-inserted media files are processed locally on your device.</li>
+      <li><strong>No Location Permissions:</strong> Flylofi never requests or accesses your device GPS, Wi-Fi tri-lateration, or IP geofencing.</li>
+      <li><strong>Spherical Trigonometry:</strong> Reachable destinations, radar ranges, and flight distances are computed client-side using Great-Circle distance formulas from your chosen departure hub.</li>
     </ul>
 
-    <h2>3. Permissions</h2>
-    <p>When running on Android, FlyLofi may request only standard system permissions necessary for core app functionality:</p>
-    <ul>
-      <li><strong>Storage / Media Access:</strong> Only accessed if you choose to import custom local music or video files via the "+ Audio" and "+ Video" buttons into your focus session.</li>
-      <li><strong>Network Access:</strong> Used exclusively to stream media from your configured local network server or edge worker when online. FlyLofi works seamlessly offline without requiring internet.</li>
-    </ul>
+    <h2>2. 100% Client-Side Local Storage</h2>
+    <p>All your focus statistics, completed journey logs, stamped immigration visas, and alliance tier status are saved exclusively in your browser or device's <code>localStorage</code>. No telemetry is sent to any external server.</p>
 
-    <h2>4. Children's Privacy</h2>
-    <p>FlyLofi does not target children under the age of 13 and does not knowingly collect any data from children.</p>
+    <h2>3. Zero Third-Party Advertising &amp; Tracking</h2>
+    <p>Flylofi is completely free of Google Analytics, Meta Pixels, ad networks, tracking SDKs, or background analytics. When you disconnect from the internet, the app continues to operate seamlessly offline.</p>
 
-    <h2>5. Changes to This Privacy Policy</h2>
-    <p>We may update this Privacy Policy from time to time. Any updates will be published on this page.</p>
+    <h2>4. Universal Sovereign Freedom</h2>
+    <p>Available as a standalone Windows executable (<code>Flylofi.exe</code>), Linux archive (<code>flylofi-linux.tar.gz</code>), signed Android package (<code>focus-flight.apk</code> with zero dangerous permissions), and progressive web app (PWA).</p>
 
-    <h2>6. Contact Us</h2>
-    <p>If you have any questions or suggestions about our Privacy Policy, please contact us at <a href="mailto:support@flylofi.org">support@flylofi.org</a>.</p>
-
-    <div class="updated">Last updated: November 2026</div>
-  </div>
+    <footer>
+      ATELIER EDITION 2026 · WRITTEN WITH CARE BY SANJITH VISHNU · CHENNAI, INDIA
+    </footer>
+  </main>
 </body>
 </html>

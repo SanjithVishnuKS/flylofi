@@ -3007,6 +3007,146 @@ button:active {
   animation: pulseHighlight 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
+
+
+/* About Me Topbar Button */
+.about-me-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 7px 14px !important;
+  border-radius: 999px !important;
+  background: rgba(212, 175, 55, 0.08) !important;
+  border: 1px solid rgba(212, 175, 55, 0.28) !important;
+  color: var(--gold-light) !important;
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: all 0.22s ease !important;
+}
+
+.about-me-btn:hover {
+  background: rgba(212, 175, 55, 0.18) !important;
+  border-color: var(--gold) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Editorial Atelier Footer */
+.atelier-colophon-footer {
+  margin-top: 56px !important;
+  padding: 48px 24px 36px !important;
+  border-top: 1px solid rgba(214, 206, 194, 0.12) !important;
+  background: linear-gradient(180deg, rgba(16, 20, 21, 0.75), rgba(11, 14, 15, 0.95)) !important;
+  border-radius: 20px 20px 0 0 !important;
+  position: relative !important;
+}
+
+.acf-inner {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: 2fr 1fr 1fr !important;
+  gap: 36px !important;
+}
+
+@media (max-width: 820px) {
+  .acf-inner {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+}
+
+.acf-brand {
+  font-family: var(--font-crest) !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.18em !important;
+  color: var(--gold-light) !important;
+  margin-bottom: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.acf-crest {
+  color: var(--gold) !important;
+}
+
+.acf-desc {
+  font-size: 12.5px !important;
+  line-height: 1.7 !important;
+  color: var(--text-muted) !important;
+  max-width: 480px !important;
+  margin-bottom: 16px !important;
+}
+
+.acf-seal-badge {
+  font-family: var(--font-mono) !important;
+  font-size: 9px !important;
+  letter-spacing: 0.14em !important;
+  color: var(--gold-light) !important;
+  padding: 4px 10px !important;
+  background: rgba(212, 175, 55, 0.1) !important;
+  border: 1px solid rgba(212, 175, 55, 0.28) !important;
+  border-radius: 999px !important;
+  display: inline-block !important;
+}
+
+.acf-col h4 {
+  font-family: var(--font-crest) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.16em !important;
+  color: var(--gold) !important;
+  margin-bottom: 14px !important;
+  text-transform: uppercase !important;
+}
+
+.acf-links {
+  list-style: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.acf-links a {
+  font-size: 12.5px !important;
+  color: var(--beige-dim) !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.acf-links a:hover {
+  color: var(--gold-light) !important;
+  transform: translateX(2px) !important;
+}
+
+.acf-bottom {
+  max-width: 1200px !important;
+  margin: 36px auto 0 !important;
+  padding-top: 20px !important;
+  border-top: 1px dashed rgba(214, 206, 194, 0.1) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 9.5px !important;
+  color: var(--text-dim) !important;
+  letter-spacing: 0.08em !important;
+}
+
+.acf-bottom strong {
+  color: var(--beige-warm) !important;
+}
+
 </style>
 </head>
 <body>
@@ -3034,6 +3174,10 @@ button:active {
         <span class="btn-icon">🛂</span>
         <span>Passport &amp; Log</span>
       </button>
+      <a href="about.html" class="about-me-btn" id="aboutMeTopBtn" title="About the Creator &amp; Dispatch Journal">
+        <span class="btn-icon">✒️</span>
+        <span>About Me</span>
+      </a>
       <button id="quickLaunchNav" type="button"  style="background:rgba(203, 45, 80,.18);color:var(--accent);border-color:rgba(203, 45, 80,.4)">✈ Board</button>
       <button id="homeNavButton" type="button">Home</button>
     </div>
@@ -3048,8 +3192,8 @@ button:active {
         <form class="booking" id="bookingForm" onsubmit="event.preventDefault();">
           <div class="card-head clickable" id="cardHeadClickable" title="Tap to configure itinerary">
             <div>
-              <div class="eyebrow">Interactive Journey Concierge</div>
-              <h2 id="bookFlightTitle">Book Focus Flight ✈</h2>
+              <div class="eyebrow">✦ THE TRAVEL ATELIER · EST. 2026</div>
+              <h2 id="bookFlightTitle">Reserve Your Focus Voyage</h2>
             </div>
             <span class="flight-no" id="bookingFormFlightNo">FF-042</span>
           </div>
@@ -3057,15 +3201,15 @@ button:active {
           <!-- Guided Stepper Progress Bar -->
           <div class="custom-stepper-bar" id="customStepperBar" role="tablist" aria-label="Journey customization steps">
             <button type="button" class="step-nav-btn active" data-step="1" id="stepNav1" role="tab" aria-selected="true" title="Step 1: Choose Transit Atmosphere">
-              <span class="step-num">1</span>
+              <span class="step-num">I</span>
               <span class="step-meta">
-                <span class="step-title">Atmosphere</span>
+                <span class="step-title">Sanctuary</span>
                 <span class="step-sub" id="stepSub1">Flight ✈</span>
               </span>
             </button>
             <div class="step-connector"></div>
             <button type="button" class="step-nav-btn" data-step="2" id="stepNav2" role="tab" aria-selected="false" title="Step 2: Plot Route & Range Radar">
-              <span class="step-num">2</span>
+              <span class="step-num">II</span>
               <span class="step-meta">
                 <span class="step-title">Route &amp; Radar</span>
                 <span class="step-sub" id="stepSub2">45m Range</span>
@@ -3073,17 +3217,17 @@ button:active {
             </button>
             <div class="step-connector"></div>
             <button type="button" class="step-nav-btn" data-step="3" id="stepNav3" role="tab" aria-selected="false" title="Step 3: Select Cabin Seat Perspective">
-              <span class="step-num">3</span>
+              <span class="step-num">III</span>
               <span class="step-meta">
-                <span class="step-title">Cabin Seat</span>
+                <span class="step-title">Cabin Vantage</span>
                 <span class="step-sub" id="stepSub3">14A Window</span>
               </span>
             </button>
             <div class="step-connector"></div>
             <button type="button" class="step-nav-btn" data-step="4" id="stepNav4" role="tab" aria-selected="false" title="Step 4: Objective & Boarding Pass">
-              <span class="step-num">4</span>
+              <span class="step-num">IV</span>
               <span class="step-meta">
-                <span class="step-title">Focus Goal</span>
+                <span class="step-title">Intent &amp; Pass</span>
                 <span class="step-sub" id="stepSub4">Code · 45m</span>
               </span>
             </button>
@@ -3094,9 +3238,9 @@ button:active {
                ============================================================== -->
           <div class="wizard-step" id="wizardStep1" data-step="1">
             <div class="step-banner">
-              <div class="step-badge">STEP 1 OF 4 · TRANSIT ATMOSPHERE</div>
-              <h3 class="step-heading">Choose Your Transit Sanctuary</h3>
-              <p class="step-description">Select how you want to travel while you focus. Every mode delivers a distinct acoustic and visual haven.</p>
+              <div class="step-badge">I OF IV · TRANSIT SANCTUARY</div>
+              <h3 class="step-heading">Select Your Transit Sanctuary</h3>
+              <p class="step-description">Every journey offers a distinct acoustic haven and visual horizon. Choose your atmosphere before plotting your coordinates.</p>
             </div>
 
             <div class="transit-card-grid">
@@ -3122,14 +3266,14 @@ button:active {
               <div class="transit-experience-card" data-mode="car" id="cardModeCar">
                 <div class="tec-top">
                   <span class="tec-icon">🚗</span>
-                  <span class="tec-tag glimpse">EXCLUSIVE GLIMPSE</span>
+                  <span class="tec-tag live">LIVE EXPERIENCE</span>
                 </div>
                 <div class="tec-title">Night Highway Drive</div>
                 <div class="tec-sub">Grand Tourer · Rainy Coastal Freeway</div>
                 <ul class="tec-perks">
                   <li>🌧️ Raindrops on glass &amp; neon reflections</li>
                   <li>🎧 Rhythmic wipers &amp; highway tire hum</li>
-                  <li>💺 Front shotgun &amp; rear leather lounge (driver locked)</li>
+                  <li>💺 Front passenger &amp; rear leather lounge</li>
                 </ul>
                 <div class="tec-action">
                   <span class="tec-status">Tap to Select</span>
@@ -3140,7 +3284,7 @@ button:active {
               <div class="transit-experience-card" data-mode="bus" id="cardModeBus">
                 <div class="tec-top">
                   <span class="tec-icon">🚌</span>
-                  <span class="tec-tag glimpse">EXCLUSIVE GLIMPSE</span>
+                  <span class="tec-tag live">LIVE EXPERIENCE</span>
                 </div>
                 <div class="tec-title">Overnight Sleeper Coach</div>
                 <div class="tec-sub">Double-Decker Express · Mountain Highway</div>
@@ -3170,9 +3314,9 @@ button:active {
                ============================================================== -->
           <div class="wizard-step" id="wizardStep2" data-step="2" style="display:none">
             <div class="step-banner">
-              <div class="step-badge">STEP 2 OF 4 · ROUTE &amp; RADAR</div>
+              <div class="step-badge">II OF IV · ROUTE &amp; TACTICAL RADAR</div>
               <h3 class="step-heading" id="step2Heading">Plot Route &amp; Tactical Radar</h3>
-              <p class="step-description">Select your departure hub and scrub your focus duration to reveal reachable destinations on the tactical radar.</p>
+              <p class="step-description">Scrub your timer to project your flight or road reach using Great-Circle spherical navigation, or roll a surprise destination with Mystery Route.</p>
             </div>
 
             <!-- Departure Origin Hub Mode Bar (0% GPS Privacy Guarantee) -->
@@ -3621,9 +3765,9 @@ button:active {
       <!-- RIGHT COLUMN: OFFICIAL BOARDING PASS WITH TACTILE MOTION-TEAR STUB RIGHT IN FRONT -->
       <div class="ticket-col">
         <div class="ticket-copy" style="margin-bottom:18px">
-          <div class="eyebrow" id="ticketColEyebrow">OFFICIAL BOARDING PASS · PHYSICAL TEAR-STUB</div>
+          <div class="eyebrow" id="ticketColEyebrow">OFFICIAL TRAVEL DOCUMENT · ATELIER EDITION</div>
           <h1 id="ticketColTitle">Tear stub to<br><em>take your seat.</em></h1>
-          <p id="ticketColSub">Your boarding pass is ready in real-time. Drag down the perforated stub or tap <strong>'Rip to Board'</strong> to settle into your aircraft cabin view.</p>
+          <p id="ticketColSub">Your personalized boarding document is dynamically plotted and ready. Drag down the perforated stub along the notch or tap <strong>'Rip to Board'</strong> to settle into your sanctuary.</p>
         </div>
 
         <div class="ticket-wrapper">
@@ -3724,6 +3868,43 @@ button:active {
       </div>
 
     </div>
+
+    <!-- ATELIER COLOPHON & MAKER FOOTER -->
+    <footer class="atelier-colophon-footer">
+      <div class="acf-inner">
+        <div class="acf-col acf-brand-col">
+          <div class="acf-brand"><span class="acf-crest">✦</span> FLYLOFI ATELIER</div>
+          <p class="acf-desc">A quiet multi-transit sanctuary designed for nocturnal thinkers, deep-focus writers, and wandering minds. Handcrafted in Chennai, India with authentic Great-Circle avionics, physical skeuomorphism, and zero-GPS privacy.</p>
+          <div class="acf-seal-badge">★ ATELIER EDITION 2026 · HAND-BUILT WITH PRIDE ★</div>
+        </div>
+
+        <div class="acf-col">
+          <h4>Transit Fleet</h4>
+          <ul class="acf-links">
+            <li><a href="javascript:void(0)" onclick="switchTransitMode('flight');goToCustomStep(1);">✈ Commercial Airliner (35k ft)</a></li>
+            <li><a href="javascript:void(0)" onclick="switchTransitMode('car');goToCustomStep(1);">🚗 Midnight Highway GT (Rainy)</a></li>
+            <li><a href="javascript:void(0)" onclick="switchTransitMode('bus');goToCustomStep(1);">🚌 Sleeper Coach (Mountain)</a></li>
+            <li><a href="javascript:void(0)" onclick="openPassportModal();">🛂 Stamped Passport &amp; FlightLog</a></li>
+          </ul>
+        </div>
+
+        <div class="acf-col">
+          <h4>Creator &amp; Charter</h4>
+          <ul class="acf-links">
+            <li><a href="about.html">✒️ About the Maker &amp; Dispatches</a></li>
+            <li><a href="privacy.html">🔒 Zero-GPS Privacy Guarantee</a></li>
+            <li><a href="javascript:void(0)" onclick="document.getElementById('downloadModalTrigger')?.click();">📥 Native Windows, Linux &amp; APK</a></li>
+            <li><a href="https://github.com/SanjithVishnuKS/flylofi" target="_blank" rel="noopener">🐙 GitHub Repository</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acf-bottom">
+        <div>DESIGNED &amp; CODED BY <strong>SANJITH VISHNU</strong> · CHENNAI, INDIA</div>
+        <div>100% FREE FOREVER · ZERO TRACKERS · NO SUBSCRIPTIONS</div>
+      </div>
+    </footer>
+
   </section>
 
   <!-- FLIGHT CRUISE VIEW: Clean Frame without floating collision button -->
@@ -3746,113 +3927,6 @@ button:active {
       <button class="board" id="homeButton" type="button" style="width:auto;display:inline-block;padding:12px 28px;margin-top:20px">Book another flight</button>
     </div>
   
-<!-- INTERACTIVE SNEAK PEEK MODAL FOR FUTURE MODES (CAR & BUS) -->
-<div class="transit-modal-overlay" id="transitModalOverlay" hidden>
-  <div class="transit-modal">
-    <div class="transit-modal-top">
-      <div class="modal-tabs">
-        <button type="button" class="modal-tab-btn active" id="modalTabCar">🚗 Midnight Drive</button>
-        <button type="button" class="modal-tab-btn" id="modalTabBus">🚌 Sleeper Bus</button>
-      </div>
-      <button type="button" class="modal-close-icon" id="modalCloseBtn" aria-label="Close modal">×</button>
-    </div>
-
-    <!-- CAR CONTENT -->
-    <div class="transit-modal-body" id="modalBodyCar">
-      <div class="modal-hero-badge">PHASE 2 EXPANSION · IN DEVELOPMENT</div>
-      <h3 class="modal-title">Focus Drive: Midnight Highway 🌧️</h3>
-      <p class="modal-desc">Step into the driver's seat for late-night deep work sessions. Designed to provide the hypnotizing calm of cruising along an empty, rainy highway at 2 AM.</p>
-
-      <div class="modal-features-list">
-        <div class="modal-feat-item">
-          <span class="modal-feat-icon">🌧️</span>
-          <div class="modal-feat-text">
-            <strong>Dynamic Rain &amp; Windshield Wipers</strong>
-            <p>Raindrops patter and streak across the windshield glass with rhythmic, toggleable wipers.</p>
-          </div>
-        </div>
-        <div class="modal-feat-item">
-          <span class="modal-feat-icon">📻</span>
-          <div class="modal-feat-text">
-            <strong>Illuminated Dashboard Radio</strong>
-            <p>Glowing analog dials, odometer focus timer, and specialized highway synthwave &amp; night lofi stations.</p>
-          </div>
-        </div>
-        <div class="modal-feat-item">
-          <span class="modal-feat-icon">🛣️</span>
-          <div class="modal-feat-text">
-            <strong>Odometer Distance Countdown</strong>
-            <p>Your session counts down in highway miles remaining to your target focus destination.</p>
-          </div>
-        </div>
-        <div class="modal-feat-item">
-          <span class="modal-feat-icon">🎟️</span>
-          <div class="modal-feat-text">
-            <strong>Express Highway Toll Pass</strong>
-            <p>Tear a physical highway toll booth receipt to initiate your drive.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-actions-box">
-        <button type="button" class="modal-sound-btn" id="carAudioDemoBtn">
-          <span id="carAudioIcon">🔊</span>
-          <span id="carAudioLabel">Test Rain &amp; Highway Sound Demo</span>
-        </button>
-        <button type="button" class="modal-vote-btn" id="carVoteBtn">⭐ Pre-Register for Focus Drive (Notify on Launch)</button>
-      </div>
-    </div>
-
-    <!-- BUS CONTENT -->
-    <div class="transit-modal-body" id="modalBodyBus" hidden>
-      <div class="modal-hero-badge">PHASE 3 EXPANSION · IN DEVELOPMENT</div>
-      <h3 class="modal-title">Focus Transit: Sleeper Bus 🌲</h3>
-      <p class="modal-desc">The contemplative tranquility of a long-distance cross-country coach journey. Perfect for long reading, studying, and deep contemplation.</p>
-
-      <div class="modal-features-list">
-        <div class="modal-feat-item">
-          <span class="modal-feat-icon">🌄</span>
-          <div class="modal-feat-text">
-            <strong>Panoramic Upper-Deck Road View</strong>
-            <p>High-altitude viewpoint gazing through misty evergreen pine valleys, mountain switchbacks, and rolling fog.</p>
-          </div>
-        </div>
-        <div class="modal-feat-item">
-          <span class="modal-feat-icon">💡</span>
-          <div class="modal-feat-text">
-            <strong>Personal Reading Spotlight</strong>
-            <p>Toggle your overhead warm reading lamp to illuminate your physical workspace or focus notes.</p>
-          </div>
-        </div>
-        <div class="modal-feat-item">
-          <span class="modal-feat-icon">💺</span>
-          <div class="modal-feat-text">
-            <strong>Berth &amp; Cabin Lounges</strong>
-            <p>Choose between panoramic forward observation seats or cozy lower sleeper berths.</p>
-          </div>
-        </div>
-        <div class="modal-feat-item">
-          <span class="modal-feat-icon">🎫</span>
-          <div class="modal-feat-text">
-            <strong>Vintage Conductor Hole Punch</strong>
-            <p>Hear the satisfying mechanical click as your retro sleeper ticket is punched for departure.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-actions-box">
-        <button type="button" class="modal-sound-btn" id="busAudioDemoBtn">
-          <span id="busAudioIcon">🔊</span>
-          <span id="busAudioLabel">Test Mountain Road &amp; Diesel Purr Demo</span>
-        </button>
-        <button type="button" class="modal-vote-btn" id="busVoteBtn">⭐ Pre-Register for Sleeper Bus (Notify on Launch)</button>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-</div>
-
 <!-- DOWNLOAD HUB MODAL (Windows, Linux, Android, PWA) -->
 <div class="download-modal-backdrop" id="downloadModal" aria-hidden="true">
   <div class="download-modal-card" role="dialog" aria-labelledby="modalTitle">
