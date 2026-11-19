@@ -5351,7 +5351,7 @@ function selectView(id) {
 function launchFlight(data) {
   activeFlight = data;
   try {
-    localStorage.setItem('focusFlightActive', JSON.stringify({...activeFlight, startedAt: Date.now()}));
+    localStorage.setItem('flylofiActiveFlight', JSON.stringify({...activeFlight, startedAt: Date.now()}));
     localStorage.setItem('flylofi_last_landed', activeFlight.destination);
     lastLandedHub = activeFlight.destination;
   } catch(e) {}

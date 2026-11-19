@@ -572,7 +572,7 @@ const carChapters=[
 ];
 
 const urlParams = new URLSearchParams(window.location.search);
-let savedFlight = JSON.parse(localStorage.getItem('focusFlightActive') || 'null');
+let savedFlight = JSON.parse(localStorage.getItem('flylofiActiveFlight') || 'null');
 if (urlParams.get('mode')) {
   const m = urlParams.get('mode');
   const dSeat = m === 'car' ? 'FP' : m === 'bus' ? '01A' : '14A';
