@@ -568,7 +568,7 @@
   window.addEventListener('keydown', unlockAutoplay, { once: true });
 
   // ==========================================================================
-  // 7. STANDOUT FEATURE: INTERACTIVE DRAGGABLE AIRPLANE WINDOW SHADE
+  // 7. Interactive Aircraft Window Shade Physical Drag Engine
   // ==========================================================================
   let isDraggingShade = false;
   let shadeStartY = 0;

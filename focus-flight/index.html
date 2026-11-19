@@ -178,7 +178,7 @@ legend{margin-bottom:10px;font-weight:600}
 .options input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;z-index:2}
 
 /* ==========================================================================
-   MULTI-TRANSIT EXPANSION (FLIGHT, CAR, BUS ROADMAP - STANDOUT SYSTEM)
+   MULTI-TRANSIT CONFIGURATION & DYNAMICS ENGINE (AIRLINER, GT HIGHWAY, SLEEPER COACH)
    ========================================================================== */
 .transit-mode-bar{
   margin-bottom:16px;padding:12px 14px;border-radius:12px;
@@ -2403,7 +2403,7 @@ body::before {
 
 
 /* ==========================================================================
-   HUMAN CRAFTSMANSHIP: MOTION PHYSICS, SPOTLIGHTS & TACTILE INTERACTIONS
+   MOTION MECHANICS: GYROSCOPE TILT, SPECULAR RIM LIGHTING & SPATIAL TRANSITIONS
    ========================================================================== */
 
 /* Step Spatial Slide Engine */
@@ -2987,6 +2987,76 @@ button:active {
   margin: 0 !important;
 }
 
+@media (max-width: 768px) {
+  .topbar {
+    height: 58px !important;
+    padding: 0 10px !important;
+  }
+  .brand {
+    font-size: 13.5px !important;
+    letter-spacing: 0.14em !important;
+  }
+  .brand span {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 13px !important;
+    margin-right: 6px !important;
+  }
+  .route-tracker {
+    display: none !important;
+  }
+  .top-actions {
+    gap: 5px !important;
+  }
+  .top-actions button, .top-actions a {
+    padding: 6px 9px !important;
+    font-size: 10.5px !important;
+    border-radius: 999px !important;
+  }
+  .download-trigger-btn span:not(.dl-icon) {
+    display: none !important;
+  }
+  .passport-log-btn span:not(.btn-icon) {
+    display: none !important;
+  }
+  .about-me-btn span:not(.btn-icon) {
+    display: none !important;
+  }
+  #homeNavButton {
+    display: none !important;
+  }
+  #quickLaunchNav {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 6px 13px !important;
+    font-size: 11.5px !important;
+    font-weight: 800 !important;
+    background: linear-gradient(135deg, #cb2d50, #88142f) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 0 16px rgba(203, 45, 80, 0.5) !important;
+    white-space: nowrap !important;
+  }
+}
+
+@keyframes passPulseGlow {
+  0% { box-shadow: 0 0 0 rgba(203, 45, 80, 0); }
+  50% { box-shadow: 0 0 35px rgba(203, 45, 80, 0.65), 0 0 60px rgba(212, 175, 55, 0.35); }
+  100% { box-shadow: 0 0 0 rgba(203, 45, 80, 0); }
+}
+.pass-pulse-glow {
+  animation: passPulseGlow 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes stubReadyPulse {
+  0% { border-color: rgba(203, 45, 80, 0.4); box-shadow: 0 0 0 rgba(203, 45, 80, 0); }
+  50% { border-color: var(--gold); box-shadow: 0 0 25px rgba(212, 175, 55, 0.5), inset 0 0 15px rgba(203, 45, 80, 0.3); }
+  100% { border-color: rgba(203, 45, 80, 0.4); box-shadow: 0 0 0 rgba(203, 45, 80, 0); }
+}
+.stub-ready-pulse {
+  animation: stubReadyPulse 1.6s ease-in-out infinite !important;
+}
+
 @media (max-width: 600px) {
   .hmc-bottom {
     grid-template-columns: 1fr 1fr !important;
@@ -3147,6 +3217,83 @@ button:active {
   color: var(--beige-warm) !important;
 }
 
+
+
+/* Bespoke Travel Dossier Anatomy (Breaks repetitive AI bullet lists) */
+.tec-header-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.tec-badge-spec {
+  font-family: var(--font-mono) !important;
+  font-size: 8.5px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: var(--gold) !important;
+  display: block !important;
+  margin-bottom: 2px !important;
+}
+
+.tec-title {
+  font-family: var(--font-serif) !important;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  color: var(--beige) !important;
+  letter-spacing: -0.01em !important;
+  margin: 0 !important;
+}
+
+.tec-narrative {
+  font-size: 12.5px !important;
+  line-height: 1.6 !important;
+  color: var(--beige-dim) !important;
+  margin: 12px 0 14px !important;
+}
+
+.tec-dossier-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
+  margin-bottom: 14px !important;
+}
+
+@media (max-width: 640px) {
+  .tec-dossier-grid {
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+}
+
+.tec-dossier-item {
+  background: rgba(14, 18, 20, 0.6) !important;
+  border: 1px solid rgba(214, 206, 194, 0.08) !important;
+  border-radius: 8px !important;
+  padding: 8px 10px !important;
+}
+
+.tdi-label {
+  display: block !important;
+  font-family: var(--font-mono) !important;
+  font-size: 8px !important;
+  letter-spacing: 0.12em !important;
+  color: var(--text-muted) !important;
+  text-transform: uppercase !important;
+  margin-bottom: 2px !important;
+}
+
+.tdi-val {
+  display: block !important;
+  font-family: var(--font-display) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: var(--beige) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
 </style>
 </head>
 <body>
@@ -3247,16 +3394,30 @@ button:active {
               <!-- Card 1: Commercial Airliner -->
               <div class="transit-experience-card active" data-mode="flight" id="cardModeFlight">
                 <div class="tec-top">
-                  <span class="tec-icon">✈</span>
-                  <span class="tec-tag live">LIVE EXPERIENCE</span>
+                  <div class="tec-header-left">
+                    <span class="tec-icon">✈</span>
+                    <div>
+                      <span class="tec-badge-spec">BOEING 787-9 DREAMLINER · STRATOSPHERE FL380</span>
+                      <h4 class="tec-title">Commercial Airliner</h4>
+                    </div>
+                  </div>
+                  <span class="tec-tag live">LIVE FLEET</span>
                 </div>
-                <div class="tec-title">Commercial Airliner</div>
-                <div class="tec-sub">Boeing 787 Dreamliner · 35,000 ft High Altitude Cruise</div>
-                <ul class="tec-perks">
-                  <li>☁️ Stratospheric cloud vistas &amp; sunset horizon</li>
-                  <li>🎧 Deep jet turbine engine drone &amp; lo-fi jazz</li>
-                  <li>💺 Window, middle, aisle &amp; first class suites</li>
-                </ul>
+                <p class="tec-narrative">A tranquil stratospheric haven above the weather. Low GEnx turbofan purr, chimes, and panoramic aerial cloud decks drifting slowly beneath.</p>
+                <div class="tec-dossier-grid">
+                  <div class="tec-dossier-item">
+                    <span class="tdi-label">VANTAGE</span>
+                    <span class="tdi-val">14A Cloud Vista · Suite 01A</span>
+                  </div>
+                  <div class="tec-dossier-item">
+                    <span class="tdi-label">ACOUSTICS</span>
+                    <span class="tdi-val">Jet Turbine Purr · Cabin Chimes</span>
+                  </div>
+                  <div class="tec-dossier-item">
+                    <span class="tdi-label">SPEED &amp; REACH</span>
+                    <span class="tdi-val">440 Knots · Global Intercontinental</span>
+                  </div>
+                </div>
                 <div class="tec-action">
                   <span class="tec-status">Selected</span>
                 </div>
@@ -3265,16 +3426,30 @@ button:active {
               <!-- Card 2: Highway GT Car -->
               <div class="transit-experience-card" data-mode="car" id="cardModeCar">
                 <div class="tec-top">
-                  <span class="tec-icon">🚗</span>
-                  <span class="tec-tag live">LIVE EXPERIENCE</span>
+                  <div class="tec-header-left">
+                    <span class="tec-icon">🚗</span>
+                    <div>
+                      <span class="tec-badge-spec">GRAND TOURER GT · PACIFIC COAST PCH-1</span>
+                      <h4 class="tec-title">Night Highway Drive</h4>
+                    </div>
+                  </div>
+                  <span class="tec-tag live">LIVE FLEET</span>
                 </div>
-                <div class="tec-title">Night Highway Drive</div>
-                <div class="tec-sub">Grand Tourer · Rainy Coastal Freeway</div>
-                <ul class="tec-perks">
-                  <li>🌧️ Raindrops on glass &amp; neon reflections</li>
-                  <li>🎧 Rhythmic wipers &amp; highway tire hum</li>
-                  <li>💺 Front passenger &amp; rear leather lounge</li>
-                </ul>
+                <p class="tec-narrative">Late-night asphalt meditation. Rhythmic wiper cadence against rain-streaked windshield glass, glowing amber instruments, and highway tire purr.</p>
+                <div class="tec-dossier-grid">
+                  <div class="tec-dossier-item">
+                    <span class="tdi-label">VANTAGE</span>
+                    <span class="tdi-val">Front Passenger · Rear Lounge</span>
+                  </div>
+                  <div class="tec-dossier-item">
+                    <span class="tdi-label">ACOUSTICS</span>
+                    <span class="tdi-val">Rain on Glass · Tire Hum · Wipers</span>
+                  </div>
+                  <div class="tec-dossier-item">
+                    <span class="tdi-label">SPEED &amp; REACH</span>
+                    <span class="tdi-val">55 Knots · Coastal Arterials</span>
+                  </div>
+                </div>
                 <div class="tec-action">
                   <span class="tec-status">Tap to Select</span>
                 </div>
@@ -3283,16 +3458,30 @@ button:active {
               <!-- Card 3: Sleeper Coach -->
               <div class="transit-experience-card" data-mode="bus" id="cardModeBus">
                 <div class="tec-top">
-                  <span class="tec-icon">🚌</span>
-                  <span class="tec-tag live">LIVE EXPERIENCE</span>
+                  <div class="tec-header-left">
+                    <span class="tec-icon">🚌</span>
+                    <div>
+                      <span class="tec-badge-spec">DOUBLE-DECKER EXPRESS · ALPINE PASS (2,400M)</span>
+                      <h4 class="tec-title">Overnight Sleeper Coach</h4>
+                    </div>
+                  </div>
+                  <span class="tec-tag live">LIVE FLEET</span>
                 </div>
-                <div class="tec-title">Overnight Sleeper Coach</div>
-                <div class="tec-sub">Double-Decker Express · Mountain Highway</div>
-                <ul class="tec-perks">
-                  <li>🛣️ Real asphalt highway &amp; misty mountain pines</li>
-                  <li>🎧 Low engine purr &amp; passing highway breeze</li>
-                  <li>💺 Upper observation deck &amp; private wood berth</li>
-                </ul>
+                <p class="tec-narrative">The unhurried calm of overnight ground travel. Steady diesel purr through mountain switchbacks, panoramic upper-deck windshield, and warm bunk reading lamp.</p>
+                <div class="tec-dossier-grid">
+                  <div class="tec-dossier-item">
+                    <span class="tdi-label">VANTAGE</span>
+                    <span class="tdi-val">Upper Deck Observation · Timber Berth</span>
+                  </div>
+                  <div class="tec-dossier-item">
+                    <span class="tdi-label">ACOUSTICS</span>
+                    <span class="tdi-val">Diesel Resonance · Wind in Pines</span>
+                  </div>
+                  <div class="tec-dossier-item">
+                    <span class="tdi-label">SPEED &amp; REACH</span>
+                    <span class="tdi-val">43 Knots · Mountain Pass Route</span>
+                  </div>
+                </div>
                 <div class="tec-action">
                   <span class="tec-status">Tap to Select</span>
                 </div>
@@ -3754,8 +3943,8 @@ button:active {
 
             <div class="step-footer">
               <button type="button" class="step-back-btn" id="step4BackBtn">← Back to Seat</button>
-              <button type="button" class="step-confirm-btn" id="step4ConfirmBtn">
-                🎫 Confirm &amp; Rip Stub to Board
+              <button type="button" class="step-confirm-btn" id="step4ConfirmBtn" title="Proceed to the physical Boarding Pass to tear your stub">
+                🎫 Proceed to Boarding Pass &amp; Rip to Board →
               </button>
             </div>
           </div>
@@ -3849,7 +4038,7 @@ button:active {
               <!-- Tactile Motion Tear Handle -->
               <div class="stub-motion-handle" id="stubTearHandle" title="Drag / Swipe Down to Tear Stub">
                 <div class="handle-arrow">▼</div>
-                <div class="handle-text" id="handleActionText">DRAG DOWN<br>TO TEAR STUB</div>
+                <div class="handle-text" id="handleActionText">DRAG DOWN OR TAP<br>TO TEAR STUB</div>
                 <div class="tear-progress-track">
                   <div class="tear-progress-fill" id="tearProgressFill"></div>
                 </div>
@@ -4035,7 +4224,7 @@ button:active {
 
 <script>
 /* ==========================================================================
-   HUMAN TOUCH: WEB AUDIO SYNTHESIZER & FLUID MOTION ENGINE
+   DSP ENGINE: PROCEDURAL CABIN ACOUSTICS, HAPTICS & TICKET MECHANICAL SOUNDS
    ========================================================================== */
 
 let _craftAudioCtx = null;
@@ -4373,7 +4562,7 @@ const TRANSIT_CONFIG = {
     stampSub: 'GATE CLOSED · CLEARED FOR FLIGHT',
     stubHeader: 'PASSENGER STUB',
     ripBtnText: '✂ Rip Stub to Board Flight',
-    actionText: 'DRAG DOWN<br>TO TEAR STUB',
+    actionText: 'DRAG DOWN OR TAP<br>TO TEAR STUB',
     defaultSeat: '14A',
     routes: Object.keys(AIRPORT_REGISTRY).reduce((acc, code) => {
       acc[code] = { name: `${AIRPORT_REGISTRY[code].city} (${AIRPORT_REGISTRY[code].country})`, code };
@@ -4404,7 +4593,7 @@ const TRANSIT_CONFIG = {
     stampSub: 'FAST-LANE AUTHORIZED · READY TO CRUISE',
     stubHeader: 'HIGHWAY TOLL STUB',
     ripBtnText: '✂ Rip Stub to Start Highway Drive',
-    actionText: 'DRAG DOWN<br>TO TEAR PASS',
+    actionText: 'DRAG DOWN OR TAP<br>TO TEAR PASS',
     defaultSeat: 'FP',
     routes: {
       PCH: { name: 'Pacific Coast Highway (Monterey)', code: 'PCH' },
@@ -4443,7 +4632,7 @@ const TRANSIT_CONFIG = {
     stampSub: 'CABIN LIGHTS DIMMED · DEPARTING SOON',
     stubHeader: 'COACH TICKET STUB',
     ripBtnText: '✂ Rip Stub to Board Sleeper Coach',
-    actionText: 'DRAG DOWN<br>TO TEAR TICKET',
+    actionText: 'DRAG DOWN OR TAP<br>TO TEAR TICKET',
     defaultSeat: '01A',
     routes: {
       TYO: { name: 'Tokyo Station (Midnight Departure)', code: 'TYO' },
@@ -5164,10 +5353,21 @@ function launchFlight(data) {
     lastLandedHub = activeFlight.destination;
   } catch(e) {}
   selectView('cruiseView');
-  try {
-    $('cruiseFrame').contentWindow.location.reload();
-  } catch(e) {
-    $('cruiseFrame').src = 'cruise.html?embedded=1';
+
+  const q = new URLSearchParams({
+    embedded: '1',
+    mode: activeFlight.transitMode || 'flight',
+    from: activeFlight.departure || 'MAA',
+    to: activeFlight.destination || 'SIN',
+    duration: String(activeFlight.duration || '45'),
+    seat: activeFlight.seat || '14A',
+    category: activeFlight.category || 'Code',
+    t: String(Date.now())
+  }).toString();
+
+  const frame = $('cruiseFrame');
+  if (frame) {
+    frame.src = `cruise.html?${q}`;
   }
 }
 
@@ -5783,7 +5983,20 @@ $('exitCruiseTopBtn').onclick = () => selectView('homeView');
 $('homeNavButton').onclick = () => selectView('homeView');
 $('homeButton').onclick = () => selectView('homeView');
 $('quickLaunchNav')?.addEventListener('click', () => {
-  $('boardingPass')?.scrollIntoView({behavior: 'smooth', block: 'center'});
+  updateLiveBoardingPass();
+  const bp = $('boardingPass');
+  if (bp) {
+    bp.scrollIntoView({behavior: 'smooth', block: 'center'});
+    bp.classList.remove('pass-pulse-glow');
+    void bp.offsetWidth;
+    bp.classList.add('pass-pulse-glow');
+  }
+  const stubEl = $('passStubTearable');
+  if (stubEl) {
+    stubEl.classList.remove('stub-ready-pulse');
+    void stubEl.offsetWidth;
+    stubEl.classList.add('stub-ready-pulse');
+  }
 });
 
 window.addEventListener('message', (event) => {
@@ -5855,7 +6068,7 @@ function resetTearState() {
   isDragging = false;
   currentDeltaY = 0;
   if (stub) {
-    stub.classList.remove('tearing', 'torn-off');
+    stub.classList.remove('tearing', 'torn-off', 'stub-ready-pulse');
     stub.style.transform = '';
   }
   if (tearProgress) tearProgress.style.width = '0%';
@@ -5873,7 +6086,7 @@ function triggerCompleteTear() {
   }
 
   if (stub) {
-    stub.classList.remove('tearing');
+    stub.classList.remove('tearing', 'stub-ready-pulse');
     stub.classList.add('torn-off');
     if (tearProgress) tearProgress.style.width = '100%';
   }
@@ -5899,8 +6112,10 @@ function triggerCompleteTear() {
 // 1. Infallible Quick Rip Button (Works across Mobile Touch, Pointer, and Click)
 if (quickRip) {
   const handleQuickRip = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     triggerCompleteTear();
   };
   quickRip.addEventListener('click', handleQuickRip);
@@ -5908,35 +6123,36 @@ if (quickRip) {
 }
 
 // 2. Touch & Pointer Dragging Logic with Page-Scroll Lock
-function startDrag(clientY, target) {
+function startDrag(clientX, clientY, target) {
   if (hasTorn) return false;
-  // If user touched the Quick Rip button, do NOT hijack with drag
   if (target && target.closest && target.closest('#quickRipBtn')) {
     return false;
   }
   isDragging = true;
   startY = clientY;
+  startX = clientX;
   currentDeltaY = 0;
   lastSoundDelta = 0;
+  dragStartTime = Date.now();
   if (stub) stub.classList.add('tearing');
   playTearSound('drag');
   return true;
 }
 
-function moveDrag(clientY) {
+function moveDrag(clientX, clientY) {
   if (!isDragging || hasTorn) return;
   const dy = Math.max(0, clientY - startY);
   currentDeltaY = dy;
 
-    const rot = Math.min(18, dy * 0.14);
-  const shiftX = Math.min(24, dy * 0.18);
+  const rot = Math.min(18, dy * 0.16);
+  const shiftX = Math.min(24, dy * 0.2);
   if (stub) stub.style.transform = `translate(${shiftX}px, ${dy}px) rotate(${rot}deg)`;
 
-  const targetLimit = window.innerWidth <= 600 ? 45 : 65;
+  const targetLimit = window.innerWidth <= 600 ? 30 : 55;
   const pct = Math.min(100, (dy / targetLimit) * 100);
   if (tearProgress) tearProgress.style.width = `${pct}%`;
 
-if (dy - lastSoundDelta > 14) {
+  if (dy - lastSoundDelta > 12) {
     playTearSound('drag');
     lastSoundDelta = dy;
     if (navigator.vibrate) {
@@ -5949,12 +6165,20 @@ if (dy - lastSoundDelta > 14) {
   }
 }
 
-function endDrag() {
+function endDrag(e) {
   if (!isDragging || hasTorn) return;
   isDragging = false;
   if (stub) stub.classList.remove('tearing');
 
-  const minReleaseThreshold = window.innerWidth <= 600 ? 40 : 55;
+  const dragDuration = Date.now() - dragStartTime;
+  const minReleaseThreshold = window.innerWidth <= 600 ? 26 : 42;
+
+  // Quick tap (< 320ms and small displacement): treat as intentional tap-to-tear!
+  if (currentDeltaY < 12 && dragDuration < 320) {
+    triggerCompleteTear();
+    return;
+  }
+
   if (currentDeltaY >= minReleaseThreshold) {
     triggerCompleteTear();
   } else {
@@ -5973,7 +6197,8 @@ function endDrag() {
 if (stub) {
   stub.addEventListener('touchstart', (e) => {
     if (e.touches && e.touches.length > 0) {
-      if (startDrag(e.touches[0].clientY, e.target)) {
+      const touch = e.touches[0];
+      if (startDrag(touch.clientX, touch.clientY, e.target)) {
         e.preventDefault();
       }
     }
@@ -5982,48 +6207,50 @@ if (stub) {
   stub.addEventListener('touchmove', (e) => {
     if (isDragging && e.touches && e.touches.length > 0) {
       e.preventDefault(); // Crucial: stops mobile browser pull-to-refresh & vertical page scroll
-      moveDrag(e.touches[0].clientY);
+      moveDrag(e.touches[0].clientX, e.touches[0].clientY);
     }
   }, { passive: false });
 
   stub.addEventListener('touchend', (e) => {
-    if (isDragging) endDrag();
+    if (isDragging) endDrag(e);
   });
 
-  stub.addEventListener('touchcancel', () => {
-    if (isDragging) endDrag();
+  stub.addEventListener('touchcancel', (e) => {
+    if (isDragging) endDrag(e);
   });
 
   // Pointer events for Desktop Mouse Dragging
   stub.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'touch') return; // Handled by touch events
-    if (startDrag(e.clientY, e.target)) {
+    if (startDrag(e.clientX, e.clientY, e.target)) {
       try { stub.setPointerCapture(e.pointerId); } catch(err) {}
     }
   });
 
   stub.addEventListener('pointermove', (e) => {
     if (e.pointerType === 'touch') return;
-    moveDrag(e.clientY);
+    moveDrag(e.clientX, e.clientY);
   });
 
   stub.addEventListener('pointerup', (e) => {
     if (e.pointerType === 'touch') return;
-    endDrag();
+    endDrag(e);
   });
 
   stub.addEventListener('pointercancel', (e) => {
     if (e.pointerType === 'touch') return;
-    endDrag();
+    endDrag(e);
   });
 }
 
-// Make tapping anywhere on the motion handle also tear immediately on mobile/desktop
+// Tap anywhere on stub motion handle tears immediately
 if (tearHandle) {
-  tearHandle.addEventListener('click', (e) => {
+  const handleTearTap = (e) => {
     if (e.target.closest && e.target.closest('#quickRipBtn')) return;
     triggerCompleteTear();
-  });
+  };
+  tearHandle.addEventListener('click', handleTearTap);
+  tearHandle.addEventListener('touchend', handleTearTap);
 }
 
 // Download Hub Modal Logic & Desktop PWA Installation
@@ -6234,7 +6461,7 @@ $('step3BackBtn')?.addEventListener('click', () => goToCustomStep(2));
 $('step3NextBtn')?.addEventListener('click', () => goToCustomStep(4));
 $('step4BackBtn')?.addEventListener('click', () => goToCustomStep(3));
 
-// Confirm & Rip Stub Button
+// Confirm & Go to Boarding Pass Button
 $('step4ConfirmBtn')?.addEventListener('click', () => {
   updateLiveBoardingPass();
   const bp = $('boardingPass');
@@ -6244,10 +6471,12 @@ $('step4ConfirmBtn')?.addEventListener('click', () => {
     bp.classList.add('pass-pulse-glow');
     bp.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
-  // Seamlessly initiate tear and transition into cruise
-  setTimeout(() => {
-    triggerCompleteTear();
-  }, 450);
+  const stubEl = $('passStubTearable');
+  if (stubEl) {
+    stubEl.classList.remove('stub-ready-pulse');
+    void stubEl.offsetWidth;
+    stubEl.classList.add('stub-ready-pulse');
+  }
 });
 
 // Initialize wizard step from URL query (?step=2), hash (#step2), or default to step 1
@@ -6557,7 +6786,7 @@ initPassportModalListeners();
 </script>
 
   <!-- =========================================================================
-       PASSPORT, FLIGHTLOG & MEMBERSHIP MODAL (OUTSHINES FOCUSFLIGHT)
+       VOYAGE LEDGER, IMMIGRATION PASSPORT & ALLIANCE TIER PROGRESSION MODAL
        ========================================================================= -->
   <div class="passport-modal-backdrop" id="passportModal" role="dialog" aria-modal="true" aria-labelledby="passportModalTitle" hidden>
     <div class="passport-modal-box">
