@@ -3888,934 +3888,172 @@ em {
             </button>
           </div>
 
-          <!-- ==============================================================
-               STEP 1: SELECT TRANSIT EXPERIENCE
-               ============================================================== -->
-          <div class="wizard-step" id="wizardStep1" data-step="1">
-            <div class="step-banner">
-              <div class="step-badge">I OF IV · TRANSIT SANCTUARY</div>
-              <h3 class="step-heading">Select Your Transit Sanctuary</h3>
-              <p class="step-description">Every journey offers a distinct acoustic haven and visual horizon. Choose your atmosphere before plotting your coordinates.</p>
-            </div>
-
-            <div class="transit-card-grid">
-              <!-- Card 1: Stratospheric Flight -->
-              <div class="transit-experience-card active" data-mode="flight" id="cardModeFlight">
-                <div class="tec-top">
-                  <div class="tec-header-left">
-                    <span class="tec-icon">✈</span>
-                    <div>
-                      <span class="tec-badge-spec">STRATOSPHERIC JET FL380 · CABIN SANCTUARY</span>
-                      <h4 class="tec-title">Stratospheric Flight</h4>
-                    </div>
-                  </div>
-                  <span class="tec-tag live">ACTIVE SANCTUARY</span>
-                </div>
-                <p class="tec-narrative">A tranquil stratospheric haven above the weather. Low GEnx turbofan purr, chimes, and panoramic aerial cloud decks drifting slowly beneath.</p>
-                <div class="tec-dossier-grid">
-                  <div class="tec-dossier-item">
-                    <span class="tdi-label">VANTAGE</span>
-                    <span class="tdi-val">14A Cloud Vista · Suite 01A</span>
-                  </div>
-                  <div class="tec-dossier-item">
-                    <span class="tdi-label">ACOUSTICS</span>
-                    <span class="tdi-val">Jet Turbine Purr · Cabin Chimes</span>
-                  </div>
-                  <div class="tec-dossier-item">
-                    <span class="tdi-label">SPEED &amp; REACH</span>
-                    <span class="tdi-val">440 Knots · Global Intercontinental</span>
-                  </div>
-                </div>
-                <div class="tec-action">
-                  <span class="tec-status">Selected</span>
-                </div>
-              </div>
-
-              <!-- Card 2: Highway GT Car -->
-              <div class="transit-experience-card" data-mode="car" id="cardModeCar">
-                <div class="tec-top">
-                  <div class="tec-header-left">
-                    <span class="tec-icon">🚗</span>
-                    <div>
-                      <span class="tec-badge-spec">GRAND TOURER GT · PACIFIC COAST PCH-1</span>
-                      <h4 class="tec-title">Night Highway Drive</h4>
-                    </div>
-                  </div>
-                  <span class="tec-tag live">ACTIVE SANCTUARY</span>
-                </div>
-                <p class="tec-narrative">Late-night asphalt meditation. Rhythmic wiper cadence against rain-streaked windshield glass, glowing amber instruments, and highway tire purr.</p>
-                <div class="tec-dossier-grid">
-                  <div class="tec-dossier-item">
-                    <span class="tdi-label">VANTAGE</span>
-                    <span class="tdi-val">Front Passenger · Rear Lounge</span>
-                  </div>
-                  <div class="tec-dossier-item">
-                    <span class="tdi-label">ACOUSTICS</span>
-                    <span class="tdi-val">Rain on Glass · Tire Hum · Wipers</span>
-                  </div>
-                  <div class="tec-dossier-item">
-                    <span class="tdi-label">SPEED &amp; REACH</span>
-                    <span class="tdi-val">55 Knots · Coastal Arterials</span>
-                  </div>
-                </div>
-                <div class="tec-action">
-                  <span class="tec-status">Tap to Select</span>
-                </div>
-              </div>
-
-              <!-- Card 3: Sleeper Coach -->
-              <div class="transit-experience-card" data-mode="bus" id="cardModeBus">
-                <div class="tec-top">
-                  <div class="tec-header-left">
-                    <span class="tec-icon">🚌</span>
-                    <div>
-                      <span class="tec-badge-spec">DOUBLE-DECKER EXPRESS · ALPINE PASS (2,400M)</span>
-                      <h4 class="tec-title">Overnight Sleeper Coach</h4>
-                    </div>
-                  </div>
-                  <span class="tec-tag live">ACTIVE SANCTUARY</span>
-                </div>
-                <p class="tec-narrative">The unhurried calm of overnight ground travel. Steady diesel purr through mountain switchbacks, panoramic upper-deck windshield, and warm bunk reading lamp.</p>
-                <div class="tec-dossier-grid">
-                  <div class="tec-dossier-item">
-                    <span class="tdi-label">VANTAGE</span>
-                    <span class="tdi-val">Upper Deck Observation · Timber Berth</span>
-                  </div>
-                  <div class="tec-dossier-item">
-                    <span class="tdi-label">ACOUSTICS</span>
-                    <span class="tdi-val">Diesel Resonance · Wind in Pines</span>
-                  </div>
-                  <div class="tec-dossier-item">
-                    <span class="tdi-label">SPEED &amp; REACH</span>
-                    <span class="tdi-val">43 Knots · Mountain Pass Route</span>
-                  </div>
-                </div>
-                <div class="tec-action">
-                  <span class="tec-status">Tap to Select</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="step-footer">
-              <div class="step-summary-pill">
-                <span>Selected: <strong id="step1SummaryMode">Stratospheric Flight ✈</strong></span>
-              </div>
-              <button type="button" class="step-next-btn" id="step1NextBtn">
-                Continue to Route &amp; Radar →
-              </button>
-            </div>
-          </div>
-
-          <!-- ==============================================================
-               STEP 2: ROUTE, RADAR & DURATION RANGE
-               ============================================================== -->
-          <div class="wizard-step" id="wizardStep2" data-step="2" style="display:none">
-            <div class="step-banner">
-              <div class="step-badge">II OF IV · ROUTE &amp; TACTICAL RADAR</div>
-              <h3 class="step-heading" id="step2Heading">Plot Route &amp; Tactical Radar</h3>
-              <p class="step-description">Scrub your timer to project your flight or road reach using Great-Circle spherical navigation, or roll a surprise destination with Mystery Route.</p>
-            </div>
-
-            <!-- Departure Origin Hub Mode Bar (0% GPS Privacy Guarantee) -->
-            <div class="origin-mode-bar" id="originModeBar">
-              <div class="origin-mode-label">Departure Origin:</div>
-              <div class="origin-pills">
-                <button type="button" class="origin-pill active" id="originOdysseyPill" title="Continuous World Tour: Depart from where you last landed">
-                  <span class="origin-glyph">🌍</span>
-                  <span>Last Landed</span>
-                  <span class="origin-city-tag" id="lastLandedTag">SIN</span>
-                </button>
-                <button type="button" class="random-route-btn" id="randomRouteBtn" onclick="pickMysteryRoute()" title="Pick a random surprise destination reachable within your focus timer">
-                  <span class="dice-icon">🔀</span>
-                  <span>Mystery Route</span>
-                </button>
-                <button type="button" class="origin-pill" id="originHomePill"  title="Depart from your chosen Home Base Hub (No GPS required)">
-                  <span class="origin-glyph">🏠</span>
-                  <span>Home Base</span>
-                  <span class="origin-city-tag" id="homeBaseTag">MAA</span>
-                </button>
-                <button type="button" class="change-base-btn" id="changeBaseBtn" title="Set a different Home Base city">
-                  <span>⚙ Set Base</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Interactive Dynamic Flight Range Radar & Route Vector Canvas -->
-            <div class="flight-radar-card" id="flightRadarCard">
-              <div class="radar-header">
-                <span class="radar-badge" id="radarModeBadge">
-                  <span id="radarModeIcon">✈</span>
-                  <span id="radarModeTitle">Aviation Radar</span>
-                </span>
-                <span class="radar-range-readout" id="radarRangeReadout">Range: ~45 min (380 NM)</span>
-              </div>
-              <canvas class="radar-canvas" id="flightRadarCanvas" width="560" height="220" aria-label="Flight range tactical radar"></canvas>
-            </div>
-
-            <!-- Continuous Duration Scrubber with Tick Marks (Matching User Screenshot!) -->
-            <div class="radar-scrubber-box">
-              <div class="scrubber-header">
-                <span class="scrubber-label">Focus Journey Duration:</span>
-                <span class="scrubber-val" id="scrubberValueDisplay">45 min</span>
-              </div>
-              <input type="range" class="range-slider" id="radarDurationSlider" min="15" max="180" step="5" value="45" aria-label="Flight duration scrubber">
-              <div class="scrubber-ticks" id="scrubberTicks">
-                <span class="scrubber-tick" data-mins="15">15m</span>
-                <span class="scrubber-tick" data-mins="30">30m</span>
-                <span class="scrubber-tick active" data-mins="45">45m</span>
-                <span class="scrubber-tick" data-mins="60">1h</span>
-                <span class="scrubber-tick" data-mins="90">1h30</span>
-                <span class="scrubber-tick" data-mins="120">2h</span>
-                <span class="scrubber-tick" data-mins="180">3h</span>
-              </div>
-            </div>
-
-            <!-- Reachable Destination Carousel Cards (Matching User Screenshot!) -->
-            <div class="dest-carousel-wrapper">
-              <div class="dest-carousel-header">
-                <span class="dest-carousel-title" id="destCarouselTitle">Reachable Destinations within Focus Range:</span>
-                <span class="dest-carousel-count" id="destCarouselCount">Tap card to select route</span>
-              </div>
-              <div class="dest-carousel" id="reachableCarousel" role="listbox" aria-label="Reachable destinations">
-                <!-- Populated dynamically based on duration and departure -->
-              </div>
-            </div>
-
-            <!-- Hidden accessible fallback selects for full backward compatibility -->
-            <div style="display:none" aria-hidden="true">
-              <select id="departure"></select>
-              <select id="destination"></select>
-            </div>
-
-            <div class="step-footer">
-              <button type="button" class="step-back-btn" id="step2BackBtn">← Back to Mode</button>
-              <div class="step-summary-pill">
-                <span>Route: <strong id="step2SummaryRoute">MAA → SIN (45m)</strong></span>
-              </div>
-              <button type="button" class="step-next-btn" id="step2NextBtn">Continue to Cabin Seat →</button>
-            </div>
-          </div>
-
-          <!-- ==============================================================
-               STEP 3: CABIN & SEAT PERSPECTIVE
-               ============================================================== -->
-          <div class="wizard-step" id="wizardStep3" data-step="3" style="display:none">
-            <div class="step-banner">
-              <div class="step-badge">STEP 3 OF 4 · CABIN &amp; SEAT</div>
-              <h3 class="step-heading" id="step3Heading">Select Your Cabin Vantage Point</h3>
-              <p class="step-description">Tap your desired seat on the vehicle chassis map. Every seat has its own photorealistic perspective.</p>
-            </div>
-
-            <!-- AUTHENTIC COMMERCIAL AIRLINE CABIN SEAT MAP -->
-            <fieldset style="border:1px solid rgba(203, 45, 80,.25);border-radius:14px;padding:14px;background:rgba(203, 45, 80,.03);margin-top:8px">
-              <legend id="seatMapLegend" style="padding:0 6px;color:var(--accent);font-weight:700">Stratospheric Cabin Perspectives (Tap Seat to Select)</legend>
-              
-              <!-- Mode 1: Stratospheric Flight Fuselage Map -->
-              <div id="fuselageFlight" class="fuselage-wrapper">
-                <div class="aircraft-fuselage">
-                  <div class="cockpit-nose">▲ ATMOSPHERIC FLIGHT DECK ▲</div>
-                
-                <div class="wings-indicator">
-                  <span class="wing-tag">◀ PORT WING &amp; TURBINE</span>
-                  <span class="wing-tag">STARBOARD WING &amp; TURBINE ▶</span>
-                </div>
-
-                <!-- Section 1: First Class Suites -->
-                <div class="cabin-section-label">First Class Suite · Sunset Horizon View</div>
-                <div class="seat-row">
-                  <span class="row-num">01</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="01A" title="Seat 01A - Sunset Horizon Window Suite">01A</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="01B" title="Seat 01B - Center First Suite">01B</button>
-                  <div class="cabin-aisle" style="width:28px"></div>
-                  <button type="button" class="seat-btn" data-seat="01E" title="Seat 01E - Center First Suite">01E</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn window-seat" data-seat="01F" title="Seat 01F - Sunset Horizon Window Suite">01F</button>
-                </div>
-                <div class="seat-row">
-                  <span class="row-num">02</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="02A" title="Seat 02A - Sunset Horizon Window Suite">02A</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="02B" title="Seat 02B - Center First Suite">02B</button>
-                  <div class="cabin-aisle" style="width:28px"></div>
-                  <button type="button" class="seat-btn" data-seat="02E" title="Seat 02E - Center First Suite">02E</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn window-seat" data-seat="02F" title="Seat 02F - Wing &amp; Jet Engine Window">02F</button>
-                </div>
-
-                <!-- Emergency Exit Row -->
-                <div class="exit-row-divider">
-                  <span>◀ EMERGENCY EXIT</span>
-                  <span>OVERWING SECTION</span>
-                  <span>EMERGENCY EXIT ▶</span>
-                </div>
-
-                <!-- Section 2: Overwing & Jet Turbine -->
-                <div class="cabin-section-label">Forward Cabin · Overwing &amp; Jet Turbine View</div>
-                <div class="seat-row">
-                  <span class="row-num">03</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="03A" title="Seat 03A - Wing &amp; Engine Window">03A</button>
-                  <button type="button" class="seat-btn" data-seat="03B" title="Seat 03B - Forward Cabin Middle Seat">03B</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="03C" title="Seat 03C - Forward Cabin Aisle Seat">03C</button>
-                  <button type="button" class="seat-btn" data-seat="03D" title="Seat 03D - Forward Cabin Aisle Seat">03D</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="03E" title="Seat 03E - Forward Cabin Middle Seat">03E</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="03F" title="Seat 03F - Wing &amp; Engine Window">03F</button>
-                </div>
-                <div class="seat-row">
-                  <span class="row-num">05</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="05A" title="Seat 05A - Wing &amp; Engine Window">05A</button>
-                  <button type="button" class="seat-btn" data-seat="05B" title="Seat 05B - Forward Cabin Middle Seat">05B</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="05C" title="Seat 05C - Forward Cabin Aisle Seat">05C</button>
-                  <button type="button" class="seat-btn" data-seat="05D" title="Seat 05D - Forward Cabin Aisle Seat">05D</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="05E" title="Seat 05E - Forward Cabin Middle Seat">05E</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="06F" title="Seat 06F - Wing View Window">06F</button>
-                </div>
-
-                <!-- Section 3: Mid Cabin Aerial Vista (User Reference Photo Match) -->
-                <div class="cabin-section-label">Main Cabin · 35,000 ft Aerial Earth Vista</div>
-                <div class="seat-row">
-                  <span class="row-num">11</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="11A" title="Seat 11A - Aerial Earth Vista Window">11A</button>
-                  <button type="button" class="seat-btn" data-seat="11B" title="Seat 11B - Main Cabin Middle Seat">11B</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="11C" title="Seat 11C - Main Cabin Aisle Seat">11C</button>
-                  <button type="button" class="seat-btn" data-seat="11D" title="Seat 11D - Main Cabin Aisle Seat">11D</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="11E" title="Seat 11E - Main Cabin Middle Seat">11E</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="11F" title="Seat 11F - Aerial Earth Vista Window">11F</button>
-                </div>
-                <div class="seat-row">
-                  <span class="row-num">12</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="12A" title="Seat 12A - Aerial Earth Vista Window">12A</button>
-                  <button type="button" class="seat-btn" data-seat="12B" title="Seat 12B - Main Cabin Middle Seat">12B</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="12C" title="Seat 12C - Main Cabin Aisle Seat">12C</button>
-                  <button type="button" class="seat-btn" data-seat="12D" title="Seat 12D - Main Cabin Aisle Seat">12D</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="12E" title="Seat 12E - Main Cabin Middle Seat">12E</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="14F" title="Seat 14F - Aerial Earth Vista Window">14F</button>
-                </div>
-                <div class="seat-row">
-                  <span class="row-num">14</span>
-                  <button type="button" class="seat-btn window-seat selected" data-seat="14A" title="Seat 14A - Aerial Earth Vista Window">14A</button>
-                  <button type="button" class="seat-btn" data-seat="14B" title="Seat 14B - Main Cabin Middle Seat">14B</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="14C" title="Seat 14C - Main Cabin Aisle Seat">14C</button>
-                  <button type="button" class="seat-btn" data-seat="14D" title="Seat 14D - Main Cabin Aisle Seat">14D</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="14E" title="Seat 14E - Main Cabin Middle Seat">14E</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="15F" title="Seat 15F - Aerial Earth Vista Window">15F</button>
-                </div>
-
-                <!-- Section 4: Aft Cabin Night Lights -->
-                <div class="cabin-section-label">Aft Cabin · Night Flight &amp; City Lights View</div>
-                <div class="seat-row">
-                  <span class="row-num">16</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="16A" title="Seat 16A - Night City Lights Window">16A</button>
-                  <button type="button" class="seat-btn" data-seat="16B" title="Seat 16B - Aft Cabin Middle Seat">16B</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="16C" title="Seat 16C - Aft Cabin Aisle Seat">16C</button>
-                  <button type="button" class="seat-btn" data-seat="16D" title="Seat 16D - Aft Cabin Aisle Seat">16D</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="16E" title="Seat 16E - Aft Cabin Middle Seat">16E</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="17F" title="Seat 17F - Night City Lights Window">17F</button>
-                </div>
-                <div class="seat-row">
-                  <span class="row-num">18</span>
-                  <button type="button" class="seat-btn window-seat" data-seat="18A" title="Seat 18A - Night City Lights Window">18A</button>
-                  <button type="button" class="seat-btn" data-seat="18B" title="Seat 18B - Aft Cabin Middle Seat">18B</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="18C" title="Seat 18C - Aft Cabin Aisle Seat">18C</button>
-                  <button type="button" class="seat-btn" data-seat="18D" title="Seat 18D - Aft Cabin Aisle Seat">18D</button>
-                  <div class="cabin-aisle"></div>
-                  <button type="button" class="seat-btn" data-seat="18E" title="Seat 18E - Aft Cabin Middle Seat">18E</button>
-                  <button type="button" class="seat-btn window-seat" data-seat="19F" title="Seat 19F - Night City Lights Window">19F</button>
-                </div>
-
-                <div class="seat-map-legend">
-                  <div><span class="legend-box selected"></span>Selected</div>
-                  <div><span class="legend-box available"></span>Available Seat</div>
-                  <div><span style="font-size:12px;margin-right:2px">🪟</span>Window Seat</div>
-                </div>
-              </div>
-              </div>
-
-              <!-- Mode 2: Highway GT Car Cabin Chassis (4 Seats: DR Locked, FP, RL, RR Accessible) -->
-              <div id="fuselageCar" class="fuselage-wrapper" hidden>
-                <div class="car-chassis-map">
-                  <div class="car-windshield-nose">▲ DUAL-MOTOR HIGHWAY CABIN ▲</div>
-                  <div class="car-cabin-grid">
-                    <!-- Front Row -->
-                    <div class="cabin-section-label">Front Cockpit · Rain on Windshield &amp; Highway POV</div>
-                    <div class="car-cabin-row">
-                      <button type="button" class="seat-btn locked driver-seat" disabled title="Driver / Chauffeur Seat (Locked — Non-Selectable)">
-                        🔒 DR
-                      </button>
-                      <div class="car-center-console">CONSOLE<br>D7</div>
-                      <button type="button" class="seat-btn window-seat selected" data-seat="FP" title="Seat FP - Front Passenger (Shotgun Window)">
-                        💺 FP
-                      </button>
-                    </div>
-
-                    <!-- Rear Row -->
-                    <div class="cabin-section-label" style="margin-top:10px">Rear Passenger Cabin · Window Droplets &amp; Guardrails</div>
-                    <div class="car-cabin-row">
-                      <button type="button" class="seat-btn window-seat" data-seat="RL" title="Seat RL - Rear Left Window">
-                        💺 RL
-                      </button>
-                      <div class="car-center-console" style="height:36px">ARMREST</div>
-                      <button type="button" class="seat-btn window-seat" data-seat="RR" title="Seat RR - Rear Right Window">
-                        💺 RR
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="seat-map-legend" style="margin-top:20px">
-                    <div><span class="legend-box selected"></span>Selected</div>
-                    <div><span class="legend-box available"></span>Available Passenger Seat (3 total)</div>
-                    <div><span class="legend-box" style="background:rgba(28,35,37,0.6);border-color:rgba(255,255,255,0.08)">🔒</span>Chauffeur (Locked)</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Mode 3: Cross-Country Sleeper Coach Chassis (Driver Cab Locked, All Berths Accessible) -->
-              <div id="fuselageBus" class="fuselage-wrapper" hidden>
-                <div class="bus-chassis-map">
-                  <div class="bus-cab-nose">▲ SLEEPER COACH UPPER &amp; LOWER DECKS ▲</div>
-                  
-                  <!-- Driver Cab Section -->
-                  <div class="cabin-section-label">Driver Cab · Non-Selectable</div>
-                  <div class="seat-row" style="justify-content:center;margin-bottom:12px">
-                    <button type="button" class="seat-btn locked driver-seat" disabled title="Bus Captain Cab (Locked — Non-Selectable)" style="width:140px">
-                      🔒 BUS CAPTAIN (DR)
-                    </button>
-                  </div>
-
-                  <!-- Upper Observation Deck -->
-                  <div class="cabin-section-label">Upper Observation Deck · Forward Highway Panorama</div>
-                  <div class="seat-row" style="justify-content:center;gap:36px;margin-bottom:14px">
-                    <button type="button" class="seat-btn window-seat selected" data-seat="01A" title="Berth 01A - Upper Panorama Window Deck" style="width:72px">
-                      🌄 01A
-                    </button>
-                    <div class="cabin-aisle" style="width:20px"></div>
-                    <button type="button" class="seat-btn window-seat" data-seat="01B" title="Berth 01B - Upper Panorama Window Deck" style="width:72px">
-                      🌄 01B
-                    </button>
-                  </div>
-
-                  <!-- Sleeper Berths Rows 02 to 06 -->
-                  <div class="cabin-section-label">Private Sleeper Berths · Upper &amp; Lower Window Bunks</div>
-                  <div class="seat-row">
-                    <span class="row-num">02</span>
-                    <button type="button" class="seat-btn window-seat" data-seat="02A" title="Berth 02A - Lower Window Berth">02A</button>
-                    <button type="button" class="seat-btn" data-seat="02B" title="Berth 02B - Lower Aisle Berth">02B</button>
-                    <div class="cabin-aisle"></div>
-                    <button type="button" class="seat-btn" data-seat="02C" title="Berth 02C - Upper Aisle Berth">02C</button>
-                    <button type="button" class="seat-btn window-seat" data-seat="02D" title="Berth 02D - Upper Window Berth">02D</button>
-                  </div>
-                  <div class="seat-row">
-                    <span class="row-num">03</span>
-                    <button type="button" class="seat-btn window-seat" data-seat="03A" title="Berth 03A - Lower Window Berth">03A</button>
-                    <button type="button" class="seat-btn" data-seat="03B" title="Berth 03B - Lower Aisle Berth">03B</button>
-                    <div class="cabin-aisle"></div>
-                    <button type="button" class="seat-btn" data-seat="03C" title="Berth 03C - Upper Aisle Berth">03C</button>
-                    <button type="button" class="seat-btn window-seat" data-seat="03D" title="Berth 03D - Upper Window Berth">03D</button>
-                  </div>
-                  <div class="seat-row">
-                    <span class="row-num">04</span>
-                    <button type="button" class="seat-btn window-seat" data-seat="04A" title="Berth 04A - Lower Window Berth">04A</button>
-                    <button type="button" class="seat-btn" data-seat="04B" title="Berth 04B - Lower Aisle Berth">04B</button>
-                    <div class="cabin-aisle"></div>
-                    <button type="button" class="seat-btn" data-seat="04C" title="Berth 04C - Upper Aisle Berth">04C</button>
-                    <button type="button" class="seat-btn window-seat" data-seat="04D" title="Berth 04D - Upper Window Berth">04D</button>
-                  </div>
-                  <div class="seat-row">
-                    <span class="row-num">05</span>
-                    <button type="button" class="seat-btn window-seat" data-seat="05A" title="Berth 05A - Lower Window Berth">05A</button>
-                    <button type="button" class="seat-btn" data-seat="05B" title="Berth 05B - Lower Aisle Berth">05B</button>
-                    <div class="cabin-aisle"></div>
-                    <button type="button" class="seat-btn" data-seat="05C" title="Berth 05C - Upper Aisle Berth">05C</button>
-                    <button type="button" class="seat-btn window-seat" data-seat="05D" title="Berth 05D - Upper Window Berth">05D</button>
-                  </div>
-                  <div class="seat-row">
-                    <span class="row-num">06</span>
-                    <button type="button" class="seat-btn window-seat" data-seat="06A" title="Berth 06A - Lower Window Berth">06A</button>
-                    <button type="button" class="seat-btn" data-seat="06B" title="Berth 06B - Lower Aisle Berth">06B</button>
-                    <div class="cabin-aisle"></div>
-                    <button type="button" class="seat-btn" data-seat="06C" title="Berth 06C - Upper Aisle Berth">06C</button>
-                    <button type="button" class="seat-btn window-seat" data-seat="06D" title="Berth 06D - Upper Window Berth">06D</button>
-                  </div>
-
-                  <div class="seat-map-legend" style="margin-top:20px">
-                    <div><span class="legend-box selected"></span>Selected</div>
-                    <div><span class="legend-box available"></span>Available Passenger Berth (22 total)</div>
-                    <div><span class="legend-box" style="background:rgba(28,35,37,0.6);border-color:rgba(255,255,255,0.08)">🔒</span>Bus Captain (Locked)</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Selected Seat Details & Live Scenic Preview -->
-              <div class="selected-seat-info-card" id="selectedSeatCard">
-                <div class="seat-info-left">
-                  <strong id="selectedSeatCode">Seat 14A • Window View</strong>
-                  <small id="selectedSeatDesc">Aerial Earth Vista • 35,000 ft patchwork fields &amp; rivers</small>
-                </div>
-                <img id="selectedSeatThumb" class="seat-preview-thumb" src="media/flight/scenes/seat_14a_aerial_earth.jpg" alt="Selected perspective preview">
-              </div>
-            </fieldset>
-
-            <div class="step-footer">
-              <button type="button" class="step-back-btn" id="step3BackBtn">← Back to Route</button>
-              <div class="step-summary-pill">
-                <span>Seat: <strong id="step3SummarySeat">14A · Window</strong></span>
-              </div>
-              <button type="button" class="step-next-btn" id="step3NextBtn">Continue to Focus Goal →</button>
-            </div>
-          </div>
-
-          <!-- ==============================================================
-               STEP 4: FOCUS OBJECTIVE & BOARDING CONFIRMATION
-               ============================================================== -->
-          <div class="wizard-step" id="wizardStep4" data-step="4" style="display:none">
-            <div class="step-banner">
-              <div class="step-badge">STEP 4 OF 4 · OBJECTIVE &amp; BOARDING</div>
-              <h3 class="step-heading">Set Focus Goal &amp; Prepare to Board</h3>
-              <p class="step-description">Fine-tune your timer, pick your focus discipline, and review your journey itinerary before boarding.</p>
-            </div>
-
-            <!-- DURATION SELECTION (Presets + Custom Timer) -->
-            <fieldset style="border:1px solid rgba(203, 45, 80,.25);border-radius:14px;padding:14px;background:rgba(203, 45, 80,.03);margin-bottom:14px">
-              <legend style="padding:0 6px;color:var(--accent);font-weight:700">Flight Duration (Select Preset or Custom)</legend>
-              <div class="duration-grid" id="durationGrid">
-                <button type="button" class="dur-btn" data-mins="15">15 min</button>
-                <button type="button" class="dur-btn" data-mins="25">25 min</button>
-                <button type="button" class="dur-btn active" data-mins="45">45 min</button>
-                <button type="button" class="dur-btn" data-mins="60">60 min</button>
-                <button type="button" class="dur-btn" data-mins="90">90 min</button>
-                <button type="button" class="dur-btn" data-mins="120">120 min</button>
-              </div>
-              <div class="custom-timer-box">
-                <span class="custom-timer-icon">⏱</span>
-                <div>
-                  <label for="customTimerInput">Custom Timer</label>
-                  <div style="font-size:9px;color:var(--muted)">Set any custom duration (1 - 360 min)</div>
-                </div>
-                <div class="custom-timer-field">
-                  <button type="button" id="timerMinusBtn" class="timer-step-btn" title="Decrease 5 min">−</button>
-                  <input type="number" id="customTimerInput" min="1" max="360" value="45" placeholder="45">
-                  <button type="button" id="timerPlusBtn" class="timer-step-btn" title="Increase 5 min">+</button>
-                  <span>min</span>
-                </div>
-              </div>
-            </fieldset>
-
-            <!-- FOCUS CATEGORY -->
-            <fieldset style="border:1px solid rgba(203, 45, 80,.25);border-radius:14px;padding:14px;background:rgba(203, 45, 80,.03);margin-bottom:14px">
-              <legend style="padding:0 6px;color:var(--accent);font-weight:700">Focus Category</legend>
-              <div class="options" id="categoryOptions">
-                <label class="active"><input type="radio" name="category" value="Programming" checked>Code</label>
-                <label><input type="radio" name="category" value="Studying">Study</label>
-                <label><input type="radio" name="category" value="Engineering">Build</label>
-                <label><input type="radio" name="category" value="Personal">Read</label>
-              </div>
-            </fieldset>
-
-            <!-- Complete Journey Confirmation Card -->
-            <div class="journey-confirmation-card" id="journeyConfirmationCard">
-              <div class="jcc-head">
-                <span class="jcc-badge">READY FOR DEPARTURE</span>
-                <span class="jcc-code" id="jccCode">FF-042</span>
-              </div>
-              <div class="jcc-route-row">
-                <div class="jcc-node">
-                  <span class="jcc-label">FROM</span>
-                  <strong class="jcc-val" id="jccFrom">MAA · Chennai</strong>
-                </div>
-                <div class="jcc-arrow" id="jccArrow">✈</div>
-                <div class="jcc-node" style="text-align:right">
-                  <span class="jcc-label">TO</span>
-                  <strong class="jcc-val" id="jccTo">SIN · Singapore</strong>
-                </div>
-              </div>
-              <div class="jcc-details-grid">
-                <div><span class="jcc-label">MODE</span><span class="jcc-subval" id="jccMode">Atmospheric Flight</span></div>
-                <div><span class="jcc-label">SEAT</span><span class="jcc-subval" id="jccSeat">14A · Window View</span></div>
-                <div><span class="jcc-label">DURATION</span><span class="jcc-subval" id="jccDuration">45 Minutes</span></div>
-                <div><span class="jcc-label">OBJECTIVE</span><span class="jcc-subval" id="jccCategory">Programming</span></div>
-              </div>
-            </div>
-
-            <div class="step-footer">
-              <button type="button" class="step-back-btn" id="step4BackBtn">← Back to Seat</button>
-              <button type="button" class="step-confirm-btn" id="step4ConfirmBtn" title="Proceed to the physical Boarding Pass to tear your stub">
-                🎫 Proceed to Boarding Pass &amp; Rip to Board →
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <!-- RIGHT COLUMN: OFFICIAL BOARDING PASS WITH TACTILE MOTION-TEAR STUB RIGHT IN FRONT -->
-      <div class="ticket-col">
-        <div class="ticket-copy" style="margin-bottom:18px">
-          <div class="eyebrow" id="ticketColEyebrow">BESPOKE TRAVEL ARTIFACT · HANDCRAFTED FOR YOU</div>
-          <h1 id="ticketColTitle">Tear stub to<br><em>take your seat.</em></h1>
-          <p id="ticketColSub">Your personalized boarding document is dynamically plotted and ready. Drag down the perforated stub along the notch or tap <strong>'Rip to Board'</strong> to settle into your sanctuary.</p>
-        </div>
-
-        <div class="ticket-wrapper">
-          <article class="boarding-pass-card" id="boardingPass">
-            <!-- Main Ticket Body -->
-            <div class="pass-main">
-              <div class="pass-header">
-                <div class="pass-brand" id="passBrand"><span id="passBrandGlyph">✈</span> <span id="passBrandText">FLYLOFI ATELIER</span></div>
-                <div class="pass-type-badge" id="passTypeBadge">FOCUS CABIN</div>
-                <span class="flight-no" id="passFlightNo">FF-042</span>
-              </div>
-
-              <div class="pass-route">
-                <div class="route-node">
-                  <small id="ticketFromLabel">DEPARTURE</small>
-                  <strong id="ticketFromCode">MAA</strong>
-                  <span id="ticketFromName">Chennai</span>
-                </div>
-                <div class="route-mid-plane">
-                  <span class="plane-glyph" id="routeMidGlyph">✈</span>
-                  <small id="routeMidSub">NON-STOP FOCUS</small>
-                </div>
-                <div class="route-node dest">
-                  <small id="ticketToLabel">DESTINATION</small>
-                  <strong id="ticketToCode">SIN</strong>
-                  <span id="ticketToName">Singapore</span>
-                </div>
-              </div>
-
-              <div class="pass-meta-grid">
-                <div><small id="metaSeatLabel">SEAT</small><strong class="seat-highlight" id="ticketSeat">14A</strong></div>
-                <div><small id="metaGateLabel">GATE</small><strong id="ticketGate">F04</strong></div>
-                <div><small id="metaGroupLabel">GROUP</small><strong id="ticketGroup">FOCUS 1</strong></div>
-                <div><small id="metaClassLabel">CLASS</small><strong id="ticketCategory">CODE</strong></div>
-              </div>
-
-              <div class="pass-bottom">
-                <div class="barcode-box">
-                  <div class="barcode-bars"></div>
-                  <span class="barcode-text" id="barcodeText">FF 092847 042</span>
-                </div>
-                <span class="pass-duration-pill" id="ticketDuration">45 minutes · Deep cruise</span>
-              </div>
-
-              <!-- Inked Boarded Stamp (Revealed upon tearing) -->
-              <div class="boarded-stamp" id="boardedStamp">
-                <span id="boardedStampText">✓ BOARDED</span>
-                <small id="boardedStampSub">GATE CLOSED · CLEARED FOR FLIGHT</small>
-              </div>
-            </div>
-
-            <!-- Perforation Divider Line -->
-            <div class="perforation-divider" id="perforationDivider">
-              <div class="perf-notch top"></div>
-              <div class="perf-dashed-line"></div>
-              <span class="perf-scissors">✂</span>
-              <div class="perf-notch bottom"></div>
-            </div>
-
-            <!-- Interactive Tearable Stub -->
-            <div class="pass-stub-tearable" id="passStubTearable">
-              <div class="stub-header">
-                <span id="stubHeaderText">PASSENGER STUB</span>
-                <span id="stubHeaderNo">FF-042</span>
-              </div>
-
-              <div class="stub-seat-box">
-                <span class="stub-seat-label" id="stubSeatLabel">ASSIGNED SEAT</span>
-                <span class="stub-seat-num" id="stubSeatVal">14A</span>
-                <span class="stub-seat-desc" id="stubSeatDesc">WINDOW · AERIAL EARTH</span>
-              </div>
-
-              <div class="stub-flight-details">
-                <div><small>FROM</small><strong id="stubFrom">MAA</strong></div>
-                <div><small>TO</small><strong id="stubTo">SIN</strong></div>
-                <div><small>TIME</small><strong id="stubTime">45M</strong></div>
-              </div>
-
-              <!-- Tactile Motion Tear Handle -->
-              <div class="stub-motion-handle" id="stubTearHandle" title="Drag / Swipe Down to Tear Stub">
-                <div class="handle-arrow">▼</div>
-                <div class="handle-text" id="handleActionText">DRAG DOWN OR TAP<br>TO TEAR STUB</div>
-                <div class="tear-progress-track">
-                  <div class="tear-progress-fill" id="tearProgressFill"></div>
-                </div>
-              </div>
-
-              <button type="button" class="quick-rip-button" id="quickRipBtn">✂ Rip Stub to Board</button>
-            </div>
-          </article>
-        </div>
-
-        <div class="stats" style="margin-top:28px">
-          <div><strong>24</strong><small>Destinations</small></div>
-          <div><strong>86%</strong><small>Completion rate</small></div>
-          <div><strong>03h 42m</strong><small>Time in the air</small></div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ATELIER COLOPHON & MAKER FOOTER -->
-    
-    <!-- =========================================================================
-         THE STANDOUT MANIFESTO: FLYLOFI VS THE $18.99/YR APP STORE MODEL
+          <!-- =========================================================================
+         ATELIER ARCHITECTURE: CORE ENGINEERING & DESIGN PILLARS
          ========================================================================= -->
     <section class="standout-manifesto-section" id="standoutManifesto">
       <div class="manifesto-glass-card">
         
         <div class="manifesto-header">
-          <div class="manifesto-eyebrow">✦ THE INDIE ATELIER MANIFESTO · 100% FREE FOREVER</div>
-          <h2 class="manifesto-title">No Corporate Facades. No $18.99/yr Paywalls. <em>Just Me &amp; You.</em></h2>
-          <p class="manifesto-subtitle">The popular FocusFlight iOS app charges $18.99 every year, locks your FlightLogs behind subscription paywalls, and demands Apple Screen Time surveillance. Flylofi is a personal sanctuary handcrafted by Sanjith Vishnu for restless minds—unlocked, uncompromised, and private.</p>
+          <div class="manifesto-eyebrow">✦ ATELIER ARCHITECTURE · INDEPENDENT SOFTWARE CRAFT</div>
+          <h2 class="manifesto-title">Engineered for Deep Work. <em>Built with Care.</em></h2>
+          <p class="manifesto-subtitle">Flylofi is an independent digital sanctuary engineered by Sanjith Vishnu for sustained focus. Client-side avionics, tactile physical interfaces, and immersive procedural acoustics.</p>
         </div>
 
         <div class="intimate-maker-bar">
           <div class="maker-tiny-seal">SV</div>
           <div class="intimate-maker-text">
-            <span>Handcrafted by solo builder <strong>Sanjith Vishnu</strong> in Chennai, India</span>
+            <span>Designed &amp; built by software craftsman <strong>Sanjith Vishnu</strong></span>
             <span style="color:var(--accent);margin:0 6px">●</span>
-            <span>Zero corporate boards, zero ads, zero subscriptions</span>
+            <a href="https://github.com/SanjithVishnuKS" target="_blank" rel="noopener" style="color:var(--gold-light);text-decoration:underline">GitHub: @SanjithVishnuKS</a>
+            <span style="color:var(--accent);margin:0 6px">●</span>
+            <span>Open Architecture &amp; Offline-First</span>
           </div>
         </div>
 
         <div class="matrix-grid">
           
-          <!-- Dimension 1: Price & Paywalls -->
-          <article class="matrix-card">
-            <div class="matrix-card-top">
-              <span class="matrix-icon">💎</span>
-              <span class="matrix-badge-free">100% FREE FOREVER</span>
-            </div>
-            <h3 class="matrix-title">Price &amp; Subscriptions</h3>
-            <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> $18.99/year or $3.99/month recurring auto-renewing paywall</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> $0.00 Free Forever. Zero paywalls, zero ads, zero recurring charges. Just me and you.</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Dimension 2: Multi-Transit Sanctuary -->
+          <!-- Dimension 1: Multi-Transit Sanctuary -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">🌌</span>
               <span class="matrix-badge-free">3 TRANSIT MODES</span>
             </div>
-            <h3 class="matrix-title">Transit Category</h3>
+            <h3 class="matrix-title">Multi-Transit Sanctuaries</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> Strictly airplanes only. Single fixed interior view.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> Stratospheric Flight ✈, Midnight Highway GT with rain wipers 🚗, &amp; Alpine Sleeper Coach 🚌.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Atmospheric Flight ✈, Midnight Highway GT with rain wipers 🚗, and Alpine Sleeper Coach 🚌—each paired with bespoke acoustic and visual environments.</p>
             </div>
           </article>
 
-          <!-- Dimension 3: Physical Boarding Ritual -->
+          <!-- Dimension 2: Tactile Physical Skeuomorphism -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">🎫</span>
               <span class="matrix-badge-free">TACTILE SKEUOMORPHISM</span>
             </div>
-            <h3 class="matrix-title">Boarding Experience</h3>
+            <h3 class="matrix-title">Tactile Boarding Ritual</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> Generic digital flat button click.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> Perforated Boarding Pass with drag-to-tear physics, haptic vibration, authentic paper rip sound, &amp; foil sheen.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Perforated boarding pass with drag-to-tear physics, haptic vibration, authentic synthesized paper rip sound, and dynamic passenger stub.</p>
             </div>
           </article>
 
-          <!-- Dimension 4: Distraction Shield & Privacy -->
+          <!-- Dimension 3: Distraction-Free Flow -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">🔒</span>
               <span class="matrix-badge-free">ZERO PERMISSIONS</span>
             </div>
-            <h3 class="matrix-title">Distraction Controls</h3>
+            <h3 class="matrix-title">Distraction-Free Cinema</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> Requires invasive Apple Screen Time device management permissions.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> Pure Zen Cinema Fullscreen &amp; Wake-Lock. Zero surveillance, zero invasive permissions required.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Pure Zen Cinema Fullscreen with screen wake-lock. Complete focus isolation without requiring device management permissions.</p>
             </div>
           </article>
 
-          <!-- Dimension 5: Cabin Vantage Points -->
+          <!-- Dimension 4: Multi-Vantage Cabins -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">🪟</span>
               <span class="matrix-badge-free">MULTI-VANTAGE</span>
             </div>
-            <h3 class="matrix-title">Window &amp; Seat Views</h3>
+            <h3 class="matrix-title">Cabin Vantage Points</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> Generic static 3D map loop.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> First Class Suite (01A), Overwing Turbine (05A), Cloud Vista (14A), Night City Lights (18A), GT Shotgun (FP) &amp; Sleeper Berths.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">First Class Suite (01A), Overwing Turbine (05A), Cloud Vista (14A), Night City Lights (18A), GT Front Shotgun (FP), and Upper Deck Sleeper Berths.</p>
             </div>
           </article>
 
-          <!-- Dimension 6: Avionics & Tactical Radar -->
+          <!-- Dimension 5: Spherical Avionics -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">📡</span>
               <span class="matrix-badge-free">GREAT-CIRCLE CANVAS</span>
             </div>
-            <h3 class="matrix-title">Flight Navigation</h3>
+            <h3 class="matrix-title">Spherical Vector Avionics</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> Simple linear map route line.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> Spherical trigonometry Great-Circle arcs &amp; live 360° tactical radar sweep canvas with nautical mile range.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Great-Circle spherical navigation with live 360° tactical radar sweep canvas, nautical mile reach projections, and real-time bearing readouts.</p>
             </div>
           </article>
 
-          <!-- Dimension 7: Spontaneous Discovery -->
+          <!-- Dimension 6: Spontaneous Discovery -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">🔀</span>
               <span class="matrix-badge-free">MYSTERY ROUTE</span>
             </div>
-            <h3 class="matrix-title">Random Route Mode</h3>
+            <h3 class="matrix-title">Spontaneous Discovery</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> Basic random destination roll.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> Mystery Route Engine with distance-scaled global voyages (Tokyo, Reykjavik, Singapore) and arrival ceremonies.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Mystery Route Engine with distance-scaled global voyages across 24 global destinations with surprise landing ceremonies.</p>
             </div>
           </article>
 
-          <!-- Dimension 8: FlightLog & Passport -->
+          <!-- Dimension 7: Nomad Passport -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">🛂</span>
-              <span class="matrix-badge-free">RUBBER-STAMP PASSPORT</span>
+              <span class="matrix-badge-free">STAMPED VISAS</span>
             </div>
-            <h3 class="matrix-title">FlightLog &amp; Records</h3>
+            <h3 class="matrix-title">Nomad Passport &amp; FlightLog</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> FlightLog locked behind $18.99/year subscription paywall.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> Stamped International Nomad Passport &amp; local FlightLog archive with arrival visas—completely free.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Stamped International Focus Passport with authenticated rubber stamps, journey history, and seat archives stored privately in local browser storage.</p>
             </div>
           </article>
 
-          <!-- Dimension 9: Membership Progression -->
+          <!-- Dimension 8: Holographic Credentials -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">💳</span>
-              <span class="matrix-badge-free">HOLOGRAPHIC TIERS</span>
+              <span class="matrix-badge-free">HOLOGRAPHIC CREDENTIALS</span>
             </div>
-            <h3 class="matrix-title">Membership &amp; Miles</h3>
+            <h3 class="matrix-title">Membership Progression</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> Membership cards gated behind subscription.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> Unlocked Holographic Membership Cards (Silver Nomad, Gold Navigator, Obsidian Patron) with earned miles.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Holographic Membership Credentials (Silver Nomad, Gold Navigator, Obsidian Patron) that progress with earned nautical miles and focus hours.</p>
             </div>
           </article>
 
-          <!-- Dimension 10: Acoustic Sanctuary -->
+          <!-- Dimension 9: Procedural Acoustics -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">🎧</span>
-              <span class="matrix-badge-free">PROCEDURAL WEB AUDIO</span>
+              <span class="matrix-badge-free">WEB AUDIO SYNTHESIS</span>
             </div>
-            <h3 class="matrix-title">White Noise &amp; Music</h3>
+            <h3 class="matrix-title">Procedural Soundscapes</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> Basic static audio loops.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> Zero-bandwidth Web Audio: pink jet turbine purr, 432Hz theta focus binaural drone, highway rain &amp; lo-fi streams. 100% offline.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Zero-bandwidth procedural Web Audio engine: pink turbine purr, 432Hz theta binaural drone, highway rain &amp; wiper cadence. Works 100% offline.</p>
             </div>
           </article>
 
-          <!-- Dimension 11: Zero-GPS Architecture -->
+          <!-- Dimension 10: Zero-Telemetry Privacy -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">🛡️</span>
               <span class="matrix-badge-free">ZERO TELEMETRY</span>
             </div>
-            <h3 class="matrix-title">Privacy Architecture</h3>
+            <h3 class="matrix-title">Client-Side Privacy Architecture</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> Apple ID account tracking and Screen Time telemetry.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> Zero GPS requests, zero telemetry, zero accounts. Stored privately on your device.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Zero GPS requests, zero telemetry, zero analytics tracking, and zero account requirements. All data stays private on your local device.</p>
             </div>
           </article>
 
-          <!-- Dimension 12: Universal Platform Freedom -->
+          <!-- Dimension 11: Cross-Platform Ecosystem -->
           <article class="matrix-card">
             <div class="matrix-card-top">
               <span class="matrix-icon">📱</span>
               <span class="matrix-badge-free">CROSS-PLATFORM</span>
             </div>
-            <h3 class="matrix-title">Device Ecosystem</h3>
+            <h3 class="matrix-title">Universal Ecosystem</h3>
             <div class="matrix-comparison">
-              <div class="comp-row-appstore">
-                <span class="cross">✕</span>
-                <span><strong>FocusFlight iOS:</strong> Strictly iOS and iPadOS Apple ecosystem lock-in.</span>
-              </div>
-              <div class="comp-row-flylofi">
-                <span class="check">✓</span>
-                <span><strong>Flylofi:</strong> Universal Web PWA, compiled native Android APK, standalone Windows .exe, and Linux binaries.</span>
-              </div>
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Progressive Web App (PWA), standalone Windows executable, compiled native Android APK, and Linux packages for seamless portability.</p>
+            </div>
+          </article>
+
+          <!-- Dimension 12: Independent Software Craft -->
+          <article class="matrix-card">
+            <div class="matrix-card-top">
+              <span class="matrix-icon">✒️</span>
+              <span class="matrix-badge-free">INDEPENDENT CRAFT</span>
+            </div>
+            <h3 class="matrix-title">Crafted by Sanjith Vishnu</h3>
+            <div class="matrix-comparison">
+              <p style="color:#e8edea;font-size:12.5px;line-height:1.6">Meticulously designed with custom typography, fluid Awwwards gradient meshes, and open architecture. Connect on <a href="https://github.com/SanjithVishnuKS" target="_blank" rel="noopener" style="color:var(--gold-light);text-decoration:underline">GitHub: @SanjithVishnuKS</a>.</p>
             </div>
           </article>
 
@@ -4828,7 +4066,7 @@ em {
       <div class="acf-inner">
         <div class="acf-col acf-brand-col">
           <div class="acf-brand"><span class="acf-crest">✦</span> FLYLOFI ATELIER</div>
-          <p class="acf-desc">A quiet multi-transit sanctuary designed for nocturnal thinkers, deep-focus writers, and wandering minds. Handcrafted in Chennai, India with authentic Great-Circle avionics, physical skeuomorphism, and zero-GPS privacy.</p>
+          <p class="acf-desc">A quiet multi-transit sanctuary designed for nocturnal thinkers, deep-focus writers, and wandering minds. Engineered with authentic Great-Circle avionics, physical skeuomorphism, and zero-GPS privacy., physical skeuomorphism, and zero-GPS privacy.</p>
           <div class="acf-seal-badge">★ ATELIER EDITION 2026 · HAND-BUILT WITH PRIDE ★</div>
         </div>
 
@@ -4854,8 +4092,8 @@ em {
       </div>
 
       <div class="acf-bottom">
-        <div>DESIGNED &amp; CODED BY <strong>SANJITH VISHNU</strong> · CHENNAI, INDIA</div>
-        <div>100% FREE FOREVER · ZERO TRACKERS · NO SUBSCRIPTIONS</div>
+        <div>DESIGNED &amp; BUILT BY <strong>SANJITH VISHNU</strong> · <a href="https://github.com/SanjithVishnuKS" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline">GITHUB: @SANJITHVISHNUKS</a></div>
+        <div>OPEN SOURCE SOFTWARE · PRIVATE &amp; OFFLINE-FIRST</div>
       </div>
     </footer>
 
@@ -7615,7 +6853,7 @@ initPassportModalListeners();
         <button type="button" class="pm-tab-btn active" data-pm-tab="card" id="pmTabCard">💳 Membership Tier</button>
         <button type="button" class="pm-tab-btn" data-pm-tab="passport" id="pmTabPassport">🛂 Stamped Visas</button>
         <button type="button" class="pm-tab-btn" data-pm-tab="log" id="pmTabLog">📜 FlightLog History</button>
-        <button type="button" class="pm-tab-btn" data-pm-tab="compare" id="pmTabCompare">✦ The Flylofi Edge</button>
+        <button type="button" class="pm-tab-btn" data-pm-tab="compare" id="pmTabCompare">✦ Architecture</button>
       </div>
 
       <!-- Tab 1: Holographic Membership Card -->
@@ -7657,7 +6895,7 @@ initPassportModalListeners();
           <div class="tpb-track">
             <div class="tpb-fill" id="tierProgressFill" style="width: 74%;"></div>
           </div>
-          <p class="tpb-desc">Every minute spent in deep focus earns flight &amp; road miles. 100% free forever — no $18.99/year subscription paywall.</p>
+          <p class="tpb-desc">Every minute spent in deep focus earns flight &amp; road miles. Preserved locally on your device with zero telemetry.</p>
         </div>
       </div>
 
@@ -7696,28 +6934,28 @@ initPassportModalListeners();
         </div>
       </div>
 
-      <!-- Tab 4: The Flylofi Edge Comparison -->
+      <!-- Tab 4: Architecture & Design Pillars -->
       <div class="pm-tab-pane" id="pmPaneCompare" style="display:none">
         <div class="comparison-card-grid">
           <div class="comp-card">
             <div class="comp-icon">🌌</div>
             <h4>Multi-Transit Sanctuary</h4>
-            <p>While FocusFlight is strictly locked to airplanes, Flylofi offers Stratospheric Flights, Midnight Highway Grand Tourers, and Cross-Country Sleeper Buses.</p>
+            <p>Travel through atmospheric stratospheric flights, midnight coastal highway GT road trips, and alpine sleeper coach mountain switchbacks.</p>
           </div>
           <div class="comp-card">
             <div class="comp-icon">💺</div>
             <h4>True Seat Perspectives</h4>
-            <p>Every seat delivers a distinct photorealistic vantage point: Window, Middle, Aisle, First Class Suites, and Bus Observation Decks.</p>
+            <p>Every seat delivers a distinct photorealistic vantage point: Sunset First Suites, Overwing Turbines, Cloud Vistas, and Bus Observation Decks.</p>
           </div>
           <div class="comp-card">
             <div class="comp-icon">🔒</div>
             <h4>Zero-GPS Privacy</h4>
-            <p>Calculates dynamic reach radii mathematically without requesting your private device GPS location or Apple Screen Time control.</p>
+            <p>Calculates dynamic reach radii mathematically using Great-Circle spherical navigation, without requesting your private device GPS location.</p>
           </div>
           <div class="comp-card">
-            <div class="comp-icon">💎</div>
-            <h4>100% Free Forever</h4>
-            <p>No $18.99/year subscription, no auto-renewing charges, and zero advertisements across Windows, Linux, Android, and Web.</p>
+            <div class="comp-icon">⚙️</div>
+            <h4>Independent Software Craft</h4>
+            <p>Engineered by Sanjith Vishnu with zero telemetry, zero trackers, and offline persistence. Connect on <a href="https://github.com/SanjithVishnuKS" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline">GitHub: @SanjithVishnuKS</a>.</p>
           </div>
         </div>
       </div>
