@@ -798,7 +798,136 @@
       -webkit-background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
     }
-  </style>
+  
+/* Standout Manifesto 12-Point Grid in About Page */
+.manifesto-about-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 36px clamp(20px, 4vw, 40px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.manifesto-about-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--accent-bright), transparent);
+  opacity: 0.7;
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+}
+
+@media (max-width: 860px) {
+  .matrix-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .matrix-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.matrix-card {
+  background: rgba(16, 21, 23, 0.75);
+  border: 1px solid rgba(214, 206, 194, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.matrix-card:hover {
+  border-color: rgba(203, 45, 80, 0.4);
+  background: rgba(22, 28, 31, 0.92);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.matrix-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.matrix-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.matrix-badge-free {
+  font-family: var(--font-mono, monospace);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--gold-light, #f4e2a1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  text-transform: uppercase;
+}
+
+.matrix-title {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: #fbf8f1;
+  margin-bottom: 10px;
+}
+
+.matrix-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: auto;
+}
+
+.comp-row-appstore {
+  color: #7d8c88;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.comp-row-appstore .cross {
+  color: #ff6b8b;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.comp-row-flylofi {
+  color: #e8edea;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.comp-row-flylofi .check {
+  color: #4cd995;
+  font-weight: 800;
+  line-height: 1;
+}
+
+</style>
 </head>
 <body>
   <!-- AWWWARDS FLUID MESH GRADIENT AURORA -->
@@ -910,6 +1039,252 @@
     <!-- =========================================================================
          CAPTAIN'S DISPATCH BOARD / POST ABOUT ME
          ========================================================================= -->
+    
+    <!-- =========================================================================
+         THE STANDOUT MANIFESTO: FLYLOFI VS THE $18.99/YR APP STORE MODEL
+         ========================================================================= -->
+    <section class="manifesto-about-section" id="standoutManifesto">
+      <div class="dispatch-head">
+        <div class="dispatch-title-group">
+          <div class="eyebrow">✦ THE INDIE ATELIER MANIFESTO · 100% FREE FOREVER</div>
+          <h2>No Corporate Facades. No $18.99/yr Paywalls. <em>Just Me &amp; You.</em></h2>
+          <p class="dispatch-desc">The popular FocusFlight iOS app charges $18.99 every year, locks your FlightLogs behind subscription paywalls, and demands Apple Screen Time surveillance. Flylofi is a personal sanctuary handcrafted by Sanjith Vishnu for restless minds—unlocked, uncompromised, and private.</p>
+        </div>
+      </div>
+
+      <div class="matrix-grid">
+        
+        <!-- Dimension 1: Price & Paywalls -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">💎</span>
+            <span class="matrix-badge-free">100% FREE FOREVER</span>
+          </div>
+          <h3 class="matrix-title">Price &amp; Subscriptions</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> $18.99/year or $3.99/month recurring auto-renewing paywall</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> $0.00 Free Forever. Zero paywalls, zero ads, zero recurring charges. Just me and you.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 2: Multi-Transit Sanctuary -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">🌌</span>
+            <span class="matrix-badge-free">3 TRANSIT MODES</span>
+          </div>
+          <h3 class="matrix-title">Transit Category</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> Strictly airplanes only. Single fixed interior view.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> Stratospheric Flight ✈, Midnight Highway GT with rain wipers 🚗, &amp; Alpine Sleeper Coach 🚌.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 3: Physical Boarding Ritual -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">🎫</span>
+            <span class="matrix-badge-free">TACTILE SKEUOMORPHISM</span>
+          </div>
+          <h3 class="matrix-title">Boarding Experience</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> Generic digital flat button click.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> Perforated Boarding Pass with drag-to-tear physics, haptic vibration, authentic paper rip sound, &amp; foil sheen.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 4: Distraction Shield & Privacy -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">🔒</span>
+            <span class="matrix-badge-free">ZERO PERMISSIONS</span>
+          </div>
+          <h3 class="matrix-title">Distraction Controls</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> Requires invasive Apple Screen Time device management permissions.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> Pure Zen Cinema Fullscreen &amp; Wake-Lock. Zero surveillance, zero invasive permissions required.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 5: Cabin Vantage Points -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">🪟</span>
+            <span class="matrix-badge-free">MULTI-VANTAGE</span>
+          </div>
+          <h3 class="matrix-title">Window &amp; Seat Views</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> Generic static 3D map loop.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> First Class Suite (01A), Overwing Turbine (05A), Cloud Vista (14A), Night City Lights (18A), GT Shotgun (FP) &amp; Sleeper Berths.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 6: Avionics & Tactical Radar -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">📡</span>
+            <span class="matrix-badge-free">GREAT-CIRCLE CANVAS</span>
+          </div>
+          <h3 class="matrix-title">Flight Navigation</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> Simple linear map route line.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> Spherical trigonometry Great-Circle arcs &amp; live 360° tactical radar sweep canvas with nautical mile range.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 7: Spontaneous Discovery -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">🔀</span>
+            <span class="matrix-badge-free">MYSTERY ROUTE</span>
+          </div>
+          <h3 class="matrix-title">Random Route Mode</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> Basic random destination roll.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> Mystery Route Engine with distance-scaled global voyages (Tokyo, Reykjavik, Singapore) and arrival ceremonies.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 8: FlightLog & Passport -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">🛂</span>
+            <span class="matrix-badge-free">RUBBER-STAMP PASSPORT</span>
+          </div>
+          <h3 class="matrix-title">FlightLog &amp; Records</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> FlightLog locked behind $18.99/year subscription paywall.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> Stamped International Nomad Passport &amp; local FlightLog archive with arrival visas—completely free.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 9: Membership Progression -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">💳</span>
+            <span class="matrix-badge-free">HOLOGRAPHIC TIERS</span>
+          </div>
+          <h3 class="matrix-title">Membership &amp; Miles</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> Membership cards gated behind subscription.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> Unlocked Holographic Membership Cards (Silver Nomad, Gold Navigator, Obsidian Patron) with earned miles.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 10: Acoustic Sanctuary -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">🎧</span>
+            <span class="matrix-badge-free">PROCEDURAL WEB AUDIO</span>
+          </div>
+          <h3 class="matrix-title">White Noise &amp; Music</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> Basic static audio loops.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> Zero-bandwidth Web Audio: pink jet turbine purr, 432Hz theta focus binaural drone, highway rain &amp; lo-fi streams. 100% offline.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 11: Zero-GPS Architecture -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">🛡️</span>
+            <span class="matrix-badge-free">ZERO TELEMETRY</span>
+          </div>
+          <h3 class="matrix-title">Privacy Architecture</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> Apple ID account tracking and Screen Time telemetry.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> Zero GPS requests, zero telemetry, zero accounts. Stored privately on your device.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dimension 12: Universal Platform Freedom -->
+        <article class="matrix-card">
+          <div class="matrix-card-top">
+            <span class="matrix-icon">📱</span>
+            <span class="matrix-badge-free">CROSS-PLATFORM</span>
+          </div>
+          <h3 class="matrix-title">Device Ecosystem</h3>
+          <div class="matrix-comparison">
+            <div class="comp-row-appstore">
+              <span class="cross">✕</span>
+              <span><strong>FocusFlight iOS:</strong> Strictly iOS and iPadOS Apple ecosystem lock-in.</span>
+            </div>
+            <div class="comp-row-flylofi">
+              <span class="check">✓</span>
+              <span><strong>Flylofi:</strong> Universal Web PWA, compiled native Android APK, standalone Windows .exe, and Linux binaries.</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
     <section class="dispatch-section">
       <div class="dispatch-head">
         <div class="dispatch-title-group">
@@ -971,7 +1346,7 @@
       <div class="footer-col">
         <h4>SANCTUARY ROUTES</h4>
         <ul class="footer-links">
-          <li><a href="index.html">✈ Commercial Airliner</a></li>
+          <li><a href="index.html">✈ Stratospheric Flight</a></li>
           <li><a href="index.html?mode=car">🚗 Midnight Highway GT</a></li>
           <li><a href="index.html?mode=bus">🚌 Cross-Country Sleeper Bus</a></li>
           <li><a href="index.html#passport">🛂 Stamped Passport &amp; FlightLog</a></li>
