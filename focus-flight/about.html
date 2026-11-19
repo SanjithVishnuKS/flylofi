@@ -733,9 +733,81 @@
       from { transform: translateY(20px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+
+    /* Awwwards "Gradient Gradients" Fluid Mesh Aurora */
+    .ambient-gradient-mesh {
+      position: fixed;
+      inset: -25%;
+      width: 150%;
+      height: 150%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(95px) saturate(145%);
+      opacity: 0.65;
+    }
+    .mesh-orb {
+      position: absolute;
+      border-radius: 50%;
+      mix-blend-mode: screen;
+      will-change: transform;
+    }
+    .mesh-orb-1 {
+      width: 55vw; height: 55vw; top: -10vw; left: 10vw;
+      background: radial-gradient(circle, rgba(203, 45, 80, 0.3) 0%, rgba(168, 35, 66, 0.12) 45%, transparent 70%);
+      animation: orbDrift1 22s ease-in-out infinite alternate;
+    }
+    .mesh-orb-2 {
+      width: 50vw; height: 50vw; top: 32vh; right: -5vw;
+      background: radial-gradient(circle, rgba(28, 55, 60, 0.45) 0%, rgba(18, 36, 40, 0.16) 50%, transparent 70%);
+      animation: orbDrift2 28s ease-in-out infinite alternate;
+    }
+    .mesh-orb-3 {
+      width: 44vw; height: 44vw; bottom: -6vh; left: 24vw;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.16) 0%, rgba(203, 45, 80, 0.1) 45%, transparent 70%);
+      animation: orbDrift3 25s ease-in-out infinite alternate;
+    }
+    .mesh-orb-4 {
+      width: 36vw; height: 36vw; top: 60vh; left: -5vw;
+      background: radial-gradient(circle, rgba(223, 117, 87, 0.15) 0%, rgba(168, 35, 66, 0.08) 50%, transparent 70%);
+      animation: orbDrift4 20s ease-in-out infinite alternate;
+    }
+    @keyframes orbDrift1 {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(7vw, 10vh, 0) scale(1.12); }
+      100% { transform: translate3d(-6vw, 5vh, 0) scale(0.96); }
+    }
+    @keyframes orbDrift2 {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-9vw, -7vh, 0) scale(1.09); }
+      100% { transform: translate3d(5vw, 8vh, 0) scale(0.94); }
+    }
+    @keyframes orbDrift3 {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-5vw, -10vh, 0) scale(1.14); }
+      100% { transform: translate3d(7vw, -4vh, 0) scale(1); }
+    }
+    @keyframes orbDrift4 {
+      0% { transform: translate3d(0, 0, 0) scale(0.92); }
+      50% { transform: translate3d(10vw, -5vh, 0) scale(1.08); }
+      100% { transform: translate3d(-3vw, 7vh, 0) scale(1); }
+    }
+
+    .hero-title, .section-heading h2 {
+      background: linear-gradient(135deg, #ffffff 0%, #fbf8f1 30%, #e2cdb3 65%, #cb2d50 95%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
   </style>
 </head>
 <body>
+  <!-- AWWWARDS FLUID MESH GRADIENT AURORA -->
+  <div class="ambient-gradient-mesh" aria-hidden="true">
+    <div class="mesh-orb mesh-orb-1"></div>
+    <div class="mesh-orb mesh-orb-2"></div>
+    <div class="mesh-orb mesh-orb-3"></div>
+    <div class="mesh-orb mesh-orb-4"></div>
+  </div>
 
   <!-- Top Navigation Bar -->
   <header class="topbar">

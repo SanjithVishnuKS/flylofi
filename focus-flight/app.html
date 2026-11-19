@@ -3294,10 +3294,193 @@ button:active {
   text-overflow: ellipsis !important;
 }
 
+/* ==========================================================================
+   AWWWARDS "GRADIENT GRADIENTS" FLUID MESH AURORA & DYNAMIC SPECULAR LIGHTING
+   ========================================================================== */
+.ambient-gradient-mesh {
+  position: fixed;
+  inset: -25%;
+  width: 150%;
+  height: 150%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(95px) saturate(145%);
+  opacity: 0.68;
+  will-change: transform;
+}
+
+.mesh-orb {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.mesh-orb-1 {
+  width: 58vw;
+  height: 58vw;
+  top: -12vw;
+  left: 8vw;
+  background: radial-gradient(circle, rgba(203, 45, 80, 0.32) 0%, rgba(168, 35, 66, 0.14) 45%, transparent 70%);
+  animation: orbDrift1 24s ease-in-out infinite alternate;
+}
+
+.mesh-orb-2 {
+  width: 52vw;
+  height: 52vw;
+  top: 28vh;
+  right: -6vw;
+  background: radial-gradient(circle, rgba(28, 55, 60, 0.45) 0%, rgba(18, 36, 40, 0.16) 50%, transparent 70%);
+  animation: orbDrift2 30s ease-in-out infinite alternate;
+}
+
+.mesh-orb-3 {
+  width: 44vw;
+  height: 44vw;
+  bottom: -6vh;
+  left: 22vw;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, rgba(203, 45, 80, 0.1) 42%, transparent 70%);
+  animation: orbDrift3 26s ease-in-out infinite alternate;
+}
+
+.mesh-orb-4 {
+  width: 38vw;
+  height: 38vw;
+  top: 55vh;
+  left: -6vw;
+  background: radial-gradient(circle, rgba(223, 117, 87, 0.16) 0%, rgba(168, 35, 66, 0.08) 50%, transparent 70%);
+  animation: orbDrift4 21s ease-in-out infinite alternate;
+}
+
+@keyframes orbDrift1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(7vw, 10vh, 0) scale(1.12); }
+  100% { transform: translate3d(-6vw, 5vh, 0) scale(0.96); }
+}
+
+@keyframes orbDrift2 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-9vw, -7vh, 0) scale(1.09); }
+  100% { transform: translate3d(5vw, 8vh, 0) scale(0.94); }
+}
+
+@keyframes orbDrift3 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-5vw, -10vh, 0) scale(1.14); }
+  100% { transform: translate3d(7vw, -4vh, 0) scale(1); }
+}
+
+@keyframes orbDrift4 {
+  0% { transform: translate3d(0, 0, 0) scale(0.92); }
+  50% { transform: translate3d(10vw, -5vh, 0) scale(1.08); }
+  100% { transform: translate3d(-3vw, 7vh, 0) scale(1); }
+}
+
+/* Shimmering Metallic Gradient Typography (Awwwards "We Are Cocoon" Effect) */
+#bookFlightTitle,
+#ticketColTitle {
+  background: linear-gradient(135deg, #ffffff 0%, #fbf8f1 28%, #e8d9c5 58%, #cb2d50 95%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+}
+
+#ticketColTitle em,
+.hero h1 em,
+em {
+  background: linear-gradient(135deg, #f5d070 0%, #d4af37 40%, #df7557 75%, #cb2d50 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-style: italic !important;
+}
+
+.step-heading {
+  background: linear-gradient(135deg, #ffffff 0%, #f4ede2 40%, #c4b59f 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.tec-title {
+  background: linear-gradient(135deg, #ffffff 0%, #f4ede2 50%, #c9bbae 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Holographic Security Foil Sheen on Boarding Pass (Awwwards "USA Today" Effect) */
+.boarding-pass-card {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.boarding-pass-card::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(214, 206, 194, 0.03) 44%,
+    rgba(212, 175, 55, 0.12) 48%,
+    rgba(203, 45, 80, 0.16) 52%,
+    rgba(255, 255, 255, 0.1) 55%,
+    transparent 62%
+  );
+  transform: translateX(-120%) rotate(25deg);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.boarding-pass-card:hover::after,
+.boarding-pass-card.pass-pulse-glow::after {
+  animation: holographicSheen 2.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes holographicSheen {
+  0% { transform: translateX(-120%) rotate(25deg); opacity: 0; }
+  15% { opacity: 0.85; }
+  55% { transform: translateX(120%) rotate(25deg); opacity: 0.85; }
+  100% { transform: translateX(120%) rotate(25deg); opacity: 0; }
+}
+
+/* Multi-Tone Gradient Border & Specular Rim Light */
+.transit-experience-card.active {
+  border-color: rgba(203, 45, 80, 0.5) !important;
+  box-shadow: 
+    0 16px 42px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(203, 45, 80, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 32px rgba(203, 45, 80, 0.25) !important;
+}
+
+.step-nav-btn.active .step-num {
+  background: linear-gradient(135deg, #cb2d50 0%, #88142f 100%) !important;
+  box-shadow: 0 0 18px rgba(203, 45, 80, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+.step-confirm-btn {
+  background: linear-gradient(135deg, #cb2d50 0%, #88142f 60%, #560c1d 100%) !important;
+  box-shadow: 0 8px 28px rgba(203, 45, 80, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+.step-confirm-btn:hover {
+  background: linear-gradient(135deg, #df375e 0%, #a01738 60%, #681023 100%) !important;
+  box-shadow: 0 12px 36px rgba(203, 45, 80, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+}
+
 </style>
 </head>
 <body>
-<div class="app">
+<!-- AWWWARDS FLUID MESH GRADIENT AURORA -->
+<div class="ambient-gradient-mesh" aria-hidden="true">
+  <div class="mesh-orb mesh-orb-1"></div>
+  <div class="mesh-orb mesh-orb-2"></div>
+  <div class="mesh-orb mesh-orb-3"></div>
+  <div class="mesh-orb mesh-orb-4"></div>
+</div>
+<div class="app" style="position:relative;z-index:1">
   <!-- Unified Topbar Navigation -->
   <header class="topbar">
     <div class="brand"><span>✈</span>FLYLOFI</div>
@@ -4357,8 +4540,8 @@ function initCraftMicroInteractions() {
     });
   }
 
-  // Spotlight Torch Effect for Cards
-  const trackCards = document.querySelectorAll('.transit-experience-card, .dest-card');
+  // Awwwards Gradient Spotlight Torch Effect for Cards & Panels
+  const trackCards = document.querySelectorAll('.transit-experience-card, .dest-card, .boarding-pass-card, .journey-confirmation-card, .flight-radar-card, .booking, .custom-timer-box');
   trackCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
