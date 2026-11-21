@@ -1761,8 +1761,8 @@ body::before {
   height: 66px !important;
   border-bottom: 1px solid rgba(214, 206, 194, 0.12) !important;
   background: rgba(11, 15, 17, 0.82) !important;
-  backdrop-filter: blur(28px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4) !important;
 }
 
@@ -1839,8 +1839,9 @@ body::before {
   border: 1px solid rgba(214, 206, 194, 0.14) !important;
   border-radius: 22px !important;
   background: linear-gradient(165deg, rgba(25, 33, 35, 0.85) 0%, rgba(14, 18, 20, 0.94) 100%) !important;
-  backdrop-filter: blur(32px) saturate(190%) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(190%) !important;
+  background: rgba(14, 18, 20, 0.94) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   box-shadow: 
     0 36px 90px -16px rgba(0, 0, 0, 0.75),
     0 0 0 1px rgba(255, 255, 255, 0.05) inset,
@@ -1999,7 +2000,7 @@ body::before {
   padding: 22px !important;
   border: 1px solid rgba(214, 206, 194, 0.12) !important;
   background: linear-gradient(145deg, rgba(25, 33, 35, 0.8), rgba(15, 19, 21, 0.9)) !important;
-  backdrop-filter: blur(24px) !important;
+  background: rgba(20, 26, 29, 0.92) !important;
   cursor: pointer !important;
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.38) !important;
@@ -2282,7 +2283,7 @@ body::before {
   border-radius: 14px !important;
   border: 1px solid rgba(214, 206, 194, 0.12) !important;
   background: linear-gradient(145deg, rgba(23, 30, 32, 0.8), rgba(14, 18, 20, 0.9)) !important;
-  backdrop-filter: blur(14px) !important;
+  background: rgba(18, 24, 26, 0.92) !important;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 .dest-card:hover {
@@ -4891,7 +4892,7 @@ em {
 
   <!-- FLIGHT CRUISE VIEW: Clean Frame without floating collision button -->
   <section class="cruise-view" id="cruiseView" hidden>
-    <iframe id="cruiseFrame" title="Flylofi cruise study experience" src="cruise.html?embedded=1"></iframe>
+    <iframe id="cruiseFrame" title="Flylofi cruise study experience" src="about:blank"></iframe>
   </section>
 
   <!-- LANDING / IMMIGRATION PASSPORT STAMP VIEW -->
@@ -5134,37 +5135,72 @@ function burstBoardingParticles(originX, originY) {
 
 // 6. Interactive 3D Card Tilt & Mouse Spotlight Tracking
 function initCraftMicroInteractions() {
-  // 3D Tilt for Boarding Pass
+  // High-Performance 3D Tilt for Boarding Pass (Cached rect, zero layout thrashing)
   const bp = document.getElementById('boardingPass');
   if (bp) {
+    let bpRect = null;
+    let bpRaf = false;
+    let rX = 0, rY = 0;
+
+    bp.addEventListener('mouseenter', () => {
+      bpRect = bp.getBoundingClientRect();
+    }, { passive: true });
+
     bp.addEventListener('mousemove', (e) => {
-      const rect = bp.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      const rotX = -(y / (rect.height / 2)) * 4.2;
-      const rotY = (x / (rect.width / 2)) * 4.2;
-      bp.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-2px)`;
-    });
+      if (!bpRect) bpRect = bp.getBoundingClientRect();
+      const x = e.clientX - bpRect.left - bpRect.width / 2;
+      const y = e.clientY - bpRect.top - bpRect.height / 2;
+      rX = -(y / (bpRect.height / 2)) * 3.5;
+      rY = (x / (bpRect.width / 2)) * 3.5;
+
+      if (!bpRaf) {
+        bpRaf = true;
+        requestAnimationFrame(() => {
+          bp.style.transform = `perspective(1000px) rotateX(${rX.toFixed(2)}deg) rotateY(${rY.toFixed(2)}deg) translateZ(0)`;
+          bpRaf = false;
+        });
+      }
+    }, { passive: true });
+
     bp.addEventListener('mouseleave', () => {
-      bp.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
-    });
+      bpRect = null;
+      bp.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+    }, { passive: true });
   }
 
-  // Awwwards Gradient Spotlight Torch Effect for Cards & Panels
-  const trackCards = document.querySelectorAll('.transit-experience-card, .dest-card, .boarding-pass-card, .journey-confirmation-card, .flight-radar-card, .booking, .custom-timer-box');
+  // High-Performance Spotlight Torch (Throttled via RAF with cached bounding box)
+  const trackCards = document.querySelectorAll('.transit-experience-card, .dest-card, .journey-confirmation-card, .flight-radar-card');
   trackCards.forEach(card => {
+    let cRect = null;
+    let cRaf = false;
+    let mx = 0, my = 0;
+
+    card.addEventListener('mouseenter', () => {
+      cRect = card.getBoundingClientRect();
+    }, { passive: true });
+
     card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-    });
+      if (!cRect) cRect = card.getBoundingClientRect();
+      mx = e.clientX - cRect.left;
+      my = e.clientY - cRect.top;
+      if (!cRaf) {
+        cRaf = true;
+        requestAnimationFrame(() => {
+          card.style.setProperty('--mouse-x', `${mx}px`);
+          card.style.setProperty('--mouse-y', `${my}px`);
+          cRaf = false;
+        });
+      }
+    }, { passive: true });
+
+    card.addEventListener('mouseleave', () => {
+      cRect = null;
+    }, { passive: true });
   });
 
   // Haptic Clicks on Buttons
   document.querySelectorAll('button:not(#passStubTearable button)').forEach(btn => {
-    btn.addEventListener('click', () => playHapticClick(1));
+    btn.addEventListener('click', () => playHapticClick(1), { passive: true });
   });
 }
 
@@ -5773,37 +5809,46 @@ function drawRadarScreen(canvas) {
   ctx.stroke();
   ctx.restore();
 
-  // 5. Plot Candidate Destinations & Build Click Targets
+  // 5. High-Performance Pre-Cached Destination Coordinates (Zero Trig in RAF Loop)
+  const radarKey = `${depCode}_${targetMins}_${mode}_${maxRadarNm}_${cx}_${cy}`;
+  if (typeof window._cachedRadarKey === 'undefined' || window._cachedRadarKey !== radarKey) {
+    window._cachedRadarKey = radarKey;
+    window._cachedBaseRadarPins = [];
+    for (const [code, dest] of Object.entries(registry)) {
+      if (code === depCode) continue;
+      const distNm = getGreatCircleDistance(dep.lat, dep.lon, dest.lat, dest.lon);
+      const bearing = getInitialBearing(dep.lat, dep.lon, dest.lat, dest.lon);
+      const estMins = calculateTransitDuration(distNm, mode);
+      const isReachable = estMins <= targetMins + 12;
+      const rad = (bearing - 90) * Math.PI / 180;
+      const clampedDistRatio = Math.min(1.08, distNm / maxRadarNm);
+      const px = cx + Math.cos(rad) * (clampedDistRatio * maxRadiusPx);
+      const py = cy + Math.sin(rad) * (clampedDistRatio * maxRadiusPx);
+      window._cachedBaseRadarPins.push({
+        x: px,
+        y: py,
+        code,
+        city: dest.city,
+        distNm,
+        estMins,
+        isReachable
+      });
+    }
+  }
+
   renderedRadarPins = [];
   let selectedPinCoords = null;
-
-  for (const [code, dest] of Object.entries(registry)) {
-    if (code === depCode) continue;
-    const distNm = getGreatCircleDistance(dep.lat, dep.lon, dest.lat, dest.lon);
-    const bearing = getInitialBearing(dep.lat, dep.lon, dest.lat, dest.lon);
-    const estMins = calculateTransitDuration(distNm, mode);
-    const isReachable = estMins <= targetMins + 12;
-    const isSelected = code === activeFlight.destination;
-
-    // Project polar coordinates: bearing 0 is North (-Y), 90 is East (+X)
-    const rad = (bearing - 90) * Math.PI / 180;
-    const clampedDistRatio = Math.min(1.08, distNm / maxRadarNm);
-    const px = cx + Math.cos(rad) * (clampedDistRatio * maxRadiusPx);
-    const py = cy + Math.sin(rad) * (clampedDistRatio * maxRadiusPx);
-
+  const currentDest = activeFlight.destination;
+  const basePins = window._cachedBaseRadarPins || [];
+  for (let i = 0; i < basePins.length; i++) {
+    const p = basePins[i];
+    const isSelected = p.code === currentDest;
     renderedRadarPins.push({
-      x: px,
-      y: py,
-      code,
-      city: dest.city,
-      distNm,
-      estMins,
-      isReachable,
+      ...p,
       isSelected
     });
-
     if (isSelected) {
-      selectedPinCoords = { x: px, y: py, code };
+      selectedPinCoords = { x: p.x, y: p.y, code: p.code };
     }
   }
 
@@ -5965,17 +6010,56 @@ function drawRadarScreen(canvas) {
   }
 }
 
+
+// High-Efficiency Radar Render Controller
+let lastRadarFrameTs = 0;
+
+function startRadarLoop() {
+  const canvas = $('flightRadarCanvas');
+  if (!canvas) return;
+  if (radarAnimFrame) cancelAnimationFrame(radarAnimFrame);
+
+  function renderLoop(ts) {
+    const step2 = document.getElementById('wizardStep2');
+    if (!step2 || step2.style.display === 'none' || document.hidden) {
+      radarAnimFrame = null;
+      return;
+    }
+    // Throttle to 33ms (~30fps) for silky animation with minimum CPU footprint
+    if (ts - lastRadarFrameTs >= 32) {
+      lastRadarFrameTs = ts;
+      drawRadarScreen(canvas);
+    }
+    radarAnimFrame = requestAnimationFrame(renderLoop);
+  }
+
+  radarAnimFrame = requestAnimationFrame(renderLoop);
+}
+
+function stopRadarLoop() {
+  if (radarAnimFrame) {
+    cancelAnimationFrame(radarAnimFrame);
+    radarAnimFrame = null;
+  }
+}
+window.startRadarLoop = startRadarLoop;
+window.stopRadarLoop = stopRadarLoop;
+
 function initFlightRadarCanvas() {
   const canvas = $('flightRadarCanvas');
   if (!canvas) return;
 
-  function renderLoop() {
-    drawRadarScreen(canvas);
-    radarAnimFrame = requestAnimationFrame(renderLoop);
-  }
+  // Initial single paint so canvas has graphics ready
+  drawRadarScreen(canvas);
 
-  if (radarAnimFrame) cancelAnimationFrame(radarAnimFrame);
-  renderLoop();
+  // Visibility and step-aware loop
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopRadarLoop();
+    } else if (typeof currentWizardStep !== 'undefined' && currentWizardStep === 2) {
+      startRadarLoop();
+    }
+  });
 
   // Canvas interaction: click to select destination pin
   canvas.addEventListener('click', (e) => {
@@ -6120,6 +6204,7 @@ let activeFlight = {
   sceneImg: 'media/flight/scenes/seat_14a_aerial_earth.jpg',
   number: '042'
 };
+window.activeFlight = activeFlight;
 
 function selectView(id) {
   document.querySelectorAll('.view,.cruise-view').forEach(view => view.hidden = true);
@@ -6819,8 +6904,22 @@ setupVoteButton('carVoteBtn', 'flylofi_voted_car', '✓ Priority Driver Reserved
 setupVoteButton('busVoteBtn', 'flylofi_voted_bus', '✓ Priority Passenger Reserved (Notified at Launch!)');
 
 // Navigation Actions
-$('exitCruiseTopBtn').onclick = () => selectView('homeView');
-$('homeNavButton').onclick = () => selectView('homeView');
+$('exitCruiseTopBtn').onclick = () => {
+  const frame = $('cruiseFrame');
+  if (frame) {
+    try { frame.contentWindow?.postMessage({ type: 'flylofi-pause' }, '*'); } catch(e) {}
+    frame.src = 'about:blank';
+  }
+  selectView('homeView');
+};
+$('homeNavButton').onclick = () => {
+  const frame = $('cruiseFrame');
+  if (frame && !$('cruiseView').hidden) {
+    try { frame.contentWindow?.postMessage({ type: 'flylofi-pause' }, '*'); } catch(e) {}
+    frame.src = 'about:blank';
+  }
+  selectView('homeView');
+};
 $('homeButton').onclick = () => selectView('homeView');
 // Direct Boarding & Entrance: Immediately enter the sanctuary
 function directEnterSanctuary() {
@@ -7202,6 +7301,11 @@ function goToCustomStep(stepNum) {
 
   if (newEl) {
     newEl.style.display = 'block';
+    if (stepNum === 2) {
+      setTimeout(startRadarLoop, 60);
+    } else {
+      stopRadarLoop();
+    }
     newEl.classList.remove('active', 'step-slide-out-left', 'step-slide-out-right', 'step-slide-in-right', 'step-slide-in-left');
     newEl.classList.add(isForward ? 'step-slide-in-right' : 'step-slide-in-left');
     void newEl.offsetWidth; // Force reflow for smooth momentum

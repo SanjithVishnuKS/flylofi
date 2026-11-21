@@ -845,6 +845,25 @@ window.addEventListener('pagehide',()=>{
   try{$('mediaLofi')?.pause();$('mediaCabin')?.pause()}catch(e){}
 });
 
+// Performance: Pause animation and media when backgrounded or hidden
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+  } else {
+    if (!raf && focusRunning) { raf = requestAnimationFrame(tick); }
+  }
+});
+
+window.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'flylofi-pause') {
+    focusRunning = false;
+    if (focusInterval) { clearInterval(focusInterval); focusInterval = null; }
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    try { $('mediaLofi')?.pause(); $('mediaCabin')?.pause(); } catch(err) {}
+  }
+});
+
+
 draw();
 raf=requestAnimationFrame(tick);
 })();
